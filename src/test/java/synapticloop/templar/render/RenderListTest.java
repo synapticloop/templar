@@ -25,6 +25,7 @@ public class RenderListTest {
 
 		templarContext.add("bean", evaluationBean);
 		templarContext.add("bean2", evaluationBean2);
+		System.out.println(parser);
 
 		assertEquals(parser.toString(), "Simple loop test<NEWLINE@1:18 />\n" + 
 				"\n" + 
@@ -32,13 +33,13 @@ public class RenderListTest {
 				"\n" + 
 				"<NEWLINE@3:2 />\n" + 
 				"\n" + 
-				"<LOOP@4:2 (bean.ArrayList as value)>\n" + 
-				"	<EVAL@5:3 (value)><NEWLINE@5:4 />\n" + 
+				"<LOOP@4:2 (bean.arrayList as value)>\n" + 
+				"	<EVAL@5:3 (value)/><NEWLINE@5:4 />\n" + 
 				"\n" + 
 				"</LOOP@6:2>\n" + 
 				"\n" + 
 				"<LOOP@8:2 (bean.childBeans as childBean)>\n" + 
-				"	<EVAL@9:3 (childBean.name)><NEWLINE@9:4 />\n" + 
+				"	<EVAL@9:3 (childBean.name)/><NEWLINE@9:4 />\n" + 
 				"\n" + 
 				"</LOOP@10:2>\n");
 

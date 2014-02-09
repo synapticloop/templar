@@ -90,7 +90,7 @@ public class EvaluationToken extends CommandToken {
 		stringBuilder.append(characterNumber);
 		stringBuilder.append(" (");
 		stringBuilder.append(commandLine);
-		stringBuilder.append(")>");
+		stringBuilder.append(")/>");
 		return (stringBuilder.toString());
 	}
 }

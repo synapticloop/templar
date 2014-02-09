@@ -18,10 +18,11 @@ public class EvaluationTest {
 	@Test
 	public void testRender() throws ParseException {
 		parser = new Parser("src/test/template/evaluation-test.templar");
-		assertEquals("<EVAL@1:2 (this.should.all)>\n" +
+		System.out.println(parser);
+		assertEquals("<EVAL@1:2 (this.should.all)/>\n" +
 				"\n" +
 				"be\n" +
-				"eval<EVAL@4:6 (uation)> tokens\n",
+				"eval<EVAL@4:6 (uation)/> tokens\n",
 				parser.toString());
 	}
 }

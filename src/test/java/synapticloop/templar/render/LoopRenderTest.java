@@ -19,7 +19,7 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
 import org.junit.Test;
 
@@ -40,13 +40,13 @@ public class LoopRenderTest {
 		templarConfiguration.setExplicitTabs(true);
 		TemplarContext templarContext = new TemplarContext(templarConfiguration);
 
-		ArrayList<String> ArrayList = new ArrayList<String>();
-		ArrayList.add("one");
-		ArrayList.add("two");
-		ArrayList.add("three");
-		ArrayList.add("four");
+		Vector<String> vector = new Vector<String>();
+		vector.add("one");
+		vector.add("two");
+		vector.add("three");
+		vector.add("four");
 
-		templarContext.add("ArrayList", ArrayList);
+		templarContext.add("vector", vector);
 
 		String render = parser.render(templarContext);
 		assertEquals("loop-status-first\n" +

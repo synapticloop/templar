@@ -17,8 +17,8 @@ package synapticloop.templar.utils;
  * under the Licence.
  */
 
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.token.CommentToken;
@@ -28,6 +28,7 @@ import synapticloop.templar.token.EndIfToken;
 import synapticloop.templar.token.EndLoopToken;
 import synapticloop.templar.token.EvaluationToken;
 import synapticloop.templar.token.IfToken;
+import synapticloop.templar.token.ImportToken;
 import synapticloop.templar.token.LoopToken;
 import synapticloop.templar.token.NewLineToken;
 import synapticloop.templar.token.SetToken;
@@ -91,6 +92,13 @@ public class Tokeniser {
 					} else if(token.equals("endloop")) {
 						tokens.add(new EndLoopToken("", stringTokenizer));
 						return(tokens);
+					} else if(token.equals("import")) {
+						// this is a little bit special in that we want to include all of 
+						// the generated tokens, rather than just the single token and leave
+						// it to render time to parse
+						ImportToken importToken = new ImportToken(token, stringTokenizer);
+						tokens.add(importToken);
+						tokens.addAll(importToken.getTokens());
 					} else {
 						tokens.add(new EvaluationToken(token, stringTokenizer));
 					}

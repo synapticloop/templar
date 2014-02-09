@@ -1,0 +1,9 @@
+This is an import test with some functions before{\n}
+and after the import...{\n}
+
+{fn:length[array]}{\n}
+
+{import src/test/template/import/functions.templar}
+
+{\n}
+{fn:length[array]}
