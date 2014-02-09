@@ -12,7 +12,6 @@ public class NestedListTestMain {
 		Parser parser;
 		try {
 			parser = new Parser("src/test/template/nested-list-test.templar");
-			System.out.println(parser.toString());
 			assertEquals("This is a nested list\n<LOOP@2:2 (something as somethingElse)>\n\nso we list\n<LOOP@5:2 (somethingElse as somethingElseAgain)>\n\tthen we should see these tokens...\n</LOOP@7:2>\n\n</LOOP@9:2>\n\nand that is about it\n", parser.toString());
 
 		} catch (ParseException e) {

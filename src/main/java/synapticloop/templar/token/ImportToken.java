@@ -117,6 +117,8 @@ public class ImportToken extends Token {
 		TokeniserInfo.characterNumber = characterNumber;
 		TokeniserInfo.lines = lines;
 
+		// finally add the end import token
+		tokens.add(new EndImportToken(importLocation, stringTokenizer));
 		return(tokens);
 	}
 
@@ -133,7 +135,7 @@ public class ImportToken extends Token {
 		stringBuilder.append(characterNumber);
 		stringBuilder.append(" (");
 		stringBuilder.append(importLocation);
-		stringBuilder.append(")/>");
+		stringBuilder.append(")>");
 
 		return(stringBuilder.toString());
 	}

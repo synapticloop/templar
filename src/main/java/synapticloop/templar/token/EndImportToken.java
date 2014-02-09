@@ -17,34 +17,35 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import java.util.StringTokenizer;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import synapticloop.templar.Parser;
 import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.utils.TemplarContext;
 
-public class CommentTokenTest {
-	@Before
-	public void setup() {
+
+public class EndImportToken extends Token {
+	String importLocation = null;
+
+	public EndImportToken(String importLocation, StringTokenizer stringTokenizer) throws ParseException {
+		super("", stringTokenizer);
+		this.importLocation = importLocation;
 	}
 
-	@Test(expected = ParseException.class)
-	public void testNoEndComment() throws ParseException {
-		new Parser("{--");
+	public String render(TemplarContext templarContext) {
+		return("");
 	}
 
-	@Test(expected = ParseException.class)
-	public void testNoEndCommentWithOtherTokens() throws ParseException {
-		new Parser("{-- comment goes here");
-	}
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("</IMPORT");
+		stringBuilder.append("@");
+		stringBuilder.append(lineNumber);
+		stringBuilder.append(":");
+		stringBuilder.append(characterNumber);
+		stringBuilder.append(" (");
+		stringBuilder.append(importLocation);
+		stringBuilder.append(")>");
 
-	@Test
-	public void testComment() throws ParseException, RenderException {
-		Parser parser = new Parser("{-- comment goes here}");
-		assertEquals("<COMMENT@1:2 ( comment goes here)>", parser.toString());
-		assertEquals("", parser.render());
+		return(stringBuilder.toString());
 	}
 }

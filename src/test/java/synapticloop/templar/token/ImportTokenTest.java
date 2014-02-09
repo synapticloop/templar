@@ -45,7 +45,7 @@ public class ImportTokenTest {
 	@Test
 	public void testImportFromFileSystem() throws ParseException, RenderException {
 		Parser parser = new Parser("src/test/template/import-test.templar");
-		assertEquals("<IMPORT@1:2 (src/test/template/import/hello-world.templar)/>Hello world!!\n\n", parser.toString());
+		assertEquals("<IMPORT@1:2 (src/test/template/import/hello-world.templar)>Hello world!!\n</IMPORT@1:2 (src/test/template/import/hello-world.templar)>\n", parser.toString());
 	}
 
 	@Test

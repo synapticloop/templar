@@ -25,7 +25,6 @@ public class RenderListTest {
 
 		templarContext.add("bean", evaluationBean);
 		templarContext.add("bean2", evaluationBean2);
-		System.out.println(parser);
 
 		assertEquals(parser.toString(), "Simple loop test<NEWLINE@1:18 />\n" + 
 				"\n" + 

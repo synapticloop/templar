@@ -62,9 +62,8 @@ public class IfRenderTest {
 
 	@Test
 	public void testIncorrectParsing() {
-		Parser parser;
 		try {
-			parser = new Parser("{if");
+			new Parser("{if");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -72,7 +71,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here");
+			new Parser("{if statement here");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -80,7 +79,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}");
+			new Parser("{if statement here}");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -88,7 +87,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}something");
+			new Parser("{if statement here}something");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -96,7 +95,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}something{");
+			new Parser("{if statement here}something{");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -104,7 +103,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}something{endif");
+			new Parser("{if statement here}something{endif");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -112,7 +111,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}something{endif}");
+			new Parser("{if statement here}something{endif}");
 			// we should have got an exception
 			assertTrue(true);
 		} catch (ParseException stepex) {
@@ -122,9 +121,8 @@ public class IfRenderTest {
 
 	@Test
 	public void testIncorrectElseIfRendering() {
-		Parser parser = null;
 		try {
-			parser = new Parser("{if statement here}something\n{else{endif}");
+			new Parser("{if statement here}something\n{else{endif}");
 			// we should have got an exception
 			assertTrue(false);
 		} catch (ParseException stepex) {
@@ -132,7 +130,7 @@ public class IfRenderTest {
 		}
 
 		try {
-			parser = new Parser("{if statement here}something\n{else}{endif}");
+			new Parser("{if statement here}something\n{else}{endif}");
 			// we should have got an exception
 			assertTrue(true);
 		} catch (ParseException stepex) {

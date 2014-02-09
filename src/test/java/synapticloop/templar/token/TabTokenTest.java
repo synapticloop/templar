@@ -17,25 +17,20 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.StringTokenizer;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
 import org.mockito.Mock;
 
 import synapticloop.templar.exception.ParseException;
 
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.*;
-
 public class TabTokenTest {
 	@Mock StringTokenizer mockStringTokenizer;
-
-	private TabToken tabToken;
 
 	@Before
 	public void setup() {
@@ -45,20 +40,20 @@ public class TabTokenTest {
 	@Test(expected = ParseException.class)
 	public void testNoMoreTokens() throws ParseException{
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(false);
-		tabToken = new TabToken("", mockStringTokenizer);
+		new TabToken("", mockStringTokenizer);
 	}
 
 	@Test(expected = ParseException.class)
 	public void testBadEndToken() throws ParseException{
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(true);
 		when(mockStringTokenizer.nextToken()).thenReturn(" ");
-		tabToken = new TabToken("", mockStringTokenizer);
+		new TabToken("", mockStringTokenizer);
 	}
 
 	public void testToken() throws ParseException {
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(true);
 		when(mockStringTokenizer.nextToken()).thenReturn("}");
-		tabToken = new TabToken("", mockStringTokenizer);
+		new TabToken("", mockStringTokenizer);
 		// exception not thrown
 		assertTrue(true);
 	}

@@ -31,7 +31,6 @@ import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class SetTokenTest {
-	private SetToken setToken;
 	private TemplarContext templarContext;
 	private Parser parser;
 
