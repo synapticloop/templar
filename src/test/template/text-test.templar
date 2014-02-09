@@ -1,0 +1,10 @@
+These are text
+
+tokens
+
+and should come
+out
+
+exactly as it is input
+  even with whitespace
+{-- a comment goes here}

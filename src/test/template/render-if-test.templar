@@ -1,0 +1,41 @@
+Simple if test{nl}
+--------------{nl}
+{nl}
+isAlive: {bean.isAlive}{nl}
+
+the first test is in the positive: {if bean.isAlive}this bean isAlive{endif}{nl}
+and you should see the text above 'this bean isAlive'{nl}
+
+the next test is in the negative: {if !bean.isAlive}this bean is dead{endif}{nl}
+and you should NOT see the above text 'this bean is dead'{nl}
+
+isAlive 2nd time is a charm: {bean2.isAlive}{nl}
+
+the first test is in the positive: {if bean2.isAlive}this bean2 isAlive{endif}{nl}
+and you should NOT see the text above 'this bean2 isAlive'{nl}
+
+the next test is in the negative: {if !bean2.isAlive}this bean2 is dead{endif}{nl}
+and you should see the above text 'this bean2 is dead'{nl}
+
+Nested If Test{nl}
+--------------{nl}
+
+
+{if bean.isAlive}{nl}
+	bean is alive{nl}
+	now test for age{nl}
+	{if bean.isOfAge}this bean is of age{endif}{nl}
+	{if !bean2.isOfAge}this bean2 is NOT of age{endif}{nl}
+{endif}
+
+{if fn:>[3, 1]}
+	3 is greater than 1{nl}
+{endif}
+
+{if fn:<['1', '3']}
+	1 is less than 3{nl}
+{endif}
+
+{if !fn:<['3', '1']}
+	3 is not less than 1{nl}
+{endif}

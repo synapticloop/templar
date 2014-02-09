@@ -1,0 +1,7 @@
+
+.cvsignore
+CVS
+build-eclipse
+build
+filestatistics.ser
+cobertura.ser

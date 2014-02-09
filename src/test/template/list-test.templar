@@ -1,0 +1,11 @@
+These are text tokens with
+some commands {loop something as somethingElse}
+
+	then we should see these tokens...
+
+{endloop}
+
+and should come
+out
+
+as command {loop something as somethingElse} elements {endloop}

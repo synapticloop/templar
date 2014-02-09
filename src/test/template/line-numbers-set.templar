@@ -1,0 +1,8 @@
+this is used for testing the character and line number with invalid tokens
+
+for this example we are using a set token 
+
+which will appear as an error on line 8, character 12
+123456789111
+---------012
+          {set

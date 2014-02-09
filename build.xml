@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="templar" default="help">
+	<property name="junit.test.pattern" value="**/*Test.java" />
+
+	<import file="build-common.xml" />
+	<import file="build-cobertura.xml" />
+
+	<description>
+		The build file for the templar project
+	</description>
+
+	<target name="dist">
+		<echo message="hello" />
+	</target>
+</project>

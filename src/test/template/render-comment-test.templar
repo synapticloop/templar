@@ -1,0 +1,9 @@
+this is not a comment{\n}
+{-- this is a comment}
+this is not {-- but this is... }a comment
+{-- this is a comment
+over multiple lines
+
+	with other stuff in it....
+
+}

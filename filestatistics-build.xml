@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	This is an example build file which can be included in your standard build.xml
+	file by doing the following:
+	
+		<import file="filestatistics-build.xml"/>
+	-->
+<project name="filestatistics-build" basedir="." xmlns:pf="antlib:pf">
+	<dirname property="filestatistics.basedir" file="${ant.file.filestatistics-build}" />
+
+	<!--
+		Be sure to define the 'util.lib.dir' to point to where the 
+		project-filestatistics.jar is located
+		-->
+	<property name="util.lib.dir" value="${basedir}/src/util/lib" />
+
+	<!--
+		This is the output directory for all of the reports that are generated
+		-->
+	<property name="filestatistics.dir" value="${build.dir}/reports/filestatistics/"/>
+
+	<taskdef uri="antlib:pf" resource="synapticloop/projectfilestatistics/ant/antlib.xml" classpath="${util.lib.dir}/project-filestatistics.jar" />
+
+	<target name="report" description="[filestatistics-build] Report the filestatistics for this project">
+		<!--
+			This is the output directory for the generated reports
+			-->
+		<mkdir dir="${filestatistics.dir}" />
+
+		<pf:report ignoreBinary="true" outputDirectory="${filestatistics.dir}">
+			<fileset dir=".">
+				<include name="**/*.java"/>
+				<exclude name="src/test/**/*.*"/>
+				<exclude name="build/**/*.*"/>
+				<exclude name="dist/**/*.*"/>
+			</fileset>
+		</pf:report>
+	</target>
+
+	<target name="list-plugins" description="[filestatistics-build] List all of the built-in plugins">
+		<pf:list-plugins />
+	</target>
+</project>

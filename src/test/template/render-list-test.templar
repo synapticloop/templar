@@ -1,0 +1,10 @@
+Simple loop test{\n}
+----------------{\n}
+{\n}
+{loop bean.vector as value}
+	{value}{\n}
+{endloop}
+
+{loop bean.childBeans as childBean}
+	{childBean.name}{\n}
+{endloop}

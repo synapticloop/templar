@@ -1,0 +1,13 @@
+{\n}
+A Simple evaluation bean example/test{\n}
+-------------------------------------{\n}
+{\n}
+name: {bean.name}{\n}
+isAlive: {bean.isAlive}{\n}
+age: {bean.age}{\n}
+timeBorn: {bean.timeBorn}{\n}
+{\n}
+and for the simple child bean{\n}
+-----------------------------{\n}
+{\n}
+child name: {bean.evaluationChildBean.name}{\n}

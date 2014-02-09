@@ -1,0 +1,25 @@
+loop-status-first{\n}
+
+{loop vector as vectorItem}
+	{\t}{if vectorItemStatus.first}first{else}not first{endif}:{vectorItemStatus.index}:{vectorItemStatus.offset}:{vectorItem}{\n}
+{endloop}
+
+
+loop-status-last{\n}
+
+{loop vector as vectorItem}
+	{\t}{if vectorItemStatus.last}last{else}not last{endif}:{vectorItemStatus.index}:{vectorItemStatus.offset}:{vectorItem}{\n}
+{endloop}
+
+inverse-loop-status-first{\n}
+
+{loop vector as vectorItem}
+	{\t}{if !vectorItemStatus.first}not first{else}first{endif}:{vectorItemStatus.index}:{vectorItemStatus.offset}:{vectorItem}{\n}
+{endloop}
+
+
+inverse-loop-status-last{\n}
+
+{loop vector as vectorItem}
+	{\t}{if !vectorItemStatus.last}not last{else}last{endif}:{vectorItemStatus.index}:{vectorItemStatus.offset}:{vectorItem}{\n}
+{endloop}

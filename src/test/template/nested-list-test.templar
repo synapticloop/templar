@@ -1,0 +1,11 @@
+This is a nested list
+{loop something as somethingElse}
+
+so we list
+{loop somethingElse as somethingElseAgain}
+	then we should see these tokens...
+{endloop}
+
+{endloop}
+
+and that is about it

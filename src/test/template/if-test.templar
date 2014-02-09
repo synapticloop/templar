@@ -1,0 +1,16 @@
+These are text
+
+tokens with
+some commands {if something}
+
+	then we should see these tokens...
+
+{endif}
+
+and should come
+out
+
+as command {if something} elements {endif}
+
+now for some functions
+{if something} something {else} something else {endif}
