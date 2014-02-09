@@ -1,7 +1,7 @@
 package synapticloop.templar.utils;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -18,7 +18,7 @@ package synapticloop.templar.utils;
  */
 
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.token.CommentToken;
@@ -44,15 +44,15 @@ import synapticloop.templar.token.conditional.OrToken;
 
 public class Tokeniser {
 
-	public static Vector<Token> tokenise(String contents) throws ParseException {
-		Vector<Token> tokens = new Vector<Token>();
+	public static ArrayList<Token> tokenise(String contents) throws ParseException {
+		ArrayList<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(contents, " \n\t{}", true);
 		tokens.addAll(tokenise(stringTokenizer));
 		return(tokens);
 	}
 
-	public static Vector<Token> tokenise(StringTokenizer stringTokenizer) throws ParseException {
-		Vector<Token> tokens = new Vector<Token>();
+	public static ArrayList<Token> tokenise(StringTokenizer stringTokenizer) throws ParseException {
+		ArrayList<Token> tokens = new ArrayList<Token>();
 
 		while(stringTokenizer.hasMoreTokens()) {
 			String token = stringTokenizer.nextToken();
@@ -108,9 +108,9 @@ public class Tokeniser {
 		return(tokens);
 	}
 
-	public static Vector<ConditionalToken> tokeniseCommandLine(StringTokenizer stringTokenizer) throws ParseException {
+	public static ArrayList<ConditionalToken> tokeniseCommandLine(StringTokenizer stringTokenizer) throws ParseException {
 		// at this point we want to evaluate the if statement
-		Vector<ConditionalToken> conditionalTokens = new Vector<ConditionalToken>();
+		ArrayList<ConditionalToken> conditionalTokens = new ArrayList<ConditionalToken>();
 
 		while(stringTokenizer.hasMoreTokens()) {
 			String token = stringTokenizer.nextToken();

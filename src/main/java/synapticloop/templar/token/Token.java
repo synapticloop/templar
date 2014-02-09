@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -20,7 +20,7 @@ package synapticloop.templar.token;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
@@ -30,7 +30,7 @@ import synapticloop.templar.utils.TokeniserInfo;
 
 public abstract class Token extends BasePositionToken {
 	protected String value = "";
-	protected Vector<Token> childTokens = new Vector<Token>();
+	protected ArrayList<Token> childTokens = new ArrayList<Token>();
 
 	public Token(String value, StringTokenizer stringTokenizer) throws ParseException {
 		this.value = value;
@@ -48,7 +48,7 @@ public abstract class Token extends BasePositionToken {
 		outputStream.write(render(templarContext).getBytes());
 	}
 
-	public Vector<Token> getChildren() {
+	public ArrayList<Token> getChildren() {
 		return(childTokens);
 	}
 
@@ -56,7 +56,7 @@ public abstract class Token extends BasePositionToken {
 		this.childTokens.add(token);
 	}
 
-	public void addChildTokens(Vector<Token> tokens) {
+	public void addChildTokens(ArrayList<Token> tokens) {
 		this.childTokens.addAll(tokens);
 	}
 

@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -17,8 +17,8 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Vector;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.ParseException;
@@ -30,9 +30,9 @@ import synapticloop.templar.utils.Tokeniser;
 import synapticloop.templar.utils.TokeniserInfo;
 
 public class IfToken extends CommandToken {
-	private Vector<Token> elseCondition = null;
+	private ArrayList<Token> elseCondition = null;
 	@SuppressWarnings("unused")
-	private Vector<ConditionalToken> conditionalTokens = null;
+	private ArrayList<ConditionalToken> conditionalTokens = null;
 	private boolean inverse = false;
 
 	public IfToken(String value, StringTokenizer stringTokenizer) throws ParseException {

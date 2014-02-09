@@ -1,6 +1,6 @@
 package synapticloop.templar.bean;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class EvaluationBean {
 	private String name;
@@ -8,9 +8,9 @@ public class EvaluationBean {
 	private int age = 0;
 	private long timeBorn = 0;
 	private EvaluationChildBean evaluationChildBean = null;
-	private Vector<String> vector = new Vector<String>();
+	private ArrayList<String> ArrayList = new ArrayList<String>();
 
-	private Vector<EvaluationChildBean> childBeans = new Vector<EvaluationChildBean>();
+	private ArrayList<EvaluationChildBean> childBeans = new ArrayList<EvaluationChildBean>();
 
 	public EvaluationBean() {
 
@@ -22,12 +22,12 @@ public class EvaluationBean {
 		this.age = age;
 		this.timeBorn = timeBorn;
 		this.setEvaluationChildBean(evaluationChildBean);
-		vector.add("one");
-		vector.add("two");
-		vector.add("three");
-		vector.add("four");
-		vector.add("5");
-		vector.add("vi");
+		ArrayList.add("one");
+		ArrayList.add("two");
+		ArrayList.add("three");
+		ArrayList.add("four");
+		ArrayList.add("5");
+		ArrayList.add("vi");
 
 		childBeans.add(new EvaluationChildBean("jose"));
 		childBeans.add(new EvaluationChildBean("hose b"));
@@ -76,19 +76,19 @@ public class EvaluationBean {
 		return evaluationChildBean;
 	}
 
-	public void setVector(Vector<String> vector) {
-		this.vector = vector;
+	public void setArrayList(ArrayList<String> ArrayList) {
+		this.ArrayList = ArrayList;
 	}
 
-	public Vector<String> getVector() {
-		return vector;
+	public ArrayList<String> getArrayList() {
+		return ArrayList;
 	}
 
-	public void setChildBeans(Vector<EvaluationChildBean> childBeans) {
+	public void setChildBeans(ArrayList<EvaluationChildBean> childBeans) {
 		this.childBeans = childBeans;
 	}
 
-	public Vector<EvaluationChildBean> getChildBeans() {
+	public ArrayList<EvaluationChildBean> getChildBeans() {
 		return childBeans;
 	}
 }

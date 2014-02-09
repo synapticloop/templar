@@ -1,7 +1,7 @@
 package synapticloop.templar.token.conditional;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -18,7 +18,7 @@ package synapticloop.templar.token.conditional;
  */
 
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
@@ -30,7 +30,7 @@ public class FunctionArgumentToken extends ConditionalToken {
 		super(value, stringTokenizer);
 	}
 
-	public void setChildConditionalTokens(Vector<ConditionalToken> conditionalTokens) {
+	public void setChildConditionalTokens(ArrayList<ConditionalToken> conditionalTokens) {
 		this.childConditionalTokens = conditionalTokens;
 	}
 

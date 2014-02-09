@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -20,7 +20,7 @@ package synapticloop.templar.token;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,12 +37,12 @@ public class SetTokenTest {
 
 	@Before
 	public void setup() throws ParseException {
-		Vector<String> testVector = new Vector<String>();
-		testVector.add("a");
-		testVector.add("b");
-		testVector.add("c");
+		ArrayList<String> testArrayList = new ArrayList<String>();
+		testArrayList.add("a");
+		testArrayList.add("b");
+		testArrayList.add("c");
 		templarContext = new TemplarContext();
-		templarContext.add("testVector", testVector);
+		templarContext.add("testArrayList", testArrayList);
 	}
 
 	@Test
@@ -57,19 +57,19 @@ public class SetTokenTest {
 
 	@Test
 	public void testContextSet() throws ParseException, RenderException {
-		parser = new Parser("{set testVector as anotherVector}");
+		parser = new Parser("{set testArrayList as anotherArrayList}");
 		String render = parser.render(templarContext);
 		assertEquals("", render);
-		assertNotNull(templarContext.get("anotherVector"));
+		assertNotNull(templarContext.get("anotherArrayList"));
 	}
 
 	@Test
 	public void testContextSetWithFunction() throws ParseException, RenderException {
-		parser = new Parser("{set fn:length[testVector] as anotherVector}");
+		parser = new Parser("{set fn:length[testArrayList] as anotherArrayList}");
 		String render = parser.render(templarContext);
 		assertEquals("", render);
-		assertNotNull(templarContext.get("anotherVector"));
-		assertEquals("3", templarContext.get("anotherVector").toString());
+		assertNotNull(templarContext.get("anotherArrayList"));
+		assertEquals("3", templarContext.get("anotherArrayList").toString());
 	}
 
 	@Test(expected = ParseException.class)

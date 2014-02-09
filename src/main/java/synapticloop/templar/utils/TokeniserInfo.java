@@ -1,7 +1,7 @@
 package synapticloop.templar.utils;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -17,7 +17,7 @@ package synapticloop.templar.utils;
  * under the Licence.
  */
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * This class contains information about the parsed file. Be aware that as they
@@ -30,7 +30,7 @@ public class TokeniserInfo {
 	public static final String NEW_LINE = System.getProperty("line.separator");
 	public static int lineNumber = 1;
 	public static int characterNumber = 1;
-	public static Vector<String> lines = new Vector<String>();
+	public static ArrayList<String> lines = new ArrayList<String>();
 
 	public static void incrementLine() {
 		lineNumber++;
@@ -46,13 +46,13 @@ public class TokeniserInfo {
 	}
 
 	public static String getLine(int index) {
-		return(lines.elementAt(index -1));
+		return(lines.get(index -1));
 	}
 
 	public static void reset() {
 		lineNumber = 1;
 		characterNumber = 1;
-		lines = new Vector<String>();
+		lines = new ArrayList<String>();
 	}
 
 	public static int getLineNumber() {

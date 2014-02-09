@@ -1,7 +1,7 @@
 package synapticloop.templar;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -27,7 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
@@ -40,7 +40,7 @@ import synapticloop.templar.utils.TokeniserInfo;
 public class Parser {
 	private File templarFile;
 
-	private Vector<Token> tokens = new Vector<Token>();
+	private ArrayList<Token> tokens = new ArrayList<Token>();
 
 	/**
 	 * Create a parser from the String, if the String can not be resolved to a 
@@ -111,7 +111,7 @@ public class Parser {
 			throw new ParseException("Cannot parse null contents.");
 		}
 
-		// add all of the lines to the constants vector
+		// add all of the lines to the constants ArrayList
 		StringBuilder stringBuilder = new StringBuilder(contents);
 		StringTokenizer stringTokenizer = new StringTokenizer(contents, "\n\r\f");
 		while(stringTokenizer.hasMoreTokens()) {

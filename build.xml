@@ -10,7 +10,5 @@
 		The build file for the templar project
 	</description>
 
-	<target name="dist">
-		<echo message="hello" />
-	</target>
+	<target name="dist" depends="clean,init,cobertura,jar" />
 </project>

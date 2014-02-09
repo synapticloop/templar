@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -28,9 +28,9 @@ public class TabToken extends Token {
 	public TabToken(String value, StringTokenizer stringTokenizer) throws ParseException {
 		super(value, stringTokenizer);
 		if(stringTokenizer.hasMoreTokens()) {
-			if(!stringTokenizer.nextToken().equals("}")) {
-				// TODO add what the token found was
-				throw new ParseException("Could not find end token marker '}' for the tab token.", this);
+			String nextToken = stringTokenizer.nextToken();
+			if(!nextToken.equals("}")) {
+				throw new ParseException("Could not find end token marker '}' for the tab token, found '" + nextToken + "'.", this);
 			}
 		} else {
 			throw new ParseException("Could not find end token marker '}' for the tab token.", this);

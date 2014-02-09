@@ -1,7 +1,7 @@
 package synapticloop.templar.function;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -20,7 +20,7 @@ package synapticloop.templar.function;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class FunctionLengthTest {
 
 	@Test
 	public void testValidLength() throws FunctionException {
-		assertEquals(0, functionLength.evaluate(new Object[] {new Vector<String>()}, null));
+		assertEquals(0, functionLength.evaluate(new Object[] {new ArrayList<String>()}, null));
 		assertEquals(0, functionLength.evaluate(new Object[] {new ArrayList<String>()}, null));
 		assertEquals(5, functionLength.evaluate(new Object[] {new String[5]}, null));
 

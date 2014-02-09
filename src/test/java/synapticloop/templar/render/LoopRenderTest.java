@@ -1,7 +1,7 @@
 package synapticloop.templar.render;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -19,7 +19,7 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -40,13 +40,13 @@ public class LoopRenderTest {
 		templarConfiguration.setExplicitTabs(true);
 		TemplarContext templarContext = new TemplarContext(templarConfiguration);
 
-		Vector<String> vector = new Vector<String>();
-		vector.add("one");
-		vector.add("two");
-		vector.add("three");
-		vector.add("four");
+		ArrayList<String> ArrayList = new ArrayList<String>();
+		ArrayList.add("one");
+		ArrayList.add("two");
+		ArrayList.add("three");
+		ArrayList.add("four");
 
-		templarContext.add("vector", vector);
+		templarContext.add("ArrayList", ArrayList);
 
 		String render = parser.render(templarContext);
 		assertEquals("loop-status-first\n" +

@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -18,7 +18,7 @@ package synapticloop.templar.token;
  */
 
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.ParseException;
@@ -27,7 +27,7 @@ import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
 public class SetToken extends CommandToken {
-	public Vector<Token> childTokens = new Vector<Token>();
+	public ArrayList<Token> childTokens = new ArrayList<Token>();
 
 	public SetToken(String value, StringTokenizer stringTokenizer) throws ParseException {
 		super(value, stringTokenizer);

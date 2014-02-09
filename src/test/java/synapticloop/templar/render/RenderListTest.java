@@ -32,7 +32,7 @@ public class RenderListTest {
 				"\n" + 
 				"<NEWLINE@3:2 />\n" + 
 				"\n" + 
-				"<LOOP@4:2 (bean.vector as value)>\n" + 
+				"<LOOP@4:2 (bean.ArrayList as value)>\n" + 
 				"	<EVAL@5:3 (value)><NEWLINE@5:4 />\n" + 
 				"\n" + 
 				"</LOOP@6:2>\n" + 

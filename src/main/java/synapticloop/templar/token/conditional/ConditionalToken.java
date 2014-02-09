@@ -1,7 +1,7 @@
 package synapticloop.templar.token.conditional;
 
 /*
- * Copyright (c) 2012-2013 synapticloop.
+ * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -18,7 +18,7 @@ package synapticloop.templar.token.conditional;
  */
 
 import java.util.StringTokenizer;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
@@ -28,7 +28,7 @@ import synapticloop.templar.utils.TokeniserInfo;
 
 public abstract class ConditionalToken extends BasePositionToken {
 	protected String value = null;
-	protected Vector<ConditionalToken> childConditionalTokens = null;
+	protected ArrayList<ConditionalToken> childConditionalTokens = null;
 
 	public ConditionalToken(String value, StringTokenizer stringTokenizer) throws ParseException {
 		this.value = value;
