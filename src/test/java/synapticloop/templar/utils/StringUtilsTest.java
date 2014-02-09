@@ -20,4 +20,9 @@ public class StringUtilsTest {
 	public void testEscapeHtmlWithText() {
 		assertEquals("This &quot;so called&quot; &lt;html&gt; is nice &amp; easy", StringUtils.escapeHtml("This \"so called\" <html> is nice & easy"));
 	}
+
+	@Test
+	public void testNull() {
+		assertEquals("", StringUtils.escapeHtml(null));
+	}
 }
