@@ -24,7 +24,7 @@ In a very small nutshell
 
   1. Create a new templarContext
   1. Add stuff to it
-  1. Create a parser (and parse the templar file)
+  1. Create a parser (and pass in the templar file)
   1. parser.render(templarContext)
 
 ```
