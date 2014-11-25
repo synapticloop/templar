@@ -1,0 +1,3 @@
+{if fn:notNull[hello]}
+
+{endif}

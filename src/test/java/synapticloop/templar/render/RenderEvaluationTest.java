@@ -2,6 +2,8 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -14,7 +16,8 @@ import synapticloop.templar.utils.TemplarContext;
 public class RenderEvaluationTest {
 	@Test
 	public void testParse() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/render-evaluation-test.templar");
+		File file = new File("src/test/template/render-evaluation-test.templar");
+		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();
 		EvaluationChildBean evaluationChildBean = new EvaluationChildBean("childName");
@@ -51,7 +54,8 @@ public class RenderEvaluationTest {
 
 	@Test
 	public void testFunctionEvaluationParse() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/render-evaluation-function-test.templar");
+		File file = new File("src/test/template/render-evaluation-function-test.templar");
+		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();
 		String[] array = {"one", "two", "three"};

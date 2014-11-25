@@ -1,6 +1,8 @@
 package synapticloop.templar.parse;
 import static junit.framework.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +19,8 @@ public class IfTest {
 
 	@Test
 	public void testRender() throws ParseException {
-		parser = new Parser("src/test/template/if-test.templar");
+		File file = new File("src/test/template/if-test.templar");
+		parser = new Parser(file);
 		assertEquals("These are text\n" +
 				"\n" +
 				"tokens with\n" +

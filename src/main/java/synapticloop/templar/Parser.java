@@ -26,13 +26,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.Token;
 import synapticloop.templar.utils.FileUtils;
+import synapticloop.templar.utils.HashUtils;
+import synapticloop.templar.utils.ParserCache;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 import synapticloop.templar.utils.TokeniserInfo;
@@ -46,20 +48,13 @@ public class Parser {
 	 * Create a parser from the String, if the String can not be resolved to a 
 	 * file, then treat it as raw templar contents
 	 * 
-	 * @param filePathOrContents the file path of raw contents
+	 * @param contents the raw templar markup
 	 * 
 	 * @throws ParseException if parsing goes wrong
 	 */
-	public Parser(String filePathOrContents) throws ParseException {
-		if(null != filePathOrContents) {
-			File file = new File(filePathOrContents);
-			if(FileUtils.canReadFile(file)) {
-				this.templarFile = file;
-				this.parse();
-			} else {
-				// not a file perhaps? - try for contents...
-				this.parse(filePathOrContents);
-			}
+	public Parser(String contents) throws ParseException {
+		if(null != contents) {
+			this.parse(contents);
 		} else {
 			throw new ParseException("File path or contents cannot be null");
 		}
@@ -96,7 +91,17 @@ public class Parser {
 		} catch (IOException jiioex) {
 			throw new ParseException("There was a problem reading the input stream.");
 		}
-		this.parse(stringBuilder.toString());
+		String contents = stringBuilder.toString();
+		String md5Hash = HashUtils.md5Hash(contents);
+		if(null != md5Hash) {
+			if(ParserCache.getIsInCache(md5Hash)) {
+				this.tokens = ParserCache.getCached(md5Hash);
+				return;
+			}
+		}
+
+		// at this point - we don't yet have the tokens
+		this.parse(contents);
 	}
 
 	/**
@@ -120,7 +125,9 @@ public class Parser {
 
 		// now actually do the tokenising - resetting the constants to start with
 		TokeniserInfo.reset();
-		tokens = Tokeniser.tokenise(stringBuilder.toString());
+		String string = stringBuilder.toString();
+		
+		tokens = Tokeniser.tokenise(string);
 	}
 
 	private void parse() throws ParseException {
@@ -188,7 +195,7 @@ public class Parser {
 	public void renderToFile(TemplarContext templarContext, File outputFile) throws RenderException {
 		new File(outputFile.getParentFile().getAbsolutePath()).mkdirs();
 
-		System.out.print("Rendering file '" + outputFile.getAbsolutePath() + "'.");
+		System.out.println("Rendering file '" + outputFile.getAbsolutePath() + "'.");
 
 		BufferedWriter bufferedWriter = null;
 		try {

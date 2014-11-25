@@ -19,6 +19,8 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -29,7 +31,8 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidSetToken() {
 		try {
-			Parser parser = new Parser("src/test/template/line-numbers-set.templar");
+			File file = new File("src/test/template/line-numbers-set.templar");
+			Parser parser = new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 8);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 12);
@@ -40,7 +43,8 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidCurlyBrace() {
 		try {
-			Parser parser = new Parser("src/test/template/line-numbers-curly-brace.templar");
+			File file = new File("src/test/template/line-numbers-curly-brace.templar");
+			Parser parser = new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 7);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 5);
@@ -51,7 +55,8 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidCurlyBraceNoMoreTokens() {
 		try {
-			Parser parser = new Parser("src/test/template/line-numbers-curly-brace-no-more-tokens.templar");
+			File file = new File("src/test/template/line-numbers-curly-brace-no-more-tokens.templar");
+			Parser parser = new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 9);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 5);

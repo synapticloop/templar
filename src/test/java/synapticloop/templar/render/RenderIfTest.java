@@ -2,6 +2,8 @@ package synapticloop.templar.render;
 
 import static junit.framework.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -15,7 +17,8 @@ import synapticloop.templar.utils.TemplarContext;
 public class RenderIfTest {
 	@Test
 	public void testRender() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/render-if-test.templar");
+		File file = new File("src/test/template/render-if-test.templar");
+		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();
 		EvaluationChildBean evaluationChildBean = new EvaluationChildBean("childName");

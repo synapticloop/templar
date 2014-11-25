@@ -48,7 +48,8 @@ public class ParserTest {
 
 	@Test
 	public void testAvailableParserFilePath() throws ParseException {
-		parser = new Parser("src/test/template/empty.templar");
+		File file = new File("src/test/template/empty.templar");
+		parser = new Parser(file);
 	}
 
 	@Test(expected = ParseException.class)

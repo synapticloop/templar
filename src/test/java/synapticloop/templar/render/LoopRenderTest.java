@@ -19,6 +19,7 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.junit.Test;
@@ -33,7 +34,8 @@ public class LoopRenderTest {
 
 	@Test
 	public void testLoopStatusBean() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/render-loop-test.templar");
+		File file = new File("src/test/template/render-loop-test.templar");
+		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 		templarConfiguration.setExplicitNewLines(true);

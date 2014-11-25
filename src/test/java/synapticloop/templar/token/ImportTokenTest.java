@@ -19,6 +19,8 @@ package synapticloop.templar.token;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,13 +46,15 @@ public class ImportTokenTest {
 
 	@Test
 	public void testImportFromFileSystem() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/import-test.templar");
+		File file = new File("src/test/template/import-test.templar");
+		Parser parser = new Parser(file);
 		assertEquals("<IMPORT@1:2 (src/test/template/import/hello-world.templar)>Hello world!!\n</IMPORT@1:2 (src/test/template/import/hello-world.templar)>\n", parser.toString());
 	}
 
 	@Test
 	public void testImportFromFileSystemWithFunctions() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/import-test-functions.templar");
+		File file = new File("src/test/template/import-test-functions.templar");
+		Parser parser = new Parser(file);
 		TemplarContext templarContext = new TemplarContext();
 		String[] array = {"one", "two", "three"};
 		templarContext.add("array", array);

@@ -2,6 +2,8 @@ package synapticloop.templar.render;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -15,7 +17,8 @@ import synapticloop.templar.utils.TemplarContext;
 public class IfElseRenderTest {
 	@Test
 	public void testSimpleIfRendering() throws ParseException, RenderException {
-		Parser parser = new Parser("src/test/template/render-if-else-test.templar");
+		File file = new File("src/test/template/render-if-else-test.templar");
+		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 		templarConfiguration.setExplicitNewLines(true);

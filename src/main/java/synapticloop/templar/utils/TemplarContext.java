@@ -44,11 +44,14 @@ public class TemplarContext {
 	static {
 		functionMap.put("null", new FunctionIsNull());
 		functionMap.put("notNull", new FunctionIsNotNull());
+		functionMap.put("!Null", new FunctionIsNotNull());
+		functionMap.put("!null", new FunctionIsNotNull());
 		functionMap.put("=", new FunctionEqual());
 		functionMap.put("equal", new FunctionEqual());
 		functionMap.put("<>", new FunctionNotEqual());
 		functionMap.put("not=", new FunctionNotEqual());
-		functionMap.put("noEqual", new FunctionEqual());
+		functionMap.put("!=", new FunctionNotEqual());
+		functionMap.put("notEqual", new FunctionNotEqual());
 		functionMap.put(">", new FunctionGreaterThan());
 		functionMap.put("gt", new FunctionGreaterThan());
 		functionMap.put(">=", new FunctionGreaterThanEqual());
