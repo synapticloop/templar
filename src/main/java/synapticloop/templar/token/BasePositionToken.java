@@ -1,5 +1,7 @@
 package synapticloop.templar.token;
 
+import synapticloop.templar.utils.Tokeniser;
+
 /*
  * Copyright (c) 2012-2014 synapticloop.
  * All rights reserved.
@@ -20,6 +22,7 @@ package synapticloop.templar.token;
 public abstract class BasePositionToken {
 	protected int lineNumber = 0;
 	protected int characterNumber = 0;
+	protected Tokeniser tokeniser = null;
 
 	public int getLineNumber() {
 		return(lineNumber);

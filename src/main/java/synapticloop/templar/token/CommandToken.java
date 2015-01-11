@@ -22,13 +22,14 @@ import java.util.StringTokenizer;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public abstract class CommandToken extends Token {
 	protected String commandLine = null;
 	protected StringTokenizer stringTokenizer;
 
-	public CommandToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public CommandToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		this.stringTokenizer = stringTokenizer;
 	}
 

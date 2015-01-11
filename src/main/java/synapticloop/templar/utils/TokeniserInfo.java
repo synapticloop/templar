@@ -28,38 +28,38 @@ import java.util.ArrayList;
  */
 public class TokeniserInfo {
 	public static final String NEW_LINE = System.getProperty("line.separator");
-	public static int lineNumber = 1;
-	public static int characterNumber = 1;
-	public static ArrayList<String> lines = new ArrayList<String>();
+	public int lineNumber = 1;
+	public int characterNumber = 1;
+	public ArrayList<String> lines = new ArrayList<String>();
 
-	public static void incrementLine() {
+	public void incrementLine() {
 		lineNumber++;
 		characterNumber = 1;
 	}
 
-	public static void incrementCharacter(int num) {
+	public void incrementCharacter(int num) {
 		characterNumber += num;
 	}
 
-	public static void addLine(String line) {
+	public void addLine(String line) {
 		lines.add(line);
 	}
 
-	public static String getLine(int index) {
+	public String getLine(int index) {
 		return(lines.get(index -1));
 	}
 
-	public static void reset() {
+	public void reset() {
 		lineNumber = 1;
 		characterNumber = 1;
 		lines = new ArrayList<String>();
 	}
 
-	public static int getLineNumber() {
+	public int getLineNumber() {
 		return(lineNumber);
 	}
 
-	public static int getCharacterNumber() {
+	public int getCharacterNumber() {
 		return(characterNumber);
 	}
 }

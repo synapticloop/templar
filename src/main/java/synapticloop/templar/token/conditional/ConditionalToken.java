@@ -17,23 +17,23 @@ package synapticloop.templar.token.conditional;
  * under the Licence.
  */
 
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.BasePositionToken;
 import synapticloop.templar.utils.TemplarContext;
-import synapticloop.templar.utils.TokeniserInfo;
+import synapticloop.templar.utils.Tokeniser;
 
 public abstract class ConditionalToken extends BasePositionToken {
 	protected String value = null;
 	protected ArrayList<ConditionalToken> childConditionalTokens = null;
 
-	public ConditionalToken(String value, StringTokenizer stringTokenizer) throws ParseException {
+	public ConditionalToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		this.value = value;
-		this.characterNumber = TokeniserInfo.getCharacterNumber();
-		this.lineNumber = TokeniserInfo.getLineNumber();
+		this.characterNumber = tokeniser.getTokeniserInfo().getCharacterNumber();
+		this.lineNumber = tokeniser.getTokeniserInfo().getLineNumber();
 		// do nothing with the string tokenizer
 	}
 

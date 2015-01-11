@@ -21,11 +21,12 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class NewLineToken extends Token {
 
-	public NewLineToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public NewLineToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		if(stringTokenizer.hasMoreTokens()) {
 			if(!stringTokenizer.nextToken().equals("}")) {
 				// TODO add what the token found was

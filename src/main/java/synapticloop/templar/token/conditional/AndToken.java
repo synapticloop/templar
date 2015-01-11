@@ -22,11 +22,12 @@ import java.util.StringTokenizer;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class AndToken extends ConditionalToken {
 
-	public AndToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public AndToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 	}
 
 	public Object evaluate(TemplarContext templarContext) throws RenderException {

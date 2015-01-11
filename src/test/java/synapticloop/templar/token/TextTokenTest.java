@@ -30,6 +30,7 @@ import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarConfiguration;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class TextTokenTest {
 	private TextToken textToken;
@@ -39,13 +40,13 @@ public class TextTokenTest {
 	@Before
 	public void setup() throws ParseException {
 		initMocks(this);
-		textToken = new TextToken(null, null);
+		textToken = new TextToken(null, null, new Tokeniser());
 		templarContext = new TemplarContext();
 	}
 
 	@Test
 	public void testRender() throws RenderException, ParseException {
-		textToken = new TextToken("something", null);
+		textToken = new TextToken("something", null, new Tokeniser());
 		assertEquals("something", textToken.render(templarContext));
 
 	}
@@ -55,7 +56,7 @@ public class TextTokenTest {
 		TemplarConfiguration configuration = new TemplarConfiguration();
 		templarContext.setTemplarConfiguration(configuration);
 		configuration.setExplicitNewLines(false);
-		textToken = new TextToken("\n", null);
+		textToken = new TextToken("\n", null, new Tokeniser());
 		assertEquals("\n", textToken.render(templarContext));
 		configuration.setExplicitNewLines(true);
 		templarContext.setTemplarConfiguration(configuration);

@@ -37,10 +37,10 @@ import synapticloop.templar.utils.HashUtils;
 import synapticloop.templar.utils.ParserCache;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
-import synapticloop.templar.utils.TokeniserInfo;
 
 public class Parser {
 	private File templarFile;
+	private Tokeniser tokeniser = new Tokeniser();
 
 	private ArrayList<Token> tokens = new ArrayList<Token>();
 
@@ -120,36 +120,45 @@ public class Parser {
 		StringBuilder stringBuilder = new StringBuilder(contents);
 		StringTokenizer stringTokenizer = new StringTokenizer(contents, "\n\r\f");
 		while(stringTokenizer.hasMoreTokens()) {
-			TokeniserInfo.addLine(stringTokenizer.nextToken());
+			tokeniser.getTokeniserInfo().addLine(stringTokenizer.nextToken());
 		}
 
 		// now actually do the tokenising - resetting the constants to start with
-		TokeniserInfo.reset();
+		tokeniser.getTokeniserInfo().reset();
 		String string = stringBuilder.toString();
 		
-		tokens = Tokeniser.tokenise(string);
+		tokens = tokeniser.tokenise(string);
 	}
 
 	private void parse() throws ParseException {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		// go through the parsing
+		BufferedReader bufferedReader = null;
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(templarFile));
+			bufferedReader = new BufferedReader(new FileReader(templarFile));
 			String line = null;
 			while((line = bufferedReader.readLine()) != null) {
-				TokeniserInfo.addLine(line);
+				tokeniser.getTokeniserInfo().addLine(line);
 				stringBuilder.append(line + "\n");
 			}
 		} catch(IOException jiioex) {
 			throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'");
+		} finally {
+			if(null != bufferedReader) {
+				try {
+					bufferedReader.close();
+				} catch (IOException ioex) {
+					// do nothing
+				}
+			}
 		}
 
 		// at this point we have all of the file lines, go through and tokenise
 		// them
 
-		TokeniserInfo.reset();
-		tokens = Tokeniser.tokenise(stringBuilder.toString());
+		tokeniser.getTokeniserInfo().reset();
+		tokens = tokeniser.tokenise(stringBuilder.toString());
 	}
 
 	/**
@@ -195,7 +204,7 @@ public class Parser {
 	public void renderToFile(TemplarContext templarContext, File outputFile) throws RenderException {
 		new File(outputFile.getParentFile().getAbsolutePath()).mkdirs();
 
-		System.out.println("Rendering file '" + outputFile.getAbsolutePath() + "'.");
+//		System.out.println("Rendering file '" + outputFile.getAbsolutePath() + "'.");
 
 		BufferedWriter bufferedWriter = null;
 		try {
@@ -256,4 +265,5 @@ public class Parser {
 		return (stringBuilder.toString());
 	}
 
+	public Tokeniser getTokeniser() { return(tokeniser); }
 }

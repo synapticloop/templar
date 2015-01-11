@@ -44,86 +44,87 @@ import synapticloop.templar.token.conditional.NotToken;
 import synapticloop.templar.token.conditional.OrToken;
 
 public class Tokeniser {
+	private TokeniserInfo tokeniserInfo = new TokeniserInfo();
 
-	public static ArrayList<Token> tokenise(String contents) throws ParseException {
+	public ArrayList<Token> tokenise(String contents) throws ParseException {
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(contents, " \n\t{}", true);
 		tokens.addAll(tokenise(stringTokenizer));
 		return(tokens);
 	}
 
-	public static ArrayList<Token> tokenise(StringTokenizer stringTokenizer) throws ParseException {
+	public ArrayList<Token> tokenise(StringTokenizer stringTokenizer) throws ParseException {
 		ArrayList<Token> tokens = new ArrayList<Token>();
 
 		while(stringTokenizer.hasMoreTokens()) {
 			String token = stringTokenizer.nextToken();
-			TokeniserInfo.incrementCharacter(token.length());
+			tokeniserInfo.incrementCharacter(token.length());
 
 			if(token.equals("{")) {
 				if(stringTokenizer.hasMoreTokens()) {
 					token = stringTokenizer.nextToken();
 					if(token.equals("{")) {
 						// looks like we actually want to have a '{' character
-						tokens.add(new TextToken(token, stringTokenizer));
+						tokens.add(new TextToken(token, stringTokenizer, this));
 					} else if(token.equals("--")) {
-						tokens.add(new CommentToken(token, stringTokenizer));
+						tokens.add(new CommentToken(token, stringTokenizer, this));
 					} else if(token.equals("nl")) {
-						tokens.add(new NewLineToken(token, stringTokenizer));
+						tokens.add(new NewLineToken(token, stringTokenizer, this));
 					} else if(token.equals("\\n")) {
-						tokens.add(new NewLineToken(token, stringTokenizer));
+						tokens.add(new NewLineToken(token, stringTokenizer, this));
 					} else if(token.equals("tab")) {
-						tokens.add(new TabToken(token, stringTokenizer));
+						tokens.add(new TabToken(token, stringTokenizer, this));
 					} else if(token.equals("\\t")) {
-						tokens.add(new TabToken(token, stringTokenizer));
+						tokens.add(new TabToken(token, stringTokenizer, this));
 					} else if(token.equals("set")) {
-						tokens.add(new SetToken(token, stringTokenizer));
+						tokens.add(new SetToken(token, stringTokenizer, this));
 					} else if(token.equals("if")) {
-						tokens.add(new IfToken(token, stringTokenizer));
+						tokens.add(new IfToken(token, stringTokenizer, this));
 					} else if(token.equals("loop")) {
-						tokens.add(new LoopToken(token, stringTokenizer));
+						tokens.add(new LoopToken(token, stringTokenizer, this));
 					} else if(token.equals("dumpcontext")) {
-						tokens.add(new DumpContextToken("", stringTokenizer));
+						tokens.add(new DumpContextToken("", stringTokenizer, this));
 					} else if(token.equals("else")) {
-						tokens.add(new ElseToken("", stringTokenizer));
+						tokens.add(new ElseToken("", stringTokenizer, this));
 						return(tokens);
 					} else if(token.equals("endif")) {
-						tokens.add(new EndIfToken("", stringTokenizer));
+						tokens.add(new EndIfToken("", stringTokenizer, this));
 						return(tokens);
 					} else if(token.equals("endloop")) {
-						tokens.add(new EndLoopToken("", stringTokenizer));
+						tokens.add(new EndLoopToken("", stringTokenizer, this));
 						return(tokens);
 					} else if(token.equals("import")) {
 						// this is a little bit special in that we want to include all of 
 						// the generated tokens, rather than just the single token and leave
 						// it to render time to parse
-						ImportToken importToken = new ImportToken(token, stringTokenizer);
+						ImportToken importToken = new ImportToken(token, stringTokenizer, this);
 						tokens.add(importToken);
 						tokens.addAll(importToken.getTokens());
 					} else {
-						tokens.add(new EvaluationToken(token, stringTokenizer));
+						tokens.add(new EvaluationToken(token, stringTokenizer, this));
 					}
 				} else {
 					throw new ParseException("Found an '{' character, with no more tokens after it");
 				}
 			} else {
 				if(token.equals("\n")) {
-					TokeniserInfo.incrementLine();
+					tokeniserInfo.incrementLine();
 				}
-				tokens.add(new TextToken(token, stringTokenizer));
+				tokens.add(new TextToken(token, stringTokenizer, this));
 			}
 		}
 
 		return(tokens);
 	}
 
-	public static ArrayList<ConditionalToken> tokeniseCommandLine(StringTokenizer stringTokenizer) throws ParseException {
+	public ArrayList<ConditionalToken> tokeniseCommandLine(StringTokenizer stringTokenizer) throws ParseException {
 		// at this point we want to evaluate the if statement
 		ArrayList<ConditionalToken> conditionalTokens = new ArrayList<ConditionalToken>();
 
 		while(stringTokenizer.hasMoreTokens()) {
 			String token = stringTokenizer.nextToken();
 			if(token.equalsIgnoreCase("\n")) {
-				TokeniserInfo.incrementLine();
+				tokeniserInfo.incrementLine();
 			}
 			token = token.trim();
 
@@ -132,25 +133,27 @@ public class Tokeniser {
 			}
 			if(token.equals("(")) {
 				// start of grouping
-				conditionalTokens.add(new GroupToken(token, stringTokenizer));
+				conditionalTokens.add(new GroupToken(token, stringTokenizer, this));
 			} else if(token.equals(")")) {
 				// end of grouping
 				return(conditionalTokens);
 			} else if(token.equals("&")) {
-				conditionalTokens.add(new AndToken(token, stringTokenizer));
+				conditionalTokens.add(new AndToken(token, stringTokenizer, this));
 			} else if(token.equals("!")) {
-				conditionalTokens.add(new NotToken(token, stringTokenizer));
+				conditionalTokens.add(new NotToken(token, stringTokenizer, this));
 			} else if(token.equals("|")) {
-				conditionalTokens.add(new OrToken(token, stringTokenizer));
+				conditionalTokens.add(new OrToken(token, stringTokenizer, this));
 			} else if(token.startsWith("fn:")) {
 				// have the start of a function
-				conditionalTokens.add(new FunctionToken(token, stringTokenizer));
+				conditionalTokens.add(new FunctionToken(token, stringTokenizer, this));
 			} else {
 				// this is an evaluator
-				conditionalTokens.add(new ConditionalEvaluationToken(token, stringTokenizer));
+				conditionalTokens.add(new ConditionalEvaluationToken(token, stringTokenizer, this));
 			}
 		}
 
 		return(conditionalTokens);
 	}
+
+	public TokeniserInfo getTokeniserInfo() { return(tokeniserInfo); }
 }

@@ -21,13 +21,14 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class ConditionalEvaluationToken extends ConditionalToken {
 
-	public ConditionalEvaluationToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public ConditionalEvaluationToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		value = value.trim();
 	}
 

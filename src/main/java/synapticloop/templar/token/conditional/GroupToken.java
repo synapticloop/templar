@@ -26,10 +26,10 @@ import synapticloop.templar.utils.Tokeniser;
 
 public class GroupToken extends ConditionalToken {
 
-	public GroupToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public GroupToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		// now go through the stringTokenizer and see whether we have a )
-		childConditionalTokens = Tokeniser.tokeniseCommandLine(stringTokenizer);
+		childConditionalTokens = tokeniser.tokeniseCommandLine(stringTokenizer);
 	}
 
 	public Object evaluate(TemplarContext templarContext) throws RenderException {

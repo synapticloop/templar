@@ -17,17 +17,18 @@ package synapticloop.templar.token.conditional;
  * under the Licence.
  */
 
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class FunctionArgumentToken extends ConditionalToken {
 
-	public FunctionArgumentToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public FunctionArgumentToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 	}
 
 	public void setChildConditionalTokens(ArrayList<ConditionalToken> conditionalTokens) {

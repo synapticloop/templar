@@ -21,12 +21,13 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 
 public class TabToken extends Token {
 
-	public TabToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public TabToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		if(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
 			if(!nextToken.equals("}")) {

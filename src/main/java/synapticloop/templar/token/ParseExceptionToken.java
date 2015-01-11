@@ -20,16 +20,17 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.utils.Tokeniser;
 
 public class ParseExceptionToken extends Token {
 
 	public ParseExceptionToken() throws ParseException {
-		super("", null);
+		super("", null, new Tokeniser());
 	}
 
-	public ParseExceptionToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
-	}
+	public ParseExceptionToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
+		}
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();

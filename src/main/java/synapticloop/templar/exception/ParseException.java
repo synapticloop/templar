@@ -19,6 +19,7 @@ package synapticloop.templar.exception;
 
 import synapticloop.templar.token.BasePositionToken;
 import synapticloop.templar.token.ParseExceptionToken;
+import synapticloop.templar.utils.Tokeniser;
 
 /**
  * When there is a problem parsing the templar template.  This can also contain
@@ -43,7 +44,7 @@ public class ParseException extends Exception {
 	public BasePositionToken getExceptionToken() {
 		if(null == exceptionToken) {
 			try {
-				return(new ParseExceptionToken("FATAL", null));
+				return(new ParseExceptionToken("FATAL", null, new Tokeniser()));
 			} catch (ParseException stepex) {
 				return(null);
 			}

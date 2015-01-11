@@ -30,15 +30,14 @@ import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.utils.FileUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
-import synapticloop.templar.utils.TokeniserInfo;
 
 
 public class ImportToken extends Token {
 	private static final String CLASSPATH_DEIGNATOR = "classpath:";
 	String importLocation = null;
 
-	public ImportToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public ImportToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if(stringTokenizer.hasMoreTokens()) {
@@ -62,13 +61,13 @@ public class ImportToken extends Token {
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
 
-		int lineNumber = TokeniserInfo.lineNumber;
-		int characterNumber = TokeniserInfo.characterNumber;
-		ArrayList<String> lines = TokeniserInfo.lines;
+		int lineNumber = tokeniser.getTokeniserInfo().lineNumber;
+		int characterNumber = tokeniser.getTokeniserInfo().characterNumber;
+		ArrayList<String> lines = tokeniser.getTokeniserInfo().lines;
 
-		TokeniserInfo.lineNumber = 1;
-		TokeniserInfo.characterNumber = 1;
-		TokeniserInfo.lines = new ArrayList<String>();
+		tokeniser.getTokeniserInfo().lineNumber = 1;
+		tokeniser.getTokeniserInfo().characterNumber = 1;
+		tokeniser.getTokeniserInfo().lines = new ArrayList<String>();
 
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -80,7 +79,7 @@ public class ImportToken extends Token {
 			String line = null;
 			try {
 				while((line = bufferedReader.readLine()) != null) {
-					TokeniserInfo.addLine(line);
+					tokeniser.getTokeniserInfo().addLine(line);
 					stringBuilder.append(line + "\n");
 				}
 			} catch(IOException jiioex) {
@@ -95,7 +94,7 @@ public class ImportToken extends Token {
 				BufferedReader bufferedReader = new BufferedReader(new FileReader(templarFile));
 				String line = null;
 				while((line = bufferedReader.readLine()) != null) {
-					TokeniserInfo.addLine(line);
+					tokeniser.getTokeniserInfo().addLine(line);
 					stringBuilder.append(line + "\n");
 				}
 			} catch(IOException jiioex) {
@@ -107,18 +106,18 @@ public class ImportToken extends Token {
 		ArrayList<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(stringBuilder.toString(), " \n\t{}", true);
 		try {
-			tokens.addAll(Tokeniser.tokenise(stringTokenizer));
+			tokens.addAll(tokeniser.tokenise(stringTokenizer));
 		} catch (ParseException pex) {
 			throw new ParseException("Could not parse the imported file '" + importLocation + "', message was '" + pex.getMessage() + "'.");
 		}
 
 		// now reset the content
-		TokeniserInfo.lineNumber = lineNumber;
-		TokeniserInfo.characterNumber = characterNumber;
-		TokeniserInfo.lines = lines;
+		tokeniser.getTokeniserInfo().lineNumber = lineNumber;
+		tokeniser.getTokeniserInfo().characterNumber = characterNumber;
+		tokeniser.getTokeniserInfo().lines = lines;
 
 		// finally add the end import token
-		tokens.add(new EndImportToken(importLocation, stringTokenizer));
+		tokens.add(new EndImportToken(importLocation, stringTokenizer, tokeniser));
 		return(tokens);
 	}
 

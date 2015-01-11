@@ -22,13 +22,14 @@ import java.util.StringTokenizer;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class FunctionToken extends ConditionalToken {
 	private Object[] objectArgs = null;
 	private String functionName = null;
 
-	public FunctionToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public FunctionToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 
 		// now we want to go through and get the function
 		// yay - we have a function - get the functionName
@@ -58,7 +59,7 @@ public class FunctionToken extends ConditionalToken {
 				string = string.trim();
 			}
 
-			objectArgs[i] = new ConditionalEvaluationToken(string, null);
+			objectArgs[i] = new ConditionalEvaluationToken(string, null, tokeniser);
 		}
 	}
 

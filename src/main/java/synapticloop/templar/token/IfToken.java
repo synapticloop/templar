@@ -27,7 +27,6 @@ import synapticloop.templar.token.conditional.ConditionalToken;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
-import synapticloop.templar.utils.TokeniserInfo;
 
 public class IfToken extends CommandToken {
 	private ArrayList<Token> elseCondition = null;
@@ -35,18 +34,18 @@ public class IfToken extends CommandToken {
 	private ArrayList<ConditionalToken> conditionalTokens = null;
 	private boolean inverse = false;
 
-	public IfToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public IfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if(stringTokenizer.hasMoreTokens()) {
 			while(stringTokenizer.hasMoreTokens()) {
 				String token = stringTokenizer.nextToken();
 
-				TokeniserInfo.incrementCharacter(token.length());
+				tokeniser.getTokeniserInfo().incrementCharacter(token.length());
 
 				if(token.equals("\n")) {
-					TokeniserInfo.incrementLine();
+					tokeniser.getTokeniserInfo().incrementLine();
 				} else if(token.equals("}")) {
 					// now we need to go through and tokenise the inner tokeniser...;
 					this.commandLine = stringBuilder.toString().trim();
@@ -54,27 +53,27 @@ public class IfToken extends CommandToken {
 					// at this point we want to parse the command line
 					StringTokenizer commandLineStringTokenizer = new StringTokenizer(commandLine, "(&|!)", true);
 
-					conditionalTokens = Tokeniser.tokeniseCommandLine(commandLineStringTokenizer);
+					conditionalTokens = tokeniser.tokeniseCommandLine(commandLineStringTokenizer);
 
-					this.addChildTokens(Tokeniser.tokenise(stringTokenizer));
+					this.addChildTokens(tokeniser.tokenise(stringTokenizer));
 
 					// here the next token should be a '}'
 					if(stringTokenizer.hasMoreTokens()) {
 						String endToken = stringTokenizer.nextToken();
-						TokeniserInfo.incrementCharacter(token.length());
+						tokeniser.getTokeniserInfo().incrementCharacter(token.length());
 
 						if(!endToken.equals("}")) {
-							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + TokeniserInfo.lineNumber + ", character: " + TokeniserInfo.characterNumber, this);
+							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().lineNumber + ", character: " + tokeniser.getTokeniserInfo().characterNumber, this);
 						}
 					} else {
-						throw new ParseException("Expecting '}' but no more tokens found at line: " + TokeniserInfo.lineNumber + ", character: " + TokeniserInfo.characterNumber, this);
+						throw new ParseException("Expecting '}' but no more tokens found at line: " + tokeniser.getTokeniserInfo().lineNumber + ", character: " + tokeniser.getTokeniserInfo().characterNumber, this);
 					}
 
 					// check to see what the ending token is
 					Token endingToken = childTokens.get(childTokens.size() -1);
 					if(endingToken instanceof ElseToken) {
 						// need to parse again
-						elseCondition = Tokeniser.tokenise(stringTokenizer);
+						elseCondition = tokeniser.tokenise(stringTokenizer);
 						// here the next token should be a '}'
 						if(stringTokenizer.hasMoreTokens()) {
 							String endToken = stringTokenizer.nextToken();

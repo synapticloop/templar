@@ -28,10 +28,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.utils.Tokeniser;
 
 public class NewLineTokenTest {
 	@Mock StringTokenizer mockStringTokenizer;
-
+	@Mock Tokeniser mockTokeniser;
 	@Before
 	public void setup() {
 		initMocks(this);
@@ -40,20 +41,20 @@ public class NewLineTokenTest {
 	@Test(expected = ParseException.class)
 	public void testNoMoreTokens() throws ParseException{
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(false);
-		new NewLineToken("", mockStringTokenizer);
+		new NewLineToken("", mockStringTokenizer, new Tokeniser());
 	}
 
 	@Test(expected = ParseException.class)
 	public void testBadEndToken() throws ParseException{
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(true);
 		when(mockStringTokenizer.nextToken()).thenReturn(" ");
-		new NewLineToken("", mockStringTokenizer);
+		new NewLineToken("", mockStringTokenizer, new Tokeniser());
 	}
 
 	public void testToken() throws ParseException {
 		when(mockStringTokenizer.hasMoreTokens()).thenReturn(true);
 		when(mockStringTokenizer.nextToken()).thenReturn("}");
-		new NewLineToken("", mockStringTokenizer);
+		new NewLineToken("", mockStringTokenizer, new Tokeniser());
 		// exception not thrown
 		assertTrue(true);
 	}

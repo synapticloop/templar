@@ -24,14 +24,14 @@ import java.util.StringTokenizer;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.LoopStatusBean;
+import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
-import synapticloop.templar.utils.ObjectUtils;
 
 public class LoopToken extends CommandToken {
 
-	public LoopToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public LoopToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if(stringTokenizer.hasMoreTokens()) {
@@ -40,7 +40,7 @@ public class LoopToken extends CommandToken {
 				if(token.equals("}")) {
 					// now we need to go through and tokenise the inner tokeniser...;
 					this.commandLine = stringBuilder.toString().trim();
-					this.addChildTokens(Tokeniser.tokenise(stringTokenizer));
+					this.addChildTokens(tokeniser.tokenise(stringTokenizer));
 
 					// here the next token should be a '}'
 					if(stringTokenizer.hasMoreTokens()) {

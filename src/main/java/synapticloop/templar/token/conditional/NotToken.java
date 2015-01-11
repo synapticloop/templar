@@ -22,6 +22,7 @@ import java.util.StringTokenizer;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class NotToken extends ConditionalToken {
 
@@ -29,8 +30,8 @@ public class NotToken extends ConditionalToken {
 		return(null);
 	}
 
-	public NotToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public NotToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 	}
 
 }

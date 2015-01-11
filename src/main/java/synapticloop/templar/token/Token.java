@@ -19,23 +19,24 @@ package synapticloop.templar.token;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.StringUtils;
 import synapticloop.templar.utils.TemplarContext;
-import synapticloop.templar.utils.TokeniserInfo;
+import synapticloop.templar.utils.Tokeniser;
 
 public abstract class Token extends BasePositionToken {
 	protected String value = "";
 	protected ArrayList<Token> childTokens = new ArrayList<Token>();
 
-	public Token(String value, StringTokenizer stringTokenizer) throws ParseException {
+	public Token(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		this.tokeniser = tokeniser;
 		this.value = value;
-		this.lineNumber = TokeniserInfo.lineNumber;
-		this.characterNumber = TokeniserInfo.characterNumber;
+		this.lineNumber = tokeniser.getTokeniserInfo().lineNumber;
+		this.characterNumber = tokeniser.getTokeniserInfo().characterNumber;
 		// do nothing with the string tokeniser - this may be used by the sub
 		// classes
 	}

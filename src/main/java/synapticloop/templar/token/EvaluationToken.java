@@ -23,6 +23,7 @@ import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class EvaluationToken extends CommandToken {
 
@@ -31,9 +32,10 @@ public class EvaluationToken extends CommandToken {
 	 *
 	 * @param value the token value
 	 * @param stringTokenizer
+	 * @param tokeniser 
 	 */
-	public EvaluationToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
+	public EvaluationToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 
 		StringBuilder stringBuilder = new StringBuilder();
 		// look for the next token which should be either if, list, otherwise it

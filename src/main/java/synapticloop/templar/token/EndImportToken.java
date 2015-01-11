@@ -21,13 +21,14 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 
 public class EndImportToken extends Token {
 	String importLocation = null;
 
-	public EndImportToken(String importLocation, StringTokenizer stringTokenizer) throws ParseException {
-		super("", stringTokenizer);
+	public EndImportToken(String importLocation, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super("", stringTokenizer, tokeniser);
 		this.importLocation = importLocation;
 	}
 

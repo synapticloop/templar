@@ -26,39 +26,37 @@ import synapticloop.templar.Parser;
 import synapticloop.templar.exception.ParseException;
 
 public class TokeniserInfoTest {
-	private TokeniserInfo tokeniserInfo;
 
 	@Before
 	public void setup() {
-		tokeniserInfo = new TokeniserInfo();
 	}
 
 	@Test
 	public void testLineNumbers() throws ParseException {
 		Parser parser = new Parser("\n\n\n\n\n");
-		assertEquals(6, TokeniserInfo.lineNumber);
+		assertEquals(6, parser.getTokeniser().getTokeniserInfo().lineNumber);
 		// make sure it is reset
 		parser = new Parser("");
-		assertEquals(1, TokeniserInfo.lineNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().lineNumber);
 	}
 
 	@Test
 	public void testCharacterNumbers() throws ParseException {
 		Parser parser = new Parser("\nthis is a long text token");
-		assertEquals(2, TokeniserInfo.lineNumber);
-		assertEquals(26, TokeniserInfo.characterNumber);
+		assertEquals(2, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(26, parser.getTokeniser().getTokeniserInfo().characterNumber);
 
 		parser = new Parser("this is a long text token\nthis is a long text token");
-		assertEquals(2, TokeniserInfo.lineNumber);
-		assertEquals(26, TokeniserInfo.characterNumber);
+		assertEquals(2, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(26, parser.getTokeniser().getTokeniserInfo().characterNumber);
 
 		parser = new Parser("this is a long text token\nthis is a long text token\n");
-		assertEquals(3, TokeniserInfo.lineNumber);
-		assertEquals(1, TokeniserInfo.characterNumber);
+		assertEquals(3, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().characterNumber);
 
 		// make sure it is reset
 		parser = new Parser("");
-		assertEquals(1, TokeniserInfo.lineNumber);
-		assertEquals(1, TokeniserInfo.characterNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().characterNumber);
 	}
 }

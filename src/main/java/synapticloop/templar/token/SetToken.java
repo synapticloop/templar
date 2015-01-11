@@ -17,21 +17,21 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import java.util.StringTokenizer;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
+import synapticloop.templar.utils.Tokeniser;
 
 public class SetToken extends CommandToken {
 	public ArrayList<Token> childTokens = new ArrayList<Token>();
 
-	public SetToken(String value, StringTokenizer stringTokenizer) throws ParseException {
-		super(value, stringTokenizer);
-
+	public SetToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 		// look for the next token which should be either if, list, otherwise it
 		// is an evaluation token
