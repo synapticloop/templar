@@ -25,6 +25,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public abstract class CommandToken extends Token {
+	private static final String EMPTY_STRING = "";
 	private static final long serialVersionUID = -1347463380199454468L;
 	protected String commandLine = null;
 	protected StringTokenizer stringTokenizer;
@@ -37,14 +38,14 @@ public abstract class CommandToken extends Token {
 	public abstract String render(TemplarContext templarContext) throws RenderException;
 
 	public boolean isCorrectAsStatement(String commandLine) {
-		if(null == commandLine || commandLine.trim().equals("")) {
+		if(null == commandLine || EMPTY_STRING.equals(commandLine.trim())) {
 			return(false);
 		}
 
 		String[] split = commandLine.split(" as ");
 		if(null != split && split.length == 2) {
 			// make sure that both are not empty
-			if(split[0].trim().equals("") || split[1].trim().equals("")) {
+			if(EMPTY_STRING.equals(split[0].trim()) || EMPTY_STRING.equals(split[1].trim())) {
 				return(false);
 			}
 

@@ -34,7 +34,7 @@ public class CommentToken extends CommandToken {
 		if(stringTokenizer.hasMoreTokens()) {
 			while(stringTokenizer.hasMoreTokens()) {
 				String token = stringTokenizer.nextToken();
-				if(token.equals("}")) {
+				if("}".equals(token)) {
 					foundEndToken = true;
 					break;
 				} else {

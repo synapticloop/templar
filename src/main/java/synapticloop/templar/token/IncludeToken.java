@@ -87,8 +87,8 @@ public class IncludeToken extends Token {
 					tokeniser.getTokeniserInfo().addLine(line);
 					stringBuilder.append(line + "\n");
 				}
-			} catch(IOException jiioex) {
-				throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'");
+			} catch(IOException ioex) {
+				throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'", ioex);
 			} finally {
 				if(null != bufferedReader) {
 					try {

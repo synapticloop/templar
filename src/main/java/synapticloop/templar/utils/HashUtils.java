@@ -18,8 +18,10 @@ public class HashUtils {
 				stringBuilder.append(String.format("%02x", b&0xff));
 			} 
 			digest = stringBuilder.toString(); 
-		} catch (UnsupportedEncodingException ex) { 
-		} catch (NoSuchAlgorithmException ex) { 
+		} catch (UnsupportedEncodingException ex) {
+			// do nothing
+		} catch (NoSuchAlgorithmException ex) {
+			// do nothing
 		} 
 		return digest; 
 	}

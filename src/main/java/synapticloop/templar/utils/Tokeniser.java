@@ -196,7 +196,7 @@ public class Tokeniser implements Serializable {
 			if("(".equals(token)) {
 				// start of grouping
 				conditionalTokens.add(new GroupToken(token, stringTokenizer, this));
-			} else if("(".equals(token)) {
+			} else if(")".equals(token)) {
 				// end of grouping
 				return(conditionalTokens);
 			} else if("&".equals(token)) {

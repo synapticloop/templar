@@ -63,11 +63,11 @@ public class ObjectUtils {
 					try {
 						object = invokeMethod.invoke(object, new Object[] {});
 					} catch (IllegalArgumentException iaex) {
-						throw new RenderException(iaex.getMessage());
+						throw new RenderException(iaex.getMessage(), iaex);
 					} catch (IllegalAccessException iaex) {
-						throw new RenderException(iaex.getMessage());
+						throw new RenderException(iaex.getMessage(), iaex);
 					} catch (InvocationTargetException itex) {
-						throw new RenderException(itex.getMessage());
+						throw new RenderException(itex.getMessage(), itex);
 					}
 				} else {
 					foundMethod = false;
@@ -150,8 +150,8 @@ public class ObjectUtils {
 
 			try {
 				object = templarContext.invokeFunction(functionName, objectArgs, templarContext);
-			} catch (FunctionException stefex) {
-				throw new RenderException("Command " + parseableCommandline + "' exception, " + stefex.getMessage());
+			} catch (FunctionException fex) {
+				throw new RenderException("Command " + parseableCommandline + "' exception, " + fex.getMessage(), fex);
 			}
 		} else {
 			object = ObjectUtils.evaluateObject(parseableCommandline, templarContext);
