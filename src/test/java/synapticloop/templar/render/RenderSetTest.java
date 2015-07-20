@@ -1,0 +1,24 @@
+package synapticloop.templar.render;
+
+import java.io.File;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import synapticloop.templar.Parser;
+import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.utils.TemplarContext;
+
+
+public class RenderSetTest {
+	@Test
+	public void testRender() throws ParseException, RenderException {
+		File file = new File("src/test/template/render-set-string-as-variable.templar");
+		Parser parser = new Parser(file);
+		TemplarContext templarContext = new TemplarContext();
+
+		Assert.assertEquals("\"this is a string\" (without the quotes) should appear between the >< characters: >this is a string<", parser.render(templarContext));
+
+	}
+}

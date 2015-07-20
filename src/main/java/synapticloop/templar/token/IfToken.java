@@ -17,7 +17,7 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
@@ -31,9 +31,9 @@ import synapticloop.templar.utils.Tokeniser;
 public class IfToken extends CommandToken {
 	private static final long serialVersionUID = 3233938579186241318L;
 
-	private ArrayList<Token> elseCondition = null;
+	private List<Token> elseCondition = null;
 	@SuppressWarnings("unused")
-	private ArrayList<ConditionalToken> conditionalTokens = null;
+	private List<ConditionalToken> conditionalTokens = null;
 	private boolean inverse = false;
 
 	public IfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
@@ -65,10 +65,10 @@ public class IfToken extends CommandToken {
 						tokeniser.getTokeniserInfo().incrementCharacter(token.length());
 
 						if(!endToken.equals("}")) {
-							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().lineNumber + ", character: " + tokeniser.getTokeniserInfo().characterNumber, this);
+							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
 						}
 					} else {
-						throw new ParseException("Expecting '}' but no more tokens found at line: " + tokeniser.getTokeniserInfo().lineNumber + ", character: " + tokeniser.getTokeniserInfo().characterNumber, this);
+						throw new ParseException("Expecting '}' but no more tokens found at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
 					}
 
 					// check to see what the ending token is

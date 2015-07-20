@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -63,13 +64,11 @@ public class IncludeToken extends Token {
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
 
-		int lineNumber = tokeniser.getTokeniserInfo().lineNumber;
-		int characterNumber = tokeniser.getTokeniserInfo().characterNumber;
-		ArrayList<String> lines = tokeniser.getTokeniserInfo().lines;
+		int lineNumber = tokeniser.getTokeniserInfo().getLineNumber();
+		int characterNumber = tokeniser.getTokeniserInfo().getCharacterNumber();
+		List<String> lines = tokeniser.getTokeniserInfo().getLines();
 
-		tokeniser.getTokeniserInfo().lineNumber = 1;
-		tokeniser.getTokeniserInfo().characterNumber = 1;
-		tokeniser.getTokeniserInfo().lines = new ArrayList<String>();
+		tokeniser.getTokeniserInfo().reset();
 
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -141,9 +140,7 @@ public class IncludeToken extends Token {
 		}
 
 		// now reset the content
-		tokeniser.getTokeniserInfo().lineNumber = lineNumber;
-		tokeniser.getTokeniserInfo().characterNumber = characterNumber;
-		tokeniser.getTokeniserInfo().lines = lines;
+		tokeniser.getTokeniserInfo().restore(lineNumber, characterNumber, lines);
 
 		// finally add the end import token
 		tokens.add(new EndImportToken(includeLocation, stringTokenizer, tokeniser));

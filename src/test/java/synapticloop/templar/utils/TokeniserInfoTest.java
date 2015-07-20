@@ -17,7 +17,7 @@ package synapticloop.templar.utils;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,29 +34,29 @@ public class TokeniserInfoTest {
 	@Test
 	public void testLineNumbers() throws ParseException {
 		Parser parser = new Parser("\n\n\n\n\n");
-		assertEquals(6, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(6, parser.getTokeniser().getTokeniserInfo().getLineNumber());
 		// make sure it is reset
 		parser = new Parser("");
-		assertEquals(1, parser.getTokeniser().getTokeniserInfo().lineNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().getLineNumber());
 	}
 
 	@Test
 	public void testCharacterNumbers() throws ParseException {
 		Parser parser = new Parser("\nthis is a long text token");
-		assertEquals(2, parser.getTokeniser().getTokeniserInfo().lineNumber);
-		assertEquals(26, parser.getTokeniser().getTokeniserInfo().characterNumber);
+		assertEquals(2, parser.getTokeniser().getTokeniserInfo().getLineNumber());
+		assertEquals(26, parser.getTokeniser().getTokeniserInfo().getCharacterNumber());
 
 		parser = new Parser("this is a long text token\nthis is a long text token");
-		assertEquals(2, parser.getTokeniser().getTokeniserInfo().lineNumber);
-		assertEquals(26, parser.getTokeniser().getTokeniserInfo().characterNumber);
+		assertEquals(2, parser.getTokeniser().getTokeniserInfo().getLineNumber());
+		assertEquals(26, parser.getTokeniser().getTokeniserInfo().getCharacterNumber());
 
 		parser = new Parser("this is a long text token\nthis is a long text token\n");
-		assertEquals(3, parser.getTokeniser().getTokeniserInfo().lineNumber);
-		assertEquals(1, parser.getTokeniser().getTokeniserInfo().characterNumber);
+		assertEquals(3, parser.getTokeniser().getTokeniserInfo().getLineNumber());
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().getCharacterNumber());
 
 		// make sure it is reset
 		parser = new Parser("");
-		assertEquals(1, parser.getTokeniser().getTokeniserInfo().lineNumber);
-		assertEquals(1, parser.getTokeniser().getTokeniserInfo().characterNumber);
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().getLineNumber());
+		assertEquals(1, parser.getTokeniser().getTokeniserInfo().getCharacterNumber());
 	}
 }

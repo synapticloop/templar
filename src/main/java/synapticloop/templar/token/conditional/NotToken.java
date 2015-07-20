@@ -25,13 +25,14 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class NotToken extends ConditionalToken {
-
-	public Object evaluate(TemplarContext templarContext) throws RenderException {
-		return(null);
-	}
+	private static final long serialVersionUID = 7127444959243683749L;
 
 	public NotToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
+	}
+
+	public Object evaluate(TemplarContext templarContext) throws RenderException {
+		return(null);
 	}
 
 }

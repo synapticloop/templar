@@ -57,6 +57,7 @@ public class ParseException extends Exception {
 		}
 	}
 
+	@Override
 	public String getMessage() {
 		StringBuilder stringBuilder = new StringBuilder();
 		if(null != exceptionToken) {

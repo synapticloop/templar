@@ -1,0 +1,2 @@
+{set "this is a string" as testString}
+"this is a string" (without the quotes) should appear between the >< characters: >{testString}<

@@ -38,8 +38,10 @@ public class DumpContextToken extends CommandToken {
 
 		// time to dump the templar context
 		StringBuilder stringBuilder = new StringBuilder();
+
 		// go through the context and grab all of the objects
 		stringBuilder.append(templarContext.toString());
+
 		return(stringBuilder.toString());
 	}
 

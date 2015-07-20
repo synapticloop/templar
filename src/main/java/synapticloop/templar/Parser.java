@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -42,7 +43,7 @@ public class Parser {
 	private File templarFile;
 	private Tokeniser tokeniser = new Tokeniser();
 
-	private ArrayList<Token> tokens = new ArrayList<Token>();
+	private List<Token> tokens = new ArrayList<Token>();
 
 	/**
 	 * Create a parser from the String as raw templar contents
@@ -99,11 +100,9 @@ public class Parser {
 
 		String contents = stringBuilder.toString();
 		String md5Hash = HashUtils.md5Hash(contents);
-		if(null != md5Hash) {
-			if(ParserCache.getIsInCache(md5Hash)) {
-				this.tokens = ParserCache.getCached(md5Hash);
-				return;
-			}
+		if(null != md5Hash && ParserCache.getIsInCache(md5Hash)) {
+			this.tokens = ParserCache.getCached(md5Hash);
+			return;
 		}
 
 		// at this point - we don't yet have the tokens
@@ -232,7 +231,7 @@ public class Parser {
 		}
 	}
 
-	public void renderToStream(TemplarContext templarContext, OutputStream outputStream) throws RenderException, IOException {
+	public void renderToStream(TemplarContext templarContext, OutputStream outputStream) throws RenderException {
 		if(null == templarContext) {
 			templarContext = new TemplarContext();
 		}
@@ -262,6 +261,7 @@ public class Parser {
 	 * 
 	 * @return the parsed tokens in string format
 	 */
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Token token : tokens) {

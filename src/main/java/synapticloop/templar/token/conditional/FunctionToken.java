@@ -25,6 +25,8 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class FunctionToken extends ConditionalToken {
+	private static final long serialVersionUID = 3323534849063017159L;
+
 	private Object[] objectArgs = null;
 	private String functionName = null;
 

@@ -209,8 +209,7 @@ public class ObjectUtils {
 
 	private static String deQuote(String quotedString) {
 		if((quotedString.startsWith("'") && quotedString.endsWith("'")) || (quotedString.startsWith("\"") && quotedString.endsWith("\""))) {
-			String substring = quotedString.substring(1, quotedString.length() -1);
-			return substring;
+			return(quotedString.substring(1, quotedString.length() -1));
 		}
 		return(quotedString);
 	}

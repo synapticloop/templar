@@ -26,6 +26,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class ConditionalEvaluationToken extends ConditionalToken {
+	private static final long serialVersionUID = 3804189320649027359L;
 
 	public ConditionalEvaluationToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

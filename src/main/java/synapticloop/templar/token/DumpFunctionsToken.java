@@ -1,4 +1,4 @@
-package synapticloop.templar.token.conditional;
+package synapticloop.templar.token;
 
 /*
  * Copyright (c) 2012-2014 synapticloop.
@@ -17,50 +17,45 @@ package synapticloop.templar.token.conditional;
  * under the Licence.
  */
 
-import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.token.BasePositionToken;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
-public abstract class ConditionalToken extends BasePositionToken {
-	private static final long serialVersionUID = 4109338816385903800L;
-	protected String value = null;
-	protected List<ConditionalToken> childConditionalTokens = null;
+public class DumpFunctionsToken extends CommandToken {
+	private static final long serialVersionUID = -5395690577077526893L;
 
-	public ConditionalToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
-		this.value = value;
-		this.characterNumber = tokeniser.getTokeniserInfo().getCharacterNumber();
-		this.lineNumber = tokeniser.getTokeniserInfo().getLineNumber();
-		// do nothing with the string tokenizer
+	public DumpFunctionsToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+		super(value, stringTokenizer, tokeniser);
 	}
 
-	public abstract Object evaluate(TemplarContext templarContext) throws RenderException;
+	public String render(TemplarContext templarContext) throws RenderException {
+		if(null == templarContext) {
+			templarContext = new TemplarContext();
+		}
+
+		// time to dump the templar context
+		StringBuilder stringBuilder = new StringBuilder();
+
+		// go through the context and grab all of the objects
+		// TODO - fix this
+		stringBuilder.append(templarContext.toString());
+
+		return(stringBuilder.toString());
+	}
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<");
-		stringBuilder.append(this.getClass().getSimpleName());
+		stringBuilder.append("<DUMPCONTEXT");
 		stringBuilder.append("@");
 		stringBuilder.append(lineNumber);
 		stringBuilder.append(":");
 		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		stringBuilder.append(value);
-		stringBuilder.append(")>");
+		stringBuilder.append(" />");
 
-		if(null != childConditionalTokens) {
-			for (ConditionalToken conditionalToken : childConditionalTokens) {
-				stringBuilder.append(conditionalToken.toString());
-			}
-		}
-
-		stringBuilder.append("</");
-		stringBuilder.append(this.getClass().getSimpleName());
-		stringBuilder.append(">");
 		return(stringBuilder.toString());
 	}
+
 }

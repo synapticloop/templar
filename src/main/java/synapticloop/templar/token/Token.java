@@ -20,6 +20,7 @@ package synapticloop.templar.token;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -37,9 +38,9 @@ public abstract class Token extends BasePositionToken {
 	public Token(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		this.tokeniser = tokeniser;
 		this.value = value;
-		this.lineNumber = tokeniser.getTokeniserInfo().lineNumber;
-		this.characterNumber = tokeniser.getTokeniserInfo().characterNumber;
-		this.filePath = tokeniser.getTokeniserInfo().filePath;
+		this.lineNumber = tokeniser.getTokeniserInfo().getLineNumber();
+		this.characterNumber = tokeniser.getTokeniserInfo().getCharacterNumber();
+		this.filePath = tokeniser.getTokeniserInfo().getFilePath();
 		// do nothing with the string tokeniser - this may be used by the sub
 		// classes
 	}
@@ -48,8 +49,12 @@ public abstract class Token extends BasePositionToken {
 		return(value);
 	}
 
-	public void renderToStream(TemplarContext templarContext, OutputStream outputStream) throws RenderException, IOException {
-		outputStream.write(render(templarContext).getBytes());
+	public void renderToStream(TemplarContext templarContext, OutputStream outputStream) throws RenderException {
+		try {
+			outputStream.write(render(templarContext).getBytes());
+		} catch (IOException ioex) {
+			throw new RenderException("Could not wite to the output stream, message was:" + ioex.getMessage(), ioex);
+		}
 	}
 
 	public ArrayList<Token> getChildren() {
@@ -60,7 +65,7 @@ public abstract class Token extends BasePositionToken {
 		this.childTokens.add(token);
 	}
 
-	public void addChildTokens(ArrayList<Token> tokens) {
+	public void addChildTokens(List<Token> tokens) {
 		this.childTokens.addAll(tokens);
 	}
 

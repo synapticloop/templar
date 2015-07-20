@@ -34,6 +34,7 @@ public class SetToken extends CommandToken {
 
 	public SetToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
+
 		StringBuilder stringBuilder = new StringBuilder();
 		// look for the next token which should be either if, list, otherwise it
 		// is an evaluation token
@@ -55,7 +56,7 @@ public class SetToken extends CommandToken {
 		}
 
 		if(!foundEndToken) {
-			throw new ParseException("Could not find end token '{' for evaluation.", this);
+			throw new ParseException("Could not find end token '}' for evaluation.", this);
 		}
 
 		this.commandLine = stringBuilder.toString();
@@ -66,6 +67,7 @@ public class SetToken extends CommandToken {
 		}
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) throws RenderException {
 		String[] commandSplit = commandLine.split(" as ");
 
@@ -102,6 +104,7 @@ public class SetToken extends CommandToken {
 				if(null != string) {
 					string = string.trim();
 				}
+
 				// at this point - we may need to lookup as an evaluation token.
 				// we do need to look up as evaluationToken
 				Object evalObject = ObjectUtils.evaluateObjectToDefault(string, templarContext);
@@ -119,7 +122,7 @@ public class SetToken extends CommandToken {
 				throw new RenderException("Command " + commandLine + "' exception, " + stefex.getMessage());
 			}
 		} else {
-			object = ObjectUtils.evaluateObject(setCommand, templarContext);
+			object = ObjectUtils.evaluateObjectToDefault(setCommand, templarContext);
 		}
 
 		String contextAs = commandSplit[1].trim();

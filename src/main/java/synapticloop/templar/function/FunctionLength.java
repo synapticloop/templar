@@ -35,54 +35,58 @@ public class FunctionLength extends Function {
 
 	@SuppressWarnings("rawtypes")
 	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Object object = args[0];
-			// so what do we have here...
-			if (object instanceof Collection) {
-				return(((Collection)object).size());
-			} else if (object instanceof Object[]) {
-				return(((Object[])object).length);
-			} else {
-				// let us find the methods/accessors that are size or length
-				int length = getLength(object);
-				if(length != -1) {
-					return(length);
-				} else {
-					StringBuilder stringBuilder = new StringBuilder();
-					stringBuilder.append("Don't know how to find the length of a '");
-					stringBuilder.append(object.getClass().getCanonicalName());
-					stringBuilder.append("', we looked for the following fields: {");
+		if(!verifyArgumentLength(args)) {
+			throw new FunctionException("The 'length' function requires exactly one (1) argument.");
+		}
 
-					for (int i = 0; i < FIELDS.length; i++) {
-						String string = FIELDS[i];
-						stringBuilder.append("'");
-						stringBuilder.append(string);
-						stringBuilder.append("'");
+		Object object = args[0];
+		// so what do we have here...
+		if (object instanceof Collection) {
+			return(((Collection)object).size());
+		} else if (object instanceof Object[]) {
+			return(((Object[])object).length);
+		} else {
+			return findAndInvokeAccessors(object);
+		}
+	}
 
-						if(i < FIELDS.length -1) {
-							stringBuilder.append(", ");
-						}
-					}
+	private Object findAndInvokeAccessors(Object object) throws FunctionException {
+		// let us find the methods/accessors that are size or length
+		int length = getLength(object);
+		if(length != -1) {
+			return(length);
+		} else {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("Don't know how to find the length of a '");
+			stringBuilder.append(object.getClass().getCanonicalName());
+			stringBuilder.append("', we looked for the following fields: {");
 
-					stringBuilder.append("}, and the following methods: {");
+			for (int i = 0; i < FIELDS.length; i++) {
+				String string = FIELDS[i];
+				stringBuilder.append("'");
+				stringBuilder.append(string);
+				stringBuilder.append("'");
 
-					for (int i = 0; i < METHODS.length; i++) {
-						String string = METHODS[i];
-						stringBuilder.append("'");
-						stringBuilder.append(string);
-						stringBuilder.append("()'");
-
-						if(i < METHODS.length -1) {
-							stringBuilder.append(", ");
-						}
-					}
-
-					stringBuilder.append("}.");
-					throw new FunctionException(stringBuilder.toString());
+				if(i < FIELDS.length -1) {
+					stringBuilder.append(", ");
 				}
 			}
-		} else {
-			throw new FunctionException("The 'length' function requires exactly one (1) argument.");
+
+			stringBuilder.append("}, and the following methods: {");
+
+			for (int i = 0; i < METHODS.length; i++) {
+				String string = METHODS[i];
+				stringBuilder.append("'");
+				stringBuilder.append(string);
+				stringBuilder.append("()'");
+
+				if(i < METHODS.length -1) {
+					stringBuilder.append(", ");
+				}
+			}
+
+			stringBuilder.append("}.");
+			throw new FunctionException(stringBuilder.toString());
 		}
 	}
 
@@ -93,7 +97,7 @@ public class FunctionLength extends Function {
 	 * @return the length, or -1 if not found.
 	 */
 
-	private int getLength(Object object) {
+	private static int getLength(Object object) {
 		int length = findMethod(object);
 		if(length != -1) {
 			return(length);
@@ -102,7 +106,7 @@ public class FunctionLength extends Function {
 		return(findField(object));
 	}
 
-	private int findMethod(Object object) {
+	private static int findMethod(Object object) {
 		for (int i = 0; i < METHODS.length; i++) {
 			String methodString = METHODS[i];
 			try {
@@ -126,7 +130,7 @@ public class FunctionLength extends Function {
 		return(-1);
 	}
 
-	private int findField(Object object) {
+	private static int findField(Object object) {
 		for (int i = 0; i < FIELDS.length; i++) {
 			String fieldString = FIELDS[i];
 			try {

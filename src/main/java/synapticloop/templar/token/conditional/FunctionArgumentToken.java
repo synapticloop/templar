@@ -26,6 +26,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class FunctionArgumentToken extends ConditionalToken {
+	private static final long serialVersionUID = 1116267891808005435L;
 
 	public FunctionArgumentToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

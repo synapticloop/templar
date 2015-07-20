@@ -18,9 +18,10 @@ package synapticloop.templar.exception;
  */
 
 /**
- * Thrown when there was a problem with verifying the number of arguments
- * passed through to a function, or there was a problem with the evaluation
- * process.
+ * Thrown when there was a problem with the function, which could include
+ *   - verifying the number of arguments passed through to a function, or
+ *   - the evaluation process failed, or
+ *   - the registration of the function
  */
 public class FunctionException extends Exception {
 	private static final long serialVersionUID = 5066739168531962194L;

@@ -17,7 +17,9 @@ package synapticloop.templar.utils;
  * under the Licence.
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains information about the parsed file. Be aware that as they
@@ -26,12 +28,13 @@ import java.util.ArrayList;
  * @author synapticloop
  *
  */
-public class TokeniserInfo {
+public class TokeniserInfo implements Serializable {
+	private static final long serialVersionUID = 4881429648508997875L;
 	public static final String NEW_LINE = System.getProperty("line.separator");
-	public int lineNumber = 1;
-	public int characterNumber = 1;
-	public ArrayList<String> lines = new ArrayList<String>();
-	public String filePath = null;
+	private int lineNumber = 1;
+	private int characterNumber = 1;
+	private List<String> lines = new ArrayList<String>();
+	private String filePath = null;
 
 	public void incrementLine() {
 		lineNumber++;
@@ -44,6 +47,13 @@ public class TokeniserInfo {
 		lines = new ArrayList<String>();
 	}
 
+	public void restore(int lineNumber, int characterNumber, List<String> lines) {
+		this.lineNumber = lineNumber;
+		this.characterNumber = characterNumber;
+		this.lines = lines;
+		
+	}
+
 	public int getLineNumber() { return(lineNumber); }
 	public int getCharacterNumber() { return(characterNumber); }
 	public void incrementCharacter(int num) { characterNumber += num; }
@@ -51,4 +61,6 @@ public class TokeniserInfo {
 	public String getLine(int index) { return(lines.get(index -1)); }
 	public String getFilePath() { return this.filePath; }
 	public void setFilePath(String filePath) { this.filePath = filePath; }
+
+	public List<String> getLines() { return(this.lines); }
 }

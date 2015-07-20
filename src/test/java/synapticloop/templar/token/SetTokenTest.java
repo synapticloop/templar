@@ -17,8 +17,7 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -85,5 +84,16 @@ public class SetTokenTest {
 	public void testToString() throws ParseException {
 		parser = new Parser("{set something as something}");
 		assertEquals("<SET@1:2 (something as something)>", parser.toString());
+	}
+
+	@Test
+	public void testSetStringInContext() throws ParseException {
+		parser = new Parser("{set \"something\" as something}");
+		assertEquals("<SET@1:2 (\"something\" as something)>", parser.toString());
+	}
+
+	@Test(expected=ParseException.class)
+	public void testMissingAsCommand() throws ParseException {
+		parser = new Parser("{set \"something\" missing_as_here something}");
 	}
 }
