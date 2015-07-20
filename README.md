@@ -2,13 +2,11 @@ templar
 =======
 A lightweight java templating engine
 
-Munin plugins for various things which may or may not be handy to you
-
 ## how fast is it??
 
 No idea! - I guess the answer is 'fast-enough' depending on what you want to do with it.
 
-We use it as the basis of our code generation tool ```h2zero``` which may not be open-sourced yet...
+We use it as the basis of our code generation tool ```h2zero``` which has now been [open-sourced](https://github.com/synapticloop/h2zero)
 
 ## To Build
 
@@ -61,7 +59,7 @@ here goes:
   1. ```{-- some comment here }``` a comment - can be multilined, but the comment cannot contain a ```}``` character - this designates the end of the comment
   1. ```{if ...}``` do something ```{else}``` do something else ```{endif}``` the else token is not necessary
   1. ```{import some/file/here}``` a nice little inclusion method - can also be ```{import classpath:/some/classpath/file/here}``` note that it is from the current working directory and is not relative... (will maybe add this)
-  1. ```{set __something__ as __somethingElse}``` ```something``` is the thing to be evaluated and ```somethingElse``` is the variable name to be placed in the context.
+  1. ```{set __something__ as __somethingElse}``` ```something``` is the thing to be evaluated and ```somethingElse``` is the variable name to be placed in the context.  If you want to set a string as a variable then you need to quote it with either a single (') or double (") quotation mark.
   1. ```{loop __something__ as __somethingElse__}``` loop over stuff placing a variable named ```somethingElse``` in each iteration - don't forget the ```{endloop}``` token
   1. ```{dumpcontext}``` dump all of the key-value pairs in the context - useful for debugging.
   1. ```{nl}``` or ```{\n}``` a new line character
