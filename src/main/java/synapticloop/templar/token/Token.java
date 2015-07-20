@@ -37,6 +37,7 @@ public abstract class Token extends BasePositionToken {
 		this.value = value;
 		this.lineNumber = tokeniser.getTokeniserInfo().lineNumber;
 		this.characterNumber = tokeniser.getTokeniserInfo().characterNumber;
+		this.filePath = tokeniser.getTokeniserInfo().filePath;
 		// do nothing with the string tokeniser - this may be used by the sub
 		// classes
 	}

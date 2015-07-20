@@ -45,8 +45,7 @@ public class Parser {
 	private ArrayList<Token> tokens = new ArrayList<Token>();
 
 	/**
-	 * Create a parser from the String, if the String can not be resolved to a 
-	 * file, then treat it as raw templar contents
+	 * Create a parser from the String as raw templar contents
 	 * 
 	 * @param contents the raw templar markup
 	 * 
@@ -60,6 +59,12 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Create a parser from the passed in file
+	 * 
+	 * @param file the file to be parsed
+	 * @throws ParseException if the file doesn't exist, cannot be read or is not a file
+	 */
 	public Parser(File file) throws ParseException {
 		if(null != file) {
 			if(FileUtils.canReadFile(file)) {
@@ -91,6 +96,7 @@ public class Parser {
 		} catch (IOException jiioex) {
 			throw new ParseException("There was a problem reading the input stream.");
 		}
+
 		String contents = stringBuilder.toString();
 		String md5Hash = HashUtils.md5Hash(contents);
 		if(null != md5Hash) {
@@ -126,7 +132,7 @@ public class Parser {
 		// now actually do the tokenising - resetting the constants to start with
 		tokeniser.getTokeniserInfo().reset();
 		String string = stringBuilder.toString();
-		
+
 		tokens = tokeniser.tokenise(string);
 	}
 
@@ -204,9 +210,8 @@ public class Parser {
 	public void renderToFile(TemplarContext templarContext, File outputFile) throws RenderException {
 		new File(outputFile.getParentFile().getAbsolutePath()).mkdirs();
 
-//		System.out.println("Rendering file '" + outputFile.getAbsolutePath() + "'.");
-
 		BufferedWriter bufferedWriter = null;
+
 		try {
 			bufferedWriter = new BufferedWriter(new FileWriter(outputFile));
 			bufferedWriter.write(this.render(templarContext));

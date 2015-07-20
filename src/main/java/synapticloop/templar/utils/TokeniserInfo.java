@@ -31,22 +31,11 @@ public class TokeniserInfo {
 	public int lineNumber = 1;
 	public int characterNumber = 1;
 	public ArrayList<String> lines = new ArrayList<String>();
+	public String filePath = null;
 
 	public void incrementLine() {
 		lineNumber++;
 		characterNumber = 1;
-	}
-
-	public void incrementCharacter(int num) {
-		characterNumber += num;
-	}
-
-	public void addLine(String line) {
-		lines.add(line);
-	}
-
-	public String getLine(int index) {
-		return(lines.get(index -1));
 	}
 
 	public void reset() {
@@ -55,11 +44,11 @@ public class TokeniserInfo {
 		lines = new ArrayList<String>();
 	}
 
-	public int getLineNumber() {
-		return(lineNumber);
-	}
-
-	public int getCharacterNumber() {
-		return(characterNumber);
-	}
+	public int getLineNumber() { return(lineNumber); }
+	public int getCharacterNumber() { return(characterNumber); }
+	public void incrementCharacter(int num) { characterNumber += num; }
+	public void addLine(String line) { lines.add(line); }
+	public String getLine(int index) { return(lines.get(index -1)); }
+	public String getFilePath() { return this.filePath; }
+	public void setFilePath(String filePath) { this.filePath = filePath; }
 }

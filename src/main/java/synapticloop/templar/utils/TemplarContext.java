@@ -174,6 +174,10 @@ public class TemplarContext {
 		}
 	}
 
+	public void clear() {
+		context.clear();
+	}
+
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(this.getClass().getSimpleName());

@@ -23,12 +23,11 @@ public abstract class BasePositionToken {
 	protected int lineNumber = 0;
 	protected int characterNumber = 0;
 	protected Tokeniser tokeniser = null;
+	protected String filePath = null;
 
-	public int getLineNumber() {
-		return(lineNumber);
-	}
+	public int getLineNumber() { return(lineNumber); }
 
-	public int getCharacterNumber() {
-		return(characterNumber);
-	}
+	public int getCharacterNumber() { return(characterNumber); }
+
+	public String getFilePath() { return(filePath); }
 }

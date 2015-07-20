@@ -32,11 +32,11 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 
-public class ImportToken extends Token {
+public class IncludeToken extends Token {
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
-	String importLocation = null;
+	String includeLocation = null;
 
-	public ImportToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+	public IncludeToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
@@ -45,7 +45,7 @@ public class ImportToken extends Token {
 				String nextToken = stringTokenizer.nextToken();
 
 				if(nextToken.equals("}")) {
-					importLocation = stringBuilder.toString().trim();
+					includeLocation = stringBuilder.toString().trim();
 					return;
 				}
 				stringBuilder.append(nextToken);
@@ -74,8 +74,8 @@ public class ImportToken extends Token {
 		boolean foundFilePath = true;
 		boolean foundClassPath = true;
 		// try to find it on the filepath
-		File templarFile  = new File(importLocation);
-		if(importLocation.startsWith(CLASSPATH_DESIGNATOR) || !FileUtils.canReadFile(templarFile)) {
+		File templarFile  = new File(includeLocation);
+		if(includeLocation.startsWith(CLASSPATH_DESIGNATOR) || !FileUtils.canReadFile(templarFile)) {
 			foundFilePath = false;
 		} else {
 			BufferedReader bufferedReader = null;
@@ -103,8 +103,8 @@ public class ImportToken extends Token {
 		// try and find it on the classpath
 		if(!foundFilePath) {
 			// try and get the resource as a stream
-			if(importLocation.startsWith(CLASSPATH_DESIGNATOR)) {
-				String classpathImportLocation = importLocation.substring(CLASSPATH_DESIGNATOR.length());
+			if(includeLocation.startsWith(CLASSPATH_DESIGNATOR)) {
+				String classpathImportLocation = includeLocation.substring(CLASSPATH_DESIGNATOR.length());
 				InputStream resourceAsStream = this.getClass().getResourceAsStream(classpathImportLocation);
 				if(null != resourceAsStream) {
 					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(resourceAsStream));
@@ -126,7 +126,7 @@ public class ImportToken extends Token {
 		}
 
 		if(!foundClassPath && !foundFilePath) {
-			throw new ParseException("IO Exception reading file from '" + importLocation + "'");
+			throw new ParseException("IO Exception reading file from '" + includeLocation + "'");
 		}
 
 		// load the contents
@@ -135,7 +135,7 @@ public class ImportToken extends Token {
 		try {
 			tokens.addAll(tokeniser.tokenise(stringTokenizer));
 		} catch (ParseException pex) {
-			throw new ParseException("Could not parse the imported file '" + importLocation + "', message was '" + pex.getMessage() + "'.");
+			throw new ParseException("Could not parse the imported file '" + includeLocation + "', message was '" + pex.getMessage() + "'.");
 		}
 
 		// now reset the content
@@ -144,7 +144,7 @@ public class ImportToken extends Token {
 		tokeniser.getTokeniserInfo().lines = lines;
 
 		// finally add the end import token
-		tokens.add(new EndImportToken(importLocation, stringTokenizer, tokeniser));
+		tokens.add(new EndImportToken(includeLocation, stringTokenizer, tokeniser));
 		return(tokens);
 	}
 
@@ -160,7 +160,7 @@ public class ImportToken extends Token {
 		stringBuilder.append(":");
 		stringBuilder.append(characterNumber);
 		stringBuilder.append(" (");
-		stringBuilder.append(importLocation);
+		stringBuilder.append(includeLocation);
 		stringBuilder.append(")>");
 
 		return(stringBuilder.toString());

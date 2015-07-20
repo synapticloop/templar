@@ -110,7 +110,7 @@ public class LoopToken extends CommandToken {
 			}
 			
 		} else {
-			throw new RenderException("Don't know how to iterate over an object of type '" + object.getClass().getCanonicalName() + "'.");
+			throw new RenderException("Don't know how to iterate over an object of type '" + object.getClass().getCanonicalName() + "'.\n" + this.toString());
 		}
 
 		return (stringBuilder.toString());
