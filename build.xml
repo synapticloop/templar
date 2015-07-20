@@ -11,4 +11,5 @@
 	</description>
 
 	<target name="dist" depends="clean,init,cobertura,jar" />
+	<target name="dist-skip-tests" depends="clean,init,jar" />
 </project>

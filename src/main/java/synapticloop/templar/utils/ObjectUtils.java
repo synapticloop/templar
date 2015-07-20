@@ -1,7 +1,7 @@
 package synapticloop.templar.utils;
 
 /*
- * Copyright (c) 2012-2014 synapticloop.
+ * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -30,12 +30,11 @@ public class ObjectUtils {
 
 	public static Object evaluateObject(String commandLine, TemplarContext templarContext) throws RenderException {
 		if(null == templarContext) {
-			throw new RenderException("Could not find object in context '" + commandLine + "', as context is null.");
+			throw new RenderException("TemplarContext is null, no lookups will be available.");
 		}
 
 		StringTokenizer stringTokenizer = new StringTokenizer(commandLine, ".");
 		Object object = null;
-
 
 		// the first one is the reference to the bean
 		if(stringTokenizer.hasMoreTokens()) {
@@ -91,11 +90,12 @@ public class ObjectUtils {
 		if(null == object) {
 			return(null);
 		} else {
-			// we need to know whether it starts and ends with a "'" character, if so
+			// we need to know whether it starts and ends with a "'" or '"' character, if so
 			// we will return it as a string, else we look it up in the context
 			if(isQuoted(object)) {
 				return(deQuote((String)object));
 			}
+
 			Object evaluatedObject = null;
 			try {
 				evaluatedObject = evaluateObject(object.toString(), templarContext);
@@ -202,14 +202,15 @@ public class ObjectUtils {
 	private static boolean isQuoted(Object object) {
 		if(object instanceof String) {
 			String string = (String)object;
-			return(string.startsWith("'") && string.endsWith("'"));
+			return((string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\"")));
 		}
 		return(false);
 	}
 
 	private static String deQuote(String quotedString) {
-		if(quotedString.startsWith("'") && quotedString.endsWith("'")) {
-			return(quotedString.substring(1, quotedString.length() -1));
+		if((quotedString.startsWith("'") && quotedString.endsWith("'")) || (quotedString.startsWith("\"") && quotedString.endsWith("\""))) {
+			String substring = quotedString.substring(1, quotedString.length() -1);
+			return substring;
 		}
 		return(quotedString);
 	}
