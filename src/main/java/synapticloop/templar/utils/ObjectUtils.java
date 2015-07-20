@@ -25,8 +25,10 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.RenderException;
 
 public class ObjectUtils {
-
 	private static final String[] METHOD_PREFIXES = {"get", "is", "has"};
+
+	private ObjectUtils() {}
+
 
 	public static Object evaluateObject(String commandLine, TemplarContext templarContext) throws RenderException {
 		if(null == templarContext) {

@@ -47,7 +47,7 @@ public class IncludeToken extends Token {
 			while(stringTokenizer.hasMoreTokens()) {
 				String nextToken = stringTokenizer.nextToken();
 
-				if(nextToken.equals("}")) {
+				if("}".equals(nextToken)) {
 					includeLocation = stringBuilder.toString().trim();
 					return;
 				}
@@ -60,7 +60,7 @@ public class IncludeToken extends Token {
 		}
 	}
 
-	public ArrayList<Token> getTokens() throws ParseException {
+	public List<Token> getTokens() throws ParseException {
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
 

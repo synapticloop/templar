@@ -19,6 +19,7 @@ package synapticloop.templar.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -37,10 +38,10 @@ import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.FunctionSize;
 
 public class TemplarContext {
-	public HashMap<String, Object> context = new HashMap<String, Object>();
+	public Map<String, Object> context = new HashMap<String, Object>();
 	private TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 
-	private static HashMap<String, Function> functionMap = new HashMap<String, Function>();
+	private static Map<String, Function> functionMap = new HashMap<String, Function>();
 	static {
 		functionMap.put("null", new FunctionIsNull());
 		functionMap.put("notNull", new FunctionIsNotNull());
@@ -81,7 +82,7 @@ public class TemplarContext {
 	 */
 	@SuppressWarnings("unchecked")
 	public TemplarContext(TemplarContext existingContext) {
-		this.context = (HashMap<String, Object>) existingContext.getContext().clone();
+		this.context = (Map<String, Object>) ((HashMap<String, Object>)existingContext.getContext()).clone();
 
 		Set<Entry<String, Object>> entrySet = existingContext.getContext().entrySet();
 		for (Entry<String,Object> entry : entrySet) {
@@ -101,7 +102,7 @@ public class TemplarContext {
 		return(context.containsKey(key));
 	}
 
-	protected HashMap<String, Object> getContext() {
+	protected Map<String, Object> getContext() {
 		return(context);
 	}
 
@@ -178,6 +179,7 @@ public class TemplarContext {
 		context.clear();
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(this.getClass().getSimpleName());

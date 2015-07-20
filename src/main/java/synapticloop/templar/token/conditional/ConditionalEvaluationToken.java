@@ -53,7 +53,7 @@ public class ConditionalEvaluationToken extends ConditionalToken {
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		if(!value.equals("")) {
+		if(!"".equals(value)) {
 			stringBuilder.append("<EVAL");
 			stringBuilder.append("@");
 			stringBuilder.append(lineNumber);

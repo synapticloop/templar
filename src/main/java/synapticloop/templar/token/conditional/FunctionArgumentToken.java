@@ -17,7 +17,7 @@ package synapticloop.templar.token.conditional;
  * under the Licence.
  */
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -32,7 +32,7 @@ public class FunctionArgumentToken extends ConditionalToken {
 		super(value, stringTokenizer, tokeniser);
 	}
 
-	public void setChildConditionalTokens(ArrayList<ConditionalToken> conditionalTokens) {
+	public void setChildConditionalTokens(List<ConditionalToken> conditionalTokens) {
 		this.childConditionalTokens = conditionalTokens;
 	}
 

@@ -38,8 +38,8 @@ public class LoopToken extends CommandToken {
 		if(stringTokenizer.hasMoreTokens()) {
 			while(stringTokenizer.hasMoreTokens()) {
 				String token = stringTokenizer.nextToken();
-				if(token.equals("}")) {
-					// now we need to go through and tokenise the inner tokeniser...;
+				if("}".equals(token)) {
+					// now we need to go through and tokenise the inner tokeniser...
 					this.commandLine = stringBuilder.toString().trim();
 					this.addChildTokens(tokeniser.tokenise(stringTokenizer));
 

@@ -18,6 +18,7 @@ package synapticloop.templar.token;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
@@ -30,7 +31,7 @@ import synapticloop.templar.utils.Tokeniser;
 public class SetToken extends CommandToken {
 	private static final long serialVersionUID = 8666832881610826478L;
 
-	public ArrayList<Token> childTokens = new ArrayList<Token>();
+	public List<Token> childTokens = new ArrayList<Token>();
 
 	public SetToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
@@ -44,7 +45,7 @@ public class SetToken extends CommandToken {
 		if(stringTokenizer.hasMoreTokens()) {
 			while(stringTokenizer.hasMoreTokens()) {
 				String token = stringTokenizer.nextToken();
-				if(token.equals("}")) {
+				if("}".equals(token)) {
 					foundEndToken = true;
 					break;
 				} else {
@@ -118,8 +119,8 @@ public class SetToken extends CommandToken {
 
 			try {
 				object = templarContext.invokeFunction(functionName, objectArgs, templarContext);
-			} catch (FunctionException stefex) {
-				throw new RenderException("Command " + commandLine + "' exception, " + stefex.getMessage());
+			} catch (FunctionException fex) {
+				throw new RenderException("Command " + commandLine + "' exception, " + fex.getMessage(), fex);
 			}
 		} else {
 			object = ObjectUtils.evaluateObjectToDefault(setCommand, templarContext);

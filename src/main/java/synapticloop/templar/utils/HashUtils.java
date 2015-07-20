@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class HashUtils {
+	private HashUtils() {}
 
 	public static String md5Hash(String message) {
 		String digest = null; 

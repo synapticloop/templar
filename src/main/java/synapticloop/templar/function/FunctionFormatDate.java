@@ -41,21 +41,7 @@ public class FunctionFormatDate extends Function {
 				break;
 			case 2:
 				// we have a possible date and a format string
-				Object dateOrTimestamp = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-				if(dateOrTimestamp instanceof Date) {
-					date = (Date)dateOrTimestamp;
-				} else if (dateOrTimestamp instanceof java.sql.Date) {
-					date = new Date(((java.sql.Date)dateOrTimestamp).getTime());
-				} else if (dateOrTimestamp instanceof String) {
-					// try to coerce to Long
-					date = new Date(Long.decode((String)ObjectUtils.evaluateObjectToDefault(args[0].toString().trim(), templarContext)));
-				} else if (dateOrTimestamp instanceof Long) {
-					date = new Date((Long)dateOrTimestamp);
-				} else if (dateOrTimestamp instanceof Timestamp) {
-					date = new Date(((Timestamp)dateOrTimestamp).getTime());
-				} else {
-					hasError = true;
-				}
+				date = getDateFromObject(templarContext, args[0]);
 				dateFormat = (String)args[1];
 				break;
 			default:
@@ -67,7 +53,7 @@ public class FunctionFormatDate extends Function {
 		}
 
 		// now to do the processing
-		if(hasError) {
+		if(null == date || hasError) {
 			throw new FunctionException("The function 'fmtDate' takes either one argument which is the format string, or two which are the date/long timestamp followed by the format string.");
 		}
 
@@ -83,4 +69,21 @@ public class FunctionFormatDate extends Function {
 		}
 	}
 
+	private Date getDateFromObject(TemplarContext templarContext, Object argument) {
+		Object dateOrTimestamp = ObjectUtils.evaluateObjectToDefault(argument, templarContext);
+		Date date = null;
+		if(dateOrTimestamp instanceof Date) {
+			date = (Date)dateOrTimestamp;
+		} else if (dateOrTimestamp instanceof java.sql.Date) {
+			date = new Date(((java.sql.Date)dateOrTimestamp).getTime());
+		} else if (dateOrTimestamp instanceof String) {
+			// try to coerce to Long
+			date = new Date(Long.decode((String)ObjectUtils.evaluateObjectToDefault(argument.toString().trim(), templarContext)));
+		} else if (dateOrTimestamp instanceof Long) {
+			date = new Date((Long)dateOrTimestamp);
+		} else if (dateOrTimestamp instanceof Timestamp) {
+			date = new Date(((Timestamp)dateOrTimestamp).getTime());
+		}
+		return(date);
+	}
 }

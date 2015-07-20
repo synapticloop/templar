@@ -31,7 +31,7 @@ public class TabToken extends Token {
 		super(value, stringTokenizer, tokeniser);
 		if(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
-			if(!nextToken.equals("}")) {
+			if(!"}".equals(nextToken)) {
 				throw new ParseException("Could not find end token marker '}' for the tab token, found '" + nextToken + "'.", this);
 			}
 		} else {

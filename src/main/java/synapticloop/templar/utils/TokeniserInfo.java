@@ -30,6 +30,7 @@ import java.util.List;
  */
 public class TokeniserInfo implements Serializable {
 	private static final long serialVersionUID = 4881429648508997875L;
+
 	public static final String NEW_LINE = System.getProperty("line.separator");
 	private int lineNumber = 1;
 	private int characterNumber = 1;

@@ -168,7 +168,7 @@ public class Tokeniser implements Serializable {
 					throw new ParseException("Found an '{' character, with no more tokens after it");
 				}
 			} else {
-				if(token.equals("\n")) {
+				if("\n".equals(token)) {
 					tokeniserInfo.incrementLine();
 				}
 				tokens.add(new TextToken(token, stringTokenizer, this));

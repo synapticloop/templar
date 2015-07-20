@@ -1,6 +1,8 @@
 package synapticloop.templar.utils;
 
 public class StringUtils {
+	private StringUtils() {}
+
 	public static String escapeHtml(String source) {
 		if(source==null) {
 			return ""; 

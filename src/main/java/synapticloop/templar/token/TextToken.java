@@ -31,11 +31,11 @@ public class TextToken extends Token {
 	}
 
 	public String render(TemplarContext templarContext) {
-		if(value.equals("\n") && templarContext.getTemplarConfiguration().getExplicitNewLines()) {
+		if("\n".equals(value) && templarContext.getTemplarConfiguration().getExplicitNewLines()) {
 			return("");
 		}
 
-		if(value.equals("\t") && templarContext.getTemplarConfiguration().getExplicitTabs()) {
+		if("\t".equals(value) && templarContext.getTemplarConfiguration().getExplicitTabs()) {
 			return("");
 		}
 

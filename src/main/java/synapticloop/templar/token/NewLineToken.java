@@ -29,7 +29,7 @@ public class NewLineToken extends Token {
 	public NewLineToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
 		if(stringTokenizer.hasMoreTokens()) {
-			if(!stringTokenizer.nextToken().equals("}")) {
+			if(!"}".equals(stringTokenizer.nextToken())) {
 				// TODO add what the token found was
 				throw new ParseException("Could not find end token marker '}' for the newline token.", this);
 			}
