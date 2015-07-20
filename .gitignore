@@ -6,3 +6,4 @@ build
 filestatistics.ser
 cobertura.ser
 build-sonar.xml
+/dist/
