@@ -29,6 +29,8 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class IfToken extends CommandToken {
+	private static final long serialVersionUID = 3233938579186241318L;
+
 	private ArrayList<Token> elseCondition = null;
 	@SuppressWarnings("unused")
 	private ArrayList<ConditionalToken> conditionalTokens = null;
@@ -175,8 +177,8 @@ public class IfToken extends CommandToken {
 
 			try {
 				object = templarContext.invokeFunction(functionName, objectArgs, templarContext);
-			} catch (FunctionException stefex) {
-				throw new RenderException("Command " + parseableCommandline + "' exception, " + stefex.getMessage());
+			} catch (FunctionException fex) {
+				throw new RenderException("Command " + parseableCommandline + "' exception, " + fex.getMessage(), fex);
 			}
 		} else {
 			object = ObjectUtils.evaluateObject(parseableCommandline, templarContext);

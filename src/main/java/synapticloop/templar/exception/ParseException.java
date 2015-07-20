@@ -36,6 +36,10 @@ public class ParseException extends Exception {
 		super(message);
 	}
 
+	public ParseException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
+
 	public ParseException(String message, BasePositionToken exceptionToken) {
 		super(message);
 		this.exceptionToken = exceptionToken;

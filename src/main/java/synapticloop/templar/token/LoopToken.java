@@ -29,6 +29,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class LoopToken extends CommandToken {
+	private static final long serialVersionUID = 1045794103104169533L;
 
 	public LoopToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

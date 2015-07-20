@@ -1,5 +1,7 @@
 package synapticloop.templar.token;
 
+import java.io.Serializable;
+
 import synapticloop.templar.utils.Tokeniser;
 
 /*
@@ -19,7 +21,9 @@ import synapticloop.templar.utils.Tokeniser;
  * under the Licence.
  */
 
-public abstract class BasePositionToken {
+public abstract class BasePositionToken implements Serializable {
+	private static final long serialVersionUID = -4285038550687054304L;
+
 	protected int lineNumber = 0;
 	protected int characterNumber = 0;
 	protected Tokeniser tokeniser = null;

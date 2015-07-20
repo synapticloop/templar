@@ -79,7 +79,7 @@ public class FunctionFormatDate extends Function {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 			return(simpleDateFormat.format(date));
 		} catch(IllegalArgumentException iaex) {
-			throw new FunctionException("Could not format date, message was: " + iaex.getMessage());
+			throw new FunctionException("Could not format date, message was: " + iaex.getMessage(), iaex);
 		}
 	}
 

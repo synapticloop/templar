@@ -33,6 +33,8 @@ import synapticloop.templar.utils.Tokeniser;
 
 
 public class IncludeToken extends Token {
+	private static final long serialVersionUID = 5518293366922343901L;
+
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
 	String includeLocation = null;
 

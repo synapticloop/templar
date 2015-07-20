@@ -25,6 +25,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class ElseToken extends Token {
+	private static final long serialVersionUID = 5371795050820024974L;
 
 	public ElseToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

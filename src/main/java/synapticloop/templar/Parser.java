@@ -93,8 +93,8 @@ public class Parser {
 				stringBuilder.append(line);
 				stringBuilder.append("\n");
 			}
-		} catch (IOException jiioex) {
-			throw new ParseException("There was a problem reading the input stream.");
+		} catch (IOException ioex) {
+			throw new ParseException("There was a problem reading the input stream.", ioex);
 		}
 
 		String contents = stringBuilder.toString();
@@ -148,8 +148,8 @@ public class Parser {
 				tokeniser.getTokeniserInfo().addLine(line);
 				stringBuilder.append(line + "\n");
 			}
-		} catch(IOException jiioex) {
-			throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'");
+		} catch(IOException ioex) {
+			throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'", ioex);
 		} finally {
 			if(null != bufferedReader) {
 				try {
@@ -217,8 +217,8 @@ public class Parser {
 			bufferedWriter.write(this.render(templarContext));
 			bufferedWriter.flush();
 			bufferedWriter.close();
-		} catch (IOException jiioex) {
-			throw new RenderException(jiioex.getMessage());
+		} catch (IOException ioex) {
+			throw new RenderException(ioex.getMessage(), ioex);
 		} catch (RenderException sterex) {
 			throw sterex;
 		} finally {

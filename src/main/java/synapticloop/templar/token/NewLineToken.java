@@ -24,6 +24,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class NewLineToken extends Token {
+	private static final long serialVersionUID = 7930180320542744794L;
 
 	public NewLineToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

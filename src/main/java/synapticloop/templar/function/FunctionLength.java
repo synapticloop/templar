@@ -112,10 +112,15 @@ public class FunctionLength extends Function {
 					return((Integer)invoke);
 				}
 			} catch (SecurityException jlsex) {
+				// do nothing - will go through the loop or fall out
 			} catch (NoSuchMethodException jlnsmex) {
+				// do nothing - will go through the loop or fall out
 			} catch (IllegalArgumentException jliaex) {
+				// do nothing - will go through the loop or fall out
 			} catch (IllegalAccessException jliacex) {
+				// do nothing - will go through the loop or fall out
 			} catch (InvocationTargetException jlitex) {
+				// do nothing - will go through the loop or fall out
 			}
 		}
 		return(-1);
@@ -128,9 +133,13 @@ public class FunctionLength extends Function {
 				Field field = object.getClass().getField(fieldString);
 				return(field.getInt(object));
 			} catch (SecurityException e) {
+				// do nothing - will go through the loop or fall out
 			} catch (NoSuchFieldException e) {
+				// do nothing - will go through the loop or fall out
 			} catch (IllegalArgumentException e) {
+				// do nothing - will go through the loop or fall out
 			} catch (IllegalAccessException e) {
+				// do nothing - will go through the loop or fall out
 			}
 		}
 		return(-1);

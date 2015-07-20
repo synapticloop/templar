@@ -25,6 +25,7 @@ import synapticloop.templar.utils.Tokeniser;
 
 
 public class TabToken extends Token {
+	private static final long serialVersionUID = 4536085611216408706L;
 
 	public TabToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

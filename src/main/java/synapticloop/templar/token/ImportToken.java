@@ -33,6 +33,8 @@ import synapticloop.templar.utils.Tokeniser;
 
 
 public class ImportToken extends Token {
+	private static final long serialVersionUID = 9019815748103868539L;
+
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
 	String importLocation = null;
 
@@ -87,7 +89,7 @@ public class ImportToken extends Token {
 					stringBuilder.append(line + "\n");
 				}
 			} catch(IOException jiioex) {
-				throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'");
+				throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'", jiioex);
 			} finally {
 				if(null != bufferedReader) {
 					try {

@@ -25,6 +25,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public abstract class CommandToken extends Token {
+	private static final long serialVersionUID = -1347463380199454468L;
 	protected String commandLine = null;
 	protected StringTokenizer stringTokenizer;
 

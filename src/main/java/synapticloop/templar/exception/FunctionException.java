@@ -28,4 +28,8 @@ public class FunctionException extends Exception {
 	public FunctionException(String message) {
 		super(message);
 	}
+
+	public FunctionException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
 }

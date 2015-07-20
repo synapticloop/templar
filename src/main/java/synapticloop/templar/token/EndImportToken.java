@@ -25,7 +25,9 @@ import synapticloop.templar.utils.Tokeniser;
 
 
 public class EndImportToken extends Token {
-	String importLocation = null;
+	private static final long serialVersionUID = 3292020620692967485L;
+
+	private String importLocation = null;
 
 	public EndImportToken(String importLocation, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super("", stringTokenizer, tokeniser);

@@ -5,3 +5,4 @@ build-eclipse
 build
 filestatistics.ser
 cobertura.ser
+build-sonar.xml

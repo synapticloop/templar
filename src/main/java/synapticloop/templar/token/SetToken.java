@@ -28,6 +28,8 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class SetToken extends CommandToken {
+	private static final long serialVersionUID = 8666832881610826478L;
+
 	public ArrayList<Token> childTokens = new ArrayList<Token>();
 
 	public SetToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {

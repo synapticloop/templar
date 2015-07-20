@@ -25,6 +25,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class DumpContextToken extends CommandToken {
+	private static final long serialVersionUID = -5395690577077526893L;
 
 	public DumpContextToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

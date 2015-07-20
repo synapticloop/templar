@@ -29,6 +29,8 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public abstract class Token extends BasePositionToken {
+	private static final long serialVersionUID = -7987699180706299996L;
+
 	protected String value = "";
 	protected ArrayList<Token> childTokens = new ArrayList<Token>();
 

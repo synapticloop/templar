@@ -25,6 +25,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class EndIfToken extends Token {
+	private static final long serialVersionUID = -5400742367676273035L;
 
 	public EndIfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

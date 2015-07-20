@@ -24,6 +24,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class CommentToken extends CommandToken {
+	private static final long serialVersionUID = -6434699251782123749L;
 
 	public CommentToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
