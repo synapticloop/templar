@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2012-2014 synapticloop.
+ * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -33,7 +33,7 @@ public abstract class Token extends BasePositionToken {
 	private static final long serialVersionUID = -7987699180706299996L;
 
 	protected String value = "";
-	protected ArrayList<Token> childTokens = new ArrayList<Token>();
+	protected List<Token> childTokens = new ArrayList<Token>();
 
 	public Token(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		this.tokeniser = tokeniser;
@@ -57,7 +57,7 @@ public abstract class Token extends BasePositionToken {
 		}
 	}
 
-	public ArrayList<Token> getChildren() {
+	public List<Token> getChildren() {
 		return(childTokens);
 	}
 

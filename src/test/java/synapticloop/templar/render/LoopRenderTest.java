@@ -1,7 +1,7 @@
 package synapticloop.templar.render;
 
 /*
- * Copyright (c) 2012-2014 synapticloop.
+ * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
