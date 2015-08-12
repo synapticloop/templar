@@ -40,7 +40,7 @@ public abstract class Function {
 		if(null == args) {
 			return(false);
 		} else {
-			return(args.length == numArgs);
+			return(args.length == getNumArgs());
 		}
 	}
 
@@ -66,5 +66,7 @@ public abstract class Function {
 	}
 
 	public abstract Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException;
+
+	public int getNumArgs() { return numArgs; }
 
 }

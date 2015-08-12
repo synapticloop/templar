@@ -17,10 +17,13 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.function.Function;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -36,19 +39,23 @@ public class DumpFunctionsToken extends CommandToken {
 			templarContext = new TemplarContext();
 		}
 
-		// time to dump the templar context
+		// time to dump the templar context function map
 		StringBuilder stringBuilder = new StringBuilder();
 
 		// go through the context and grab all of the objects
-		// TODO - fix this
-		stringBuilder.append(templarContext.toString());
+		Map<String, Function> functionMap = templarContext.getFunctionMap();
+		Iterator<String> iterator = functionMap.keySet().iterator();
+		while(iterator.hasNext()) {
+			Function function = functionMap.get(iterator.next());
+			stringBuilder.append(function.getClass().getSimpleName() + " #numArgs: " + function.getNumArgs() + "\n");
+		}
 
 		return(stringBuilder.toString());
 	}
 
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<DUMPCONTEXT");
+		stringBuilder.append("<DUMPFUNCTIONS");
 		stringBuilder.append("@");
 		stringBuilder.append(lineNumber);
 		stringBuilder.append(":");

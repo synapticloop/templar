@@ -43,6 +43,15 @@ public class CommandLineUtilsParseTest {
 		CommandLineUtils.parseCommandLine("'\" something else \"");
 	}
 
+	@Test(expected=ParseCommandException.class)
+	public void testInvalidFunctionMissingColon() throws ParseCommandException {
+		CommandLineUtils.parseCommandLine("fn[something, something]");
+	}
+	@Test(expected=ParseCommandException.class)
+	public void testInvalidFunctionMissingFunctionStart() throws ParseCommandException {
+		CommandLineUtils.parseCommandLine("fn:something something, something]");
+	}
+
 	@Test
 	public void testSingleQuote() throws ParseCommandException {
 		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("'something else'"));

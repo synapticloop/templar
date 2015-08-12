@@ -37,6 +37,7 @@ import synapticloop.templar.function.FunctionLength;
 import synapticloop.templar.function.FunctionLessThan;
 import synapticloop.templar.function.FunctionLessThanEqual;
 import synapticloop.templar.function.FunctionNotEqual;
+import synapticloop.templar.function.FunctionOr;
 import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
 
@@ -71,6 +72,8 @@ public class TemplarContext {
 		functionMap.put("true", new FunctionTrue());
 		functionMap.put("and", new FunctionAnd());
 		functionMap.put("&", new FunctionAnd());
+		functionMap.put("or", new FunctionOr());
+		functionMap.put("|", new FunctionOr());
 	}
 
 	public TemplarContext() {
@@ -141,6 +144,10 @@ public class TemplarContext {
 		} else {
 			functionMap.put(name, function);
 		}
+	}
+
+	public Map<String, Function> getFunctionMap() {
+		return(functionMap);
 	}
 
 	private String getRegisteredFunctions() {
