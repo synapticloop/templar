@@ -41,7 +41,6 @@ public class ObjectUtils {
 		// the first one is the reference to the bean
 		if(stringTokenizer.hasMoreTokens()) {
 			String beanToken = stringTokenizer.nextToken();
-			
 
 			if(!templarContext.containsKey(beanToken)) {
 				// we couldn't find the object in the context
@@ -113,6 +112,31 @@ public class ObjectUtils {
 		}
 	}
 
+	public static Boolean evaluateObjectToDefaultBoolean(Object object, TemplarContext templarContext) {
+		Object evaluateObjectToDefault = null;
+		boolean inverse = false;
+		if(object instanceof String) {
+			String temp = (String)object;
+			if(null != temp && temp.startsWith("!")) {
+				inverse = true;
+				temp = temp.substring(1);
+			}
+			evaluateObjectToDefault = evaluateObjectToDefault(temp, templarContext);
+		} else {
+			evaluateObjectToDefault = evaluateObjectToDefault(object, templarContext);
+		}
+
+		if(evaluateObjectToDefault instanceof Boolean) {
+			if(inverse) {
+				return(!((Boolean) evaluateObjectToDefault).booleanValue());
+			} else {
+				return(((Boolean) evaluateObjectToDefault).booleanValue());
+			}
+		}
+
+		return(null);
+	}
+
 	public static Object parseAndExecuteCommandLine(TemplarContext templarContext, String commandLine) throws RenderException {
 
 		String parseableCommandline = commandLine;
@@ -161,6 +185,7 @@ public class ObjectUtils {
 
 		return(object);
 	}
+
 	/**
 	 * Go through the METHOD_PREFIXES array and find the method that is called
 	 * METHOD_PREFIXES[i] + reference

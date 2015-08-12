@@ -19,6 +19,7 @@ package synapticloop.templar.token.conditional;
 
 import java.util.StringTokenizer;
 
+import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.ObjectUtils;
@@ -36,6 +37,44 @@ public class ConditionalEvaluationToken extends ConditionalToken {
 	public Object evaluate(TemplarContext templarContext) throws RenderException {
 		// see whether the value exists in the context.
 		Object object = null;
+		if(value.startsWith("fn:")) {
+			// yay - we have a function - get the functionName
+			int startArgs = value.indexOf("[");
+			if(startArgs == -1) {
+				throw new RenderException("Could not find function argument start token of '[' for function '" + value + "'.");
+			}
+			int endArgs = value.indexOf("]");
+			if(endArgs == -1) {
+				throw new RenderException("Could not find function argument end token of ']' for function '" + value + "'.");
+			}
+
+			// get the arguments as strings, then convert them into objects
+			String functionName = value.substring(3, startArgs);
+			String[] args = value.substring(startArgs +1, endArgs).split(",");
+			if(null == args || args.length == 0) {
+				throw new RenderException("Could not parse arguments for function '" + value + "'.");
+			}
+
+			Object[] objectArgs = new Object[args.length];
+			for (int i = 0; i < args.length; i++) {
+				String string = args[i];
+
+				if(null != string) {
+					string = string.trim();
+				}
+				// at this point - evaluate the token
+				//				objectArgs[i] = Utils.evaluateObject(string, templarContext);
+				objectArgs[i] = string;
+			}
+
+			try {
+				object = templarContext.invokeFunction(functionName, objectArgs, templarContext);
+				return(object);
+			} catch (FunctionException fex) {
+				throw new RenderException("Command " + value + "' exception, " + fex.getMessage(), fex);
+			}
+		}
+
 		if(value.contains(".")) {
 			// means that we want to do a function of a function
 			object = ObjectUtils.evaluateObject(value, templarContext);

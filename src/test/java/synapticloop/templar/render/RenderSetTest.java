@@ -19,6 +19,15 @@ public class RenderSetTest {
 		TemplarContext templarContext = new TemplarContext();
 
 		Assert.assertEquals("\"this is a string\" (without the quotes) should appear between the >< characters: >this is a string<", parser.render(templarContext));
-
+	}
+	
+	@Test
+	public void renderFunctionalSetCommand() throws ParseException, RenderException {
+		File file = new File("src/test/template/render-set-function-as-variable.templar");
+		Parser parser = new Parser(file);
+		TemplarContext templarContext = new TemplarContext();
+		templarContext.add("alwaysTrue", true);
+		templarContext.add("alwaysFalse", false);
+		String render = parser.render(templarContext);
 	}
 }

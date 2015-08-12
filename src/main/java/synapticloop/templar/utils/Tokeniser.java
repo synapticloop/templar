@@ -40,13 +40,6 @@ import synapticloop.templar.token.SetToken;
 import synapticloop.templar.token.TabToken;
 import synapticloop.templar.token.TextToken;
 import synapticloop.templar.token.Token;
-import synapticloop.templar.token.conditional.AndToken;
-import synapticloop.templar.token.conditional.ConditionalEvaluationToken;
-import synapticloop.templar.token.conditional.ConditionalToken;
-import synapticloop.templar.token.conditional.FunctionToken;
-import synapticloop.templar.token.conditional.GroupToken;
-import synapticloop.templar.token.conditional.NotToken;
-import synapticloop.templar.token.conditional.OrToken;
 
 public class Tokeniser implements Serializable {
 	private static final long serialVersionUID = 4768014602151991781L;
@@ -176,45 +169,6 @@ public class Tokeniser implements Serializable {
 		}
 
 		return(tokens);
-	}
-
-	public List<ConditionalToken> tokeniseCommandLine(StringTokenizer stringTokenizer) throws ParseException {
-		// at this point we want to evaluate the if statement
-		ArrayList<ConditionalToken> conditionalTokens = new ArrayList<ConditionalToken>();
-
-		while(stringTokenizer.hasMoreTokens()) {
-			String token = stringTokenizer.nextToken();
-			if("\n".equalsIgnoreCase(token)) {
-				tokeniserInfo.incrementLine();
-			}
-			token = token.trim();
-
-			if("".equals(token)) {
-				continue;
-			}
-
-			if("(".equals(token)) {
-				// start of grouping
-				conditionalTokens.add(new GroupToken(token, stringTokenizer, this));
-			} else if(")".equals(token)) {
-				// end of grouping
-				return(conditionalTokens);
-			} else if("&".equals(token)) {
-				conditionalTokens.add(new AndToken(token, stringTokenizer, this));
-			} else if("!".equals(token)) {
-				conditionalTokens.add(new NotToken(token, stringTokenizer, this));
-			} else if("|".equals(token)) {
-				conditionalTokens.add(new OrToken(token, stringTokenizer, this));
-			} else if("fn:".equals(token)) {
-				// have the start of a function
-				conditionalTokens.add(new FunctionToken(token, stringTokenizer, this));
-			} else {
-				// this is an evaluator
-				conditionalTokens.add(new ConditionalEvaluationToken(token, stringTokenizer, this));
-			}
-		}
-
-		return(conditionalTokens);
 	}
 
 	public TokeniserInfo getTokeniserInfo() { return(tokeniserInfo); }

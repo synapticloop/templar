@@ -1,0 +1,11 @@
+{set fn:and[alwaysTrue, alwaysTrue] as andFunction}
+{if fn:true[andFunction]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{set !fn:and[alwaysTrue, alwaysTrue] as andFunction}
+{if fn:false[andFunction]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{set fn:and[alwaysTrue, fn:and[alwaysTrue, alwaysTrue] as andFunction}
+{if fn:true[andFunction]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{set alwaysTrue as someValue}
+{if fn:true[someValue]}CORRECT{else}FATAL ERROR{endif}{\n}

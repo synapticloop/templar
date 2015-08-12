@@ -1,7 +1,7 @@
 package synapticloop.templar;
 
 /*
- * Copyright (c) 2012-2014 synapticloop.
+ * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -79,6 +79,11 @@ public class Parser {
 		this.parse();
 	}
 
+	/**
+	 * 
+	 * @param inputStream
+	 * @throws ParseException
+	 */
 	public Parser(InputStream inputStream) throws ParseException {
 		if(null == inputStream) {
 			throw new ParseException("Input stream cannot be null");
@@ -110,7 +115,7 @@ public class Parser {
 	}
 
 	/**
-	 * Parse the contents of the string
+	 * Parse the contents of the passed in string
 	 *
 	 * @param contents the contents to be parsed
 	 *

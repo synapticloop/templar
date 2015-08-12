@@ -29,19 +29,21 @@ public class NewLineToken extends Token {
 	public NewLineToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
 		if(stringTokenizer.hasMoreTokens()) {
-			if(!"}".equals(stringTokenizer.nextToken())) {
-				// TODO add what the token found was
-				throw new ParseException("Could not find end token marker '}' for the newline token.", this);
+			String nextToken = stringTokenizer.nextToken();
+			if(!"}".equals(nextToken)) {
+				throw new ParseException("Could not find end token marker '}' for the newline token, next token was '" + nextToken + "'.", this);
 			}
 		} else {
-			throw new ParseException("Could not find end token marker '}' for the newline token.", this);
+			throw new ParseException("Could not find end token marker '}' for the newline token, and we are out of tokens", this);
 		}
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		return("\n");
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<NEWLINE");

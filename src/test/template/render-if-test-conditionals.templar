@@ -1,0 +1,14 @@
+Simple if test with conditionals{nl}
+--------------------------------{nl}
+alwaysTrue: {alwaysTrue}{\n}
+alwaysFalse: {alwaysTrue}{\n}
+{\n}
+
+fn:and[true, !fn:true[false]] {if fn:and[alwaysTrue, !fn:true[alwaysFalse]]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+fn:and[true, true]: {if fn:and[alwaysTrue, alwaysTrue]}CORRECT{else}FATAL ERROR{endif}{\n}
+fn:and[true, false]: {if fn:and[alwaysTrue, alwaysFalse]}FATAL ERROR{else}CORRECT{endif}{\n}
+fn:and[true, !false]: {if fn:and[alwaysTrue, !alwaysFalse]}CORRECT{else}FATAL ERROR{endif}{\n}
+fn:and[true, fn:false] {if fn:and[alwaysTrue, fn:false[alwaysFalse]]}CORRECT{else}FATAL ERROR{endif}{\n}
+fn:and[true, !fn:true[false]] {if fn:and[alwaysTrue, !fn:true[alwaysFalse]]}CORRECT{else}FATAL ERROR{endif}{\n}
+fn:and[fn:true, fn:true] {if fn:and[fn:true[alwaysTrue], fn:true[alwaysTrue]]}CORRECT{else}FATAL ERROR{endif}{\n}

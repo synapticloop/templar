@@ -1,4 +1,7 @@
-package synapticloop.templar.token.conditional;
+package synapticloop.templar.function;
+
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.TemplarContext;
 
 /*
  * Copyright (c) 2012-2014 synapticloop.
@@ -17,22 +20,17 @@ package synapticloop.templar.token.conditional;
  * under the Licence.
  */
 
-import java.util.StringTokenizer;
-
-import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.utils.TemplarContext;
-import synapticloop.templar.utils.Tokeniser;
-
-public class NotToken extends ConditionalToken {
-	private static final long serialVersionUID = 7127444959243683749L;
-
-	public NotToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
-		super(value, stringTokenizer, tokeniser);
+public class FunctionTrue extends FunctionBoolean {
+	public FunctionTrue() {
+		super(1);
 	}
 
-	public Object evaluate(TemplarContext templarContext) throws RenderException {
-		return(null);
+	@Override
+	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+		if(verifyArgumentLength(args)) {
+			return(getEvaluatedArgument(args, templarContext, true));
+		} else {
+			throw new FunctionException("The function 'true' takes exactly one argument.");
+		}
 	}
-
 }

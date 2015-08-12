@@ -25,7 +25,9 @@ import java.util.Set;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.function.Function;
+import synapticloop.templar.function.FunctionAnd;
 import synapticloop.templar.function.FunctionEqual;
+import synapticloop.templar.function.FunctionFalse;
 import synapticloop.templar.function.FunctionFormatDate;
 import synapticloop.templar.function.FunctionGreaterThan;
 import synapticloop.templar.function.FunctionGreaterThanEqual;
@@ -36,6 +38,7 @@ import synapticloop.templar.function.FunctionLessThan;
 import synapticloop.templar.function.FunctionLessThanEqual;
 import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.FunctionSize;
+import synapticloop.templar.function.FunctionTrue;
 
 public class TemplarContext {
 	public Map<String, Object> context = new HashMap<String, Object>();
@@ -64,6 +67,10 @@ public class TemplarContext {
 		functionMap.put("length", new FunctionLength());
 		functionMap.put("size", new FunctionSize());
 		functionMap.put("fmtDate", new FunctionFormatDate());
+		functionMap.put("false", new FunctionFalse());
+		functionMap.put("true", new FunctionTrue());
+		functionMap.put("and", new FunctionAnd());
+		functionMap.put("&", new FunctionAnd());
 	}
 
 	public TemplarContext() {

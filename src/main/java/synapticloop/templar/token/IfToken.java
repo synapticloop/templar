@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.exception.ParseCommandException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.token.conditional.ConditionalToken;
+import synapticloop.templar.token.command.CommandLineToken;
+import synapticloop.templar.utils.CommandLineUtils;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
@@ -32,10 +34,18 @@ public class IfToken extends CommandToken {
 	private static final long serialVersionUID = 3233938579186241318L;
 
 	private List<Token> elseCondition = null;
-	@SuppressWarnings("unused")
-	private List<ConditionalToken> conditionalTokens = null;
 	private boolean inverse = false;
 
+	private List<CommandLineToken> commandLineTokens;
+
+	/**
+	 * The if token is a conditional token with a command line
+	 * 
+	 * @param value
+	 * @param stringTokenizer
+	 * @param tokeniser
+	 * @throws ParseException
+	 */
 	public IfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
@@ -51,11 +61,11 @@ public class IfToken extends CommandToken {
 				} else if(token.equals("}")) {
 					// now we need to go through and tokenise the inner tokeniser...;
 					this.commandLine = stringBuilder.toString().trim();
-
-					// at this point we want to parse the command line
-					StringTokenizer commandLineStringTokenizer = new StringTokenizer(commandLine, "(&|!)", true);
-
-					conditionalTokens = tokeniser.tokeniseCommandLine(commandLineStringTokenizer);
+					try {
+						this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
+					} catch (ParseCommandException pcex) {
+						throw new ParseException("Could not parse command line '" + commandLine + "', message was: " + pcex.getMessage(), pcex);
+					}
 
 					this.addChildTokens(tokeniser.tokenise(stringTokenizer));
 
@@ -97,10 +107,9 @@ public class IfToken extends CommandToken {
 			}
 		} else {
 			// we are in an if token - but we have no more tokens :(
-			
+			// something
 		}
-		// TODO possibly delete
-//		this.commandLine = stringBuilder.toString().trim();
+
 		throw new ParseException("Expecting if conditional statement but no more tokens found.", this);
 	}
 
@@ -108,7 +117,10 @@ public class IfToken extends CommandToken {
 		StringBuilder stringBuilder = new StringBuilder();
 		// what we need to to is to grab the key out of the context...
 
-		Object object = parseAndExecuteCommandLine(templarContext);
+		Object object = null;
+		for (CommandLineToken commandLineToken : commandLineTokens) {
+			object = commandLineToken.evaluate(templarContext);
+		}
 
 		if(object instanceof Boolean) {
 			Boolean test = (Boolean)object;
