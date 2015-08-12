@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
 
@@ -32,7 +32,7 @@ public abstract class CommandLineToken {
 	protected List<CommandLineToken> childTokens = new ArrayList<CommandLineToken>();
 	protected String evaluateCommand = null;
 
-	public CommandLineToken(StringTokenizer stringTokenizer) throws ParseCommandException {}
+	public CommandLineToken(StringTokenizer stringTokenizer) throws ParseException {}
 
 	public abstract Object evaluate(TemplarContext templarContext) throws RenderException;
 

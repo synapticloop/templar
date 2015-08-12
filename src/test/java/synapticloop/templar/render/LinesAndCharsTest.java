@@ -17,7 +17,7 @@ package synapticloop.templar.render;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -32,7 +32,7 @@ public class LinesAndCharsTest {
 	public void testInvalidSetToken() {
 		try {
 			File file = new File("src/test/template/line-numbers-set.templar");
-			Parser parser = new Parser(file);
+			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 8);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 12);
@@ -44,7 +44,7 @@ public class LinesAndCharsTest {
 	public void testInvalidCurlyBrace() {
 		try {
 			File file = new File("src/test/template/line-numbers-curly-brace.templar");
-			Parser parser = new Parser(file);
+			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 7);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 5);
@@ -56,7 +56,7 @@ public class LinesAndCharsTest {
 	public void testInvalidCurlyBraceNoMoreTokens() {
 		try {
 			File file = new File("src/test/template/line-numbers-curly-brace-no-more-tokens.templar");
-			Parser parser = new Parser(file);
+			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 9);
 			assertEquals(stepex.getExceptionToken().getCharacterNumber(), 5);

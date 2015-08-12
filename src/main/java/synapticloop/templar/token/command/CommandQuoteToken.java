@@ -2,17 +2,17 @@ package synapticloop.templar.token.command;
 
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class CommandQuoteToken extends CommandLineToken {
 
-	public CommandQuoteToken(StringTokenizer stringTokenizer) throws ParseCommandException {
+	public CommandQuoteToken(StringTokenizer stringTokenizer) throws ParseException {
 		super(stringTokenizer);
 	}
 
-	protected void tokeniseQuote(String quotationMark, StringTokenizer stringTokenizer) throws ParseCommandException {
+	protected void tokeniseQuote(String quotationMark, StringTokenizer stringTokenizer) throws ParseException {
 		StringBuilder stringBuilder = new StringBuilder();
 		boolean foundFinalQuote = false;
 		boolean isEscaped = false;
@@ -35,7 +35,7 @@ public class CommandQuoteToken extends CommandLineToken {
 		}
 
 		if(!foundFinalQuote) {
-			throw new ParseCommandException("Could not find ending quotation mark (" + quotationMark + ")");
+			throw new ParseException("Could not find ending quotation mark (" + quotationMark + ")");
 		}
 
 		evaluateCommand = stringBuilder.toString();

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
@@ -63,7 +63,7 @@ public class IfToken extends CommandToken {
 					this.commandLine = stringBuilder.toString().trim();
 					try {
 						this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
-					} catch (ParseCommandException pcex) {
+					} catch (ParseException pcex) {
 						throw new ParseException("Could not parse command line '" + commandLine + "', message was: " + pcex.getMessage(), pcex);
 					}
 

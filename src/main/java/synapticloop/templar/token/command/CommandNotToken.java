@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class CommandNotToken extends CommandLineToken {
 
-	public CommandNotToken(StringTokenizer stringTokenizer) throws ParseCommandException {
+	public CommandNotToken(StringTokenizer stringTokenizer) throws ParseException {
 		super(stringTokenizer);
 		List<CommandLineToken> commandTokens = new ArrayList<CommandLineToken>();
 		// at this point we are looking for either a function or an evaluation
@@ -23,7 +23,7 @@ public class CommandNotToken extends CommandLineToken {
 					break;
 				case DOUBLE_QUOTE:
 				case SINGLE_QUOTE:
-					throw new ParseCommandException("Cannot have a '!' before a simgle quote (') or double quote (\")");
+					throw new ParseException("Cannot have a '!' before a simgle quote (') or double quote (\")");
 				case FUNCTION:
 					childTokens.add(new CommandFunctionToken(stringTokenizer));
 					break;
@@ -34,7 +34,7 @@ public class CommandNotToken extends CommandLineToken {
 				childTokens.add(new CommandEvaluationToken(new StringTokenizer(nextToken)));
 			}
 		} else {
-			throw new ParseCommandException("Could not find next token after '!'");
+			throw new ParseException("Could not find next token after '!'");
 		}
 		commandTokens.add(this);
 		this.evaluateCommand = "";

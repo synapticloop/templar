@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.token.command.CommandDoubleQuoteToken;
 import synapticloop.templar.token.command.CommandEvaluationToken;
 import synapticloop.templar.token.command.CommandFunctionToken;
@@ -13,7 +13,7 @@ import synapticloop.templar.token.command.CommandNotToken;
 import synapticloop.templar.token.command.CommandSingleQuoteToken;
 
 public class CommandLineUtils {
-	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseCommandException {
+	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseException {
 		List<CommandLineToken> commandTokens= new ArrayList<CommandLineToken>();
 		StringTokenizer stringTokenizer = new StringTokenizer(commandLine, "!:\"'[]", true);
 
@@ -36,7 +36,7 @@ public class CommandLineUtils {
 				case CommandLineToken.FUNCTION_START:
 				case CommandLineToken.FUNCTION_END:
 				case CommandLineToken.COLON:
-					throw new ParseCommandException("Failure parsing command line, unexpected token '" + nextToken + "'.");
+					throw new ParseException("Failure parsing command line, unexpected token '" + nextToken + "'.");
 				default:
 					commandTokens.add(new CommandEvaluationToken(new StringTokenizer(nextToken)));
 					break;

@@ -3,17 +3,17 @@ package synapticloop.templar.token.command;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class CommandFunctionToken extends CommandLineToken {
 
-	public CommandFunctionToken(StringTokenizer stringTokenizer) throws ParseCommandException {
+	public CommandFunctionToken(StringTokenizer stringTokenizer) throws ParseException {
 		super(stringTokenizer);
 		// at this point - we must have a ':'
 		if(!stringTokenizer.hasMoreElements() || !stringTokenizer.nextToken().equals(":")) {
-			throw new ParseCommandException("Could not find the ':' for the function");
+			throw new ParseException("Could not find the ':' for the function");
 		}
 
 		// now we are at the function name, delimeters and values...
@@ -21,7 +21,7 @@ public class CommandFunctionToken extends CommandLineToken {
 
 		// at this point - we must have a '['
 		if(!stringTokenizer.hasMoreElements() || !stringTokenizer.nextToken().equals("[")) {
-			throw new ParseCommandException("Could not find argument start delimiter '[' for the function");
+			throw new ParseException("Could not find argument start delimiter '[' for the function");
 		}
 
 		while(stringTokenizer.hasMoreTokens()) {
@@ -52,7 +52,7 @@ public class CommandFunctionToken extends CommandLineToken {
 				case FUNCTION_END:
 					return;
 				default:
-					throw new ParseCommandException("Found token '" + nextToken + "', without a case statement");
+					throw new ParseException("Found token '" + nextToken + "', without a case statement");
 				}
 			} else {
 				// these will be arguments

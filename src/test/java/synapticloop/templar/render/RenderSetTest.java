@@ -28,6 +28,6 @@ public class RenderSetTest {
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.add("alwaysTrue", true);
 		templarContext.add("alwaysFalse", false);
-		String render = parser.render(templarContext);
+		parser.render(templarContext);
 	}
 }

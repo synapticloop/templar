@@ -2,14 +2,14 @@ package synapticloop.templar.token.command;
 
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
 public class CommandEvaluationToken extends CommandLineToken {
 
-	public CommandEvaluationToken(StringTokenizer stringTokenizer) throws ParseCommandException {
+	public CommandEvaluationToken(StringTokenizer stringTokenizer) throws ParseException {
 		super(stringTokenizer);
 		StringBuilder stringBuilder = new StringBuilder();
 		while (stringTokenizer.hasMoreTokens()) {

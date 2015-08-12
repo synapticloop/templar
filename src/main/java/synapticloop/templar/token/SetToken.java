@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.ParseCommandException;
+import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
@@ -84,7 +84,7 @@ public class SetToken extends CommandToken {
 
 		try {
 			this.commandLineTokens = CommandLineUtils.parseCommandLine(setCommand);
-		} catch (ParseCommandException pex) {
+		} catch (ParseException pex) {
 			throw new ParseException("Could not parse command line '" + setCommand + "', message was: " + pex.getMessage(), pex);
 		}
 
