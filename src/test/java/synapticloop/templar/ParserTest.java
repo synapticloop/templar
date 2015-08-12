@@ -17,7 +17,7 @@ package synapticloop.templar;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -92,7 +92,7 @@ public class ParserTest {
 		templarContext.setTemplarConfiguration(templarConfiguration);
 
 		parser = new Parser(new File("src/test/template/simple.templar"));
-		assertEquals("This is a simple template<NEWLINE@1:27 />\n\nwith two lines.\n", parser.toString());
+		assertEquals("This is a simple template<NEWLINE@1:27 />\nwith two lines.\n", parser.toString());
 		assertEquals("This is a simple template\n\nwith two lines.\n", parser.render(templarContext));
 	}
 
@@ -109,7 +109,7 @@ public class ParserTest {
 		InputStream inputStream = new FileInputStream(file);
 
 		parser = new Parser(inputStream);
-		assertEquals("This is a simple template<NEWLINE@1:27 />\n\nwith two lines.\n", parser.toString());
+		assertEquals("This is a simple template<NEWLINE@1:27 />\nwith two lines.\n", parser.toString());
 		assertEquals("This is a simple template\n\nwith two lines.\n", parser.render(templarContext));
 	}
 

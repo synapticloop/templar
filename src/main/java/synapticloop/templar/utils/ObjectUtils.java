@@ -219,7 +219,7 @@ public class ObjectUtils {
 				}
 			}
 		} catch (NullPointerException npex) {
-			throw new RenderException("Got Null Pointer for method '" + methodReference + "' on object '" + object + "'.");
+			throw new RenderException("Got Null Pointer for method '" + methodReference + "' on object '" + object + "'.", npex);
 		}
 			
 

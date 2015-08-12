@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.utils.CommandLineUtils;
@@ -32,10 +31,7 @@ import synapticloop.templar.utils.Tokeniser;
 public class SetToken extends CommandToken {
 	private static final long serialVersionUID = 8666832881610826478L;
 
-	public List<Token> childTokens = new ArrayList<Token>();
-//	public List<Token> commandLineTokens = new ArrayList<Token>();
-
-	private List<CommandLineToken> commandLineTokens;
+	private List<CommandLineToken> commandLineTokens = new ArrayList<CommandLineToken>();
 
 	private String contextAs;
 

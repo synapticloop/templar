@@ -131,7 +131,7 @@ public class IncludeToken extends Token {
 		}
 
 		// load the contents
-		ArrayList<Token> tokens = new ArrayList<Token>();
+		List<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(stringBuilder.toString(), " \n\t{}", true);
 		try {
 			tokens.addAll(tokeniser.tokenise(stringTokenizer));

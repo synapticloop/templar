@@ -47,7 +47,7 @@ public class ImportToken extends Token {
 			while(stringTokenizer.hasMoreTokens()) {
 				String nextToken = stringTokenizer.nextToken();
 
-				if(nextToken.equals("}")) {
+				if("}".equals(nextToken)) {
 					importLocation = stringBuilder.toString().trim();
 					return;
 				}
@@ -60,7 +60,7 @@ public class ImportToken extends Token {
 		}
 	}
 
-	public ArrayList<Token> getTokens() throws ParseException {
+	public List<Token> getTokens() throws ParseException {
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
 
@@ -131,7 +131,7 @@ public class ImportToken extends Token {
 		}
 
 		// load the contents
-		ArrayList<Token> tokens = new ArrayList<Token>();
+		List<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(stringBuilder.toString(), " \n\t{}", true);
 		try {
 			tokens.addAll(tokeniser.tokenise(stringTokenizer));

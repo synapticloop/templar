@@ -45,14 +45,6 @@ public class NewLineToken extends Token {
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<NEWLINE");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" />\n");
-
-		return(stringBuilder.toString());
+		return(super.toString("NEWLINE"));
 	}
 }

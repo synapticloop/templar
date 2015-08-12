@@ -1,6 +1,6 @@
 package synapticloop.templar.render;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -29,19 +29,19 @@ public class RenderListTest {
 		templarContext.add("bean", evaluationBean);
 		templarContext.add("bean2", evaluationBean2);
 
-		assertEquals(parser.toString(), "Simple loop test<NEWLINE@1:18 />\n" + 
+		assertEquals(parser.toString(), "Simple loop test<NEWLINE@1:18 />" + 
 				"\n" + 
-				"----------------<NEWLINE@2:18 />\n" + 
+				"----------------<NEWLINE@2:18 />" + 
 				"\n" + 
-				"<NEWLINE@3:2 />\n" + 
+				"<NEWLINE@3:2 />" + 
 				"\n" + 
 				"<LOOP@4:2 (bean.arrayList as value)>\n" + 
-				"	<EVAL@5:3 (value)/><NEWLINE@5:4 />\n" + 
+				"	<EVAL@5:3 (value)/><NEWLINE@5:4 />" + 
 				"\n" + 
 				"</LOOP@6:2>\n" + 
 				"\n" + 
 				"<LOOP@8:2 (bean.childBeans as childBean)>\n" + 
-				"	<EVAL@9:3 (childBean.name)/><NEWLINE@9:4 />\n" + 
+				"	<EVAL@9:3 (childBean.name)/><NEWLINE@9:4 />" + 
 				"\n" + 
 				"</LOOP@10:2>\n");
 

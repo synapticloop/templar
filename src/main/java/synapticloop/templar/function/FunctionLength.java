@@ -26,8 +26,8 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionLength extends Function {
-	protected static final String[] FIELDS = {"size", "length"};
-	protected static final String[] METHODS = {"getSize", "getLength"};
+	private static final String[] FIELDS = {"size", "length"};
+	private static final String[] METHODS = {"getSize", "getLength"};
 
 	public FunctionLength() {
 		super(1);

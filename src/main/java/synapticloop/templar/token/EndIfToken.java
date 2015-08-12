@@ -37,14 +37,6 @@ public class EndIfToken extends Token {
 	}
 
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("< /IF");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(">");
-
-		return(stringBuilder.toString());
+		return(super.toString("/IF"));
 	}
 }

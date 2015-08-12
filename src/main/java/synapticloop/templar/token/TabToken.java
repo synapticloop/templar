@@ -44,14 +44,6 @@ public class TabToken extends Token {
 	}
 
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<TAB");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" />");
-
-		return(stringBuilder.toString());
+		return(super.toString("TAB"));
 	}
 }

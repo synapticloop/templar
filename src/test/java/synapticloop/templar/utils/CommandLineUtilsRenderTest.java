@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import synapticloop.templar.Parser;
 import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 
@@ -91,9 +90,9 @@ public class CommandLineUtilsRenderTest {
 	}
 
 	private void assertOnlyOneCommand(List<CommandLineToken> commandTokens) {
-		for (CommandLineToken commandToken : commandTokens) {
-			System.out.println(commandToken);
-		}
+//		for (CommandLineToken commandToken : commandTokens) {
+//			System.out.println(commandToken);
+//		}
 		assertEquals(1, commandTokens.size());
 	}
 }

@@ -35,7 +35,7 @@ public class FunctionIsNull extends Function {
 					Object evaluateObject = ObjectUtils.evaluateObject(args[0].toString(), templarContext);
 					return(null == evaluateObject);
 				} catch (RenderException sterex) {
-					// if we cannot find it in the evaluation - then we assume that it is
+					// if we cannot find it in the evaluation - then we assume that it is null
 					return(true);
 				}
 			} else {

@@ -42,7 +42,7 @@ import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
 
 public class TemplarContext {
-	public Map<String, Object> context = new HashMap<String, Object>();
+	private Map<String, Object> context = new HashMap<String, Object>();
 	private TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 
 	private static Map<String, Function> functionMap = new HashMap<String, Function>();

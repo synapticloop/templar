@@ -1,5 +1,5 @@
 package synapticloop.templar.parse;
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.io.File;
 
@@ -28,15 +28,15 @@ public class IfTest {
 				"\n" +
 				"\tthen we should see these tokens...\n" +
 				"\n" +
-				"< /IF@8:2>\n" +
+				"</IF@8:2>\n" +
 				"\n" +
 				"and should come\n" +
 				"out\n" +
 				"\n" +
-				"as command <IF@13:13 (something)> elements < /IF@13:35>\n" +
+				"as command <IF@13:13 (something)> elements </IF@13:35>\n" +
 				"\n" +
 				"now for some functions\n" +
-				"<IF@16:2 (something)> something <ELSE@16:25 /> something else < /IF@16:43>\n",
+				"<IF@16:2 (something)> something <ELSE@16:25 /> something else </IF@16:43>\n",
 				parser.toString());
 	}
 }

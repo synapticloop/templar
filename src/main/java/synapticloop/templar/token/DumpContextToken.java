@@ -46,15 +46,7 @@ public class DumpContextToken extends CommandToken {
 	}
 
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<DUMPCONTEXT");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" />");
-
-		return(stringBuilder.toString());
+		return(super.toString("DUMPCONTEXT"));
 	}
 
 }

@@ -20,13 +20,10 @@ package synapticloop.templar.token;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.utils.CommandLineUtils;
-import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -56,10 +53,10 @@ public class IfToken extends CommandToken {
 
 				tokeniser.getTokeniserInfo().incrementCharacter(token.length());
 
-				if(token.equals("\n")) {
+				if("\n".equals(token)) {
 					tokeniser.getTokeniserInfo().incrementLine();
-				} else if(token.equals("}")) {
-					// now we need to go through and tokenise the inner tokeniser...;
+				} else if("}".equals(token)) {
+					// now we need to go through and tokenise the inner tokeniser...
 					this.commandLine = stringBuilder.toString().trim();
 					try {
 						this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
@@ -74,7 +71,7 @@ public class IfToken extends CommandToken {
 						String endToken = stringTokenizer.nextToken();
 						tokeniser.getTokeniserInfo().incrementCharacter(token.length());
 
-						if(!endToken.equals("}")) {
+						if(!"}".equals(endToken)) {
 							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
 						}
 					} else {
@@ -89,7 +86,7 @@ public class IfToken extends CommandToken {
 						// here the next token should be a '}'
 						if(stringTokenizer.hasMoreTokens()) {
 							String endToken = stringTokenizer.nextToken();
-							if(!endToken.equals("}")) {
+							if(!"}".equals(endToken)) {
 								throw new ParseException("Expecting '}' but found '" + endToken + "'", this);
 							}
 						} else {
@@ -146,57 +143,6 @@ public class IfToken extends CommandToken {
 		}
 
 		return (stringBuilder.toString());
-	}
-
-	private Object parseAndExecuteCommandLine(TemplarContext templarContext) throws RenderException {
-
-		String parseableCommandline = commandLine;
-		if(commandLine.startsWith("!")) {
-			inverse = true;
-			parseableCommandline = commandLine.substring(1);
-		}
-
-		Object object = null;
-		if(parseableCommandline.startsWith("fn:")) {
-			// yay - we have a function - get the functionName
-			int startArgs = parseableCommandline.indexOf("[");
-			if(startArgs == -1) {
-				throw new RenderException("Could not find function argument start token of '[' for function '" + parseableCommandline + "'.");
-			}
-			int endArgs = parseableCommandline.indexOf("]");
-			if(endArgs == -1) {
-				throw new RenderException("Could not find function argument end token of ']' for function '" + parseableCommandline + "'.");
-			}
-
-			// get the arguments as strings, then convert them into objects
-			String functionName = parseableCommandline.substring(3, startArgs);
-			String[] args = parseableCommandline.substring(startArgs +1, endArgs).split(",");
-			if(null == args || args.length == 0) {
-				throw new RenderException("Could not parse arguments for function '" + commandLine + "'.");
-			}
-
-			Object[] objectArgs = new Object[args.length];
-			for (int i = 0; i < args.length; i++) {
-				String string = args[i];
-
-				if(null != string) {
-					string = string.trim();
-				}
-				// at this point - evaluate the token
-//				objectArgs[i] = Utils.evaluateObject(string, templarContext);
-				objectArgs[i] = string;
-			}
-
-			try {
-				object = templarContext.invokeFunction(functionName, objectArgs, templarContext);
-			} catch (FunctionException fex) {
-				throw new RenderException("Command " + parseableCommandline + "' exception, " + fex.getMessage(), fex);
-			}
-		} else {
-			object = ObjectUtils.evaluateObject(parseableCommandline, templarContext);
-		}
-
-		return(object);
 	}
 
 	public String toString() {

@@ -54,15 +54,7 @@ public class DumpFunctionsToken extends CommandToken {
 	}
 
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<DUMPFUNCTIONS");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" />");
-
-		return(stringBuilder.toString());
+		return(super.toString("DUMPFUNCTIONS"));
 	}
 
 }

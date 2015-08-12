@@ -39,9 +39,6 @@ public class EvaluationToken extends CommandToken {
 		super(value, stringTokenizer, tokeniser);
 
 		StringBuilder stringBuilder = new StringBuilder();
-		// look for the next token which should be either if, list, otherwise it
-		// is an evaluation token
-		// @TODO unless of course it is a fn token
 		stringBuilder.append(value);
 
 		boolean foundEndToken = false;
@@ -49,7 +46,7 @@ public class EvaluationToken extends CommandToken {
 		if(stringTokenizer.hasMoreTokens()) {
 			while(stringTokenizer.hasMoreTokens()) {
 				String token = stringTokenizer.nextToken();
-				if(token.equals("}")) {
+				if("}".equals(token)) {
 					foundEndToken = true;
 					break;
 				} else {
