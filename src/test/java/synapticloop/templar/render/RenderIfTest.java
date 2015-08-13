@@ -1,6 +1,6 @@
 package synapticloop.templar.render;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.*;
 
 import java.io.File;
 
@@ -30,6 +30,7 @@ public class RenderIfTest {
 		templarContext.add("bean", evaluationBean);
 		templarContext.add("bean2", evaluationBean2);
 
+		String render = parser.render(templarContext);
 		assertEquals("Simple if test\n" +
 				"--------------\n" +
 				"\n" +
@@ -52,7 +53,7 @@ public class RenderIfTest {
 				"this bean2 is NOT of age\n" +
 				"3 is greater than 1\n" +
 				"1 is less than 3\n" +
-				"3 is not less than 1\n", parser.render(templarContext));
+				"3 is not less than 1\n", render);
 
 	}
 }

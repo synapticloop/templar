@@ -1,6 +1,6 @@
 package synapticloop.templar.render;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -48,7 +48,6 @@ public class RenderEvaluationTest {
 		EvaluationChildBean evaluationChildBean = new EvaluationChildBean("childName");
 		EvaluationBean evaluationBean = new EvaluationBean("test name", true, 30, 1348083911423L, evaluationChildBean);
 		templarContext.add("bean", evaluationBean);
-
 		parser.render(templarContext);
 	}
 

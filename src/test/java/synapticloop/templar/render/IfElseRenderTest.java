@@ -9,6 +9,7 @@ import org.junit.Test;
 import synapticloop.templar.Parser;
 import synapticloop.templar.bean.EvaluationBean;
 import synapticloop.templar.bean.EvaluationChildBean;
+import synapticloop.templar.bean.OuterBean;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarConfiguration;
@@ -33,6 +34,8 @@ public class IfElseRenderTest {
 
 		templarContext.add("bean", evaluationBean);
 		templarContext.add("bean2", evaluationBean2);
+		templarContext.add("outerBean", new OuterBean());
+
 		assertEquals("<IF@1:2 (fn:>['3','1'])>3 > 1<ELSE@1:23 />3 !> 1</IF@1:31><NEWLINE@1:32 />\n<IF@2:2 (fn:>['1','3'])>1 > 3<ELSE@2:23 />1 !> 3</IF@2:31>\n", parser.toString());
 		String render = parser.render(templarContext);
 		assertEquals("3 > 1\n1 !> 3", render);

@@ -94,7 +94,37 @@ public class CommandFunctionToken extends CommandLineToken {
 		Object[] args = new Object[childTokens.size()];
 		int i = 0;
 		for (CommandLineToken commandToken : childTokens) {
-			args[i] = commandToken.evaluate(templarContext);
+			try {
+				args[i] = commandToken.evaluate(templarContext);
+			} catch(RenderException rex) {
+				if(rex.getCause() instanceof NullPointerException) {
+					if("notNull".equals(evaluateCommand)) {
+						return(false);
+					} else if("null".equals(evaluateCommand)) {
+						return(true);
+					} else {
+						throw rex;
+					}
+				}
+			}
+
+			if(i == 0) {
+				if("or".equals(evaluateCommand)) {
+					// if we have an or function, if the first is true, ignore the rest...
+					if(args[0] instanceof Boolean) {
+						if(((Boolean)args[i]).booleanValue()) {
+							return(true);
+						}
+					}
+				} else if("and".equals(evaluateCommand)) {
+					// if we have an and function, if the first is false, ignore the rest...
+					if(args[0] instanceof Boolean) {
+						if(!((Boolean)args[i]).booleanValue()) {
+							return(false);
+						}
+					}
+				}
+			}
 			i++;
 		}
 		try {

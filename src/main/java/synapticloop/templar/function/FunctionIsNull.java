@@ -18,7 +18,6 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
@@ -31,13 +30,8 @@ public class FunctionIsNull extends Function {
 		if(verifyArgumentLength(args)) {
 			if(null != args[0]) {
 				// see if we can get if from the context
-				try {
-					Object evaluateObject = ObjectUtils.evaluateObject(args[0].toString(), templarContext);
-					return(null == evaluateObject);
-				} catch (RenderException sterex) {
-					// if we cannot find it in the evaluation - then we assume that it is null
-					return(true);
-				}
+				Object evaluateObject = ObjectUtils.evaluateObjectToDefault(args[0].toString(), templarContext);
+				return(null == evaluateObject);
 			} else {
 				return(true);
 			}

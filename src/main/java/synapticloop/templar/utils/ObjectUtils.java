@@ -202,6 +202,7 @@ public class ObjectUtils {
 			String methodPrefix = METHOD_PREFIXES[i];
 
 			returnMethod = getMethod(object, methodPrefix + reference);
+
 			if(null != returnMethod) {
 				return(returnMethod);
 			}
@@ -226,7 +227,7 @@ public class ObjectUtils {
 		return(null);
 	}
 
-	private static boolean isQuoted(Object object) {
+	public static boolean isQuoted(Object object) {
 		if(object instanceof String) {
 			String string = (String)object;
 			return((string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\"")));
@@ -234,7 +235,7 @@ public class ObjectUtils {
 		return(false);
 	}
 
-	private static String deQuote(String quotedString) {
+	public static String deQuote(String quotedString) {
 		if((quotedString.startsWith("'") && quotedString.endsWith("'")) || (quotedString.startsWith("\"") && quotedString.endsWith("\""))) {
 			return(quotedString.substring(1, quotedString.length() -1));
 		}

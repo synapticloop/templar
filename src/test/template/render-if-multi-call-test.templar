@@ -1,0 +1,13 @@
+{--
+  here is a pretty usual test, first we test that what we want to call is 
+  actually not null, then we test the variable
+}
+{if fn:and[fn:notNull[outerBean.null.something], !outerBean.null.something]}FATAL ERROR{else}CORRECT{endif}{\n}
+{-- now we do the test where it is indeed not null, and call it }
+{if fn:and[fn:notNull[outerBean.innerBean.true], outerBean.innerBean.true]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{if fn:notNull[outerBean.innerBean.notNull]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{if outerBean.innerBean.true}CORRECT{else}FATAL ERROR{endif}{\n}
+{if !outerBean.innerBean.false}CORRECT{else}FATAL ERROR{endif}{\n}
+{if fn:and[fn:notNull[outerBean.innerBean.notNull], !outerBean.innerBean.false]}CORRECT{else}FATAL ERROR{endif}{\n}

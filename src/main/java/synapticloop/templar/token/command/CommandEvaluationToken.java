@@ -50,6 +50,13 @@ public class CommandEvaluationToken extends CommandLineToken {
 
 	@Override
 	public Object evaluate(TemplarContext templarContext) throws RenderException {
-		return(ObjectUtils.evaluateObjectToDefault(evaluateCommand, templarContext));
+		// if the evaluated command is quoted, then just return the de-quoted stuff
+		if(ObjectUtils.isQuoted(evaluateCommand)) {
+			return(ObjectUtils.deQuote(evaluateCommand));
+		}
+
+		return(ObjectUtils.evaluateObject(evaluateCommand, templarContext));
 	}
+
+	
 }

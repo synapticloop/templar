@@ -17,16 +17,19 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
+import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.token.command.CommandLineToken;
+import synapticloop.templar.utils.CommandLineUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class EvaluationToken extends CommandToken {
 	private static final long serialVersionUID = -1330734609056279943L;
+	private List<CommandLineToken> commandLineTokens;
 
 	/**
 	 * Build an evaluation token which should be in the form of {to.be.evaluated}
@@ -61,21 +64,28 @@ public class EvaluationToken extends CommandToken {
 			throw new ParseException("Could not find end token '}' for evaluation.", this);
 		}
 		this.commandLine = stringBuilder.toString();
+		this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
 	}
 
 	public String render(TemplarContext templarContext) throws RenderException {
 		StringBuilder stringBuilder = new StringBuilder();
-		Object object = null;
-		try {
-			if(commandLine.startsWith("fn:")) {
-				object = ObjectUtils.parseAndExecuteCommandLine(templarContext, commandLine);
-			} else {
-				object = ObjectUtils.evaluateObject(commandLine, templarContext);
+		if(null != commandLineTokens) {
+			for (CommandLineToken commandLineToken : commandLineTokens) {
+				stringBuilder.append(commandLineToken.evaluate(templarContext));
 			}
-			stringBuilder.append(object);
-		} catch(RenderException rex){
-			throw new RenderException("Token '" + this.toString() + "' said: '" + rex.getMessage() + "'.", rex);
 		}
+//		StringBuilder stringBuilder = new StringBuilder();
+		Object object = null;
+//		try {
+//			if(commandLine.startsWith("fn:")) {
+//				object = ObjectUtils.parseAndExecuteCommandLine(templarContext, commandLine);
+//			} else {
+//				object = ObjectUtils.evaluateObject(commandLine, templarContext);
+//			}
+//			stringBuilder.append(object);
+//		} catch(RenderException rex){
+//			throw new RenderException("Token '" + this.toString() + "' said: '" + rex.getMessage() + "'.", rex);
+//		}
 
 
 		return (stringBuilder.toString());

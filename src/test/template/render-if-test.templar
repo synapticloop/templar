@@ -28,7 +28,7 @@ Nested If Test{nl}
 	{if !bean2.isOfAge}this bean2 is NOT of age{endif}{nl}
 {endif}
 
-{if fn:>[3, 1]}
+{if fn:>['3', '1']}
 	3 is greater than 1{nl}
 {endif}
 

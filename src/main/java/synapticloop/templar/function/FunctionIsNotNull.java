@@ -26,6 +26,7 @@ public class FunctionIsNotNull extends Function {
 		super(1);
 	}
 
+	@Override
 	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			if(null != args[0]) {
