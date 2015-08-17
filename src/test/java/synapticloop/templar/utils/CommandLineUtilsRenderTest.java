@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -14,12 +13,6 @@ import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 
 public class CommandLineUtilsRenderTest {
-	private CommandLineUtils commandLineUtils;
-
-	@Before
-	public void setup() {
-		commandLineUtils = new CommandLineUtils();
-	}
 
 	@Test
 	public void testNotSingleQuote() throws ParseException, RenderException, ParseException {

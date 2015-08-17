@@ -18,11 +18,10 @@ package synapticloop.templar.function.math;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.function.Function;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionPower extends Function {
+public class FunctionPower extends BaseMathFunction {
 
 	public FunctionPower() {
 		super(2);
@@ -48,13 +47,5 @@ public class FunctionPower extends Function {
 		}
 
 		throw new FunctionException("The function '^' takes exactly two arguments, both of which must be coercible to a Long.");
-	}
-
-	private Number getNumber(String numberString) {
-		if(numberString.contains(".")) {
-			return(new Double(numberString));
-		} else {
-			return(new Long(numberString));
-		}
 	}
 }

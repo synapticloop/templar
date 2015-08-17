@@ -43,7 +43,7 @@ public class SetToken extends CommandToken {
 		// look for the next token which should be either if, list, otherwise it
 		// is an evaluation token
 
-		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
+		boolean foundEndToken = ParserHelper.didFindEndToken(stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
 			throw new ParseException("Could not find end token '}' for set command.", this);
@@ -83,6 +83,7 @@ public class SetToken extends CommandToken {
 	}
 
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<SET@");

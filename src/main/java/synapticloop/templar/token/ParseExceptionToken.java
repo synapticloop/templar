@@ -33,6 +33,7 @@ public class ParseExceptionToken extends Token {
 		super(value, stringTokenizer, tokeniser);
 		}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<PARSE_EXCEPTION");

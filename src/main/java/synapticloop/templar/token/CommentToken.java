@@ -31,7 +31,7 @@ public class CommentToken extends CommandToken {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
-		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
+		boolean foundEndToken = ParserHelper.didFindEndToken(stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
 			throw new ParseException("Unable to find the closing comment token '}'", this);

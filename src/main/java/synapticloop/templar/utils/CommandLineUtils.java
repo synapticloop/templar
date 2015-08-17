@@ -30,6 +30,8 @@ import synapticloop.templar.token.command.CommandNotToken;
 import synapticloop.templar.token.command.CommandSingleQuoteToken;
 
 public class CommandLineUtils {
+	private CommandLineUtils() {}
+
 	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseException {
 		List<CommandLineToken> commandTokens= new ArrayList<CommandLineToken>();
 		StringTokenizer stringTokenizer = new StringTokenizer(commandLine, "!:\"'[]", true);

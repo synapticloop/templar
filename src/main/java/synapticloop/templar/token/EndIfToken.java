@@ -31,11 +31,13 @@ public class EndIfToken extends Token {
 		super(value, stringTokenizer, tokeniser);
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) throws RenderException {
 		// do nothing
 		return("");
 	}
 
+	@Override
 	public String toString() {
 		return(super.toString("/IF"));
 	}

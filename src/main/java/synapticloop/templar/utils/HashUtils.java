@@ -21,11 +21,13 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import synapticloop.templar.exception.ParseException;
+
 
 public class HashUtils {
 	private HashUtils() {}
 
-	public static String md5Hash(String message) {
+	public static String md5Hash(String message) throws ParseException {
 		String digest = null; 
 		try { 
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5"); 
@@ -36,10 +38,10 @@ public class HashUtils {
 				stringBuilder.append(String.format("%02x", b&0xff));
 			} 
 			digest = stringBuilder.toString(); 
-		} catch (UnsupportedEncodingException ex) {
-			// do nothing
-		} catch (NoSuchAlgorithmException ex) {
-			// do nothing
+		} catch (UnsupportedEncodingException ueex) {
+			throw new ParseException("Unsupported encoding exception", ueex);
+		} catch (NoSuchAlgorithmException nsaex) {
+			throw new ParseException("No such algorithm exception", nsaex);
 		} 
 		return digest; 
 	}

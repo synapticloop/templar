@@ -17,7 +17,7 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -48,7 +48,7 @@ public class ImportTokenTest {
 	public void testImportFromFileSystem() throws ParseException, RenderException {
 		File file = new File("src/test/template/import-test.templar");
 		Parser parser = new Parser(file);
-		assertEquals("<IMPORT@1:2 (src/test/template/import/hello-world.templar)>Hello world!!\n</IMPORT@1:2 (src/test/template/import/hello-world.templar)>\n", parser.toString());
+		assertEquals("<IMPORT@1:2 (src/test/template/import/hello-world.templar)>Hello world!!\n</IMPORT@1:2>\n", parser.toString());
 	}
 
 	@Test

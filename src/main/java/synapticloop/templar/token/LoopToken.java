@@ -65,6 +65,7 @@ public class LoopToken extends CommandToken {
 		this.commandLine = stringBuilder.toString().trim();
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	public String render(TemplarContext templarContext) throws RenderException {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -117,6 +118,7 @@ public class LoopToken extends CommandToken {
 		return (stringBuilder.toString());
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<LOOP");

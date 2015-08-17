@@ -69,7 +69,6 @@ public class CommandNotToken extends CommandLineToken {
 			return(!((Boolean)evaluate).booleanValue());
 		} else {
 			// we couldn't invoke or lookup
-//			return(true);
 			throw new RenderException("Can only evaluate the not '!' of boolean evaluation, type was: '" + evaluate.getClass().getName() + "', value was: '" + evaluate.toString() + "', command token: '" + commandToken + "'.");
 		}
 	}

@@ -24,15 +24,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import synapticloop.templar.token.Token;
 
 public class ParserCache {
-	private static Map<String, List<Token>> parser_cache = new ConcurrentHashMap<String, List<Token>>();
+	private static Map<String, List<Token>> cachedTokens = new ConcurrentHashMap<String, List<Token>>();
 
 	private ParserCache() {}
 
 	public static boolean getIsInCache(String md5Hash) {
-		return(parser_cache.containsKey(md5Hash));
+		return(cachedTokens.containsKey(md5Hash));
 	}
 
 	public static List<Token> getCached(String md5Hash) {
-		return(parser_cache.get(md5Hash));
+		return(cachedTokens.get(md5Hash));
 	}
 }

@@ -39,10 +39,12 @@ public class TabToken extends Token {
 		}
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		return("\t");
 	}
 
+	@Override
 	public String toString() {
 		return(super.toString("TAB"));
 	}

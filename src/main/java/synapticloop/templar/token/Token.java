@@ -69,6 +69,7 @@ public abstract class Token extends BasePositionToken {
 		this.childTokens.addAll(tokens);
 	}
 
+	@Override
 	public String toString() {
 		return(value);
 	}

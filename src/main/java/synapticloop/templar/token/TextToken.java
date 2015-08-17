@@ -30,6 +30,7 @@ public class TextToken extends Token {
 		super(value, stringTokenizer, tokeniser);
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		if("\n".equals(value) && templarContext.getTemplarConfiguration().getExplicitNewLines()) {
 			return("");

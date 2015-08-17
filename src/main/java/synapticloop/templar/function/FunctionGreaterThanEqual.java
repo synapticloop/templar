@@ -22,6 +22,7 @@ import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionGreaterThanEqual extends FunctionNumericComparison {
 
+	@Override
 	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
 		super.evaluateNumeric(args, templarContext);
 

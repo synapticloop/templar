@@ -45,7 +45,7 @@ public class EvaluationToken extends CommandToken {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(value);
 
-		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
+		boolean foundEndToken = ParserHelper.didFindEndToken(stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
 			throw new ParseException("Could not find end token '}' for evaluation.", this);
@@ -55,6 +55,7 @@ public class EvaluationToken extends CommandToken {
 	}
 
 
+	@Override
 	public String render(TemplarContext templarContext) throws RenderException {
 		StringBuilder stringBuilder = new StringBuilder();
 		if(null != commandLineTokens) {

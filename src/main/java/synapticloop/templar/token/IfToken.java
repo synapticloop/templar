@@ -45,71 +45,72 @@ public class IfToken extends CommandToken {
 	 */
 	public IfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
+
 		StringBuilder stringBuilder = new StringBuilder();
 
-		if(stringTokenizer.hasMoreTokens()) {
-			while(stringTokenizer.hasMoreTokens()) {
-				String token = stringTokenizer.nextToken();
+		if(!stringTokenizer.hasMoreTokens()) {
+			throw new ParseException("Expecting if conditional statement but no more tokens found.", this);
+		}
 
-				tokeniser.getTokeniserInfo().incrementCharacter(token.length());
+		while(stringTokenizer.hasMoreTokens()) {
+			String token = stringTokenizer.nextToken();
 
-				if("\n".equals(token)) {
-					tokeniser.getTokeniserInfo().incrementLine();
-				} else if("}".equals(token)) {
-					// now we need to go through and tokenise the inner tokeniser...
-					this.commandLine = stringBuilder.toString().trim();
-					try {
-						this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
-					} catch (ParseException pcex) {
-						throw new ParseException("Could not parse command line '" + commandLine + "', message was: " + pcex.getMessage(), pcex);
+			tokeniser.getTokeniserInfo().incrementCharacter(token.length());
+
+			if("\n".equals(token)) {
+				tokeniser.getTokeniserInfo().incrementLine();
+			} else if("}".equals(token)) {
+				// now we need to go through and tokenise the inner tokeniser...
+				this.commandLine = stringBuilder.toString().trim();
+				try {
+					this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
+				} catch (ParseException pcex) {
+					throw new ParseException("Could not parse command line '" + commandLine + "', message was: " + pcex.getMessage(), pcex);
+				}
+
+				this.addChildTokens(tokeniser.tokenise(stringTokenizer));
+
+				// here the next token should be a '}'
+				if(stringTokenizer.hasMoreTokens()) {
+					String endToken = stringTokenizer.nextToken();
+					tokeniser.getTokeniserInfo().incrementCharacter(token.length());
+
+					if(!"}".equals(endToken)) {
+						throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
 					}
+				} else {
+					throw new ParseException("Expecting '}' but no more tokens found at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
+				}
 
-					this.addChildTokens(tokeniser.tokenise(stringTokenizer));
-
+				// check to see what the ending token is
+				Token endingToken = childTokens.get(childTokens.size() -1);
+				if(endingToken instanceof ElseToken) {
+					// need to parse again
+					elseCondition = tokeniser.tokenise(stringTokenizer);
 					// here the next token should be a '}'
 					if(stringTokenizer.hasMoreTokens()) {
 						String endToken = stringTokenizer.nextToken();
-						tokeniser.getTokeniserInfo().incrementCharacter(token.length());
-
 						if(!"}".equals(endToken)) {
-							throw new ParseException("Expecting '}' but found '" + endToken + "'at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
+							throw new ParseException("Expecting '}' but found '" + endToken + "'", this);
 						}
 					} else {
-						throw new ParseException("Expecting '}' but no more tokens found at line: " + tokeniser.getTokeniserInfo().getLineNumber() + ", character: " + tokeniser.getTokeniserInfo().getCharacterNumber(), this);
+						throw new ParseException("Expecting '}' but no more tokens found.", this);
 					}
-
-					// check to see what the ending token is
-					Token endingToken = childTokens.get(childTokens.size() -1);
-					if(endingToken instanceof ElseToken) {
-						// need to parse again
-						elseCondition = tokeniser.tokenise(stringTokenizer);
-						// here the next token should be a '}'
-						if(stringTokenizer.hasMoreTokens()) {
-							String endToken = stringTokenizer.nextToken();
-							if(!"}".equals(endToken)) {
-								throw new ParseException("Expecting '}' but found '" + endToken + "'", this);
-							}
-						} else {
-							throw new ParseException("Expecting '}' but no more tokens found.", this);
-						}
-					} else if(endingToken instanceof EndIfToken) {
-						return;
-					} else {
-						throw new ParseException("Expecting '{endif}' or '{else}' but found '" + endingToken.value + "' instead.", this);
-					}
+				} else if(endingToken instanceof EndIfToken) {
 					return;
 				} else {
-					stringBuilder.append(token);
+					throw new ParseException("Expecting '{endif}' or '{else}' but found '" + endingToken.value + "' instead.", this);
 				}
+				return;
+			} else {
+				stringBuilder.append(token);
 			}
-		} else {
-			// we are in an if token - but we have no more tokens :(
-			// something
 		}
 
 		throw new ParseException("Expecting if conditional statement but no more tokens found.", this);
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) throws RenderException {
 		StringBuilder stringBuilder = new StringBuilder();
 		// what we need to to is to grab the key out of the context...
@@ -145,6 +146,7 @@ public class IfToken extends CommandToken {
 		return (stringBuilder.toString());
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<IF");

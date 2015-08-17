@@ -18,11 +18,10 @@ package synapticloop.templar.function.math;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.function.Function;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionModulus extends Function {
+public class FunctionModulus extends BaseMathFunction {
 
 	public FunctionModulus() {
 		super(2);
@@ -47,15 +46,6 @@ public class FunctionModulus extends Function {
 			}
 		}
 
-		// TODO - should really be 
 		throw new FunctionException("The function '%' takes exactly two arguments, both of which must be coercible to a Number.");
-	}
-
-	private Number getNumber(String numberString) {
-		if(numberString.contains(".")) {
-			return(new Double(numberString));
-		} else {
-			return(new Long(numberString));
-		}
 	}
 }

@@ -143,14 +143,16 @@ public class ImportToken extends Token {
 		tokeniser.getTokeniserInfo().restore(lineNumber, characterNumber, lines);
 
 		// finally add the end import token
-		tokens.add(new EndImportToken(importLocation, stringTokenizer, tokeniser));
+		tokens.add(new EndImportToken(stringTokenizer, tokeniser));
 		return(tokens);
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		return("");
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<IMPORT");

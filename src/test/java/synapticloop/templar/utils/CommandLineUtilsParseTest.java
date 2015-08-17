@@ -4,20 +4,12 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.token.command.CommandLineToken;
 
 public class CommandLineUtilsParseTest {
-	private CommandLineUtils commandLineUtils;
-
-	@Before
-	public void setup() {
-		commandLineUtils = new CommandLineUtils();
-	}
-
 	@Test(expected=ParseException.class)
 	public void testNotSingleQuote() throws ParseException {
 		CommandLineUtils.parseCommandLine("!\"hello\"");

@@ -2,10 +2,11 @@ package synapticloop.templar.utils;
 
 import java.util.StringTokenizer;
 
-import synapticloop.templar.token.Token;
-
 public class ParserHelper {
-	public static boolean didFindEndToken(Token token, StringTokenizer stringTokenizer, StringBuilder stringBuilder) {
+
+	private ParserHelper() {}
+
+	public static boolean didFindEndToken(StringTokenizer stringTokenizer, StringBuilder stringBuilder) {
 		while(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
 			if("}".equals(nextToken)) {

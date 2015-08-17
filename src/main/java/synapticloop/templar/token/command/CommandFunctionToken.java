@@ -109,24 +109,19 @@ public class CommandFunctionToken extends CommandLineToken {
 			}
 
 			if(i == 0) {
-				if("or".equals(evaluateCommand)) {
-					// if we have an or function, if the first is true, ignore the rest...
-					if(args[0] instanceof Boolean) {
-						if(((Boolean)args[i]).booleanValue()) {
-							return(true);
-						}
-					}
-				} else if("and".equals(evaluateCommand)) {
-					// if we have an and function, if the first is false, ignore the rest...
-					if(args[0] instanceof Boolean) {
-						if(!((Boolean)args[i]).booleanValue()) {
-							return(false);
-						}
+				if(args[0] instanceof Boolean) {
+					if("or".equals(evaluateCommand) &&  ((Boolean)args[i]).booleanValue()) {
+						// if we have an or function, if the first is true, ignore the rest...
+						return(true);
+					} else if("and".equals(evaluateCommand) &&  !((Boolean)args[i]).booleanValue()) {
+						// if we have an and function, if the first is false, ignore the rest...
+						return(false);
 					}
 				}
 			}
 			i++;
 		}
+
 		try {
 			return(templarContext.invokeFunction(evaluateCommand, args, templarContext));
 		} catch (FunctionException fex) {

@@ -35,6 +35,7 @@ public abstract class CommandToken extends Token {
 		this.stringTokenizer = stringTokenizer;
 	}
 
+	@Override
 	public abstract String render(TemplarContext templarContext) throws RenderException;
 
 	public boolean isCorrectAsStatement(String commandLine) {

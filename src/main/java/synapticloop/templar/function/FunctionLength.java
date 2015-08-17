@@ -33,6 +33,7 @@ public class FunctionLength extends Function {
 		super(1);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(!verifyArgumentLength(args)) {

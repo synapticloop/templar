@@ -31,6 +31,7 @@ public class DumpContextToken extends CommandToken {
 		super(value, stringTokenizer, tokeniser);
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) throws RenderException {
 		if(null == templarContext) {
 			templarContext = new TemplarContext();
@@ -45,6 +46,7 @@ public class DumpContextToken extends CommandToken {
 		return(stringBuilder.toString());
 	}
 
+	@Override
 	public String toString() {
 		return(super.toString("DUMPCONTEXT"));
 	}

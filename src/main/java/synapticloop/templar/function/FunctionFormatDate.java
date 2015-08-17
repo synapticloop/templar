@@ -27,6 +27,7 @@ import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionFormatDate extends Function {
 
+	@Override
 	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
 		boolean hasError = false;
 		Date date = null;

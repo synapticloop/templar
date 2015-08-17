@@ -27,28 +27,17 @@ import synapticloop.templar.utils.Tokeniser;
 public class EndImportToken extends Token {
 	private static final long serialVersionUID = 3292020620692967485L;
 
-	private String importLocation = null;
-
-	public EndImportToken(String importLocation, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
+	public EndImportToken(StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super("", stringTokenizer, tokeniser);
-		this.importLocation = importLocation;
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		return("");
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("</IMPORT");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		stringBuilder.append(importLocation);
-		stringBuilder.append(")>");
-
-		return(stringBuilder.toString());
+		return(super.toString("/IMPORT"));
 	}
 }
