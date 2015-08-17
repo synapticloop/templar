@@ -24,6 +24,7 @@ import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.utils.CommandLineUtils;
+import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -44,21 +45,7 @@ public class EvaluationToken extends CommandToken {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(value);
 
-		boolean foundEndToken = false;
-
-		if(stringTokenizer.hasMoreTokens()) {
-			while(stringTokenizer.hasMoreTokens()) {
-				String token = stringTokenizer.nextToken();
-				if("}".equals(token)) {
-					foundEndToken = true;
-					break;
-				} else {
-					stringBuilder.append(token);
-				}
-			}
-		} else {
-			throw new ParseException("Could not find any more tokens for evaluation.", this);
-		}
+		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
 			throw new ParseException("Could not find end token '}' for evaluation.", this);
@@ -67,6 +54,7 @@ public class EvaluationToken extends CommandToken {
 		this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
 	}
 
+
 	public String render(TemplarContext templarContext) throws RenderException {
 		StringBuilder stringBuilder = new StringBuilder();
 		if(null != commandLineTokens) {
@@ -74,33 +62,11 @@ public class EvaluationToken extends CommandToken {
 				stringBuilder.append(commandLineToken.evaluate(templarContext));
 			}
 		}
-//		StringBuilder stringBuilder = new StringBuilder();
-		Object object = null;
-//		try {
-//			if(commandLine.startsWith("fn:")) {
-//				object = ObjectUtils.parseAndExecuteCommandLine(templarContext, commandLine);
-//			} else {
-//				object = ObjectUtils.evaluateObject(commandLine, templarContext);
-//			}
-//			stringBuilder.append(object);
-//		} catch(RenderException rex){
-//			throw new RenderException("Token '" + this.toString() + "' said: '" + rex.getMessage() + "'.", rex);
-//		}
-
-
 		return (stringBuilder.toString());
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<EVAL");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		stringBuilder.append(commandLine);
-		stringBuilder.append(")/>");
-		return (stringBuilder.toString());
+		return(toString("EVAL", commandLine));
 	}
 }

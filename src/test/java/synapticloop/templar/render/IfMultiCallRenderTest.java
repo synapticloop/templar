@@ -24,7 +24,6 @@ public class IfMultiCallRenderTest {
 		templarContext.add("outerBean", new OuterBean());
 
 		String render = parser.render(templarContext);
-		System.out.println(render);
 		TestUtils.checkRenderContents(render);
 	}
 }

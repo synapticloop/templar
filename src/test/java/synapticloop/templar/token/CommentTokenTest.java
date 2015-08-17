@@ -17,7 +17,7 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class CommentTokenTest {
 	@Test
 	public void testComment() throws ParseException, RenderException {
 		Parser parser = new Parser("{-- comment goes here}");
-		assertEquals("<COMMENT@1:2 ( comment goes here)>", parser.toString());
+		assertEquals("<COMMENT@1:2 ( comment goes here)/>", parser.toString());
 		assertEquals("", parser.render());
 	}
 }

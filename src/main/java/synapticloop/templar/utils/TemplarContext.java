@@ -40,6 +40,12 @@ import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.FunctionOr;
 import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
+import synapticloop.templar.function.math.FunctionAdd;
+import synapticloop.templar.function.math.FunctionDivide;
+import synapticloop.templar.function.math.FunctionModulus;
+import synapticloop.templar.function.math.FunctionMulitply;
+import synapticloop.templar.function.math.FunctionPower;
+import synapticloop.templar.function.math.FunctionSubtract;
 
 public class TemplarContext {
 	private Map<String, Object> context = new HashMap<String, Object>();
@@ -47,10 +53,13 @@ public class TemplarContext {
 
 	private static Map<String, Function> functionMap = new HashMap<String, Function>();
 	static {
+		// null operators
 		functionMap.put("null", new FunctionIsNull());
 		functionMap.put("notNull", new FunctionIsNotNull());
 		functionMap.put("!Null", new FunctionIsNotNull());
 		functionMap.put("!null", new FunctionIsNotNull());
+		
+		// boolean function operators
 		functionMap.put("=", new FunctionEqual());
 		functionMap.put("equal", new FunctionEqual());
 		functionMap.put("<>", new FunctionNotEqual());
@@ -65,15 +74,31 @@ public class TemplarContext {
 		functionMap.put("lt", new FunctionLessThan());
 		functionMap.put("<=", new FunctionLessThanEqual());
 		functionMap.put("lte", new FunctionLessThanEqual());
+
+		// size operators
 		functionMap.put("length", new FunctionLength());
 		functionMap.put("size", new FunctionSize());
+		
+		// date operators
 		functionMap.put("fmtDate", new FunctionFormatDate());
+
+		// boolean test operators
 		functionMap.put("false", new FunctionFalse());
 		functionMap.put("true", new FunctionTrue());
+
+		// logical operators
 		functionMap.put("and", new FunctionAnd());
 		functionMap.put("&", new FunctionAnd());
 		functionMap.put("or", new FunctionOr());
 		functionMap.put("|", new FunctionOr());
+
+		// mathematical operators
+		functionMap.put("+", new FunctionAdd());
+		functionMap.put("-", new FunctionSubtract());
+		functionMap.put("*", new FunctionMulitply());
+		functionMap.put("/", new FunctionDivide());
+		functionMap.put("^", new FunctionPower());
+		functionMap.put("%", new FunctionModulus());
 	}
 
 	public TemplarContext() {

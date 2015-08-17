@@ -1,9 +1,5 @@
 package synapticloop.templar.function;
 
-import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
-import synapticloop.templar.utils.TemplarContext;
-
 /*
  * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
@@ -21,6 +17,10 @@ import synapticloop.templar.utils.TemplarContext;
  * under the Licence.
  */
 
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.utils.TemplarContext;
+
 public class FunctionAnd extends Function {
 	public FunctionAnd() {
 		super(2);
@@ -31,7 +31,7 @@ public class FunctionAnd extends Function {
 		if(verifyArgumentLength(args)) {
 			Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
 			// no need to evaluate any further
-			if(argZero.booleanValue() != true) {
+			if(!argZero.booleanValue()) {
 				return(false);
 			}
 

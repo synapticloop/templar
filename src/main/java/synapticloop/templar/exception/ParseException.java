@@ -61,9 +61,6 @@ public class ParseException extends Exception {
 	public String getMessage() {
 		StringBuilder stringBuilder = new StringBuilder();
 		if(null != exceptionToken) {
-//			stringBuilder.append("[filePath:");
-//			stringBuilder.append(exceptionToken.getFilePath());
-//			stringBuilder.append("@Line: ");
 			stringBuilder.append("[Line: ");
 			stringBuilder.append(exceptionToken.getLineNumber());
 			stringBuilder.append(", Character: ");

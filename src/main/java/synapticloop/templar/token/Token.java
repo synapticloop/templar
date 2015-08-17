@@ -73,6 +73,21 @@ public abstract class Token extends BasePositionToken {
 		return(value);
 	}
 
+	public String toString(String name, String commandLine) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("<");
+		stringBuilder.append(name);
+		stringBuilder.append("@");
+		stringBuilder.append(lineNumber);
+		stringBuilder.append(":");
+		stringBuilder.append(characterNumber);
+		stringBuilder.append(" (");
+		stringBuilder.append(commandLine);
+		stringBuilder.append(")/>");
+		return (stringBuilder.toString());
+		
+	}
+
 	public String toString(String name) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("<");

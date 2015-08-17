@@ -22,9 +22,9 @@ import synapticloop.templar.function.Function;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionAdd extends Function {
+public class FunctionModulus extends Function {
 
-	public FunctionAdd() {
+	public FunctionModulus() {
 		super(2);
 	}
 
@@ -41,14 +41,14 @@ public class FunctionAdd extends Function {
 
 			// if either of the numbers are doubles, return a double
 			if(argZeroNumber instanceof Double || argOneNumber instanceof Double) {
-				return(argZeroNumber.doubleValue() + argOneNumber.doubleValue());
+				return(argZeroNumber.doubleValue() % argOneNumber.doubleValue());
 			} else {
-				return(argZeroNumber.longValue() + argOneNumber.longValue());
+				return(argZeroNumber.longValue() % argOneNumber.longValue());
 			}
 		}
 
 		// TODO - should really be 
-		throw new FunctionException("The function '+' takes exactly two arguments, both of which must be coercible to a Number.");
+		throw new FunctionException("The function '%' takes exactly two arguments, both of which must be coercible to a Number.");
 	}
 
 	private Number getNumber(String numberString) {

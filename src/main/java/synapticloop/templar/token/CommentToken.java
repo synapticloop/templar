@@ -20,6 +20,7 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -30,20 +31,7 @@ public class CommentToken extends CommandToken {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
-		boolean foundEndToken = false;
-		if(stringTokenizer.hasMoreTokens()) {
-			while(stringTokenizer.hasMoreTokens()) {
-				String token = stringTokenizer.nextToken();
-				if("}".equals(token)) {
-					foundEndToken = true;
-					break;
-				} else {
-					stringBuilder.append(token);
-				}
-			}
-		} else {
-			throw new ParseException("Unable to find the closing comment token '}'", this);
-		}
+		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
 			throw new ParseException("Unable to find the closing comment token '}'", this);
@@ -52,21 +40,14 @@ public class CommentToken extends CommandToken {
 		this.commandLine = stringBuilder.toString();
 	}
 
+	@Override
 	public String render(TemplarContext templarContext) {
 		return("");
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<COMMENT");
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		stringBuilder.append(commandLine);
-		stringBuilder.append(")>");
-		return (stringBuilder.toString());
+		return(toString("COMMENT", commandLine));
 	}
 
 }

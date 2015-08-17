@@ -25,6 +25,7 @@ import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.utils.CommandLineUtils;
+import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -42,24 +43,10 @@ public class SetToken extends CommandToken {
 		// look for the next token which should be either if, list, otherwise it
 		// is an evaluation token
 
-		boolean foundEndToken = false;
-
-		if(stringTokenizer.hasMoreTokens()) {
-			while(stringTokenizer.hasMoreTokens()) {
-				String token = stringTokenizer.nextToken();
-				if("}".equals(token)) {
-					foundEndToken = true;
-					break;
-				} else {
-					stringBuilder.append(token);
-				}
-			}
-		} else {
-			throw new ParseException("Could not find any more tokens for evaluation.", this);
-		}
+		boolean foundEndToken = ParserHelper.didFindEndToken(this, stringTokenizer, stringBuilder);
 
 		if(!foundEndToken) {
-			throw new ParseException("Could not find end token '}' for evaluation.", this);
+			throw new ParseException("Could not find end token '}' for set command.", this);
 		}
 
 		this.commandLine = stringBuilder.toString();
