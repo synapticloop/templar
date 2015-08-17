@@ -20,6 +20,7 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -29,14 +30,7 @@ public class TabToken extends Token {
 
 	public TabToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
-		if(stringTokenizer.hasMoreTokens()) {
-			String nextToken = stringTokenizer.nextToken();
-			if(!"}".equals(nextToken)) {
-				throw new ParseException("Could not find end token marker '}' for the tab token, found '" + nextToken + "'.", this);
-			}
-		} else {
-			throw new ParseException("Could not find end token marker '}' for the tab token.", this);
-		}
+		ParserHelper.parseToEndToken(this, stringTokenizer, "tab");
 	}
 
 	@Override

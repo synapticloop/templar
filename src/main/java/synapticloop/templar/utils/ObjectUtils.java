@@ -61,15 +61,7 @@ public class ObjectUtils {
 				Method invokeMethod = findMethod(object, stringTokenizer.nextToken());
 				if(null != invokeMethod) {
 					foundMethod = true;
-					try {
-						object = invokeMethod.invoke(object, new Object[] {});
-					} catch (IllegalArgumentException iaex) {
-						throw new RenderException(iaex.getMessage(), iaex);
-					} catch (IllegalAccessException iaex) {
-						throw new RenderException(iaex.getMessage(), iaex);
-					} catch (InvocationTargetException itex) {
-						throw new RenderException(itex.getMessage(), itex);
-					}
+					object = invokeObjectMethod(object, invokeMethod);
 				} else {
 					foundMethod = false;
 				}
@@ -80,11 +72,20 @@ public class ObjectUtils {
 			}
 		}
 
-//		if(null == object) {
-//			throw new RenderException("Could not parse command line '" + commandLine + "', object is null.");
-//		}
-
 		return(object);
+	}
+
+
+	private static Object invokeObjectMethod(Object object, Method invokeMethod) throws RenderException {
+		try {
+			return(invokeMethod.invoke(object, new Object[] {}));
+		} catch (IllegalArgumentException iaex) {
+			throw new RenderException(iaex.getMessage(), iaex);
+		} catch (IllegalAccessException iaex) {
+			throw new RenderException(iaex.getMessage(), iaex);
+		} catch (InvocationTargetException itex) {
+			throw new RenderException(itex.getMessage(), itex);
+		}
 	}
 
 	public static Object evaluateObjectToDefault(Object object, TemplarContext templarContext) {

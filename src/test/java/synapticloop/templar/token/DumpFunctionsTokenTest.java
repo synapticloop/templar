@@ -1,6 +1,8 @@
 package synapticloop.templar.token;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +14,7 @@ import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 
-public class DumpContextTokenTest {
+public class DumpFunctionsTokenTest {
 	DumpContextToken dumpContextToken;
 
 	@Before

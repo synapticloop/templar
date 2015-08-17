@@ -21,9 +21,9 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionMulitply extends BaseMathFunction {
+public class FunctionMultiply extends BaseMathFunction {
 
-	public FunctionMulitply() {
+	public FunctionMultiply() {
 		super(2);
 	}
 

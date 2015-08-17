@@ -2,6 +2,9 @@ package synapticloop.templar.utils;
 
 import java.util.StringTokenizer;
 
+import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.token.BasePositionToken;
+
 public class ParserHelper {
 
 	private ParserHelper() {}
@@ -16,6 +19,17 @@ public class ParserHelper {
 			}
 		}
 		return false;
+	}
+
+	public static void parseToEndToken(BasePositionToken basePositionToken, StringTokenizer stringTokenizer, String tokenName) throws ParseException {
+		if(stringTokenizer.hasMoreTokens()) {
+			String nextToken = stringTokenizer.nextToken();
+			if(!"}".equals(nextToken)) {
+				throw new ParseException("Could not find end token marker '}' for the " + tokenName + " token, found '" + nextToken + "'.", basePositionToken);
+			}
+		} else {
+			throw new ParseException("Could not find end token marker '}' for the tab token.", basePositionToken);
+		}
 	}
 
 }

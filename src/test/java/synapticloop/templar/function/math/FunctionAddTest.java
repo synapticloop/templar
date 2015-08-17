@@ -18,6 +18,34 @@ public class FunctionAddTest {
 	}
 
 	@Test
+	public void foundInTemplarContext() throws FunctionException {
+		templarContext.add("argone", 123);
+		templarContext.add("argtwo", 456);
+		Object[] test = { "argone", "argtwo" };
+		assertEquals(579L, functionAdd.evaluate(test, templarContext));
+	}
+
+	@Test(expected=FunctionException.class)
+	public void notFoundInTemplarContext() throws FunctionException {
+		templarContext.add("argone", 123);
+		templarContext.add("argtwo", 456);
+		Object[] test = { "argone", "notfoundargument" };
+		functionAdd.evaluate(test, templarContext);
+	}
+
+	@Test(expected=FunctionException.class)
+	public void wrongNumberOfArguments() throws FunctionException {
+		Object[] test = { "'123'", "'456'", "sdkfjhkdsjfh" };
+		functionAdd.evaluate(test, templarContext);
+	}
+
+	@Test(expected=FunctionException.class)
+	public void notCoercibleArguments() throws FunctionException {
+		Object[] test = { "'one'", "'two'" };
+		functionAdd.evaluate(test, templarContext);
+	}
+
+	@Test
 	public void testAddLongLong() throws FunctionException {
 		Object[] test = {"'123'", "'456'"};
 		assertEquals(579L, functionAdd.evaluate(test, templarContext));

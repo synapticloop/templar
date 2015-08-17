@@ -43,7 +43,7 @@ import synapticloop.templar.function.FunctionTrue;
 import synapticloop.templar.function.math.FunctionAdd;
 import synapticloop.templar.function.math.FunctionDivide;
 import synapticloop.templar.function.math.FunctionModulus;
-import synapticloop.templar.function.math.FunctionMulitply;
+import synapticloop.templar.function.math.FunctionMultiply;
 import synapticloop.templar.function.math.FunctionPower;
 import synapticloop.templar.function.math.FunctionSubtract;
 
@@ -95,7 +95,7 @@ public class TemplarContext {
 		// mathematical operators
 		functionMap.put("+", new FunctionAdd());
 		functionMap.put("-", new FunctionSubtract());
-		functionMap.put("*", new FunctionMulitply());
+		functionMap.put("*", new FunctionMultiply());
 		functionMap.put("/", new FunctionDivide());
 		functionMap.put("^", new FunctionPower());
 		functionMap.put("%", new FunctionModulus());
@@ -125,18 +125,42 @@ public class TemplarContext {
 		}
 	}
 
+	/**
+	 * Add an object to the templar context.  If there is an existing value for the key, it will be over-ridden.
+	 * 
+	 * @param key the key to add
+	 * @param value the value to store at the key location
+	 */
 	public void add(String key, Object value) {
 		context.put(key, value);
 	}
 
+
+	/**
+	 * Get a value from the context with the specified key.  If the key does not exist, null will be returned
+	 * 
+	 * @param key the key to lookup
+	 * @return the value associated with the key or null if it does not exist
+	 */
 	public Object get(String key) {
 		return(context.get(key));
 	}
 
+	/**
+	 * Test whether the context has a specific key
+	 * 
+	 * @param key the key to test
+	 * @return whether there is an object with the specified key
+	 */
 	public boolean containsKey(String key) {
 		return(context.containsKey(key));
 	}
 
+	/**
+	 * Get the complete templar context - with all of the key:value pairs in it
+	 * 
+	 * @return the templar context
+	 */
 	protected Map<String, Object> getContext() {
 		return(context);
 	}
@@ -149,6 +173,12 @@ public class TemplarContext {
 		return templarConfiguration;
 	}
 
+	/**
+	 * Return whether the templar context has a particular function registered to it.
+	 * 
+	 * @param name the function name to test
+	 * @return whether the templar context has that function registered to it.
+	 */
 	public boolean hasFunction(String name) {
 		return(functionMap.containsKey(name));
 	}
@@ -171,6 +201,11 @@ public class TemplarContext {
 		}
 	}
 
+	/**
+	 * Get the map of all registered functions keyed on function name
+	 * 
+	 * @return the map of all registered functions
+	 */
 	public Map<String, Function> getFunctionMap() {
 		return(functionMap);
 	}

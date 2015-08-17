@@ -4,15 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
-import org.mockito.Mock;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.function.FunctionGreaterThan;
-
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.*;
 
 public class TemplarContextTest {
 	private TemplarContext templarContext;
@@ -53,6 +47,42 @@ public class TemplarContextTest {
 	@Test(expected = FunctionException.class)
 	public void testFunctionNullArgs() throws FunctionException {
 		templarContext.invokeFunction(">", new Object[] {null, "string"}, null);
+	}
+
+	@Test
+	public void testCloneContext() {
+		templarContext.add("hello", "baby");
+		TemplarContext duplicate = new TemplarContext(templarContext);
+		assertEquals("baby", duplicate.get("hello"));
+
+		duplicate.add("hello", "there");
+		assertEquals("there", duplicate.get("hello"));
+		assertEquals("baby", templarContext.get("hello"));
+
+		duplicate.add("what", "ever");
+		assertEquals("ever", duplicate.get("what"));
+		assertNull(templarContext.get("what"));
+	}
+
+	@Test
+	public void getFunctionMap() throws FunctionException {
+		templarContext.addFunction("something", new FunctionGreaterThan());
+		assertTrue(templarContext.getFunctionMap().containsKey("something"));
+	}
+
+	@Test
+	public void testClearContext() {
+		templarContext.add("hello", "baby");
+		assertEquals("baby", templarContext.get("hello"));
+		templarContext.clear();
+		assertNull(templarContext.get("hello"));
+		assertEquals(0, templarContext.getContext().entrySet().size());
+	}
+
+	@Test(expected = FunctionException.class)
+	public void testNonRegisteredFunction() throws FunctionException {
+		Object[] args = {};
+		templarContext.invokeFunction("not-registered-function-name", args, null);
 	}
 
 }

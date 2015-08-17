@@ -13,11 +13,19 @@ public abstract class BaseMathFunction extends Function {
 	@Override
 	public abstract Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException;
 
-	protected Number getNumber(String numberString) {
+	protected Number getNumber(String numberString) throws FunctionException {
 		if(numberString.contains(".")) {
-			return(new Double(numberString));
+			try {
+				return(new Double(numberString));
+			} catch (NumberFormatException nfex) {
+				throw new FunctionException("Could not coerce '" + numberString + "' to a number.");
+			}
 		} else {
-			return(new Long(numberString));
+			try {
+				return(new Long(numberString));
+			} catch (NumberFormatException nfex) {
+				throw new FunctionException("Could not coerce '" + numberString + "' to a number.");
+			}
 		}
 	}
 
