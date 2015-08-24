@@ -18,9 +18,9 @@
 	<!--
 		This is the output directory for all of the reports that are generated
 		-->
-	<property name="filestatistics.dir" value="${build.dir}/reports/filestatistics/"/>
+	<property name="filestatistics.dir" value="build/reports/filestatistics/"/>
 
-	<taskdef uri="antlib:pf" resource="synapticloop/projectfilestatistics/ant/antlib.xml" classpath="${util.lib.dir}/project-filestatistics.jar" />
+	<taskdef uri="antlib:pf" resource="synapticloop/projectfilestatistics/ant/antlib.xml" classpath="lib/util/project-filestatistics.jar" />
 
 	<target name="report" description="[filestatistics-build] Report the filestatistics for this project">
 		<!--
