@@ -15,6 +15,16 @@ public class PreToken extends Token {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
 
+		if(stringTokenizer.hasMoreTokens()) {
+			// discard the first token if it is a space
+			String nextToken = stringTokenizer.nextToken();
+			if(!" ".equals(nextToken)) {
+				stringBuilder.append(nextToken);
+			}
+		} else {
+			throw new ParseException("Found a 'pre' token with no more tokens", this);
+		}
+
 		boolean foundEndToken = false;
 		while(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
@@ -42,6 +52,11 @@ public class PreToken extends Token {
 			throw new ParseException("Unable to find the closing pre token 'pre}'", this);
 		}
 
+		int length = stringBuilder.length();
+		if(stringBuilder.lastIndexOf(" ") == length -1) {
+			// if it ends with a space, remove it
+			stringBuilder.deleteCharAt(length -1);
+		}
 		this.value = stringBuilder.toString();
 	}
 

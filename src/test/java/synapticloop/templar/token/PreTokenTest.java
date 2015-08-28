@@ -17,42 +17,42 @@ public class PreTokenTest {
 	@Test
 	public void testCorrectToken() throws ParseException {
 		Parser parser = new Parser("{pre all sorts of stuff here pre}");
-		assertEquals("<PRE@1:2 ( all sorts of stuff here )/>", parser.toString());
+		assertEquals("<PRE@1:2 (all sorts of stuff here)/>", parser.toString());
 	}
 
 	@Test
 	public void testLotsOfPreToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre pre pre pre something, something, pre pre}");
-		assertEquals("<PRE@1:2 ( pre pre pre something, something, pre )/>", parser.toString());
-		assertEquals(" pre pre pre something, something, pre ", parser.render());
+		assertEquals("<PRE@1:2 (pre pre pre something, something, pre)/>", parser.toString());
+		assertEquals("pre pre pre something, something, pre", parser.render());
 	}
 
 	@Test
 	public void testJavascriptToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre some_javascript_function() {} pre}");
 		System.out.println(parser.toString());
-		assertEquals("<PRE@1:2 ( some_javascript_function() {} )/>", parser.toString());
-		assertEquals(" some_javascript_function() {} ", parser.render());
+		assertEquals("<PRE@1:2 (some_javascript_function() {})/>", parser.toString());
+		assertEquals("some_javascript_function() {}", parser.render());
 	}
 
 	@Test
 	public void testNewLinesAndTabsToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre \nnoindent\n\tpre\n\tpre\n\tpre\n\tsomething, something\n\tpre\nnoindent pre}");
-		assertEquals("<PRE@1:2 ( \n" + 
+		assertEquals("<PRE@1:2 (\n" + 
 				"noindent\n" + 
 				"	pre\n" + 
 				"	pre\n" + 
 				"	pre\n" + 
 				"	something, something\n" + 
 				"	pre\n" + 
-				"noindent )/>", parser.toString());
-		assertEquals(" \nnoindent\n" + 
+				"noindent)/>", parser.toString());
+		assertEquals("\nnoindent\n" + 
 				"	pre\n" + 
 				"	pre\n" + 
 				"	pre\n" + 
 				"	something, something\n" + 
 				"	pre\n" + 
-				"noindent ", parser.render());
+				"noindent", parser.render());
 	}
 
 }
