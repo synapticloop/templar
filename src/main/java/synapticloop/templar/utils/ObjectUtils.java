@@ -26,7 +26,7 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.RenderException;
 
 public class ObjectUtils {
-	private static final String[] METHOD_PREFIXES = {"get", "is", "has"};
+	private static final String[] METHOD_PREFIXES = {"get", "is", "has", ""};
 
 	private ObjectUtils() {}
 
@@ -228,8 +228,21 @@ public class ObjectUtils {
 		Method returnMethod = null;
 		if(object instanceof Map<?, ?>) {
 			try {
-				Method method = object.getClass().getMethod("get", Object.class);
-				return(method);
+				returnMethod = object.getClass().getMethod(reference);
+				if(null != returnMethod) {
+					return(returnMethod);
+				}
+			} catch (NoSuchMethodException nsmex) {
+				// fall through
+			} catch (SecurityException sex) {
+				// fall through
+			}
+
+			try {
+				// it could be that we are looking up a direct call on the object
+
+				returnMethod = object.getClass().getMethod("get", Object.class);
+				return(returnMethod);
 			} catch (NoSuchMethodException nsmex) {
 				throw new RenderException("Could not find 'get' method on Map object instance", nsmex);
 			} catch (SecurityException sex) {
