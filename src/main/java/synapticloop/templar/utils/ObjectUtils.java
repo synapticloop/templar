@@ -19,6 +19,7 @@ package synapticloop.templar.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
@@ -58,10 +59,24 @@ public class ObjectUtils {
 			boolean foundMethod = false;
 
 			while(stringTokenizer.hasMoreTokens()) {
-				Method invokeMethod = findMethod(object, stringTokenizer.nextToken());
+				String nextToken = stringTokenizer.nextToken();
+
+				Method invokeMethod = findMethod(object, nextToken);
 				if(null != invokeMethod) {
 					foundMethod = true;
-					object = invokeObjectMethod(object, invokeMethod);
+					int parameterCount = invokeMethod.getParameterCount();
+					switch (parameterCount) {
+					case 0:
+						object = invokeObjectMethod(object, invokeMethod);
+						break;
+					case 1:
+						object = invokeObjectMethod(object, invokeMethod, new Object[] { nextToken });
+						break;
+					default:
+						// at this point, the method that we have found has more than 1 parameter - we
+						// don't support this as the do notation doesn't handle it
+						throw new RenderException("Cannot invoke method with more than 1 parameter, tryied to invoke method: '" + invokeMethod.toGenericString() + ".");
+					}
 				} else {
 					foundMethod = false;
 				}
@@ -79,6 +94,18 @@ public class ObjectUtils {
 	private static Object invokeObjectMethod(Object object, Method invokeMethod) throws RenderException {
 		try {
 			return(invokeMethod.invoke(object, new Object[] {}));
+		} catch (IllegalArgumentException iaex) {
+			throw new RenderException(iaex.getMessage(), iaex);
+		} catch (IllegalAccessException iaex) {
+			throw new RenderException(iaex.getMessage(), iaex);
+		} catch (InvocationTargetException itex) {
+			throw new RenderException(itex.getMessage(), itex);
+		}
+	}
+
+	private static Object invokeObjectMethod(Object object, Method invokeMethod, Object[] parameters) throws RenderException {
+		try {
+			return(invokeMethod.invoke(object, parameters));
 		} catch (IllegalArgumentException iaex) {
 			throw new RenderException(iaex.getMessage(), iaex);
 		} catch (IllegalAccessException iaex) {
@@ -199,6 +226,17 @@ public class ObjectUtils {
 	 */
 	private static Method findMethod(Object object, String reference) throws RenderException {
 		Method returnMethod = null;
+		if(object instanceof Map<?, ?>) {
+			try {
+				Method method = object.getClass().getMethod("get", Object.class);
+				return(method);
+			} catch (NoSuchMethodException nsmex) {
+				throw new RenderException("Could not find 'get' method on Map object instance", nsmex);
+			} catch (SecurityException sex) {
+				throw new RenderException("Could not find 'get' method on Map object instance", sex);
+			}
+		}
+
 		for (int i = 0; i < METHOD_PREFIXES.length; i++) {
 			String methodPrefix = METHOD_PREFIXES[i];
 

@@ -1,0 +1,8 @@
+{--
+	this file is designed to test looking up values in a Map<key, value>.
+
+	Normally we are looking for a getter (or is/has in the case of a boolean), however
+	if the object is a map - we want to look it up on the key and output the value
+}
+{if fn:=[session.sessionObjects.hello, "baby"]}CORRECT{else}FATAL ERROR{endif}{\n}
+{if fn:=[session.sessionObjects.bean.name, "test name"]}CORRECT{else}FATAL ERROR{endif}{\n}
