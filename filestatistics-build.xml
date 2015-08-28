@@ -6,7 +6,7 @@
 	
 		<import file="filestatistics-build.xml"/>
 	-->
-<project name="filestatistics-build" basedir="." xmlns:pf="antlib:pf">
+<project name="filestatistics-build" basedir="." xmlns:pf="antlib:pf" default="report">
 	<dirname property="filestatistics.basedir" file="${ant.file.filestatistics-build}" />
 
 	<!--

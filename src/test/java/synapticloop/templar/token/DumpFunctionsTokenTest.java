@@ -1,9 +1,6 @@
 package synapticloop.templar.token;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.*;
+import static junit.framework.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +47,7 @@ public class DumpFunctionsTokenTest {
 		dumpFunctionsToken = new DumpFunctionsToken(null, null, new Tokeniser());
 		TemplarContext templarContext = new TemplarContext();
 		String render = dumpFunctionsToken.render(templarContext);
-		assertTrue(render.contains(FunctionLessThanEqual.class.getName()));
+		assertTrue(render.contains(FunctionLessThanEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionLessThanEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionNotEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionLessThan.class.getSimpleName()));

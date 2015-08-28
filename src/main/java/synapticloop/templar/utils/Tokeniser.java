@@ -36,6 +36,7 @@ import synapticloop.templar.token.IfToken;
 import synapticloop.templar.token.ImportToken;
 import synapticloop.templar.token.LoopToken;
 import synapticloop.templar.token.NewLineToken;
+import synapticloop.templar.token.PreToken;
 import synapticloop.templar.token.SetToken;
 import synapticloop.templar.token.TabToken;
 import synapticloop.templar.token.TextToken;
@@ -61,6 +62,7 @@ public class Tokeniser implements Serializable {
 	private static final int ENDIF = 12;
 	private static final int ENDLOOP = 13;
 	private static final int IMPORT = 14;
+	private static final int PRE = 15;
 
 	private static final Map<String, Integer> TOKEN_MAP = new HashMap<String, Integer>();
 	static {
@@ -79,6 +81,7 @@ public class Tokeniser implements Serializable {
 		TOKEN_MAP.put("endif", ENDIF);
 		TOKEN_MAP.put("endloop", ENDLOOP);
 		TOKEN_MAP.put("import", IMPORT);
+		TOKEN_MAP.put("pre", PRE);
 	}
 
 
@@ -151,6 +154,10 @@ public class Tokeniser implements Serializable {
 							ImportToken importToken = new ImportToken(token, stringTokenizer, this);
 							tokens.add(importToken);
 							tokens.addAll(importToken.getTokens());
+							break;
+						case PRE:
+							PreToken preToken = new PreToken(token, stringTokenizer, this);
+							tokens.add(preToken);
 							break;
 						default:
 							tokens.add(new EvaluationToken(token, stringTokenizer, this));

@@ -10,6 +10,6 @@
 		The build file for the templar project
 	</description>
 
-	<target name="dist" depends="clean,init,cobertura,jar" />
-	<target name="dist-skip-tests" depends="clean,init,jar" />
+	<target name="dist" depends="clean,init,cobertura,jar" description="build the distributables" />
+	<target name="dist-skip-tests" depends="clean,init,jar" description="build the distributables without tests" />
 </project>

@@ -1,6 +1,34 @@
 templar
 =======
-A lightweight java templating engine
+A lightweight java templating engine - and by lightweight we mean 4922 lines of code...
+
+```
+ 
+ Line number report (NumberTextReporter)
+ =======================================
+   File type     #    Code(      %)    Comment(      %)    Blank(      %)    Total(      %)  
+ -----------  ----  ---------------  ------------------  ----------------  ----------------  
+       .java    69    3916( 79.56%)        316(  6.42%)      690( 14.02%)     4922(100.00%)  
+ -----------  ----  ---------------  ------------------  ----------------  ----------------  
+     1 types    69    3916( 79.56%)        316(  6.42%)      690( 14.02%)     4922(100.00%)  
+ ===========  ====  ===============  ==================  ================  ================  
+ 
+ Line number report (CumulativeBarTextReporter)
+ ==============================================
+   File type  
+ -----------  0                   25                  50                   75                  100
+              +----------------------------------------------------------------+-----+-----------+
+       .java  |################################################################|:::::|           |
+              +----------------------------------------------------------------+-----+-----------+
+ 
+ Key:
+ ----
+   '#' code
+   ':' comment
+   ' ' blank
+ 
+```
+
 
 ## how fast is it??
 
@@ -73,16 +101,16 @@ The functions are as follows:
 
   1. ```fn:null``` if something is null 
   1. ```fn:notNull``` if something is not null
-  1. ```fn:=",``` equal
+  1. ```fn:=,``` equal
   1. ```fn:equal``` equal
-  1. ```fn:<>",``` not equal
+  1. ```fn:<>,``` not equal
   1. ```fn:not``` not
   1. ```fn:noEqual``` not equal
-  1. ```fn:>",``` greater than
+  1. ```fn:>,``` greater than
   1. ```fn:gt``` greater than
-  1. ```fn:>=",``` greater than or equal
+  1. ```fn:>=,``` greater than or equal
   1. ```fn:gte``` as above
-  1. ```fn:<",``` less than
+  1. ```fn:<,``` less than
   1. ```fn:lt``` as above
   1. ```fn:<=",``` less than or equal
   1. ```fn:lte``` as above

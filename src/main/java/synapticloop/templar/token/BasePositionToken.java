@@ -1,9 +1,5 @@
 package synapticloop.templar.token;
 
-import java.io.Serializable;
-
-import synapticloop.templar.utils.Tokeniser;
-
 /*
  * Copyright (c) 2012-2015 synapticloop.
  * All rights reserved.
@@ -21,6 +17,15 @@ import synapticloop.templar.utils.Tokeniser;
  * under the Licence.
  */
 
+import java.io.Serializable;
+
+import synapticloop.templar.utils.Tokeniser;
+
+/**
+ * The BasePositionToken has methods to keep track of the line and character 
+ * number for all of the tokens that are parsed.  This is generally used for 
+ * error handling
+ */
 public abstract class BasePositionToken implements Serializable {
 	private static final long serialVersionUID = -4285038550687054304L;
 
