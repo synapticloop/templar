@@ -42,8 +42,10 @@ import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
 import synapticloop.templar.function.math.FunctionAdd;
 import synapticloop.templar.function.math.FunctionDivide;
+import synapticloop.templar.function.math.FunctionEven;
 import synapticloop.templar.function.math.FunctionModulus;
 import synapticloop.templar.function.math.FunctionMultiply;
+import synapticloop.templar.function.math.FunctionOdd;
 import synapticloop.templar.function.math.FunctionPower;
 import synapticloop.templar.function.math.FunctionSubtract;
 
@@ -58,7 +60,7 @@ public class TemplarContext {
 		functionMap.put("notNull", new FunctionIsNotNull());
 		functionMap.put("!Null", new FunctionIsNotNull());
 		functionMap.put("!null", new FunctionIsNotNull());
-		
+
 		// boolean function operators
 		functionMap.put("=", new FunctionEqual());
 		functionMap.put("equal", new FunctionEqual());
@@ -78,7 +80,7 @@ public class TemplarContext {
 		// size operators
 		functionMap.put("length", new FunctionLength());
 		functionMap.put("size", new FunctionSize());
-		
+
 		// date operators
 		functionMap.put("fmtDate", new FunctionFormatDate());
 
@@ -99,6 +101,10 @@ public class TemplarContext {
 		functionMap.put("/", new FunctionDivide());
 		functionMap.put("^", new FunctionPower());
 		functionMap.put("%", new FunctionModulus());
+
+		// even and odd
+		functionMap.put("even", new FunctionEven());
+		functionMap.put("odd", new FunctionOdd());
 	}
 
 	public TemplarContext() {
