@@ -55,56 +55,57 @@ public class TemplarContext {
 
 	private static Map<String, Function> functionMap = new HashMap<String, Function>();
 	static {
+
 		// null operators
-		functionMap.put("null", new FunctionIsNull());
-		functionMap.put("notNull", new FunctionIsNotNull());
-		functionMap.put("!Null", new FunctionIsNotNull());
-		functionMap.put("!null", new FunctionIsNotNull());
+		functionMap.put("null", new FunctionIsNull()); // test whether the passed in parameter is null
+		functionMap.put("notNull", new FunctionIsNotNull()); // test whether the passed in parameter is not null
+		functionMap.put("!Null", new FunctionIsNotNull()); // test whether the passed in parameter is not null
+		functionMap.put("!null", new FunctionIsNotNull());// test whether the passed in parameter is not null
 
 		// boolean function operators
-		functionMap.put("=", new FunctionEqual());
-		functionMap.put("equal", new FunctionEqual());
-		functionMap.put("<>", new FunctionNotEqual());
-		functionMap.put("not=", new FunctionNotEqual());
-		functionMap.put("!=", new FunctionNotEqual());
-		functionMap.put("notEqual", new FunctionNotEqual());
-		functionMap.put(">", new FunctionGreaterThan());
-		functionMap.put("gt", new FunctionGreaterThan());
-		functionMap.put(">=", new FunctionGreaterThanEqual());
-		functionMap.put("gte", new FunctionGreaterThanEqual());
-		functionMap.put("<", new FunctionLessThan());
-		functionMap.put("lt", new FunctionLessThan());
-		functionMap.put("<=", new FunctionLessThanEqual());
-		functionMap.put("lte", new FunctionLessThanEqual());
+		functionMap.put("=", new FunctionEqual()); // test whether the passed in parameters are equal
+		functionMap.put("equal", new FunctionEqual()); // test whether the passed in parameters are equal
+		functionMap.put("<>", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+		functionMap.put("not=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+		functionMap.put("!=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+		functionMap.put("notEqual", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+		functionMap.put(">", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
+		functionMap.put("gt", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
+		functionMap.put(">=", new FunctionGreaterThanEqual()); // test whether the the first parameter is greater than or equal to the second
+		functionMap.put("gte", new FunctionGreaterThanEqual());  // test whether the the first parameter is greater than or equal to the second
+		functionMap.put("<", new FunctionLessThan());  // test whether the the first parameter is less than the second
+		functionMap.put("lt", new FunctionLessThan());  // test whether the the first parameter is less than the second
+		functionMap.put("<=", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to the second
+		functionMap.put("lte", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to than the second
 
 		// size operators
-		functionMap.put("length", new FunctionLength());
-		functionMap.put("size", new FunctionSize());
+		functionMap.put("length", new FunctionLength()); // return the length/size of the passed in parameter
+		functionMap.put("size", new FunctionSize()); // return the length/size of the passed in parameter
 
 		// date operators
-		functionMap.put("fmtDate", new FunctionFormatDate());
+		functionMap.put("fmtDate", new FunctionFormatDate()); // format the date with the two parameters date, and format as a string
 
 		// boolean test operators
-		functionMap.put("false", new FunctionFalse());
-		functionMap.put("true", new FunctionTrue());
+		functionMap.put("false", new FunctionFalse()); // test whether the parameter is false
+		functionMap.put("true", new FunctionTrue()); // test whether the parameter is true
 
 		// logical operators
-		functionMap.put("and", new FunctionAnd());
-		functionMap.put("&", new FunctionAnd());
-		functionMap.put("or", new FunctionOr());
-		functionMap.put("|", new FunctionOr());
+		functionMap.put("and", new FunctionAnd()); // logical AND function for the two parameters
+		functionMap.put("&", new FunctionAnd()); // logical AND function for the two parameters
+		functionMap.put("or", new FunctionOr()); // logical OR function for the two parameters
+		functionMap.put("|", new FunctionOr()); // logical OR function for the two parameters
 
 		// mathematical operators
-		functionMap.put("+", new FunctionAdd());
-		functionMap.put("-", new FunctionSubtract());
-		functionMap.put("*", new FunctionMultiply());
-		functionMap.put("/", new FunctionDivide());
-		functionMap.put("^", new FunctionPower());
-		functionMap.put("%", new FunctionModulus());
+		functionMap.put("+", new FunctionAdd()); // Mathematical ADDITION of two numbers
+		functionMap.put("-", new FunctionSubtract()); // Mathematical SUBTRACTION of two numbers
+		functionMap.put("*", new FunctionMultiply()); // Mathematical MULTIPLICATION of two numbers
+		functionMap.put("/", new FunctionDivide()); // Mathematical DIVISION of two numbers
+		functionMap.put("^", new FunctionPower()); // Mathematical EXPONENT of two numbers
+		functionMap.put("%", new FunctionModulus()); // Mathematical MODULUS of two numbers
 
 		// even and odd
-		functionMap.put("even", new FunctionEven());
-		functionMap.put("odd", new FunctionOdd());
+		functionMap.put("even", new FunctionEven()); // Test whether the passed in number is even
+		functionMap.put("odd", new FunctionOdd()); // Test whether the passed in number is odd
 	}
 
 	public TemplarContext() {

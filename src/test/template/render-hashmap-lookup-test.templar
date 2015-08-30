@@ -6,3 +6,7 @@
 }
 {if fn:=[session.sessionObjects.hello, "baby"]}CORRECT{else}FATAL ERROR{endif}{\n}
 {if fn:=[session.sessionObjects.bean.name, "test name"]}CORRECT{else}FATAL ERROR{endif}{\n}
+
+{loop session.sessionObjects.keySet as key}
+{\t}KEY: {key}, VALUE: {session.sessionObjects.$key} {if fn:notNull[session.sessionObjects.$key]}CORRECT{else} FATAL ERROR{endif}{\n}
+{endloop}

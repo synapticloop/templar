@@ -61,6 +61,17 @@ public class ObjectUtils {
 			while(stringTokenizer.hasMoreTokens()) {
 				String nextToken = stringTokenizer.nextToken();
 
+				// at this point - we may want to lookup the context for a variable, which 
+				// will be prefixed by a '$' character
+				if(nextToken.startsWith("$")) {
+					// look this up in the context - which should be a string??
+					// TODO - check the above
+					Object contextLookupObject = templarContext.get(nextToken.substring(1));
+					if(null != contextLookupObject) {
+						nextToken = contextLookupObject.toString();
+					}
+				}
+
 				Method invokeMethod = findMethod(object, nextToken);
 				if(null != invokeMethod) {
 					foundMethod = true;

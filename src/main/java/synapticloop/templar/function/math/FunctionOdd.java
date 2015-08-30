@@ -4,6 +4,12 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
+/**
+ * Test whether the passed in number (or something that can be coerced to a 
+ * number) is odd.  In the case of a double, this is coerced to a long 
+ * and then tested
+ */
+
 public class FunctionOdd extends BaseMathFunction {
 
 	public FunctionOdd() {

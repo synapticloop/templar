@@ -4,6 +4,11 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
+/**
+ * Test whether the passed in number (or something that can be coerced to a 
+ * number) is even.  In the case of a double, this is coerced to a long 
+ * and then tested
+ */
 public class FunctionEven extends BaseMathFunction {
 
 	public FunctionEven() {
@@ -18,7 +23,7 @@ public class FunctionEven extends BaseMathFunction {
 			return((argZeroNumber.longValue() & 1) == 0);
 		}
 
-		throw new FunctionException("The function 'even' takes exactly one arguments, which must be coercible to a Number.");
+		throw new FunctionException("The function 'even' takes exactly one argument, which must be coercible to a Number.");
 	}
 
 }

@@ -1,6 +1,6 @@
 templar
 =======
-A lightweight java templating engine - and by lightweight we mean 4922 lines of code...
+A lightweight java templating engine - and by lightweight we mean a small number of lines of code... (that weights in around 90k):
 
 ```
  
@@ -8,9 +8,9 @@ A lightweight java templating engine - and by lightweight we mean 4922 lines of 
  =======================================
    File type     #    Code(      %)    Comment(      %)    Blank(      %)    Total(      %)  
  -----------  ----  ---------------  ------------------  ----------------  ----------------  
-       .java    69    3916( 79.56%)        316(  6.42%)      690( 14.02%)     4922(100.00%)  
+       .java    72    4065( 79.52%)        328(  6.42%)      719( 14.06%)     5112(100.00%)  
  -----------  ----  ---------------  ------------------  ----------------  ----------------  
-     1 types    69    3916( 79.56%)        316(  6.42%)      690( 14.02%)     4922(100.00%)  
+     1 types    72    4065( 79.52%)        328(  6.42%)      719( 14.06%)     5112(100.00%)  
  ===========  ====  ===============  ==================  ================  ================  
  
  Line number report (CumulativeBarTextReporter)
@@ -90,6 +90,7 @@ here goes:
   1. ```{set __something__ as __somethingElse}``` ```something``` is the thing to be evaluated and ```somethingElse``` is the variable name to be placed in the context.  If you want to set a string as a variable then you need to quote it with either a single (') or double (") quotation mark.
   1. ```{loop __something__ as __somethingElse__}``` loop over stuff placing a variable named ```somethingElse``` in each iteration - don't forget the ```{endloop}``` token
   1. ```{dumpcontext}``` dump all of the key-value pairs in the context - useful for debugging.
+  1. ```{dumpfunctions}``` dump all of the functions and their number of arguments - useful for debugging.
   1. ```{nl}``` or ```{\n}``` a new line character
   1. ```{tab}``` or ```{\t}``` a tab character
 
@@ -99,26 +100,62 @@ for the ```{if}``` and ```{set}``` commands can also take functions - or you can
 
 The functions are as follows:
 
-  1. ```fn:null``` if something is null 
-  1. ```fn:notNull``` if something is not null
-  1. ```fn:=,``` equal
-  1. ```fn:equal``` equal
-  1. ```fn:<>,``` not equal
-  1. ```fn:not``` not
-  1. ```fn:noEqual``` not equal
-  1. ```fn:>,``` greater than
-  1. ```fn:gt``` greater than
-  1. ```fn:>=,``` greater than or equal
-  1. ```fn:gte``` as above
-  1. ```fn:<,``` less than
-  1. ```fn:lt``` as above
-  1. ```fn:<=",``` less than or equal
-  1. ```fn:lte``` as above
-  1. ```fn:length``` length of an obect
-  1. ```fn:size``` same as above - I can never remember which one I should use
-  1. ```fn:fmtDate``` format a date
+```
 
-They can be used inline.
+// null operators
+functionMap.put("null", new FunctionIsNull()); // test whether the passed in parameter is null
+functionMap.put("notNull", new FunctionIsNotNull()); // test whether the passed in parameter is not null
+functionMap.put("!Null", new FunctionIsNotNull()); // test whether the passed in parameter is not null
+functionMap.put("!null", new FunctionIsNotNull());// test whether the passed in parameter is not null
+
+// boolean function operators
+functionMap.put("=", new FunctionEqual()); // test whether the passed in parameters are equal
+functionMap.put("equal", new FunctionEqual()); // test whether the passed in parameters are equal
+functionMap.put("<>", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+functionMap.put("not=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+functionMap.put("!=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+functionMap.put("notEqual", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+functionMap.put(">", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
+functionMap.put("gt", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
+functionMap.put(">=", new FunctionGreaterThanEqual()); // test whether the the first parameter is greater than or equal to the second
+functionMap.put("gte", new FunctionGreaterThanEqual());  // test whether the the first parameter is greater than or equal to the second
+functionMap.put("<", new FunctionLessThan());  // test whether the the first parameter is less than the second
+functionMap.put("lt", new FunctionLessThan());  // test whether the the first parameter is less than the second
+functionMap.put("<=", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to the second
+functionMap.put("lte", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to than the second
+
+// size operators
+functionMap.put("length", new FunctionLength()); // return the length/size of the passed in parameter
+functionMap.put("size", new FunctionSize()); // return the length/size of the passed in parameter
+
+// date operators
+functionMap.put("fmtDate", new FunctionFormatDate()); // format the date with the two parameters date, and format as a string
+
+// boolean test operators
+functionMap.put("false", new FunctionFalse()); // test whether the parameter is false
+functionMap.put("true", new FunctionTrue()); // test whether the parameter is true
+
+// logical operators
+functionMap.put("and", new FunctionAnd()); // logical AND function for the two parameters
+functionMap.put("&", new FunctionAnd()); // logical AND function for the two parameters
+functionMap.put("or", new FunctionOr()); // logical OR function for the two parameters
+functionMap.put("|", new FunctionOr()); // logical OR function for the two parameters
+
+// mathematical operators
+functionMap.put("+", new FunctionAdd()); // Mathematical ADDITION of two numbers
+functionMap.put("-", new FunctionSubtract()); // Mathematical SUBTRACTION of two numbers
+functionMap.put("*", new FunctionMultiply()); // Mathematical MULTIPLICATION of two numbers
+functionMap.put("/", new FunctionDivide()); // Mathematical DIVISION of two numbers
+functionMap.put("^", new FunctionPower()); // Mathematical EXPONENT of two numbers
+functionMap.put("%", new FunctionModulus()); // Mathematical MODULUS of two numbers
+
+// even and odd
+functionMap.put("even", new FunctionEven()); // Test whether the passed in number is even
+functionMap.put("odd", new FunctionOdd()); // Test whether the passed in number is odd
+```
+
+See [src/main/java/synapticloop/templar/function](https://github.com/synapticloop/templar/tree/master/src/main/java/synapticloop/templar/function) for all of the in-built functions and [TemplarContext.java](https://github.com/synapticloop/templar/blob/master/src/main/java/synapticloop/templar/utils/TemplarContext.java) for all of the registrations and aliases.
+
 
 ## What's with the whitespace (tabs and newlines)?
 
