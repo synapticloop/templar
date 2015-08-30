@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+{import src/imports/head.templar}
+<body>
+	<div class="wrapper">
+		{import src/imports/sidenav.templar}
+		<section>
+
+			<h3>
+				<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to templar.
+			</h3>
+
+			<p>
+				templar is an easy to use ultra light-weight templating engine
+			</p>
+
+			<p><strong>Key Concepts</strong></p>
+
+			<p>
+				For those that are looking to dive straight into the code, there are two simple key concepts that need to be 
+				understood within the templar rendering engine:
+			</p>
+
+			<dl>
+				<dt>the parsing</dt>
+				<dd>
+					The templar files (by convention having a '.templar. extension) are first parsed and tokenised.
+				</dd>
+				<dt>the rendering</dt>
+				<dd>
+					Once parsing has successfully completed, the parsed files are then rendered.
+				</dd>
+			</dl>
+
+			<h3><a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h3>
+
+			<p>
+				Templar was designed with the following goals:
+			</p>
+
+			<ul>
+				<li>light-weight - absolutely no dependencies</li>
+				<li>whitespace is important - we (sometimes) care about newlines, spaces and tabs</li>
+				<li>easy to use</li>
+				<li>just powerful enough</li>
+			</ul>
+
+			<p>
+				When <a href="https://github.com/synapticloop/h2zero">h2zero</a> was in it's infancy, we needed a templating
+				engine that would satisfy all of the above criteria - especially the whitespace importance one (<em>no one
+				likes generated code that is ugly</em>).  So we search around and evaluated the following:
+			</p>
+
+			<ul>
+				<li>Velocity</li>
+				<li>FreeMarker</li>
+				<li>StringTemplate</li>
+				<li>JSPs !!!</li>
+			</ul>
+
+			<p>
+				All required huge libraries, lots of dependencies until we found the (now very much defunct) JavaTemplar engine
+				from <a href="https://code.google.com/p/javatemplar/">https://code.google.com/p/javatemplar/</a> (last updated 
+				July 2011). (although we do like their icon!).
+			</p>
+			
+			<p>
+				Whilst this didn't quite have enough functionality to do what we required, it inspired us to build our own, 
+				which has now grown into a feature-rich templating engine.
+			</p>
+
+			<p>
+				In fact this site was generated with <a href="https://github.com/synapticloop/templar-gen/">synapticloop templar-gen</a>
+				which utilises the library.
+			</p>
+			<h3><a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h3>
+
+			<p>
+				<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.
+			</p>
+		</section>
+		{import src/imports/footer.templar}
+	</div>
+	<script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+{import src/imports/head.templar}
+<body>
+	<div class="wrapper">
+		{import src/imports/sidenav.templar}
+		<section>
+
+			<h3>
+				<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>quick start.
+			</h3>
+
+			<p>
+				Getting started with templar:
+			</p>
+
+			<p>
+				<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.
+			</p>
+
+			<p>This example was taken from <a href="http://synapticloop.github.io/sab-spot-comment/">sab-spot-comment</a>:</p>
+
+			<p>In a very small nutshell</p>
+
+			<ol>
+				<li>Create a new templarContext</li>
+				<li>Add stuff to it</li>
+				<li>Create a parser (and pass in the templar file)</li>
+				<li>parser.render(templarContext)</li>
+			</ol>
+
+			<pre class="prettyprint lang-java"><code>
+{pre
+TemplarContext templarContext = new TemplarContext();
+
+templarContext.add("setupManager", SetupManager.INSTANCE);
+
+templarContext.add("dummySuccessComment", new Download("Dummy Success Download", "http://www.example.com/", "SAB_NZB_ID", "", System.currentTimeMillis(), "GUID", false).getComment());
+templarContext.add("dummyFailedComment", new Download("Dummy Failed Download", "http://www.example.com/", "SAB_NZB_ID", "Unpacking failed, archive requires a password", System.currentTimeMillis(), "GUID", false).getComment());
+templarContext.add("dummyIgnoredDownload", new Download("Dummy Ignored Download", "http://www.example.com/", "SAB_NZB_ID", "Unpacking failed, archive requires a password", System.currentTimeMillis(), "GUID", true));
+
+try {
+    Parser parser = new Parser(this.getClass().getResourceAsStream("/synapticloop/ssc/template/admin.templar"));
+    return(HttpUtils.okResponse(NanoHTTPD.MIME_HTML, parser.render(templarContext)));
+} catch (ParseException pex) {
+    pex.printStackTrace();
+    return(HttpUtils.internalServerErrorResponse());
+} catch (RenderException rex) {
+    rex.printStackTrace();
+    return(HttpUtils.internalServerErrorResponse());
+}
+pre}
+			</code></pre>
+
+			<p><strong>Creating the TemplarContext</strong></p>
+
+<pre class="prettyprint lang-java"><code>
+TemplarContext templarContext = new TemplarContext();
+</code></pre>
+
+			<p>
+				This creates a default context, with a default configuration, meaning
+			</p>
+			
+			<ul>
+				<li>You must <em>explicitly</em> put in new lines</li>
+				<li>You must <em>explicitly</em> put in tab characters</li>
+				<li>Whitespace is ignored</li>
+			</ul>
+
+			<p>
+				These are the defaults and the output can be seen by viewing source of these pages - which should be mostly
+				on one line (more about the <code>{{pre ... pre}</code> syntax later).
+			</p>
+			
+			<p>
+				If you wish to over-ride this default behaviour, you will need to instantiate a <code>TemplarContext</code> with
+				a passed in <code>TemplarConfiguration</code>. e.g.:
+			</p>
+
+<pre class="prettyprint lang-java"><code>{pre TemplarConfiguration templarConfiguration = new TemplarConfiguration();
+templarConfiguration.setExplicitNewLines(false);
+templarConfiguration.setExplicitTabs(false);
+templarConfiguration.setIgnoreWhitespace(false);
+pre}</code></pre>
+
+			<p>or</p>
+<pre class="prettyprint lang-java"><code>{pre TemplarConfiguration templarConfiguration = new TemplarConfiguration(false, false, false);
+pre}
+</code></pre>
+
+			<p>
+				And then:
+			</p>
+
+<pre><code>
+{pre TemplarContext templarContext = new TemplarContext(templarConfiguration); pre}
+</code></pre>
+
+
+		</section>
+		{import src/imports/footer.templar}
+	</div>
+	<script src="javascripts/scale.fix.js"></script>
+
+</body>
+</html>
