@@ -21,6 +21,7 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -29,6 +30,13 @@ public class DumpContextToken extends CommandToken {
 
 	public DumpContextToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
+		StringBuilder stringBuilder = new StringBuilder();
+
+		boolean foundEndToken = ParserHelper.didFindEndToken(stringTokenizer, stringBuilder);
+
+		if(!foundEndToken) {
+			throw new ParseException("Unable to find the closing dump context token '}'", this);
+		}
 	}
 
 	@Override

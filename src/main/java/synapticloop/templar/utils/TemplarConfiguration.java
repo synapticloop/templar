@@ -22,6 +22,14 @@ public class TemplarConfiguration {
 	private boolean explicitTabs = true;
 	private boolean ignoreWhitespace = true;
 
+	public TemplarConfiguration() { }
+	
+	public TemplarConfiguration(boolean explicitNewLines, boolean explicitTabs, boolean ignoreWhitespace) {
+		this.explicitNewLines = explicitNewLines;
+		this.explicitTabs = explicitTabs;
+		this.ignoreWhitespace = ignoreWhitespace;
+	}
+
 	public void setExplicitNewLines(boolean explicitNewLines) {
 		this.explicitNewLines = explicitNewLines;
 	}
