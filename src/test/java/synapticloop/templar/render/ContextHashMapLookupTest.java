@@ -41,7 +41,6 @@ public class ContextHashMapLookupTest {
 		templarContext.add("session", sessionBean);
 
 		String render = parser.render(templarContext);
-		System.out.println(render);
 		TestUtils.checkRenderContents(render);
 	}
 

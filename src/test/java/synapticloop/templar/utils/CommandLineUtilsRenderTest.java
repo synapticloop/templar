@@ -83,9 +83,6 @@ public class CommandLineUtilsRenderTest {
 	}
 
 	private void assertOnlyOneCommand(List<CommandLineToken> commandTokens) {
-//		for (CommandLineToken commandToken : commandTokens) {
-//			System.out.println(commandToken);
-//		}
 		assertEquals(1, commandTokens.size());
 	}
 }

@@ -4,13 +4,14 @@ A lightweight java templating engine - and by lightweight we mean a small number
 
 ```
  
+ 
  Line number report (NumberTextReporter)
  =======================================
    File type     #    Code(      %)    Comment(      %)    Blank(      %)    Total(      %)  
  -----------  ----  ---------------  ------------------  ----------------  ----------------  
-       .java    72    4065( 79.52%)        328(  6.42%)      719( 14.06%)     5112(100.00%)  
+       .java    72    4077( 79.40%)        336(  6.54%)      722( 14.06%)     5135(100.00%)  
  -----------  ----  ---------------  ------------------  ----------------  ----------------  
-     1 types    72    4065( 79.52%)        328(  6.42%)      719( 14.06%)     5112(100.00%)  
+     1 types    72    4077( 79.40%)        336(  6.54%)      722( 14.06%)     5135(100.00%)  
  ===========  ====  ===============  ==================  ================  ================  
  
  Line number report (CumulativeBarTextReporter)
@@ -26,7 +27,7 @@ A lightweight java templating engine - and by lightweight we mean a small number
    '#' code
    ':' comment
    ' ' blank
- 
+  
 ```
 
 

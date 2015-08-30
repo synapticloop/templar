@@ -30,7 +30,6 @@ public class PreTokenTest {
 	@Test
 	public void testJavascriptToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre some_javascript_function() {} pre}");
-		System.out.println(parser.toString());
 		assertEquals("<PRE@1:2 (some_javascript_function() {})/>", parser.toString());
 		assertEquals("some_javascript_function() {}", parser.render());
 	}
