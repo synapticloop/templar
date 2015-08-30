@@ -1,0 +1,19 @@
+			<h4><code class="large">{{-- ...</code> - comments <a name="command-comments">&nbsp;</a></h4>
+			
+			<p>
+				Comments start with <code>{{--</code> and continue up to the <em>first</em> instance found of <code>}</code>.
+				This means that you <strong>CANNOT</strong> have a <code>}</code> character in the comment section - sorry.
+			</p>
+
+			<pre><code>{pre {-- 
+We all know that code in comments
+is
+a good idea.
+
+Comments can be multi-lined or they could be all on one line.
+
+We understand that not allowing the end brace character in a comment
+means that you cannot comment out large block of templar templates,
+hence the apology.
+
+} pre}</code></pre>

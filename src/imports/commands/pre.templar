@@ -1,0 +1,30 @@
+<h4><code class="large">{{pre ...</code> - pre formatted text <a name="command-pre">&nbsp;</a></h4>
+
+<p>
+	As the name would suggest pre-formatted text - this is the only command that does not end with a <code>}</code>
+	character, instead must end with <code>pre}</code>.
+</p>
+
+<pre><code>{{pre {\n}
+{\n}
+{\n}
+anything that goes in here, including any templar syntax is output exactly as shown without any templar parsing.  This{\n} 
+is especially useful for CSS and JavaScript which has a lot of '{' and '}' characters.{\n}
+{\n}
+The content will be output until an end token of 'pre' immediately followed be a '}' character{\n}
+{\n}
+pre}</code></pre>
+
+<p>
+	The above would render as follows (note the use of the <code>{{\n}</code>):
+</p>
+
+<pre><code>{pre {\n}
+{\n}
+{\n}
+anything that goes in here, including any templar syntax is output exactly as shown without any templar parsing.  This{\n} 
+is especially useful for CSS and JavaScript which has a lot of '{' and '}' characters.{\n}
+{\n}
+The content will be output until an end token of 'pre' immediately followed be a '}' character{\n}
+{\n}
+pre}</code></pre>

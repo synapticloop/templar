@@ -253,3 +253,8 @@ footer {
     color:#444;
   }
 }
+
+code.large {
+	font-size: larger;
+	background-color: #FAEBD7;
+}

@@ -26,7 +26,7 @@
 				<li>Create a new templarContext</li>
 				<li>Add stuff to it</li>
 				<li>Create a parser (and pass in the templar file)</li>
-				<li>parser.render(templarContext)</li>
+				<li>render the content</li>
 			</ol>
 
 			<pre class="prettyprint lang-java"><code>
@@ -52,7 +52,7 @@ try {
 pre}
 			</code></pre>
 
-			<p><strong>Creating the TemplarContext</strong></p>
+			<p><strong>1. Creating the TemplarContext</strong></p>
 
 <pre class="prettyprint lang-java"><code>
 TemplarContext templarContext = new TemplarContext();
@@ -97,6 +97,39 @@ pre}
 {pre TemplarContext templarContext = new TemplarContext(templarConfiguration); pre}
 </code></pre>
 
+		<p><strong>2. Adding objects to the templarContext</strong></p>
+		
+		<p>Very simply</p>
+		
+<pre class="prettyprint lang-java"><code>{pre templarContext.add(key, value)
+pre}
+</code></pre>
+
+		<p><strong>3. Creating a parser object</strong></p>
+
+		<p>Very simply</p>
+
+<pre class="prettyprint lang-java"><code>{pre try {
+    Parser parser = new Parser(this.getClass().getResourceAsStream("/synapticloop/ssc/template/admin.templar"));
+} catch (ParseException pex) {
+    pex.printStackTrace();
+}
+
+pre}
+</code></pre>
+
+		<p><strong>4. Rendering a parser object</strong></p>
+
+		<p>Very simply</p>
+
+<pre class="prettyprint lang-java"><code>{pre try {
+    String render = parser.render(templarContext);
+    // do something with the rendered content...
+} catch (RenderException rex) {
+    rex.printStackTrace();
+}
+pre}
+</code></pre>
 
 		</section>
 		{import src/imports/footer.templar}

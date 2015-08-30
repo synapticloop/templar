@@ -1,0 +1,30 @@
+<h4><code class="large">{{loop ...}</code> - loop over an iterable <a name="command-loop">&nbsp;</a></h4>
+
+<p>
+	The format of this command is as follows: <code>{{loop __something__ as __somethingElse__}</code>, where <code>__something__</code>
+	is what you want to loop over, placing <code>__somethingElse__</code> into the context for each iteration.  This will
+	iterate over it rendering the inner content between start and <code>{{endloop}</code> token.
+</p>
+
+<pre><code>{pre
+{loop object.array as something}
+  // render something here
+{endloop}
+pre}</code></pre>
+
+<p>
+	An example taken from <a href="https://github.com/synapticloop/h2zero/">h2zero</a>:
+</p>
+
+<pre><code>{pre {loop table.finders as finder}
+	{if fn:null[finder.selectClause]}
+		{\t}private static final String SQL_{finder.staticName} = SQL_SELECT_START
+	{else}
+		{\t}private static final String SQL_{finder.staticName} = "{finder.selectClause}"
+	{endif}
+
+	{if fn:notNull[finder.whereClause]} + " {finder.whereClause}"{endif}
+	{if fn:notNull[finder.orderBy]} + " order by {finder.orderBy}"{endif};{\n}
+{endloop}
+{\n}
+pre}</code></pre>

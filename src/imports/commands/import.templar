@@ -1,0 +1,13 @@
+<h4><code class="large">{{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4>
+
+<p>
+	Import a file into the current file, the file to import can also be from the classpath (if you are deploying this as 
+	a complete jar - <code>{{import classpath:/some/classpath/file/here.templar}</code>
+</p>
+
+<pre><code>{pre {import src/imports/commands/import.templar}
+pre}</code></pre>
+
+<p>
+	This file was imported from syntax-reference.html with the above line
+</p>

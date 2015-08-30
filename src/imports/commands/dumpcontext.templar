@@ -1,0 +1,15 @@
+			<h4><code class="large">{{dumpcontext}</code> - dumping the context <a name="command-dumpcontext">&nbsp;</a></h4>
+
+			<p>
+				This is useful for debugging as this will render all of the objects in the context, and will look like this:
+			</p>
+
+{set "world" as hello}
+
+<pre><code>{dumpcontext}</code></pre>
+
+			<p>
+				We cheated a little bit and added something to the context with the following:
+			</p>
+
+<pre><code>{pre {set "world" as hello} pre}</code></pre>
