@@ -77,6 +77,7 @@ public class SetToken extends CommandToken {
 	public String render(TemplarContext templarContext) throws RenderException {
 		for (CommandLineToken commandLineToken : commandLineTokens) {
 			templarContext.add(contextAs, commandLineToken.evaluate(templarContext));
+			System.out.println(templarContext.containsKey("something"));
 		}
 		// we don't actually render anything for this...
 		return("");
@@ -94,7 +95,7 @@ public class SetToken extends CommandToken {
 		if(null != commandLine) {
 			stringBuilder.append(commandLine.trim());
 		}
-		stringBuilder.append(")>");
+		stringBuilder.append(") />");
 		return (stringBuilder.toString());
 	}
 
