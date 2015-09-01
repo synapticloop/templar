@@ -45,6 +45,8 @@ import synapticloop.templar.token.Token;
 public class Tokeniser implements Serializable {
 	private static final long serialVersionUID = 4768014602151991781L;
 
+	private static Map<String, List<Token>> importCache = new HashMap<String, List<Token>>();
+
 	private TokeniserInfo tokeniserInfo = new TokeniserInfo();
 
 	private static final int BEGIN_PARENTHESES = 0;
@@ -151,6 +153,17 @@ public class Tokeniser implements Serializable {
 							// this is a little bit special in that we want to include all of 
 							// the generated tokens, rather than just the single token and leave
 							// it to render time to parse
+
+							// we need to know whether we have parsed this or not before - to stop recursive loops
+
+//							if(importCache.containsKey(importLocation)) {
+//								return(importCache.get(importLocation));
+//							}
+
+							// at this point - we are going to add it to the cache - even though we haven't quite parsed it yet...
+
+//							importCache.put(importLocation, null);
+
 							ImportToken importToken = new ImportToken(token, stringTokenizer, this);
 							tokens.add(importToken);
 							tokens.addAll(importToken.getTokens());
@@ -178,5 +191,6 @@ public class Tokeniser implements Serializable {
 		return(tokens);
 	}
 
+	public static void addToImportCache(String importLocation, List<Token> tokens) { importCache.put(importLocation, tokens); }
 	public TokeniserInfo getTokeniserInfo() { return(tokeniserInfo); }
 }

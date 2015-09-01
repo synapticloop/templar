@@ -61,6 +61,7 @@ public class ImportToken extends Token {
 	}
 
 	public List<Token> getTokens() throws ParseException {
+
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
 
@@ -144,6 +145,7 @@ public class ImportToken extends Token {
 
 		// finally add the end import token
 		tokens.add(new EndImportToken(stringTokenizer, tokeniser));
+
 		return(tokens);
 	}
 
