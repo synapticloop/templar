@@ -81,8 +81,7 @@ public class FunctionRequiresImport extends Function {
 		}
 	}
 
-}
-</code></pre><p>Once you have written your own function, you then need to add it to the templarContext for it to be callable</p><pre class="prettyprint lang-java"><code>TemplarConfiguration templarConfiguration = new TemplarConfiguration();
+}</code></pre><p>Once you have written your own function, you then need to add it to the templarContext for it to be callable</p><pre class="prettyprint lang-java"><code>TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 templarConfiguration.setExplicitNewLines(true);
 templarConfiguration.setExplicitTabs(true);
 
@@ -90,8 +89,7 @@ TemplarContext templarContext = new TemplarContext(templarConfiguration);
 
 if(!templarContext.hasFunction("requiresImport")) {
 	templarContext.addFunction("requiresImport", new FunctionRequiresImport());
-}
-</code></pre></section><script type="text/javascript">
+}</code></pre></section><script type="text/javascript">
 	var _paq = _paq || [];
 	_paq.push(['trackPageView']);
 	_paq.push(['enableLinkTracking']);

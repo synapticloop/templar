@@ -63,9 +63,11 @@
 				print out the key:value pairs.  In this case we use the dollar (<code>$</code>) notation:
 			</p>
 
-			<pre><code>{pre {loop session.sessionObjects.keySet as key}
+			<pre><code>{pre
+{loop session.sessionObjects.keySet as key}
 	{\t}KEY: {key}, VALUE: {session.sessionObjects.$key}{\n}
-{endloop} pre}</code></pre>
+{endloop}
+pre}</code></pre>
 
 			<p>
 				In effect this looks for a <code>$key</code> object in the templarContext with the name of <code>key</code> which 

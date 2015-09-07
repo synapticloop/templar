@@ -15,29 +15,21 @@ hence the apology.
 	&lt;something&gt; is true and this will be output
 {else}
 	&lt;something&gt; is false and this will be output
-{endif}
-</code></pre><p><code>&lt;something&gt;</code> can either be a function, or an evaluation, e.g:</p><pre><code>{if fn:true[object.method]}
+{endif}</code></pre><p><code>&lt;something&gt;</code> can either be a function, or an evaluation, e.g:</p><pre><code>{if fn:true[object.method]}
 	fn:true[object.method] is true and this will be output
 {else}
 	fn:true[object.method] is false and this will be output
-{endif}
-</code></pre><pre><code>{if some.object.methodThatReturnsABoolean}
+{endif}</code></pre><pre><code>{if some.object.methodThatReturnsABoolean}
 	some.object.methodThatReturnsABoolean is true and this will be output
 {else}
 	some.object.methodThatReturnsABoolean is false and this will be output
-{endif}
-</code></pre><p>You may of course chain functions, so long as the result is coercible to a Boolean</p><pre><code>{if fn:equals[fn:size[array], 10]}
+{endif}</code></pre><p>You may of course chain functions, so long as the result is coercible to a Boolean</p><pre><code>{if fn:equals[fn:size[array], 10]}
 	this will be output if the size of the array is exactly 10
 {else}
 	this will be output if the size of the array is not exactly 10
-{endif}
-</code></pre><h4><code class="large">{set ...}</code> - set a variable into the context <a name="command-set">&nbsp;</a></h4><p>The format of this command is as follows: <code>{set __something__ as __somethingElse__}</code>, where <code>__something__</code>is what you want to place in the context, and <code>__somethingElse__</code> is the key which it will be bound to.</p><pre><code>{set "world" as hello}
-</code></pre><p>We will be using this example later on - you can see that it has been placed into the context by using the <code>{dumpcontext}</code> command - which renders the following (at runtime):</p><pre><code>TemplarContext[{hello:world}]</code></pre><p>You can also set the evaluation of an object or function into the context.</p><pre><code>{set fn:length["some-string"] as someStringLength}
-</code></pre><p>Once again dumping the context</p><pre><code>TemplarContext[{someStringLength:11}, {hello:world}]</code></pre><h4><code class="large">{loop ...}</code> - loop over an iterable <a name="command-loop">&nbsp;</a></h4><p>The format of this command is as follows: <code>{loop __something__ as __somethingElse__}</code>, where <code>__something__</code>is what you want to loop over, placing <code>__somethingElse__</code> into the context for each iteration.  This williterate over it rendering the inner content between start and <code>{endloop}</code> token.</p><pre><code>
-{loop object.array as something}
+{endif}</code></pre><h4><code class="large">{set ...}</code> - set a variable into the context <a name="command-set">&nbsp;</a></h4><p>The format of this command is as follows: <code>{set __something__ as __somethingElse__}</code>, where <code>__something__</code>is what you want to place in the context, and <code>__somethingElse__</code> is the key which it will be bound to.</p><pre><code>{set "world" as hello}</code></pre><p>We will be using this example later on - you can see that it has been placed into the context by using the <code>{dumpcontext}</code> command - which renders the following (at runtime):</p><pre><code>TemplarContext[{hello:world}]</code></pre><p>You can also set the evaluation of an object or function into the context.</p><pre><code>{set fn:length["some-string"] as someStringLength}</code></pre><p>Once again dumping the context</p><pre><code>TemplarContext[{someStringLength:11}, {hello:world}]</code></pre><h4><code class="large">{loop ...}</code> - loop over an iterable <a name="command-loop">&nbsp;</a></h4><p>The format of this command is as follows: <code>{loop __something__ as __somethingElse__}</code>, where <code>__something__</code>is what you want to loop over, placing <code>__somethingElse__</code> into the context for each iteration.  This williterate over it rendering the inner content between start and <code>{endloop}</code> token.</p><pre><code>{loop object.array as something}
   // render something here
-{endloop}
-</code></pre><p>An example taken from <a href="https://github.com/synapticloop/h2zero/">h2zero</a>:</p><pre><code>{loop table.finders as finder}
+{endloop}</code></pre><p>An example taken from <a href="https://github.com/synapticloop/h2zero/">h2zero</a>:</p><pre><code>{loop table.finders as finder}
 	{if fn:null[finder.selectClause]}
 		{\t}private static final String SQL_{finder.staticName} = SQL_SELECT_START
 	{else}
@@ -47,9 +39,7 @@ hence the apology.
 	{if fn:notNull[finder.whereClause]} + " {finder.whereClause}"{endif}
 	{if fn:notNull[finder.orderBy]} + " order by {finder.orderBy}"{endif};{\n}
 {endloop}
-{\n}
-</code></pre><h4><code class="large">{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4><p>Import a file into the current file, the file to import can also be from the classpath (if you are deploying this as a complete jar - <code>{import classpath:/some/classpath/file/here.templar}</code></p><pre><code>{import src/imports/commands/import.templar}
-</code></pre><p>This file was imported from syntax-reference.html with the above line</p><h4><code class="large">{pre ...</code> - pre formatted text <a name="command-pre">&nbsp;</a></h4><p>As the name would suggest pre-formatted text - this is the only command that does not end with a <code>}</code>character, instead must end with <code>pre}</code>.</p><pre><code>{pre 
+{\n}</code></pre><h4><code class="large">{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4><p>Import a file into the current file, the file to import can also be from the classpath (if you are deploying this as a complete jar - <code>{import classpath:/some/classpath/file/here.templar}</code></p><pre><code>{import src/imports/commands/import.templar}</code></pre><p>This file was imported from syntax-reference.html with the above line</p><h4><code class="large">{pre ...</code> - pre formatted text <a name="command-pre">&nbsp;</a></h4><p>As the name would suggest pre-formatted text - this is the only command that does not end with a <code>}</code>character, instead must end with <code>pre}</code>.</p><pre><code>{pre 
 
 
 anything that goes in here, including any templar syntax is output exactly as shown without any templar parsing.  This
@@ -64,8 +54,7 @@ anything that goes in here, including any templar syntax is output exactly as sh
 is especially useful for CSS and JavaScript which has a lot of '{' and '}' characters.{\n}
 {\n}
 The content will be output until an end token of 'pre' immediately followed be a '}' character{\n}
-{\n}
-</code></pre><h4><code class="large">{tab}</code> or <code class="large">{\t}</code> - output a tab <a name="command-tab">&nbsp;</a></h4><p>This will output a tab whitespace character</p><h4><code class="large">{nl}</code> or <code class="large">{\n}</code> - output a new line character <a name="command-newline">&nbsp;</a></h4><p>This will output a newline whitespace character</p><h4><code class="large">{dumpcontext}</code> - dumping the context <a name="command-dumpcontext">&nbsp;</a></h4><p>This is useful for debugging as this will render all of the objects in the context, and will look like this:</p><pre><code>TemplarContext[{someStringLength:11}, {hello:world}]</code></pre><p>We cheated a little bit and added something to the context with the following:</p><pre><code>{set "world" as hello}</code></pre><h4><code class="large">{dumpfunctions}</code> - dumping the functions <a name="command-dumpfunctions">&nbsp;</a></h4><p>This is useful for debugging as this will render all of the registered functions and it will look like this:</p><pre><code>FunctionLessThanEqual #numArgs: 2
+{\n}</code></pre><h4><code class="large">{tab}</code> or <code class="large">{\t}</code> - output a tab <a name="command-tab">&nbsp;</a></h4><p>This will output a tab whitespace character</p><h4><code class="large">{nl}</code> or <code class="large">{\n}</code> - output a new line character <a name="command-newline">&nbsp;</a></h4><p>This will output a newline whitespace character</p><h4><code class="large">{dumpcontext}</code> - dumping the context <a name="command-dumpcontext">&nbsp;</a></h4><p>This is useful for debugging as this will render all of the objects in the context, and will look like this:</p><pre><code>TemplarContext[{someStringLength:11}, {hello:world}]</code></pre><p>We cheated a little bit and added something to the context with the following:</p><pre><code>{set "world" as hello}</code></pre><h4><code class="large">{dumpfunctions}</code> - dumping the functions <a name="command-dumpfunctions">&nbsp;</a></h4><p>This is useful for debugging as this will render all of the registered functions and it will look like this:</p><pre><code>FunctionLessThanEqual #numArgs: 2
 FunctionNotEqual #numArgs: 2
 FunctionLessThan #numArgs: 2
 FunctionAnd #numArgs: 2
