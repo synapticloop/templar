@@ -78,14 +78,16 @@ TemplarContext templarContext = new TemplarContext();
 				a passed in <code>TemplarConfiguration</code>. e.g.:
 			</p>
 
-<pre class="prettyprint lang-java"><code>{pre TemplarConfiguration templarConfiguration = new TemplarConfiguration();
+<pre class="prettyprint lang-java"><code>{pre
+TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 templarConfiguration.setExplicitNewLines(false);
 templarConfiguration.setExplicitTabs(false);
 templarConfiguration.setIgnoreWhitespace(false);
 pre}</code></pre>
 
 			<p>or</p>
-<pre class="prettyprint lang-java"><code>{pre TemplarConfiguration templarConfiguration = new TemplarConfiguration(false, false, false);
+<pre class="prettyprint lang-java"><code>{pre
+TemplarConfiguration templarConfiguration = new TemplarConfiguration(false, false, false);
 pre}
 </code></pre>
 
@@ -94,14 +96,17 @@ pre}
 			</p>
 
 <pre><code>
-{pre TemplarContext templarContext = new TemplarContext(templarConfiguration); pre}
+{pre
+TemplarContext templarContext = new TemplarContext(templarConfiguration);
+pre}
 </code></pre>
 
 		<p><strong>2. Adding objects to the templarContext</strong></p>
 		
 		<p>Very simply</p>
 		
-<pre class="prettyprint lang-java"><code>{pre templarContext.add(key, value)
+<pre class="prettyprint lang-java"><code>{pre
+templarContext.add(key, value)
 pre}
 </code></pre>
 
@@ -109,7 +114,8 @@ pre}
 
 		<p>Very simply</p>
 
-<pre class="prettyprint lang-java"><code>{pre try {
+<pre class="prettyprint lang-java"><code>{pre
+try {
     Parser parser = new Parser(this.getClass().getResourceAsStream("/synapticloop/ssc/template/admin.templar"));
 } catch (ParseException pex) {
     pex.printStackTrace();
@@ -122,7 +128,8 @@ pre}
 
 		<p>Very simply</p>
 
-<pre class="prettyprint lang-java"><code>{pre try {
+<pre class="prettyprint lang-java"><code>{pre
+try {
     String render = parser.render(templarContext);
     // do something with the rendered content...
 } catch (RenderException rex) {
