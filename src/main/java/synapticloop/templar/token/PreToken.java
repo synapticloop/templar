@@ -16,9 +16,9 @@ public class PreToken extends Token {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if(stringTokenizer.hasMoreTokens()) {
-			// discard the first token if it is a space
+			// discard the first token if it is a space or newline
 			String nextToken = stringTokenizer.nextToken();
-			if(!" ".equals(nextToken)) {
+			if(!" ".equals(nextToken) && !"\n".equals(nextToken)) {
 				stringBuilder.append(nextToken);
 			}
 		} else {
@@ -53,7 +53,7 @@ public class PreToken extends Token {
 		}
 
 		int length = stringBuilder.length();
-		if(stringBuilder.lastIndexOf(" ") == length -1) {
+		if(stringBuilder.lastIndexOf(" ") == length -1 || stringBuilder.lastIndexOf("\n") == length -1) {
 			// if it ends with a space, remove it
 			stringBuilder.deleteCharAt(length -1);
 		}

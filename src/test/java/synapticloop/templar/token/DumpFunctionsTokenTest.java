@@ -2,6 +2,8 @@ package synapticloop.templar.token;
 
 import static junit.framework.Assert.*;
 
+import java.util.StringTokenizer;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -44,7 +46,7 @@ public class DumpFunctionsTokenTest {
 
 	@Test
 	public void testRender() throws ParseException, RenderException {
-		dumpFunctionsToken = new DumpFunctionsToken(null, null, new Tokeniser());
+		dumpFunctionsToken = new DumpFunctionsToken("", new StringTokenizer("}"), new Tokeniser());
 		TemplarContext templarContext = new TemplarContext();
 		String render = dumpFunctionsToken.render(templarContext);
 		assertTrue(render.contains(FunctionLessThanEqual.class.getSimpleName()));

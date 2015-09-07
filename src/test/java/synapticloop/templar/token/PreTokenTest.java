@@ -35,6 +35,13 @@ public class PreTokenTest {
 	}
 
 	@Test
+	public void testNewLinesStarter() throws ParseException, RenderException {
+		Parser parser = new Parser("{pre\nwe want to ignore start and end new lines\npre}");
+		assertEquals("<PRE@1:2 (we want to ignore start and end new lines)/>", parser.toString());
+		assertEquals("we want to ignore start and end new lines", parser.render());
+	}
+
+	@Test
 	public void testNewLinesAndTabsToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre \nnoindent\n\tpre\n\tpre\n\tpre\n\tsomething, something\n\tpre\nnoindent pre}");
 		assertEquals("<PRE@1:2 (\n" + 

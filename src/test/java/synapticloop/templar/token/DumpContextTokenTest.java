@@ -2,6 +2,8 @@ package synapticloop.templar.token;
 
 import static junit.framework.Assert.*;
 
+import java.util.StringTokenizer;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -23,7 +25,7 @@ public class DumpContextTokenTest {
 	@Test
 	public void testNullContext() {
 		try {
-			dumpContextToken = new DumpContextToken(null, null, new Tokeniser());
+			dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
 			assertEquals("<DUMPCONTEXT@1:1 />", dumpContextToken.toString());
 		} catch (ParseException e) {
 			assertFalse(true);
@@ -32,7 +34,7 @@ public class DumpContextTokenTest {
 
 	@Test
 	public void testRender() throws ParseException, RenderException {
-		dumpContextToken = new DumpContextToken(null, null, new Tokeniser());
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.add("key", "value");
 		assertEquals("TemplarContext[{key:value}]", dumpContextToken.render(templarContext));
@@ -40,7 +42,7 @@ public class DumpContextTokenTest {
 
 	@Test
 	public void testRenderObjects() throws ParseException, RenderException {
-		dumpContextToken = new DumpContextToken(null, null, new Tokeniser());
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.add("key", "value");
 		templarContext.add("stringArray", new String[8]);
@@ -52,7 +54,7 @@ public class DumpContextTokenTest {
 
 	@Test
 	public void testRenderNullContext() throws ParseException, RenderException {
-		dumpContextToken = new DumpContextToken(null, null, new Tokeniser());
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
 		assertEquals("TemplarContext[]", dumpContextToken.render(null));
 	}
 
