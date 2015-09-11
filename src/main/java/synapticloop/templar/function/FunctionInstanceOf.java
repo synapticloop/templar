@@ -17,8 +17,24 @@ package synapticloop.templar.function;
  * under the Licence.
  */
 
-public class FunctionSize extends FunctionLength {
-	public FunctionSize() {
-		super();
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.utils.TemplarContext;
+
+public class FunctionInstanceOf extends Function {
+	public FunctionInstanceOf() {
+		super(2);
+	}
+
+	@Override
+	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+		if(verifyArgumentLength(args)) {
+			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+			String argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext).toString();
+
+			return(argZero.getClass().getCanonicalName().endsWith(argOne));
+		} else {
+			throw new FunctionException("The function 'instanceof' takes exactly two arguments, an Object and a String");
+		}
 	}
 }

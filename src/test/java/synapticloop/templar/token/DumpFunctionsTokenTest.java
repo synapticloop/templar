@@ -23,7 +23,6 @@ import synapticloop.templar.function.FunctionLessThan;
 import synapticloop.templar.function.FunctionLessThanEqual;
 import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.FunctionOr;
-import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
 import synapticloop.templar.function.math.FunctionAdd;
 import synapticloop.templar.function.math.FunctionDivide;
@@ -73,7 +72,6 @@ public class DumpFunctionsTokenTest {
 		assertTrue(render.contains(FunctionDivide.class.getSimpleName()));
 		assertTrue(render.contains(FunctionEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionIsNull.class.getSimpleName()));
-		assertTrue(render.contains(FunctionSize.class.getSimpleName()));
 		assertTrue(render.contains(FunctionTrue.class.getSimpleName()));
 		assertTrue(render.contains(FunctionNotEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionNotEqual.class.getSimpleName()));

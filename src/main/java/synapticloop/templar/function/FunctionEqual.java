@@ -22,7 +22,6 @@ import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionEqual extends Function {
-
 	public FunctionEqual() {
 		super(2);
 	}
@@ -48,7 +47,5 @@ public class FunctionEqual extends Function {
 		} else {
 			throw new FunctionException("The function '=', or 'equal' takes exactly two arguments, both of which must be coercible to a String.");
 		}
-
 	}
-
 }

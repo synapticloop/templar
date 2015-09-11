@@ -38,7 +38,6 @@ import synapticloop.templar.function.FunctionLessThan;
 import synapticloop.templar.function.FunctionLessThanEqual;
 import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.FunctionOr;
-import synapticloop.templar.function.FunctionSize;
 import synapticloop.templar.function.FunctionTrue;
 import synapticloop.templar.function.math.FunctionAdd;
 import synapticloop.templar.function.math.FunctionDivide;
@@ -59,28 +58,17 @@ public class TemplarContext {
 		// null operators
 		functionMap.put("null", new FunctionIsNull()); // test whether the passed in parameter is null
 		functionMap.put("notNull", new FunctionIsNotNull()); // test whether the passed in parameter is not null
-		functionMap.put("!Null", new FunctionIsNotNull()); // test whether the passed in parameter is not null
-		functionMap.put("!null", new FunctionIsNotNull());// test whether the passed in parameter is not null
 
 		// boolean function operators
 		functionMap.put("=", new FunctionEqual()); // test whether the passed in parameters are equal
-		functionMap.put("equal", new FunctionEqual()); // test whether the passed in parameters are equal
 		functionMap.put("<>", new FunctionNotEqual()); // test whether the passed in parameters are not equal
-		functionMap.put("not=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
-		functionMap.put("!=", new FunctionNotEqual()); // test whether the passed in parameters are not equal
-		functionMap.put("notEqual", new FunctionNotEqual()); // test whether the passed in parameters are not equal
 		functionMap.put(">", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
-		functionMap.put("gt", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
 		functionMap.put(">=", new FunctionGreaterThanEqual()); // test whether the the first parameter is greater than or equal to the second
-		functionMap.put("gte", new FunctionGreaterThanEqual());  // test whether the the first parameter is greater than or equal to the second
 		functionMap.put("<", new FunctionLessThan());  // test whether the the first parameter is less than the second
-		functionMap.put("lt", new FunctionLessThan());  // test whether the the first parameter is less than the second
 		functionMap.put("<=", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to the second
-		functionMap.put("lte", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to than the second
 
 		// size operators
 		functionMap.put("length", new FunctionLength()); // return the length/size of the passed in parameter
-		functionMap.put("size", new FunctionSize()); // return the length/size of the passed in parameter
 
 		// date operators
 		functionMap.put("fmtDate", new FunctionFormatDate()); // format the date with the two parameters date, and format as a string
@@ -108,6 +96,31 @@ public class TemplarContext {
 		functionMap.put("odd", new FunctionOdd()); // Test whether the passed in number is odd
 	}
 
+	private static Map<String, String> functionAliasMap = new HashMap<String, String>();
+	static {
+		functionAliasMap.put("isnull", "null");
+		functionAliasMap.put("isNull", "null");
+
+		functionAliasMap.put("!Null", "notNull");
+		functionAliasMap.put("!null", "notNull");
+		functionAliasMap.put("isnotnull", "notNull");
+		functionAliasMap.put("isNotNull", "notNull");
+		functionAliasMap.put("notnull", "notNull");
+
+		functionAliasMap.put("equal", "=");
+
+		functionAliasMap.put("not=", "<>");
+		functionAliasMap.put("!=", "<>");
+		functionAliasMap.put("notEqual", "<>");
+
+		functionAliasMap.put("gt", ">");
+		functionAliasMap.put("gt=", ">=");
+		functionAliasMap.put("lt", "<");
+		functionAliasMap.put("lte", "<=");
+
+		functionAliasMap.put("length", "size");
+
+	}
 	public TemplarContext() {
 		// do nothing
 	}
@@ -181,13 +194,14 @@ public class TemplarContext {
 	}
 
 	/**
-	 * Return whether the templar context has a particular function registered to it.
+	 * Return whether the templar context has a particular function registered to
+	 * it, or has a function aliased to it
 	 * 
-	 * @param name the function name to test
+	 * @param name the function name to lookup
 	 * @return whether the templar context has that function registered to it.
 	 */
 	public boolean hasFunction(String name) {
-		return(functionMap.containsKey(name));
+		return(functionMap.containsKey(name) || functionAliasMap.containsKey(name));
 	}
 
 	/**
@@ -213,9 +227,8 @@ public class TemplarContext {
 	 * 
 	 * @return the map of all registered functions
 	 */
-	public Map<String, Function> getFunctionMap() {
-		return(functionMap);
-	}
+	public Map<String, Function> getFunctionMap() { return(functionMap); }
+	public Map<String, String> getFunctionAliasMap() { return(functionAliasMap); }
 
 	private String getRegisteredFunctions() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -250,10 +263,29 @@ public class TemplarContext {
 					parsedArgs[i] = null;
 				}
 			}
-			return(functionMap.get(name).evaluate(args, templarContext));
+			return(getFunction(name).evaluate(args, templarContext));
 		} else {
 			throw new FunctionException("Function with name '" + name + "' does not exist.");
 		}
+	}
+
+	public static String getBaseFunction(String name) {
+		if(functionAliasMap.containsKey(name)) {
+			return(functionAliasMap.get(name));
+		}
+
+		return(name);
+	}
+	private Function getFunction(String name) {
+		if(functionMap.containsKey(name)) {
+			return(functionMap.get(name));
+		}
+
+		if(functionAliasMap.containsKey(name)) {
+			return(functionMap.get(functionAliasMap.get(name)));
+		}
+
+		return(null);
 	}
 
 	public void clear() {

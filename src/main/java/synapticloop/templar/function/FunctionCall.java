@@ -21,6 +21,7 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionCall extends Function {
+
 	public FunctionCall() {
 		super(1);
 	}
@@ -43,5 +44,4 @@ public class FunctionCall extends Function {
 			throw new FunctionException("The function 'call' takes only one argument which is in the format of 'object.method'.");
 		}
 	}
-
 }

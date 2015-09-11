@@ -22,6 +22,7 @@ import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionAnd extends Function {
+
 	public FunctionAnd() {
 		super(2);
 	}

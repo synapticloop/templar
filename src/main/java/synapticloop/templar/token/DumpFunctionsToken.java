@@ -17,8 +17,11 @@ package synapticloop.templar.token;
  * under the Licence.
  */
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -55,11 +58,27 @@ public class DumpFunctionsToken extends CommandToken {
 		Map<String, Function> functionMap = templarContext.getFunctionMap();
 		Iterator<String> iterator = functionMap.keySet().iterator();
 		while(iterator.hasNext()) {
-			Function function = functionMap.get(iterator.next());
-			stringBuilder.append(function.getClass().getSimpleName() + " #numArgs: " + function.getNumArgs() + "\n");
+			String fnName = iterator.next();
+			Function function = functionMap.get(fnName);
+
+			stringBuilder.append(function.getClass().getSimpleName() + " fn:" + fnName + "[ <#numArgs: " + function.getNumArgs() + "> ]\n");
 		}
 
 		return(stringBuilder.toString());
+	}
+
+	private List<String> getAliasesForFunction(String name, TemplarContext templarContext) {
+		ArrayList<String> arrayList = new ArrayList<String>();
+
+		Map<String, Function> functionMap = templarContext.getFunctionMap();
+		Map<String, String> functionAliasMap = templarContext.getFunctionAliasMap();
+
+		Set<String> keySet = functionAliasMap.keySet();
+		for (String key : keySet) {
+			functionMap.keySet();
+		}
+
+		return(arrayList);
 	}
 
 	@Override

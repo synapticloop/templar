@@ -24,7 +24,12 @@ public abstract class Function {
 	private int numArgs = 0;
 
 	protected Function() {}
-	
+
+	/**
+	 * Instantiate the function
+	 * 
+	 * @param numArgs the number of requested arguments that this function takes
+	 */
 	public Function(int numArgs) {
 		this.numArgs = numArgs;
 	}
@@ -65,8 +70,23 @@ public abstract class Function {
 		return(false);
 	}
 
+	/**
+	 * Evaluate the function
+	 * 
+	 * @param args the array of arguments that are passed in
+	 * @param templarContext the templar context for any lookups
+	 * 
+	 * @return the evaluation object
+	 * 
+	 * @throws FunctionException if something went horribly wrong with the evaluation
+	 */
 	public abstract Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException;
 
+	/**
+	 * Return the number of arguments that this function expects
+	 * 
+	 * @return the number of arguments that needs to be passed in to the function
+	 */
 	public int getNumArgs() { return numArgs; }
 
 }
