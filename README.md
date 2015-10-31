@@ -1,6 +1,6 @@
 templar
 =======
-
+ 
 (Documentation now lives here: [http://synapticloop.github.io/templar/](http://synapticloop.github.io/templar/))
 
 A lightweight java templating engine - and by lightweight we mean a small number of lines of code... (that weights in around 90k):

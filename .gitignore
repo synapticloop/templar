@@ -8,3 +8,6 @@ cobertura.ser
 build-sonar.xml
 /dist/
 hs_err_*.log
+/target/
+reports/
+.gradle/

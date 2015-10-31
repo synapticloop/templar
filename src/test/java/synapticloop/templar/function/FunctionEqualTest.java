@@ -17,8 +17,10 @@ package synapticloop.templar.function;
  * under the Licence.
  */
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +64,7 @@ public class FunctionEqualTest {
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
-}
+	}
 
 	@Test
 	public void testNonCoerce() {
@@ -118,5 +120,18 @@ public class FunctionEqualTest {
 
 		objects = new Object[] {"'3'", "'3'"};
 		assertTrue(((Boolean)functionEqual.evaluate(objects, null)).booleanValue());
+	}
+
+	@Test
+	public void testArrayLength() throws FunctionException {
+		FunctionLength functionLength = new FunctionLength();
+
+
+		List<String> theList = new ArrayList<String>();
+		Object listLength = functionLength.evaluate(new Object[] { theList }, null);
+		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { listLength, 0 }, null)).booleanValue());
+		theList.add("one");
+		listLength = functionLength.evaluate(new Object[] { theList }, null);
+		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { listLength, 1}, null)).booleanValue());
 	}
 }

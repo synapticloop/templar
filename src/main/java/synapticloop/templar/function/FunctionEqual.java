@@ -31,6 +31,7 @@ public class FunctionEqual extends Function {
 		if(verifyArgumentLength(args)) {
 			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
 			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+
 			if(null == argZero) {
 				if(null == argOne) {
 					return(true);
