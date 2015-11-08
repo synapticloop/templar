@@ -21,15 +21,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
-import org.mockito.Mock;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.TemplarContext;
-
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.*;
 
 public class FunctionIsNullTest {
 	private FunctionIsNull functionIsNull;

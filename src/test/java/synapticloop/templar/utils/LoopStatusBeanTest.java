@@ -4,15 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.After;
-
-import org.mockito.Mock;
-
-import synapticloop.templar.Parser;
-import synapticloop.templar.exception.ParseException;
-
-import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.*;
 
 public class LoopStatusBeanTest {
 	private LoopStatusBean loopStatusBean;

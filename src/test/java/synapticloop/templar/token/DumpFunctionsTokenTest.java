@@ -1,6 +1,7 @@
 package synapticloop.templar.token;
 
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
+
 
 import java.util.StringTokenizer;
 

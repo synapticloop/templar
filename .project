@@ -21,7 +21,7 @@
 		</filter>
 	</filteredResources>
 	<name>templar</name>
-	<comment>Project templar created by Buildship.</comment>
+	<comment>Templar templating engine</comment>
 	<projects/>
 	<natures>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>

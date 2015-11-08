@@ -16,10 +16,8 @@ package synapticloop.templar.function;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
 import java.util.ArrayList;
 
 import org.junit.Before;
