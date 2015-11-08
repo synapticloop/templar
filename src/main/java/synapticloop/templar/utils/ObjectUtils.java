@@ -31,6 +31,18 @@ public class ObjectUtils {
 	private ObjectUtils() {}
 
 
+	/**
+	 * Evaluate an object against the templar context.  This does not allow for 
+	 * quoted variable, and everything is attempted to be looked up through the 
+	 * templar context inline.
+	 * 
+	 * @param commandLine the command line to evaluate
+	 * @param templarContext the templar context for lookups
+	 * 
+	 * @return the evaluated object
+	 * 
+	 * @throws RenderException if there was an error rendering 
+	 */
 	public static Object evaluateObject(String commandLine, TemplarContext templarContext) throws RenderException {
 		if(null == templarContext) {
 			throw new RenderException("TemplarContext is null, no lookups will be available.");
@@ -125,6 +137,19 @@ public class ObjectUtils {
 			throw new RenderException(itex.getMessage(), itex);
 		}
 	}
+
+	/**
+	 * Evaluate an object against the templar context.  If the object is quoted
+	 * either with double quotes (") or single quotes (') then it will be 
+	 * passed back as a string and not looked up in the context
+	 * 
+	 * @param object the object to evaluate
+	 * @param templarContext the templar context for lookups
+	 * 
+	 * @return the evaluated object
+	 * 
+	 * @throws RenderException if there was an error rendering 
+	 */
 
 	public static Object evaluateObjectToDefault(Object object, TemplarContext templarContext) {
 		if(null == object) {
@@ -290,16 +315,32 @@ public class ObjectUtils {
 		return(null);
 	}
 
+	/**
+	 * Return whether the object is quoted, i.e. the passed in object is a String 
+	 * and both starts and ends with a single quote (') or a double quote (")
+	 * 
+	 * @param object the object to test
+	 * 
+	 * @return whether the object is a string and is quoted
+	 */
 	public static boolean isQuoted(Object object) {
 		if(object instanceof String) {
 			String string = (String)object;
-			return((string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\"")));
+			return(string.length() >= 2 && ((string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\""))));
 		}
 		return(false);
 	}
 
+	/**
+	 * De-quote a string by removing both the first and last quote character (either 
+	 * single or double quotation marks) 
+	 * 
+	 * @param quotedString the quoted string
+	 * 
+	 * @return the de-quoted string 
+	 */
 	public static String deQuote(String quotedString) {
-		if((quotedString.startsWith("'") && quotedString.endsWith("'")) || (quotedString.startsWith("\"") && quotedString.endsWith("\""))) {
+		if(isQuoted(quotedString)) {
 			return(quotedString.substring(1, quotedString.length() -1));
 		}
 		return(quotedString);
