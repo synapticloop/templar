@@ -9,6 +9,19 @@ public abstract class BaseMathFunction extends Function {
 		super(numArgs);
 	}
 
+	public BaseMathFunction(int numArgs, int numArgsMax) {
+		super(numArgs, numArgsMax);
+	}
+
+	/**
+	 * Get a number from the passed in string, either a double, or a Long
+	 * 
+	 * @param numberString the number, expressed as a string
+	 * 
+	 * @return the parsed number
+	 * 
+	 * @throws FunctionException if the string could not be parsed into a number
+	 */
 	protected Number getNumber(String numberString) throws FunctionException {
 		if(numberString.contains(".")) {
 			try {

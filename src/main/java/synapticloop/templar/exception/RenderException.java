@@ -24,10 +24,21 @@ package synapticloop.templar.exception;
 public class RenderException extends Exception {
 	private static final long serialVersionUID = -5781431903609494963L;
 
+	/**
+	 * Create a rendering exception
+	 * 
+	 * @param message the message for the exception
+	 */
 	public RenderException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Create a render exception
+	 * 
+	 * @param message the message for the exception
+	 * @param rootCause the root cause of the exception
+	 */
 	public RenderException(String message, Exception rootCause) {
 		super(message, rootCause);
 	}

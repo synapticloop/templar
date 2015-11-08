@@ -32,19 +32,42 @@ public class ParseException extends Exception {
 	private static final long serialVersionUID = 2330577994861842050L;
 	private BasePositionToken exceptionToken = null;
 
+	/**
+	 * Create a parse exception
+	 * 
+	 * @param message the message
+	 */
 	public ParseException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Create a parse exception
+	 * 
+	 * @param message the message
+	 * @param throwable the root cause
+	 */
 	public ParseException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
 
+	/**
+	 * Create a parse exception with a token in which the exception occurred
+	 * 
+	 * @param message the message
+	 * @param exceptionToken the token with that the parsing errored on
+	 */
 	public ParseException(String message, BasePositionToken exceptionToken) {
 		super(message);
 		this.exceptionToken = exceptionToken;
 	}
 
+	/**
+	 * Get the exception token that the parsing errored on, of a default empty
+	 * token if one was not given.
+	 * 
+	 * @return the exception token or a default one
+	 */
 	public BasePositionToken getExceptionToken() {
 		if(null == exceptionToken) {
 			try {

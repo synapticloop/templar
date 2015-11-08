@@ -1,8 +1,4 @@
-package synapticloop.templar.function;
-
-import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.helper.ObjectHelper;
-import synapticloop.templar.utils.TemplarContext;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -21,19 +17,15 @@ import synapticloop.templar.utils.TemplarContext;
  * under the Licence.
  */
 
-public class FunctionOr extends Function {
-	public FunctionOr() {
-		super(2);
-	}
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.TemplarContext;
+
+public class FunctionLessThanEqual extends FunctionNumericComparison {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		Boolean argZero = ObjectHelper.evaluateObjectToDefaultBoolean(args[0], templarContext);
-		Boolean argOne = ObjectHelper.evaluateObjectToDefaultBoolean(args[1], templarContext);
-		if(null == argZero || null == argOne) {
-			throw new FunctionException("Could not evaluate arguments to a Boolean, arguments were: " + args[0] + ", " + args[1] + ", values: " + argZero + ", " + argOne);
-		} else {
-			return(argZero || argOne);
-		}
+		super.evaluateNumeric(args, templarContext);
+		return(arg1.longValue() <= arg2.longValue());
 	}
+
 }

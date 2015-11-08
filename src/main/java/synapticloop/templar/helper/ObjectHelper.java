@@ -148,8 +148,6 @@ public class ObjectHelper {
 	 * @param templarContext the templar context for lookups
 	 * 
 	 * @return the evaluated object
-	 * 
-	 * @throws RenderException if there was an error rendering 
 	 */
 
 	public static Object evaluateObjectToDefault(Object object, TemplarContext templarContext) {

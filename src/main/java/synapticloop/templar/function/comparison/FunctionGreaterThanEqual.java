@@ -1,7 +1,4 @@
-package synapticloop.templar.function;
-
-import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.TemplarContext;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -20,13 +17,16 @@ import synapticloop.templar.utils.TemplarContext;
  * under the Licence.
  */
 
-public class FunctionTrue extends FunctionBoolean {
-	public FunctionTrue() {
-		super(1);
-	}
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.TemplarContext;
+
+public class FunctionGreaterThanEqual extends FunctionNumericComparison {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		return(getEvaluatedArgument(args, templarContext, true));
+		super.evaluateNumeric(args, templarContext);
+
+		return(arg1.longValue() >= arg2.longValue());
 	}
+
 }

@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.function.FunctionGreaterThan;
+import synapticloop.templar.function.comparison.FunctionGreaterThan;
 
 public class TemplarContextTest {
 	private TemplarContext templarContext;

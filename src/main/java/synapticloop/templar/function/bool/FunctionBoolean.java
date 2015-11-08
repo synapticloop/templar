@@ -1,12 +1,13 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.bool;
 
+import synapticloop.templar.function.Function;
 import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public abstract class FunctionBoolean extends Function {
 
-	public FunctionBoolean(int i) {
-		super(i);
+	public FunctionBoolean(int numArgs) {
+		super(numArgs);
 	}
 
 	protected Object getEvaluatedArgument(Object[] args, TemplarContext templarContext, boolean testValue) {

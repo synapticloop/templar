@@ -19,17 +19,30 @@ package synapticloop.templar.exception;
 
 /**
  * Thrown when there was a problem with the function, which could include
- *   - verifying the number of arguments passed through to a function, or
- *   - the evaluation process failed, or
- *   - the registration of the function
+ * <ul>
+ *   <li>verifying the number of arguments passed through to a function, or</li>
+ *   <li>the evaluation process failed, or</li>
+ *   <li>the registration of the function failed</li>
+ * </ul>
  */
 public class FunctionException extends Exception {
 	private static final long serialVersionUID = 5066739168531962194L;
 
+	/**
+	 * Create a function exception
+	 * 
+	 * @param message the exception message
+	 */
 	public FunctionException(String message) {
 		super(message);
 	}
 
+	/**
+	 * Create a function exception
+	 * 
+	 * @param message the message
+	 * @param throwable the root cause
+	 */
 	public FunctionException(String message, Throwable throwable) {
 		super(message, throwable);
 	}

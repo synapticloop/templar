@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -18,6 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.function.Function;
 import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 

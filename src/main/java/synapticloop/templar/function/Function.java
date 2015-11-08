@@ -50,6 +50,7 @@ public abstract class Function {
 	/**
 	 * Evaluate the function, first confirming the number of arguments
 	 * 
+	 * @param alias the alias that was used to invoke this function
 	 * @param args the array of arguments that are passed in
 	 * @param templarContext the templar context for any lookups
 	 * 

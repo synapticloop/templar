@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.function.comparison.FunctionGreaterThanEqual;
 
 public class FunctionGreaterThanEqualTest {
 	private FunctionGreaterThanEqual functionGreaterThanEqual;

@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.bool;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.TemplarContext;

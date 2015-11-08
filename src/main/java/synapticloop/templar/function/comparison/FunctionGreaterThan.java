@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -20,12 +20,13 @@ package synapticloop.templar.function;
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionLessThan extends FunctionNumericComparison {
+public class FunctionGreaterThan extends FunctionNumericComparison {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		super.evaluateNumeric(args, templarContext);
-		return(arg1.longValue() < arg2.longValue());
+
+		return(arg1.longValue() > arg2.longValue());
 	}
 
 }
