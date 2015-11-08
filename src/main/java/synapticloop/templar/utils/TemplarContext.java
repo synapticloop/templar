@@ -118,9 +118,11 @@ public class TemplarContext {
 		functionAliasMap.put("notnull", "notNull");
 
 		functionAliasMap.put("equal", "=");
+		functionAliasMap.put("eq", "=");
 
 		functionAliasMap.put("not=", "<>");
 		functionAliasMap.put("!=", "<>");
+		functionAliasMap.put("!eq", "<>");
 		functionAliasMap.put("notEqual", "<>");
 
 		functionAliasMap.put("gt", ">");

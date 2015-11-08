@@ -48,6 +48,7 @@ public class DumpFunctionsTokenTest {
 		dumpFunctionsToken = new DumpFunctionsToken("", new StringTokenizer("}"), new Tokeniser());
 		TemplarContext templarContext = new TemplarContext();
 		String render = dumpFunctionsToken.render(templarContext);
+		System.out.println(render);
 		assertTrue(render.contains(FunctionLessThanEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionLessThanEqual.class.getSimpleName()));
 		assertTrue(render.contains(FunctionNotEqual.class.getSimpleName()));

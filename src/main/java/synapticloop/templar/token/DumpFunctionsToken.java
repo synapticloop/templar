@@ -70,24 +70,41 @@ public class DumpFunctionsToken extends CommandToken {
 				stringBuilder.append(" or ");
 				stringBuilder.append(function.getNumArgsMax());
 			}
-			stringBuilder.append("> ]\n");
+			stringBuilder.append("> ]");
+			List<String> aliasesForFunction = getAliasesForFunction(fnName, templarContext);
+			for(int i = 0; i < aliasesForFunction.size(); i++) {
+				if(i == 0) {
+					stringBuilder.append(" aliased as (");
+				}
+
+				stringBuilder.append(aliasesForFunction.get(i));
+
+				if(i == aliasesForFunction.size() -1) {
+					stringBuilder.append(")");
+				} else {
+					stringBuilder.append(", ");
+				}
+			}
+			stringBuilder.append("\n");
 		}
 
 		return(stringBuilder.toString());
 	}
 
 	private List<String> getAliasesForFunction(String name, TemplarContext templarContext) {
-		ArrayList<String> arrayList = new ArrayList<String>();
+		List<String> aliasList = new ArrayList<String>();
 
-		Map<String, Function> functionMap = templarContext.getFunctionMap();
 		Map<String, String> functionAliasMap = templarContext.getFunctionAliasMap();
 
+		// go through the function alias map and find all of the values that match the alias
 		Set<String> keySet = functionAliasMap.keySet();
 		for (String key : keySet) {
-			functionMap.keySet();
+			if(name.equals(functionAliasMap.get(key))) {
+				aliasList.add(key);
+			}
 		}
 
-		return(arrayList);
+		return(aliasList);
 	}
 
 	@Override

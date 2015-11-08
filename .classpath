@@ -10,7 +10,11 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/test/resources"/>
+	<classpathentry kind="src" path="src/test/resources">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
 	<classpathentry kind="lib" path="/Users/osmanj/.m2/repository/junit/junit/4.11/junit-4.11.jar" sourcepath="/Users/osmanj/.m2/repository/junit/junit/4.11/junit-4.11-sources.jar"/>
