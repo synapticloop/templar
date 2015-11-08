@@ -20,19 +20,19 @@ public class FunctionSubtractTest {
 	@Test
 	public void testSubtractLongLong() throws FunctionException {
 		Object[] test = {"'123'", "'456'"};
-		assertEquals(-333L, functionSubtract.evaluate(test, templarContext));
+		assertEquals(-333L, functionSubtract.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testSubtractLongDouble() throws FunctionException {
 		Object[] test = {"'123'", "'45.6'"};
-		assertEquals(77.4, functionSubtract.evaluate(test, templarContext));
+		assertEquals(77.4, functionSubtract.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testSubtractDoubleLong() throws FunctionException {
 		Object[] test = {"'45.6'", "'123'"};
-		assertEquals(-77.4, functionSubtract.evaluate(test, templarContext));
+		assertEquals(-77.4, functionSubtract.evaluate("", test, templarContext));
 	}
 
 }

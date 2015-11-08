@@ -29,21 +29,17 @@ public class FunctionAnd extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
-			// no need to evaluate any further
-			if(!argZero.booleanValue()) {
-				return(false);
-			}
+		Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
+		// no need to evaluate any further
+		if(!argZero.booleanValue()) {
+			return(false);
+		}
 
-			Boolean argOne = ObjectUtils.evaluateObjectToDefaultBoolean(args[1], templarContext);
-			if(null == argZero || null == argOne) {
-				throw new FunctionException("Could not evaluate arguments to a Boolean, arguments were: " + args[0] + ", " + args[1] + ", values: " + argZero + ", " + argOne);
-			} else {
-				return(argZero && argOne);
-			}
+		Boolean argOne = ObjectUtils.evaluateObjectToDefaultBoolean(args[1], templarContext);
+		if(null == argZero || null == argOne) {
+			throw new FunctionException("Could not evaluate arguments to a Boolean, arguments were: " + args[0] + ", " + args[1] + ", values: " + argZero + ", " + argOne);
 		} else {
-			throw new FunctionException("The function 'and' takes exactly two arguments.");
+			return(argZero && argOne);
 		}
 	}
 }

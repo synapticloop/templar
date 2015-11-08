@@ -16,9 +16,7 @@ package synapticloop.templar.function;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +34,7 @@ public class FunctionGreaterThanTest {
 	@Test
 	public void testNullArguments() {
 		try {
-			functionGreaterThan.evaluate(null, null);
+			functionGreaterThan.evaluate(">", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -44,7 +42,7 @@ public class FunctionGreaterThanTest {
 
 		try {
 			Object[] objects = new Object[] {"1", null};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -52,7 +50,7 @@ public class FunctionGreaterThanTest {
 
 		try {
 			Object[] objects = new Object[] {null, "1"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -63,7 +61,7 @@ public class FunctionGreaterThanTest {
 	public void testNonCoerce() {
 		try {
 			Object[] objects = new Object[] {"1", "sjh"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -71,7 +69,7 @@ public class FunctionGreaterThanTest {
 
 		try {
 			Object[] objects = new Object[] {"sjh", "1"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -82,7 +80,7 @@ public class FunctionGreaterThanTest {
 	public void testArgumentNumbers() {
 		try {
 			Object[] objects = new Object[] {"1"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -90,7 +88,7 @@ public class FunctionGreaterThanTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1", "1"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -98,7 +96,7 @@ public class FunctionGreaterThanTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1"};
-			functionGreaterThan.evaluate(objects, null);
+			functionGreaterThan.evaluate(">", objects, null);
 			assertTrue(true);
 		} catch (FunctionException stefex) {
 			assertTrue(false);
@@ -108,12 +106,12 @@ public class FunctionGreaterThanTest {
 	@Test
 	public void testEvaluate() throws FunctionException {
 		Object[] objects = new Object[] {"3", "1"};
-		assertTrue(((Boolean)functionGreaterThan.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionGreaterThan.evaluate(">", objects, null)).booleanValue());
 
 		objects = new Object[] {"1", "3"};
-		assertFalse(((Boolean)functionGreaterThan.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionGreaterThan.evaluate(">", objects, null)).booleanValue());
 
 		objects = new Object[] {"3", "3"};
-		assertFalse(((Boolean)functionGreaterThan.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionGreaterThan.evaluate(">", objects, null)).booleanValue());
 	}
 }

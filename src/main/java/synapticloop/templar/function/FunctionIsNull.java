@@ -28,16 +28,12 @@ public class FunctionIsNull extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			if(null != args[0]) {
-				// see if we can get if from the context
-				Object evaluateObject = ObjectUtils.evaluateObjectToDefault(args[0].toString(), templarContext);
-				return(null == evaluateObject);
-			} else {
-				return(true);
-			}
+		if(null != args[0]) {
+			// see if we can get if from the context
+			Object evaluateObject = ObjectUtils.evaluateObjectToDefault(args[0].toString(), templarContext);
+			return(null == evaluateObject);
 		} else {
-			throw new FunctionException("The function 'null' takes exactly one argument.");
+			return(true);
 		}
 	}
 }

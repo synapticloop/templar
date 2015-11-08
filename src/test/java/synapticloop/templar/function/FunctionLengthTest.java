@@ -40,28 +40,28 @@ public class FunctionLengthTest {
 
 	@Test(expected = FunctionException.class)
 	public void testTooManyArgsFormat() throws FunctionException {
-		functionLength.evaluate(new Object[] {null, null}, null);
+		functionLength.evaluate("", new Object[] {null, null}, null);
 	}
 
 	@Test(expected = FunctionException.class)
 	public void testNullArguments() throws FunctionException {
-		functionLength.evaluate(null, null);
+		functionLength.evaluate("", null, null);
 	}
 
 	@Test(expected = FunctionException.class)
 	public void testInvalidLength() throws FunctionException {
-		functionLength.evaluate(new Object[] {new FieldNone()}, null);
+		functionLength.evaluate("", new Object[] {new FieldNone()}, null);
 	}
 
 	@Test
 	public void testValidLength() throws FunctionException {
-		assertEquals(0, functionLength.evaluate(new Object[] {new ArrayList<String>()}, null));
-		assertEquals(0, functionLength.evaluate(new Object[] {new ArrayList<String>()}, null));
-		assertEquals(5, functionLength.evaluate(new Object[] {new String[5]}, null));
+		assertEquals(0, functionLength.evaluate("", new Object[] {new ArrayList<String>()}, null));
+		assertEquals(0, functionLength.evaluate("", new Object[] {new ArrayList<String>()}, null));
+		assertEquals(5, functionLength.evaluate("", new Object[] {new String[5]}, null));
 
-		assertEquals(MethodGetLength.RETURN_VALUE, functionLength.evaluate(new Object[] {new MethodGetLength()}, null));
-		assertEquals(MethodGetSize.RETURN_VALUE, functionLength.evaluate(new Object[] {new MethodGetSize()}, null));
-		assertEquals(FieldLength.RETURN_VALUE, functionLength.evaluate(new Object[] {new FieldLength()}, null));
-		assertEquals(FieldSize.RETURN_VALUE, functionLength.evaluate(new Object[] {new FieldSize()}, null));
+		assertEquals(MethodGetLength.RETURN_VALUE, functionLength.evaluate("", new Object[] {new MethodGetLength()}, null));
+		assertEquals(MethodGetSize.RETURN_VALUE, functionLength.evaluate("", new Object[] {new MethodGetSize()}, null));
+		assertEquals(FieldLength.RETURN_VALUE, functionLength.evaluate("", new Object[] {new FieldLength()}, null));
+		assertEquals(FieldSize.RETURN_VALUE, functionLength.evaluate("", new Object[] {new FieldSize()}, null));
 	}
 }

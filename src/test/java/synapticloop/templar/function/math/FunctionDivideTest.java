@@ -20,19 +20,19 @@ public class FunctionDivideTest {
 	@Test
 	public void testDivideLongLong() throws FunctionException {
 		Object[] test = {"'100'", "'10'"};
-		assertEquals(10L, functionDivide.evaluate(test, templarContext));
+		assertEquals(10L, functionDivide.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testDivideLongDouble() throws FunctionException {
 		Object[] test = {"'100'", "'10.0'"};
-		assertEquals(10.0, functionDivide.evaluate(test, templarContext));
+		assertEquals(10.0, functionDivide.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testDivideDoubleLong() throws FunctionException {
 		Object[] test = {"'100.0'", "'10'"};
-		assertEquals(10.0, functionDivide.evaluate(test, templarContext));
+		assertEquals(10.0, functionDivide.evaluate("", test, templarContext));
 	}
 
 }

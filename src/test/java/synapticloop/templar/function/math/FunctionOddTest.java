@@ -25,7 +25,7 @@ public class FunctionOddTest {
 	@Test(expected=FunctionException.class)
 	public void notFoundInTemplarContext() throws FunctionException {
 		Object[] test = { "not found argument" };
-		functionOdd.evaluate(test, templarContext);
+		functionOdd.evaluate("", test, templarContext);
 	}
 
 	@Test(expected=FunctionException.class)
@@ -58,7 +58,7 @@ public class FunctionOddTest {
 	}
 
 	private boolean invokeFunctionOdd(Object[] test) throws FunctionException {
-		Object evaluate = functionOdd.evaluate(test, templarContext);
+		Object evaluate = functionOdd.evaluate("", test, templarContext);
 		if(evaluate instanceof Boolean) {
 			return(((Boolean)evaluate).booleanValue());
 		} else {

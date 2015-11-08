@@ -28,13 +28,9 @@ public class FunctionInstanceOf extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			String argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext).toString();
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		String argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext).toString();
 
-			return(argZero.getClass().getCanonicalName().endsWith(argOne));
-		} else {
-			throw new FunctionException("The function 'instanceof' takes exactly two arguments, an Object and a String");
-		}
+		return(argZero.getClass().getCanonicalName().endsWith(argOne));
 	}
 }

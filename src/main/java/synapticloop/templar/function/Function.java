@@ -42,13 +42,65 @@ public abstract class Function {
 	}
 
 	/**
+	 * Evaluate the function, first confirming the number of arguments
+	 * 
+	 * @param args the array of arguments that are passed in
+	 * @param templarContext the templar context for any lookups
+	 * 
+	 * @return the evaluation object
+	 * 
+	 * @throws FunctionException if something went horribly wrong with the evaluation
+	 */
+
+	public Object evaluate(String alias, Object[] args, TemplarContext templarContext) throws FunctionException {
+		// we check to ensure that the args are correct
+		if(!verifyArgumentLength(args)) {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("The '");
+			stringBuilder.append(alias);
+			stringBuilder.append("' function requires ");
+			if(getNumArgsMax() != -1) {
+				stringBuilder.append("between ");
+			} else {
+				stringBuilder.append("exactly ");
+			}
+			stringBuilder.append(NumberUtil.convert(numArgs));
+			stringBuilder.append(" (");
+			stringBuilder.append(numArgs);
+			if(getNumArgsMax() != -1) {
+				stringBuilder.append(") and ");
+				stringBuilder.append(NumberUtil.convert(numArgsMax));
+				stringBuilder.append(" (");
+				stringBuilder.append(numArgsMax);
+			}
+			stringBuilder.append(") arguments.");
+			throw new FunctionException(stringBuilder.toString());
+		}
+
+		// if we get to this point - do the actual function
+		return(evaluateFunction(args, templarContext));
+	}
+
+	/**
+	 * Evaluate the function
+	 * 
+	 * @param args the array of arguments that are passed in
+	 * @param templarContext the templar context for any lookups
+	 * 
+	 * @return the evaluation object
+	 * 
+	 * @throws FunctionException if something went horribly wrong with the evaluation
+	 */
+	protected abstract Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException;
+
+	/**
 	 * Verify that the arguments match the required number
 	 * 
 	 * @param args the array of arguments
 	 * 
 	 * @return whether the number of args equals the passed in number
 	 */
-	protected boolean verifyArgumentLength(Object[] args) {
+	private boolean verifyArgumentLength(Object[] args) {
 		if(null == args) {
 			return(false);
 		} else {
@@ -81,48 +133,6 @@ public abstract class Function {
 		}
 		return(false);
 	}
-
-	/**
-	 * Evaluate the function, first confirming the number of arguments
-	 * 
-	 * @param args the array of arguments that are passed in
-	 * @param templarContext the templar context for any lookups
-	 * 
-	 * @return the evaluation object
-	 * 
-	 * @throws FunctionException if something went horribly wrong with the evaluation
-	 */
-
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
-		// we check to ensure that the args are correct
-		if(!verifyArgumentLength(args)) {
-			if(getNumArgsMax() == -1) {
-				throw new FunctionException("The '" + getFunctionName() + "' function requires exactly " + NumberUtil.convert(numArgs) + " (" + numArgs + ") argument.");
-			} else {
-				throw new FunctionException("The '" + getFunctionName() + "' function requires between " + NumberUtil.convert(numArgs) + " (" + numArgs + ") and " + NumberUtil.convert(numArgsMax) + " (" + numArgsMax + ") argument.");
-			}
-		}
-
-		// if so - do the actual function
-		return(evaluateFunction(args, templarContext));
-	}
-
-	private String getFunctionName() {
-		// TODO - lookup in a nicer way...
-		return(this.getClass().getSimpleName());
-	}
-
-	/**
-	 * Evaluate the function
-	 * 
-	 * @param args the array of arguments that are passed in
-	 * @param templarContext the templar context for any lookups
-	 * 
-	 * @return the evaluation object
-	 * 
-	 * @throws FunctionException if something went horribly wrong with the evaluation
-	 */
-	protected abstract Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException;
 
 	/**
 	 * Return the number of arguments that this function expects

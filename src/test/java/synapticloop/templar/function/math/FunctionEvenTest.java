@@ -26,7 +26,7 @@ public class FunctionEvenTest {
 	@Test(expected=FunctionException.class)
 	public void notFoundInTemplarContext() throws FunctionException {
 		Object[] test = { "not found argument" };
-		functionEven.evaluate(test, templarContext);
+		functionEven.evaluate("", test, templarContext);
 	}
 
 	@Test(expected=FunctionException.class)
@@ -59,7 +59,7 @@ public class FunctionEvenTest {
 	}
 
 	private boolean invokeFunctionEven(Object[] test) throws FunctionException {
-		Object evaluate = functionEven.evaluate(test, templarContext);
+		Object evaluate = functionEven.evaluate("", test, templarContext);
 		if(evaluate instanceof Boolean) {
 			return(((Boolean)evaluate).booleanValue());
 		} else {

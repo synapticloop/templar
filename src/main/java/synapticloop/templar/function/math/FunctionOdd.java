@@ -18,13 +18,9 @@ public class FunctionOdd extends BaseMathFunction {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			Number argZeroNumber = getNumber(argZero.toString());
-			return((argZeroNumber.longValue() & 1) == 1);
-		}
-
-		throw new FunctionException("The function 'odd' takes exactly one arguments, which must be coercible to a Number.");
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		Number argZeroNumber = getNumber(argZero.toString());
+		return((argZeroNumber.longValue() & 1) == 1);
 	}
 
 }

@@ -31,21 +31,17 @@ public class FunctionSubtract extends BaseMathFunction {
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// the first thing we want to do is to determine the argument types
 
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
 
-			Number argZeroNumber = getNumber(argZero.toString());
-			Number argOneNumber = getNumber(argOne.toString());
+		Number argZeroNumber = getNumber(argZero.toString());
+		Number argOneNumber = getNumber(argOne.toString());
 
-			// if either of the numbers are doubles, return a double
-			if(argZeroNumber instanceof Double || argOneNumber instanceof Double) {
-				return(argZeroNumber.doubleValue() - argOneNumber.doubleValue());
-			} else {
-				return(argZeroNumber.longValue() - argOneNumber.longValue());
-			}
+		// if either of the numbers are doubles, return a double
+		if(argZeroNumber instanceof Double || argOneNumber instanceof Double) {
+			return(argZeroNumber.doubleValue() - argOneNumber.doubleValue());
+		} else {
+			return(argZeroNumber.longValue() - argOneNumber.longValue());
 		}
-
-		throw new FunctionException("The function '-' takes exactly two arguments, both of which must be coercible to a Number.");
 	}
 }

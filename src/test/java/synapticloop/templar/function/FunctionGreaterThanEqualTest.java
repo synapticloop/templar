@@ -35,7 +35,7 @@ public class FunctionGreaterThanEqualTest {
 	@Test
 	public void testNullArguments() {
 		try {
-			functionGreaterThanEqual.evaluate(null, null);
+			functionGreaterThanEqual.evaluate(">=", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -43,7 +43,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", null};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -51,7 +51,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {null, "1"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -62,7 +62,7 @@ public class FunctionGreaterThanEqualTest {
 	public void testNonCoerce() {
 		try {
 			Object[] objects = new Object[] {"1", "sjh"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -70,7 +70,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"sjh", "1"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -81,7 +81,7 @@ public class FunctionGreaterThanEqualTest {
 	public void testArgumentNumbers() {
 		try {
 			Object[] objects = new Object[] {"1"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -89,7 +89,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1", "1"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -97,7 +97,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1"};
-			functionGreaterThanEqual.evaluate(objects, null);
+			functionGreaterThanEqual.evaluate(">=", objects, null);
 			assertTrue(true);
 		} catch (FunctionException stefex) {
 			assertTrue(false);
@@ -107,12 +107,12 @@ public class FunctionGreaterThanEqualTest {
 	@Test
 	public void testEvaluate() throws FunctionException {
 		Object[] objects = new Object[] {"3", "1"};
-		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
 
 		objects = new Object[] {"1", "3"};
-		assertFalse(((Boolean)functionGreaterThanEqual.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
 
 		objects = new Object[] {"3", "3"};
-		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
 	}
 }

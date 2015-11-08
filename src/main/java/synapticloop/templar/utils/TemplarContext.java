@@ -280,7 +280,7 @@ public class TemplarContext {
 					parsedArgs[i] = null;
 				}
 			}
-			return(getFunction(name).evaluate(args, templarContext));
+			return(getFunction(name).evaluate(name, args, templarContext));
 		} else {
 			throw new FunctionException("Function with name '" + name + "' does not exist.");
 		}

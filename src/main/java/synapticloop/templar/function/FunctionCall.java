@@ -28,20 +28,16 @@ public class FunctionCall extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			String objectMethodCall = (String)args[0];
+		String objectMethodCall = (String)args[0];
 
-			if(null == objectMethodCall) {
-				throw new FunctionException("Cannot function call with 'null' argument.");
-			}
-			// go through and see if we can find the function to call
-			String[] split = objectMethodCall.split(".");
-			if(split.length < 2) {
-				throw new FunctionException("Cannot make function call on'" + objectMethodCall + "'");
-			}
-			return(null);
-		} else {
-			throw new FunctionException("The function 'call' takes only one argument which is in the format of 'object.method'.");
+		if(null == objectMethodCall) {
+			throw new FunctionException("Cannot function call with 'null' argument.");
 		}
+		// go through and see if we can find the function to call
+		String[] split = objectMethodCall.split(".");
+		if(split.length < 2) {
+			throw new FunctionException("Cannot make function call on'" + objectMethodCall + "'");
+		}
+		return(null);
 	}
 }

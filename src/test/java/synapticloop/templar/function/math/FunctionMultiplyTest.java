@@ -21,19 +21,19 @@ public class FunctionMultiplyTest {
 	@Test
 	public void testSubtractLongLong() throws FunctionException {
 		Object[] test = {"'100'", "'10'"};
-		assertEquals(1000L, functionMultiply.evaluate(test, templarContext));
+		assertEquals(1000L, functionMultiply.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testSubtractLongDouble() throws FunctionException {
 		Object[] test = {"'100'", "'10.0'"};
-		assertEquals(1000.0, functionMultiply.evaluate(test, templarContext));
+		assertEquals(1000.0, functionMultiply.evaluate("", test, templarContext));
 	}
 
 	@Test
 	public void testSubtractDoubleLong() throws FunctionException {
 		Object[] test = {"'100.0'", "'10'"};
-		assertEquals(1000.0, functionMultiply.evaluate(test, templarContext));
+		assertEquals(1000.0, functionMultiply.evaluate("", test, templarContext));
 	}
 
 }

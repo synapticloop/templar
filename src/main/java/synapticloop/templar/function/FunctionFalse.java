@@ -27,10 +27,6 @@ public class FunctionFalse extends FunctionBoolean {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			return(getEvaluatedArgument(args, templarContext, false));
-		} else {
-			throw new FunctionException("The function 'false' takes exactly one argument.");
-		}
+		return(getEvaluatedArgument(args, templarContext, false));
 	}
 }

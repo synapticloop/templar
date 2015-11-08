@@ -16,8 +16,7 @@ package synapticloop.templar.function;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,17 +36,17 @@ private FunctionFormatDate functionFormatDate;
 
 	@Test(expected = FunctionException.class)
 	public void testNullFormat() throws FunctionException {
-		functionFormatDate.evaluate(new Object[] {null}, null);
+		functionFormatDate.evaluate("fmt", new Object[] {null}, null);
 	}
 
 	@Test(expected = FunctionException.class)
 	public void testNullArguments() throws FunctionException {
-		functionFormatDate.evaluate(null, null);
+		functionFormatDate.evaluate("fmt", null, null);
 	}
 
 	@Test(expected = FunctionException.class)
 	public void testInvalidFormat() throws FunctionException {
-		functionFormatDate.evaluate(new Object[] {"invalid-format-string"}, null);
+		functionFormatDate.evaluate("fmt", new Object[] {"invalid-format-string"}, null);
 	}
 
 	@Test
@@ -55,7 +54,7 @@ private FunctionFormatDate functionFormatDate;
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date(System.currentTimeMillis());
 		String expected = simpleDateFormat.format(date);
-		assertEquals(expected, functionFormatDate.evaluate(new Object[] {"yyyy-MM-dd"}, null));
+		assertEquals(expected, functionFormatDate.evaluate("fmt", new Object[] {"yyyy-MM-dd"}, null));
 	}
 
 }

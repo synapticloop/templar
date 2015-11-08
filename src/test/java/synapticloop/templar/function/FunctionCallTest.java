@@ -16,8 +16,7 @@ package synapticloop.templar.function;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
-
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,19 +34,19 @@ public class FunctionCallTest {
 	@Test
 	public void testIncorrectArgs() {
 		try {
-			functionCall.evaluate(null, null);
+			functionCall.evaluate("call", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
 		}
 
 		try {
-			functionCall.evaluate(new Object[] { null }, null);
+			functionCall.evaluate("call", new Object[] { null }, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
 		}
 	}
-//	functionCall.evaluate(new Object[] {"java.lang.System.currentTimeMillis"});
+//	functionCall.evaluate("", new Object[] {"java.lang.System.currentTimeMillis"});
 
 }

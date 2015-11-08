@@ -17,14 +17,14 @@ public class FunctionInstanceOfTest {
 
 	@Test
 	public void testInstanceOfString() throws FunctionException {
-		assertTrue((Boolean)functionInstanceOf.evaluate(new Object[] {"\"this is a string\"", "String"}, null));
-		assertTrue((Boolean)functionInstanceOf.evaluate(new Object[] {"\"this is a string\"", "java.lang.String"}, null));
-		assertFalse((Boolean)functionInstanceOf.evaluate(new Object[] {"\"this is a string\"", "java.lang.Long"}, null));
+		assertTrue((Boolean)functionInstanceOf.evaluate("", new Object[] {"\"this is a string\"", "String"}, null));
+		assertTrue((Boolean)functionInstanceOf.evaluate("", new Object[] {"\"this is a string\"", "java.lang.String"}, null));
+		assertFalse((Boolean)functionInstanceOf.evaluate("", new Object[] {"\"this is a string\"", "java.lang.Long"}, null));
 	}
 
 	@Test(expected = FunctionException.class)
 	public void testInvalidNumParameters() throws FunctionException {
-		functionInstanceOf.evaluate(new Object[] {}, null);
+		functionInstanceOf.evaluate("", new Object[] {}, null);
 	}
 
 }

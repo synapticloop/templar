@@ -38,7 +38,7 @@ public class FunctionEqualTest {
 	@Test
 	public void testNullArguments() {
 		try {
-			functionEqual.evaluate(null, null);
+			functionEqual.evaluate("=", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -46,21 +46,21 @@ public class FunctionEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", null};
-			assertFalse((Boolean)functionEqual.evaluate(objects, null));
+			assertFalse((Boolean)functionEqual.evaluate("=", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {null, "'1'"};
-			assertFalse((Boolean)functionEqual.evaluate(objects, null));
+			assertFalse((Boolean)functionEqual.evaluate("=", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {null, null};
-			assertTrue((Boolean)functionEqual.evaluate(objects, null));
+			assertTrue((Boolean)functionEqual.evaluate("=", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
@@ -70,14 +70,14 @@ public class FunctionEqualTest {
 	public void testNonCoerce() {
 		try {
 			Object[] objects = new Object[] {"'1'", "'sjh'"};
-			assertFalse((Boolean)functionEqual.evaluate(objects, null));
+			assertFalse((Boolean)functionEqual.evaluate("=", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {"'sjh'", "'1'"};
-			assertFalse((Boolean)functionEqual.evaluate(objects, null));
+			assertFalse((Boolean)functionEqual.evaluate("=", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
@@ -87,7 +87,7 @@ public class FunctionEqualTest {
 	public void testArgumentNumbers() {
 		try {
 			Object[] objects = new Object[] {"'1'"};
-			functionEqual.evaluate(objects, null);
+			functionEqual.evaluate("=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -95,7 +95,7 @@ public class FunctionEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", "'1'", "'1'"};
-			functionEqual.evaluate(objects, null);
+			functionEqual.evaluate("=", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -103,7 +103,7 @@ public class FunctionEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", "'1'"};
-			functionEqual.evaluate(objects, null);
+			functionEqual.evaluate("=", objects, null);
 			assertTrue(true);
 		} catch (FunctionException stefex) {
 			assertTrue(false);
@@ -113,13 +113,13 @@ public class FunctionEqualTest {
 	@Test
 	public void testEvaluate() throws FunctionException {
 		Object[] objects = new Object[] {"'3'", "'1'"};
-		assertFalse(((Boolean)functionEqual.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionEqual.evaluate("=", objects, null)).booleanValue());
 
 		objects = new Object[] {"'1'", "'3'"};
-		assertFalse(((Boolean)functionEqual.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionEqual.evaluate("=", objects, null)).booleanValue());
 
 		objects = new Object[] {"'3'", "'3'"};
-		assertTrue(((Boolean)functionEqual.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionEqual.evaluate("=", objects, null)).booleanValue());
 	}
 
 	@Test
@@ -127,34 +127,34 @@ public class FunctionEqualTest {
 		FunctionLength functionLength = new FunctionLength();
 
 		List<String> theList = new ArrayList<String>();
-		Object listLength = functionLength.evaluate(new Object[] { theList }, null);
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { listLength, 0 }, null)).booleanValue());
+		Object listLength = functionLength.evaluate("=", new Object[] { theList }, null);
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { listLength, 0 }, null)).booleanValue());
 		theList.add("one");
-		listLength = functionLength.evaluate(new Object[] { theList }, null);
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { listLength, 1}, null)).booleanValue());
+		listLength = functionLength.evaluate("=", new Object[] { theList }, null);
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { listLength, 1}, null)).booleanValue());
 	}
 
 	@Test
 	public void testIntegerEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Integer(1), "1" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Integer(1), "1" }, null)));
 	}
 
 	@Test
 	public void testDoubleEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Double(1.89), "1.89" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Double(1.89), "1.89" }, null)));
 	}
 
 	@Test
 	public void testFloatEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Float(1.89), "1.89" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Float(1.89), "1.89" }, null)));
 	}
 
 	@Test
 	public void testBooleanEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Boolean(true), "true" }, null)));
-		assertFalse(((Boolean)functionEqual.evaluate(new Object[] { new Boolean(false), "true" }, null)));
-		assertFalse(((Boolean)functionEqual.evaluate(new Object[] { new Boolean(true), "something-non-coercible" }, null)));
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Boolean(false), "something-non-coercible" }, null)));
-		assertTrue(((Boolean)functionEqual.evaluate(new Object[] { new Boolean(false), "false" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(true), "true" }, null)));
+		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "true" }, null)));
+		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(true), "something-non-coercible" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "something-non-coercible" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "false" }, null)));
 	}
 }

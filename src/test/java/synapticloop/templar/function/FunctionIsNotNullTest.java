@@ -38,7 +38,7 @@ public class FunctionIsNotNullTest {
 		public void testCorrectArguments() {
 			try {
 				Object[] objects = new Object[] {"'1'"};
-				functionIsNotNull.evaluate(objects, new TemplarContext());
+				functionIsNotNull.evaluate("", objects, new TemplarContext());
 				assertTrue(true);
 			} catch (FunctionException stefex) {
 				assertTrue(false);
@@ -46,7 +46,7 @@ public class FunctionIsNotNullTest {
 
 			try {
 				Object[] objects = new Object[] {"1", "1", "1"};
-				functionIsNotNull.evaluate(objects, new TemplarContext());
+				functionIsNotNull.evaluate("", objects, new TemplarContext());
 				assertTrue(false);
 			} catch (FunctionException stefex) {
 				assertTrue(true);
@@ -54,7 +54,7 @@ public class FunctionIsNotNullTest {
 
 			try {
 				Object[] objects = new Object[] {"1", "1"};
-				functionIsNotNull.evaluate(objects, new TemplarContext());
+				functionIsNotNull.evaluate("", objects, new TemplarContext());
 				assertTrue(false);
 			} catch (FunctionException stefex) {
 				assertTrue(true);
@@ -63,8 +63,8 @@ public class FunctionIsNotNullTest {
 
 		@Test
 		public void testEvaluate() throws FunctionException {
-			assertFalse(((Boolean)functionIsNotNull.evaluate(new Object[] {null}, new TemplarContext())).booleanValue());
+			assertFalse(((Boolean)functionIsNotNull.evaluate("", new Object[] {null}, new TemplarContext())).booleanValue());
 			// TODO - put this back
-			assertTrue(((Boolean)functionIsNotNull.evaluate(new Object[] {"''"}, new TemplarContext())).booleanValue());
+			assertTrue(((Boolean)functionIsNotNull.evaluate("", new Object[] {"''"}, new TemplarContext())).booleanValue());
 		}
 }

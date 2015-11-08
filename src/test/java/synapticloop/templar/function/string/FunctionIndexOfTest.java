@@ -16,6 +16,6 @@ public class FunctionIndexOfTest {
 
 	@Test
 	public void testIndexOf() throws FunctionException {
-		assertEquals(1, functionIndexOf.evaluate(new Object[] {"\"this\"", "\"his\""}, null));
+		assertEquals(1, functionIndexOf.evaluate("", new Object[] {"\"this\"", "\"his\""}, null));
 	}
 }

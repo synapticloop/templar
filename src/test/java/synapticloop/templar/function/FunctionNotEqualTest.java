@@ -36,7 +36,7 @@ public class FunctionNotEqualTest {
 	@Test
 	public void testNullArguments() {
 		try {
-			functionNotEqual.evaluate(null, null);
+			functionNotEqual.evaluate("", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -44,21 +44,21 @@ public class FunctionNotEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", null};
-			assertTrue((Boolean)functionNotEqual.evaluate(objects, null));
+			assertTrue((Boolean)functionNotEqual.evaluate("", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {null, "'1'"};
-			assertTrue((Boolean)functionNotEqual.evaluate(objects, null));
+			assertTrue((Boolean)functionNotEqual.evaluate("", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {null, null};
-			assertFalse((Boolean)functionNotEqual.evaluate(objects, null));
+			assertFalse((Boolean)functionNotEqual.evaluate("", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
@@ -68,14 +68,14 @@ public class FunctionNotEqualTest {
 	public void testNonCoerce() {
 		try {
 			Object[] objects = new Object[] {"'1'", "'sjh'"};
-			assertTrue((Boolean)functionNotEqual.evaluate(objects, null));
+			assertTrue((Boolean)functionNotEqual.evaluate("", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
 
 		try {
 			Object[] objects = new Object[] {"'sjh'", "'1'"};
-			assertTrue((Boolean)functionNotEqual.evaluate(objects, null));
+			assertTrue((Boolean)functionNotEqual.evaluate("", objects, null));
 		} catch (FunctionException stefex) {
 			assertTrue(false);
 		}
@@ -85,7 +85,7 @@ public class FunctionNotEqualTest {
 	public void testArgumentNumbers() {
 		try {
 			Object[] objects = new Object[] {"'1'"};
-			functionNotEqual.evaluate(objects, null);
+			functionNotEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -93,7 +93,7 @@ public class FunctionNotEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", "'1'", "'1'"};
-			functionNotEqual.evaluate(objects, null);
+			functionNotEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -101,7 +101,7 @@ public class FunctionNotEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"'1'", "'1'"};
-			functionNotEqual.evaluate(objects, null);
+			functionNotEqual.evaluate("", objects, null);
 			assertTrue(true);
 		} catch (FunctionException stefex) {
 			assertTrue(false);
@@ -111,12 +111,12 @@ public class FunctionNotEqualTest {
 	@Test
 	public void testEvaluate() throws FunctionException {
 		Object[] objects = new Object[] {"'3'", "'1'"};
-		assertTrue(((Boolean)functionNotEqual.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionNotEqual.evaluate("", objects, null)).booleanValue());
 
 		objects = new Object[] {"'1'", "'3'"};
-		assertTrue(((Boolean)functionNotEqual.evaluate(objects, null)).booleanValue());
+		assertTrue(((Boolean)functionNotEqual.evaluate("", objects, null)).booleanValue());
 
 		objects = new Object[] {"'3'", "'3'"};
-		assertFalse(((Boolean)functionNotEqual.evaluate(objects, null)).booleanValue());
+		assertFalse(((Boolean)functionNotEqual.evaluate("", objects, null)).booleanValue());
 	}
 }

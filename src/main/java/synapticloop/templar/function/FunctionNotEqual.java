@@ -28,24 +28,20 @@ public class FunctionNotEqual extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
-			if(null == argZero) {
-				if(null == argOne) {
-					return(false);
-				} else {
-					return(true);
-				}
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		if(null == argZero) {
+			if(null == argOne) {
+				return(false);
 			} else {
-				if(null == argOne) {
-					return(true);
-				} else {
-					return(!argOne.equals(argZero));
-				}
+				return(true);
 			}
 		} else {
-			throw new FunctionException("The function 'not=' or '<>' takes exactly two arguments, both of which must be coercible to a String.");
+			if(null == argOne) {
+				return(true);
+			} else {
+				return(!argOne.equals(argZero));
+			}
 		}
 	}
 

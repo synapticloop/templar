@@ -30,22 +30,17 @@ public class FunctionPower extends BaseMathFunction {
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// the first thing we want to do is to determine the argument types
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
 
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		Number argZeroNumber = getNumber(argZero.toString());
+		Number argOneNumber = getNumber(argOne.toString());
 
-			Number argZeroNumber = getNumber(argZero.toString());
-			Number argOneNumber = getNumber(argOne.toString());
-
-			// if either of the numbers are doubles, return a double
-			if(argOneNumber instanceof Long && argZeroNumber instanceof Long) {
-				return(argZeroNumber.longValue() ^ argOneNumber.longValue());
-			} else {
-				throw new FunctionException("The function '^' takes exactly two arguments, both of which must be coercible to a Long.");
-			}
+		// if either of the numbers are doubles, return a double
+		if(argOneNumber instanceof Long && argZeroNumber instanceof Long) {
+			return(argZeroNumber.longValue() ^ argOneNumber.longValue());
+		} else {
+			throw new FunctionException("The function '^' takes exactly two arguments, both of which must be coercible to a Long.");
 		}
-
-		throw new FunctionException("The function '^' takes exactly two arguments, both of which must be coercible to a Long.");
 	}
 }

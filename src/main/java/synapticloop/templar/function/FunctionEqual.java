@@ -28,25 +28,21 @@ public class FunctionEqual extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(verifyArgumentLength(args)) {
-			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
 
-			if(null == argZero) {
-				if(null == argOne) {
-					return(true);
-				} else {
-					return(false);
-				}
+		if(null == argZero) {
+			if(null == argOne) {
+				return(true);
 			} else {
-				if(null == argOne) {
-					return(false);
-				} else {
-					return coercion(argZero, argOne);
-				}
+				return(false);
 			}
 		} else {
-			throw new FunctionException("The function '=', or 'equal' takes exactly two arguments, both of which must be coercible to a String.");
+			if(null == argOne) {
+				return(false);
+			} else {
+				return coercion(argZero, argOne);
+			}
 		}
 	}
 
