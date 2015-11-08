@@ -9,7 +9,7 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = 'v1.0.7'
+version = 'v1.0.8'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -85,30 +85,11 @@ bintray {
 
 	publications = [ 'Synapticloop' ] //When uploading Maven-based publication files
 
-	dryRun = false //Whether to run this as dry-run, without deploying
-	publish = true //If version should be auto published after an upload
-	//Package configuration. The plugin will use the repo and name properties to check if the package already exists. In that case, there's no need to configure the other package properties (like userOrg, desc, etc).
+	publish = true
 
 	pkg {
 		repo = 'maven'
-		userOrg = 'synapticloop'
-		name = 'templar'
-		desc = 'Templar templating language'
-		websiteUrl = 'http://synapticloop.github.io/templar'
-		vcsUrl = 'https://github.com/synapticloop/templar.git'
-		licenses = [ 'BSD' ]
-
-		publicDownloadNumbers = true
-
-		version {
-			name = 'v1.0.6'
-			desc = 'ant - gradle'
-			released  = new Date()
-
-			mavenCentralSync {
-				sync = false
-			}
-		}
+		name = "templar"
 	}
 }
 task(dist).dependsOn( [ 'test', 'cobertura'] )
