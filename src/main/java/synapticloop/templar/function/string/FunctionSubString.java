@@ -11,7 +11,7 @@ public class FunctionSubString extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// arguments can be either 2 or 3
 		// TODO Auto-generated method stub
 		return null;

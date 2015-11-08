@@ -18,10 +18,12 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.NumberUtil;
 import synapticloop.templar.utils.TemplarContext;
 
 public abstract class Function {
 	private int numArgs = 0;
+	private int numArgsMax = -1;
 
 	protected Function() {}
 
@@ -32,6 +34,11 @@ public abstract class Function {
 	 */
 	public Function(int numArgs) {
 		this.numArgs = numArgs;
+	}
+
+	public Function(int numArgs, int numArgsMax) {
+		this.numArgs = numArgs;
+		this.numArgsMax  = numArgsMax;
 	}
 
 	/**
@@ -45,7 +52,12 @@ public abstract class Function {
 		if(null == args) {
 			return(false);
 		} else {
-			return(args.length == getNumArgs());
+			int argsLength = args.length;
+			if(numArgsMax == -1) {
+				return(argsLength == getNumArgs());
+			} else {
+				return(argsLength >= getNumArgs() && argsLength <= getNumArgsMax());
+			}
 		}
 	}
 
@@ -71,6 +83,36 @@ public abstract class Function {
 	}
 
 	/**
+	 * Evaluate the function, first confirming the number of arguments
+	 * 
+	 * @param args the array of arguments that are passed in
+	 * @param templarContext the templar context for any lookups
+	 * 
+	 * @return the evaluation object
+	 * 
+	 * @throws FunctionException if something went horribly wrong with the evaluation
+	 */
+
+	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+		// we check to ensure that the args are correct
+		if(!verifyArgumentLength(args)) {
+			if(getNumArgsMax() == -1) {
+				throw new FunctionException("The '" + getFunctionName() + "' function requires exactly " + NumberUtil.convert(numArgs) + " (" + numArgs + ") argument.");
+			} else {
+				throw new FunctionException("The '" + getFunctionName() + "' function requires between " + NumberUtil.convert(numArgs) + " (" + numArgs + ") and " + NumberUtil.convert(numArgsMax) + " (" + numArgsMax + ") argument.");
+			}
+		}
+
+		// if so - do the actual function
+		return(evaluateFunction(args, templarContext));
+	}
+
+	private String getFunctionName() {
+		// TODO - lookup in a nicer way...
+		return(this.getClass().getSimpleName());
+	}
+
+	/**
 	 * Evaluate the function
 	 * 
 	 * @param args the array of arguments that are passed in
@@ -80,7 +122,7 @@ public abstract class Function {
 	 * 
 	 * @throws FunctionException if something went horribly wrong with the evaluation
 	 */
-	public abstract Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException;
+	protected abstract Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException;
 
 	/**
 	 * Return the number of arguments that this function expects
@@ -88,5 +130,6 @@ public abstract class Function {
 	 * @return the number of arguments that needs to be passed in to the function
 	 */
 	public int getNumArgs() { return numArgs; }
+	public int getNumArgsMax() { return numArgsMax; }
 
 }

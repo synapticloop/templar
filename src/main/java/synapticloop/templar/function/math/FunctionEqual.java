@@ -10,7 +10,7 @@ public class FunctionEqual extends BaseMathFunction {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		return null;
 	}
 

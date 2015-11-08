@@ -12,11 +12,7 @@ public class FunctionIndexOf extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(!verifyArgumentLength(args)) {
-			throw new FunctionException("The 'indexOf' function requires exactly two (2) argument.");
-		}
-
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
 		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
 		if(null == argZero || null == argOne) {

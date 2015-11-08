@@ -26,9 +26,12 @@ import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionFormatDate extends Function {
+	public FunctionFormatDate() {
+		super(1, 2);
+	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		boolean hasError = false;
 		Date date = null;
 		String dateFormat = null;

@@ -11,7 +11,7 @@ public class FunctionSplit extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -28,7 +28,7 @@ public class FunctionAnd extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
 			// no need to evaluate any further

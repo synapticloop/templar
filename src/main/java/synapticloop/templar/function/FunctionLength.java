@@ -35,11 +35,7 @@ public class FunctionLength extends Function {
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
-		if(!verifyArgumentLength(args)) {
-			throw new FunctionException("The 'length' function requires exactly one (1) argument.");
-		}
-
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		Object object = args[0];
 		// so what do we have here...
 		if (object instanceof Collection) {

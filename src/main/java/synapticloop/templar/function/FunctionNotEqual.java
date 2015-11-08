@@ -27,7 +27,7 @@ public class FunctionNotEqual extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
 			Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);

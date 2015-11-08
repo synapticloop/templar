@@ -28,7 +28,7 @@ public class FunctionMultiply extends BaseMathFunction {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// the first thing we want to do is to determine the argument types
 
 		if(verifyArgumentLength(args)) {

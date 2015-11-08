@@ -226,7 +226,14 @@ public class TemplarContext {
 	 */
 	public void addFunction(String name, Function function) throws FunctionException {
 		if(functionMap.containsKey(name)) {
-			throw new FunctionException("Function with name '" + name + "' is already registered to the class '" + functionMap.get(name).getClass().getCanonicalName() + "'.\nCurrently registered functions:\n" + getRegisteredFunctions());
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append("Function with name '");
+			stringBuilder.append(name);
+			stringBuilder.append("' is already registered to the class '");
+			stringBuilder.append(functionMap.get(name).getClass().getCanonicalName());
+			stringBuilder.append("'.\nCurrently registered functions:\n");
+			stringBuilder.append(getRegisteredFunctions());
+			throw new FunctionException(stringBuilder.toString());
 		} else {
 			functionMap.put(name, function);
 		}
@@ -286,6 +293,7 @@ public class TemplarContext {
 
 		return(name);
 	}
+
 	private Function getFunction(String name) {
 		if(functionMap.containsKey(name)) {
 			return(functionMap.get(name));

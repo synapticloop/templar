@@ -61,7 +61,16 @@ public class DumpFunctionsToken extends CommandToken {
 			String fnName = iterator.next();
 			Function function = functionMap.get(fnName);
 
-			stringBuilder.append(function.getClass().getSimpleName() + " fn:" + fnName + "[ <#numArgs: " + function.getNumArgs() + "> ]\n");
+			stringBuilder.append(function.getClass().getSimpleName());
+			stringBuilder.append(" fn:");
+			stringBuilder.append(fnName);
+			stringBuilder.append("[ <#numArgs: ");
+			stringBuilder.append(function.getNumArgs());
+			if(function.getNumArgsMax() != -1) {
+				stringBuilder.append(" or ");
+				stringBuilder.append(function.getNumArgsMax());
+			}
+			stringBuilder.append("> ]\n");
 		}
 
 		return(stringBuilder.toString());

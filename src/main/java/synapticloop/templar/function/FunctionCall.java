@@ -27,7 +27,7 @@ public class FunctionCall extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			String objectMethodCall = (String)args[0];
 

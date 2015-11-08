@@ -27,7 +27,7 @@ public class FunctionOr extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
 			Boolean argOne = ObjectUtils.evaluateObjectToDefaultBoolean(args[1], templarContext);

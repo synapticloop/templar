@@ -27,7 +27,7 @@ public class FunctionIsNull extends Function {
 	}
 
 	@Override
-	public Object evaluate(Object[] args, TemplarContext templarContext) throws FunctionException {
+	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(verifyArgumentLength(args)) {
 			if(null != args[0]) {
 				// see if we can get if from the context
