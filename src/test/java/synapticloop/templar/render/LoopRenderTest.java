@@ -34,7 +34,7 @@ public class LoopRenderTest {
 
 	@Test
 	public void testLoopStatusBean() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-loop-test.templar");
+		File file = new File("src/test/resources/render-loop-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

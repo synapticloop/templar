@@ -3,7 +3,7 @@ and after the import...{\n}
 
 {fn:length[array]}{\n}
 
-{import src/test/template/import/functions.templar}
+{import src/test/resources/import/functions.templar}
 
 {\n}
 {fn:length[array]}

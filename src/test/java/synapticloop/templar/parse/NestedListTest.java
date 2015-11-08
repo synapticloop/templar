@@ -13,7 +13,7 @@ public class NestedListTest {
 	public void testParse() {
 		Parser parser;
 		try {
-			File file = new File("src/test/template/nested-list-test.templar");
+			File file = new File("src/test/resources/nested-list-test.templar");
 			parser = new Parser(file);
 			assertEquals("This is a nested list\n<LOOP@2:2 (something as somethingElse)>\n\nso we list\n<LOOP@5:2 (somethingElse as somethingElseAgain)>\n\tthen we should see these tokens...\n</LOOP@7:2>\n\n</LOOP@9:2>\n\nand that is about it\n", parser.toString());
 

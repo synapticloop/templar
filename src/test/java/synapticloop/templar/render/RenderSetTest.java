@@ -14,7 +14,7 @@ import synapticloop.templar.utils.TemplarContext;
 public class RenderSetTest {
 	@Test
 	public void testRender() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-set-string-as-variable.templar");
+		File file = new File("src/test/resources/render-set-string-as-variable.templar");
 		Parser parser = new Parser(file);
 		TemplarContext templarContext = new TemplarContext();
 
@@ -23,7 +23,7 @@ public class RenderSetTest {
 	
 	@Test
 	public void renderFunctionalSetCommand() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-set-function-as-variable.templar");
+		File file = new File("src/test/resources/render-set-function-as-variable.templar");
 		Parser parser = new Parser(file);
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.add("alwaysTrue", true);

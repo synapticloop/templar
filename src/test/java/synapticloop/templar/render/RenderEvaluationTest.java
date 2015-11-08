@@ -16,7 +16,7 @@ import synapticloop.templar.utils.TemplarContext;
 public class RenderEvaluationTest {
 	@Test
 	public void testParse() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-evaluation-test.templar");
+		File file = new File("src/test/resources/render-evaluation-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();
@@ -53,7 +53,7 @@ public class RenderEvaluationTest {
 
 	@Test
 	public void testFunctionEvaluationParse() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-evaluation-function-test.templar");
+		File file = new File("src/test/resources/render-evaluation-function-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();

@@ -27,7 +27,6 @@ public class FunctionGreaterThan extends FunctionNumericComparison {
 		super.evaluateNumeric(args, templarContext);
 
 		return(arg1.longValue() > arg2.longValue());
-
 	}
 
 }

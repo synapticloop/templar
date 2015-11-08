@@ -19,7 +19,7 @@ public class EvaluationTest {
 
 	@Test
 	public void testRender() throws ParseException {
-		File file = new File("src/test/template/evaluation-test.templar");
+		File file = new File("src/test/resources/evaluation-test.templar");
 		parser = new Parser(file);
 		assertEquals("<EVAL@1:2 (this.should.all)/>\n" +
 				"\n" +

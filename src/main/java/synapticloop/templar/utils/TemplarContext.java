@@ -31,6 +31,7 @@ import synapticloop.templar.function.FunctionFalse;
 import synapticloop.templar.function.FunctionFormatDate;
 import synapticloop.templar.function.FunctionGreaterThan;
 import synapticloop.templar.function.FunctionGreaterThanEqual;
+import synapticloop.templar.function.FunctionInstanceOf;
 import synapticloop.templar.function.FunctionIsNotNull;
 import synapticloop.templar.function.FunctionIsNull;
 import synapticloop.templar.function.FunctionLength;
@@ -47,6 +48,7 @@ import synapticloop.templar.function.math.FunctionMultiply;
 import synapticloop.templar.function.math.FunctionOdd;
 import synapticloop.templar.function.math.FunctionPower;
 import synapticloop.templar.function.math.FunctionSubtract;
+import synapticloop.templar.function.string.FunctionIndexOf;
 
 public class TemplarContext {
 	private Map<String, Object> context = new HashMap<String, Object>();
@@ -94,7 +96,15 @@ public class TemplarContext {
 		// even and odd
 		functionMap.put("even", new FunctionEven()); // Test whether the passed in number is even
 		functionMap.put("odd", new FunctionOdd()); // Test whether the passed in number is odd
-	}
+
+		// utilties
+		functionMap.put("instanceOf", new FunctionInstanceOf()); // Test whether it is an instance of
+
+		// string
+		functionMap.put("indexOf", new FunctionIndexOf()); // get the index of strings
+		// NIY
+//		functionMap.put("substring", new FunctionSubString()); // get the substring
+}
 
 	private static Map<String, String> functionAliasMap = new HashMap<String, String>();
 	static {

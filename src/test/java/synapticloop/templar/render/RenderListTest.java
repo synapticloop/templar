@@ -16,7 +16,7 @@ import synapticloop.templar.utils.TemplarContext;
 public class RenderListTest {
 	@Test
 	public void render() throws RenderException, ParseException {
-		File file = new File("src/test/template/render-list-test.templar");
+		File file = new File("src/test/resources/render-list-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarContext templarContext = new TemplarContext();

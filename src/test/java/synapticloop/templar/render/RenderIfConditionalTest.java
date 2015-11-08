@@ -15,7 +15,7 @@ public class RenderIfConditionalTest {
 
 	@Test
 	public void testSimpleIfConditionalRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-if-conditional-test.templar");
+		File file = new File("src/test/resources/render-if-conditional-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

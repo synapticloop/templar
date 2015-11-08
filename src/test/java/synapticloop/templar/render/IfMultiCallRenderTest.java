@@ -15,7 +15,7 @@ import synapticloop.templar.utils.TestUtils;
 public class IfMultiCallRenderTest {
 	@Test
 	public void testSimpleIfRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-if-multi-call-test.templar");
+		File file = new File("src/test/resources/render-if-multi-call-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

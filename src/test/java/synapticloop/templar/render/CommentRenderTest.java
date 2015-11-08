@@ -15,7 +15,7 @@ import synapticloop.templar.utils.TemplarContext;
 public class CommentRenderTest {
 	@Test
 	public void testSimpleIfRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-comment-test.templar");
+		File file = new File("src/test/resources/render-comment-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

@@ -16,7 +16,7 @@ public class TabNewLineRenderTest {
 
 	@Test
 	public void testExplicitNewLineTabRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/tab-newline.templar");
+		File file = new File("src/test/resources/tab-newline.templar");
 		Parser parser = new Parser(file);
 		assertEquals("<TAB@1:2 /><TAB@1:3 />\t\t\n<NEWLINE@2:2 /><NEWLINE@2:3 />\n\n<TAB@4:2 />\t<NEWLINE@4:4 /><NEWLINE@4:5 />\n", parser.toString());
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();
@@ -30,7 +30,7 @@ public class TabNewLineRenderTest {
 
 	@Test
 	public void testImplicitNewLineTabRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/tab-newline.templar");
+		File file = new File("src/test/resources/tab-newline.templar");
 		Parser parser = new Parser(file);
 		assertEquals("<TAB@1:2 /><TAB@1:3 />\t\t\n<NEWLINE@2:2 /><NEWLINE@2:3 />\n\n<TAB@4:2 />\t<NEWLINE@4:4 /><NEWLINE@4:5 />\n", parser.toString());
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

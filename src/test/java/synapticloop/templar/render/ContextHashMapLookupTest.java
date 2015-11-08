@@ -18,7 +18,7 @@ import synapticloop.templar.utils.TestUtils;
 public class ContextHashMapLookupTest {
 	@Test
 	public void testSimpleIfRendering() throws ParseException, RenderException {
-		File file = new File("src/test/template/render-hashmap-lookup-test.templar");
+		File file = new File("src/test/resources/render-hashmap-lookup-test.templar");
 		Parser parser = new Parser(file);
 
 		TemplarConfiguration templarConfiguration = new TemplarConfiguration();

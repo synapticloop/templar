@@ -20,7 +20,7 @@ public class IfTest {
 
 	@Test
 	public void testRender() throws ParseException {
-		File file = new File("src/test/template/if-test.templar");
+		File file = new File("src/test/resources/if-test.templar");
 		parser = new Parser(file);
 		assertEquals("These are text\n" +
 				"\n" +

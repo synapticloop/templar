@@ -31,7 +31,7 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidSetToken() {
 		try {
-			File file = new File("src/test/template/line-numbers-set.templar");
+			File file = new File("src/test/resources/line-numbers-set.templar");
 			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 8);
@@ -43,7 +43,7 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidCurlyBrace() {
 		try {
-			File file = new File("src/test/template/line-numbers-curly-brace.templar");
+			File file = new File("src/test/resources/line-numbers-curly-brace.templar");
 			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 7);
@@ -55,7 +55,7 @@ public class LinesAndCharsTest {
 	@Test
 	public void testInvalidCurlyBraceNoMoreTokens() {
 		try {
-			File file = new File("src/test/template/line-numbers-curly-brace-no-more-tokens.templar");
+			File file = new File("src/test/resources/line-numbers-curly-brace-no-more-tokens.templar");
 			new Parser(file);
 		} catch (ParseException stepex) {
 			assertEquals(stepex.getExceptionToken().getLineNumber(), 9);

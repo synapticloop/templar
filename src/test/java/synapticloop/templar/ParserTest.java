@@ -48,7 +48,7 @@ public class ParserTest {
 
 	@Test
 	public void testAvailableParserFilePath() throws ParseException {
-		File file = new File("src/test/template/empty.templar");
+		File file = new File("src/test/resources/empty.templar");
 		parser = new Parser(file);
 	}
 
@@ -72,13 +72,13 @@ public class ParserTest {
 
 	@Test
 	public void testAvailableParserFile() throws ParseException {
-		parser = new Parser(new File("src/test/template/empty.templar"));
+		parser = new Parser(new File("src/test/resources/empty.templar"));
 		assertEquals("", parser.toString());
 	}
 
 	@Test
 	public void testEmptyContextRendering() throws ParseException, RenderException {
-		parser = new Parser(new File("src/test/template/simple.templar"));
+		parser = new Parser(new File("src/test/resources/simple.templar"));
 		parser.render(null);
 	}
 
@@ -91,7 +91,7 @@ public class ParserTest {
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.setTemplarConfiguration(templarConfiguration);
 
-		parser = new Parser(new File("src/test/template/simple.templar"));
+		parser = new Parser(new File("src/test/resources/simple.templar"));
 		assertEquals("This is a simple template<NEWLINE@1:27 />\nwith two lines.\n", parser.toString());
 		assertEquals("This is a simple template\n\nwith two lines.\n", parser.render(templarContext));
 	}
@@ -105,7 +105,7 @@ public class ParserTest {
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.setTemplarConfiguration(templarConfiguration);
 
-		File file = new File("src/test/template/simple.templar");
+		File file = new File("src/test/resources/simple.templar");
 		InputStream inputStream = new FileInputStream(file);
 
 		parser = new Parser(inputStream);
