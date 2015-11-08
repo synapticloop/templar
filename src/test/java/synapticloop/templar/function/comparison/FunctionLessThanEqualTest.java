@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -23,20 +23,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.function.comparison.FunctionGreaterThanEqual;
+import synapticloop.templar.function.comparison.FunctionLessThanEqual;
 
-public class FunctionGreaterThanEqualTest {
-	private FunctionGreaterThanEqual functionGreaterThanEqual;
+public class FunctionLessThanEqualTest {
+	private FunctionLessThanEqual functionLessThanEqual;
 
 	@Before
 	public void setup() {
-		functionGreaterThanEqual = new FunctionGreaterThanEqual();
+		functionLessThanEqual = new FunctionLessThanEqual();
 	}
 
 	@Test
 	public void testNullArguments() {
 		try {
-			functionGreaterThanEqual.evaluate(">=", null, null);
+			functionLessThanEqual.evaluate("", null, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -44,7 +44,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", null};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -52,7 +52,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {null, "1"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -63,7 +63,7 @@ public class FunctionGreaterThanEqualTest {
 	public void testNonCoerce() {
 		try {
 			Object[] objects = new Object[] {"1", "sjh"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -71,7 +71,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"sjh", "1"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -82,7 +82,7 @@ public class FunctionGreaterThanEqualTest {
 	public void testArgumentNumbers() {
 		try {
 			Object[] objects = new Object[] {"1"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -90,7 +90,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1", "1"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(false);
 		} catch (FunctionException stefex) {
 			assertTrue(true);
@@ -98,7 +98,7 @@ public class FunctionGreaterThanEqualTest {
 
 		try {
 			Object[] objects = new Object[] {"1", "1"};
-			functionGreaterThanEqual.evaluate(">=", objects, null);
+			functionLessThanEqual.evaluate("", objects, null);
 			assertTrue(true);
 		} catch (FunctionException stefex) {
 			assertTrue(false);
@@ -107,13 +107,13 @@ public class FunctionGreaterThanEqualTest {
 
 	@Test
 	public void testEvaluate() throws FunctionException {
-		Object[] objects = new Object[] {"3", "1"};
-		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
+		Object[] objects = new Object[] {"1", "3"};
+		assertTrue(((Boolean)functionLessThanEqual.evaluate("", objects, null)).booleanValue());
 
-		objects = new Object[] {"1", "3"};
-		assertFalse(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
+		objects = new Object[] {"3", "1"};
+		assertFalse(((Boolean)functionLessThanEqual.evaluate("", objects, null)).booleanValue());
 
 		objects = new Object[] {"3", "3"};
-		assertTrue(((Boolean)functionGreaterThanEqual.evaluate(">=", objects, null)).booleanValue());
+		assertTrue(((Boolean)functionLessThanEqual.evaluate("", objects, null)).booleanValue());
 	}
 }

@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.comparison;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
