@@ -36,6 +36,12 @@ public abstract class Function {
 		this.numArgs = numArgs;
 	}
 
+	/**
+	 * Create a function with a minimum and maximum number of arguments
+	 *  
+	 * @param numArgs the minimum number of arguments allowed
+	 * @param numArgsMax the maximum number of arguments allowed
+	 */
 	public Function(int numArgs, int numArgsMax) {
 		this.numArgs = numArgs;
 		this.numArgsMax  = numArgsMax;
@@ -140,6 +146,14 @@ public abstract class Function {
 	 * @return the number of arguments that needs to be passed in to the function
 	 */
 	public int getNumArgs() { return numArgs; }
+
+	/**
+	 * Return the maximum number of arguments that this function expects, or -1 
+	 * if the maximum number of arguments is not set.
+	 * 
+	 * @return the maximum number of arguments that this function will allow, or 
+	 *   -1 if not set.
+	 */
 	public int getNumArgsMax() { return numArgsMax; }
 
 }

@@ -133,10 +133,19 @@ public class TemplarContext {
 		functionAliasMap.put("length", "size");
 
 	}
+
+	/**
+	 * Create a new templar context with the default configuration
+	 */
 	public TemplarContext() {
 		// do nothing
 	}
 
+	/**
+	 * Create a new templar context with the passed in configuration
+	 * 
+	 * @param templarConfiguration the templar configuration
+	 */
 	public TemplarContext(TemplarConfiguration templarConfiguration) {
 		this.templarConfiguration = templarConfiguration;
 	}
@@ -189,23 +198,6 @@ public class TemplarContext {
 	}
 
 	/**
-	 * Get the complete templar context - with all of the key:value pairs in it
-	 * 
-	 * @return the templar context
-	 */
-	protected Map<String, Object> getContext() {
-		return(context);
-	}
-
-	public void setTemplarConfiguration(TemplarConfiguration templarConfiguration) {
-		this.templarConfiguration = templarConfiguration;
-	}
-
-	public TemplarConfiguration getTemplarConfiguration() {
-		return templarConfiguration;
-	}
-
-	/**
 	 * Return whether the templar context has a particular function registered to
 	 * it, or has a function aliased to it
 	 * 
@@ -227,12 +219,12 @@ public class TemplarContext {
 	 *   also prints out a list of currently registered functions just to be nice.
 	 */
 	public void addFunction(String name, Function function) throws FunctionException {
-		if(functionMap.containsKey(name)) {
+		if(functionMap.containsKey(name) || functionAliasMap.containsKey(name)) {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append("Function with name '");
 			stringBuilder.append(name);
 			stringBuilder.append("' is already registered to the class '");
-			stringBuilder.append(functionMap.get(name).getClass().getCanonicalName());
+			stringBuilder.append(getFunction(name).getClass().getCanonicalName());
 			stringBuilder.append("'.\nCurrently registered functions:\n");
 			stringBuilder.append(getRegisteredFunctions());
 			throw new FunctionException(stringBuilder.toString());
@@ -247,6 +239,13 @@ public class TemplarContext {
 	 * @return the map of all registered functions
 	 */
 	public Map<String, Function> getFunctionMap() { return(functionMap); }
+
+	/**
+	 * Get the map of all aliases that is key on the alias and the value is the
+	 * actual registered function name in the function map
+	 * 
+	 * @return the map of all function aliases
+	 */
 	public Map<String, String> getFunctionAliasMap() { return(functionAliasMap); }
 
 	private String getRegisteredFunctions() {
@@ -266,6 +265,19 @@ public class TemplarContext {
 		return(stringBuilder.toString());
 	}
 
+	/**
+	 * Invoke a particular function (whether it is an alias or otherwise) with 
+	 * the passed in parameters and the templar context.
+	 * 
+	 * @param name the name of the function to invoke
+	 * @param args the arguments to pass through to the function
+	 * @param templarContext the templar context on which the function will be invoked
+	 * 
+	 * @return the return of the invoked function
+	 * 
+	 * @throws FunctionException if there was a problem invoking the function, or
+	 *   no function was registsred with that name
+	 */
 	public Object invokeFunction(String name, Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(null == args) {
 			throw new FunctionException("Argument[] to a function cannot be null.");
@@ -308,9 +320,33 @@ public class TemplarContext {
 		return(null);
 	}
 
+	/**
+	 * Clear the templar context of all entries
+	 */
 	public void clear() {
 		context.clear();
 	}
+
+	/**
+	 * Get the complete templar context - with all of the key:value pairs in it
+	 * 
+	 * @return the templar context
+	 */
+	protected Map<String, Object> getContext() { return(context); }
+
+	/**
+	 * Set the templar configuration
+	 * 
+	 * @param templarConfiguration the configuration to set
+	 */
+	public void setTemplarConfiguration(TemplarConfiguration templarConfiguration) { this.templarConfiguration = templarConfiguration; }
+
+	/**
+	 * Get the templar configuration for this context
+	 * 
+	 * @return the templar configuration for this context
+	 */
+	public TemplarConfiguration getTemplarConfiguration() { return templarConfiguration; }
 
 	@Override
 	public String toString() {
