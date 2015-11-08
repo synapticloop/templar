@@ -20,7 +20,7 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.utils.ParserHelper;
+import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 

@@ -18,7 +18,7 @@ package synapticloop.templar.function.math;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionModulus extends BaseMathFunction {
@@ -31,8 +31,8 @@ public class FunctionModulus extends BaseMathFunction {
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		// the first thing we want to do is to determine the argument types
 
-		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		Object argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext);
 
 		Number argZeroNumber = getNumber(argZero.toString());
 		Number argOneNumber = getNumber(argOne.toString());

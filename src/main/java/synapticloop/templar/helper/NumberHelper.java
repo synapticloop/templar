@@ -1,8 +1,8 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 import java.text.DecimalFormat;
 
-public class NumberUtil {
+public class NumberHelper {
 
 	private static final String[] tensNames = {
 			"",
@@ -40,7 +40,7 @@ public class NumberUtil {
 			" nineteen"
 	};
 
-	private NumberUtil() {}
+	private NumberHelper() {}
 
 	private static String convertLessThanOneThousand(int number) {
 		String soFar;

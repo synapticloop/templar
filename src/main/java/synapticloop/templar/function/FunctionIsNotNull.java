@@ -18,7 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionIsNotNull extends Function {
@@ -30,7 +30,7 @@ public class FunctionIsNotNull extends Function {
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(null != args[0]) {
 			// see if we can get if from the context
-			Object evaluateObject = ObjectUtils.evaluateObjectToDefault(args[0].toString(), templarContext);
+			Object evaluateObject = ObjectHelper.evaluateObjectToDefault(args[0].toString(), templarContext);
 			return(null != evaluateObject);
 		} else {
 			return(false);

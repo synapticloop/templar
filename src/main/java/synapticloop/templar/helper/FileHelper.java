@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -19,8 +19,8 @@ package synapticloop.templar.utils;
 
 import java.io.File;
 
-public class FileUtils {
-	private FileUtils() {}
+public class FileHelper {
+	private FileHelper() {}
 
 	public static boolean canReadFile(File file) {
 		return(file.exists() && file.canRead() && file.isFile());

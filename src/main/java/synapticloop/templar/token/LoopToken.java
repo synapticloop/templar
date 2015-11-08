@@ -23,8 +23,8 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.LoopStatusBean;
-import synapticloop.templar.utils.ObjectUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -76,7 +76,7 @@ public class LoopToken extends CommandToken {
 			throw new RenderException("command in incorrect format '" + commandLine + "', should be 'something as somethingElse'.");
 		}
 
-		Object object = ObjectUtils.evaluateObject(commandSplit[0], templarContext);
+		Object object = ObjectHelper.evaluateObject(commandSplit[0], templarContext);
 
 		String contextAs = commandSplit[1];
 		if(object instanceof Collection) {

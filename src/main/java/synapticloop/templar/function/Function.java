@@ -18,7 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.NumberUtil;
+import synapticloop.templar.helper.NumberHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public abstract class Function {
@@ -64,12 +64,12 @@ public abstract class Function {
 			} else {
 				stringBuilder.append("exactly ");
 			}
-			stringBuilder.append(NumberUtil.convert(numArgs));
+			stringBuilder.append(NumberHelper.convert(numArgs));
 			stringBuilder.append(" (");
 			stringBuilder.append(numArgs);
 			if(getNumArgsMax() != -1) {
 				stringBuilder.append(") and ");
-				stringBuilder.append(NumberUtil.convert(numArgsMax));
+				stringBuilder.append(NumberHelper.convert(numArgsMax));
 				stringBuilder.append(" (");
 				stringBuilder.append(numArgsMax);
 			}

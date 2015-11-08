@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -29,8 +29,8 @@ import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.token.command.CommandNotToken;
 import synapticloop.templar.token.command.CommandSingleQuoteToken;
 
-public class CommandLineUtils {
-	private CommandLineUtils() {}
+public class CommandLineHelper {
+	private CommandLineHelper() {}
 
 	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseException {
 		List<CommandLineToken> commandTokens= new ArrayList<CommandLineToken>();

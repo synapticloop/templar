@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
-import synapticloop.templar.utils.FileUtils;
+import synapticloop.templar.helper.FileHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -77,7 +77,7 @@ public class ImportToken extends Token {
 		boolean foundClassPath = true;
 		// try to find it on the filepath
 		File templarFile  = new File(importLocation);
-		if(importLocation.startsWith(CLASSPATH_DESIGNATOR) || !FileUtils.canReadFile(templarFile)) {
+		if(importLocation.startsWith(CLASSPATH_DESIGNATOR) || !FileHelper.canReadFile(templarFile)) {
 			foundFilePath = false;
 		} else {
 			BufferedReader bufferedReader = null;

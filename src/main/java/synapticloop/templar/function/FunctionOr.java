@@ -1,7 +1,7 @@
 package synapticloop.templar.function;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 /*
@@ -28,8 +28,8 @@ public class FunctionOr extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		Boolean argZero = ObjectUtils.evaluateObjectToDefaultBoolean(args[0], templarContext);
-		Boolean argOne = ObjectUtils.evaluateObjectToDefaultBoolean(args[1], templarContext);
+		Boolean argZero = ObjectHelper.evaluateObjectToDefaultBoolean(args[0], templarContext);
+		Boolean argOne = ObjectHelper.evaluateObjectToDefaultBoolean(args[1], templarContext);
 		if(null == argZero || null == argOne) {
 			throw new FunctionException("Could not evaluate arguments to a Boolean, arguments were: " + args[0] + ", " + args[1] + ", values: " + argZero + ", " + argOne);
 		} else {

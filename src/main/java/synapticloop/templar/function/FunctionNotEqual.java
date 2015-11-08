@@ -18,7 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionNotEqual extends Function {
@@ -28,8 +28,8 @@ public class FunctionNotEqual extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-		Object argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext);
+		Object argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
+		Object argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext);
 		if(null == argZero) {
 			if(null == argOne) {
 				return(false);

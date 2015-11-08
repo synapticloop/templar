@@ -18,7 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionInstanceOf extends Function {
@@ -28,8 +28,8 @@ public class FunctionInstanceOf extends Function {
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		Object argZero = ObjectUtils.evaluateObjectToDefault(args[0], templarContext);
-		String argOne = ObjectUtils.evaluateObjectToDefault(args[1], templarContext).toString();
+		Object argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
+		String argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext).toString();
 
 		return(argZero.getClass().getCanonicalName().endsWith(argOne));
 	}

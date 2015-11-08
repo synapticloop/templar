@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class CommandEvaluationToken extends CommandLineToken {
@@ -51,11 +51,11 @@ public class CommandEvaluationToken extends CommandLineToken {
 	@Override
 	public Object evaluate(TemplarContext templarContext) throws RenderException {
 		// if the evaluated command is quoted, then just return the de-quoted stuff
-		if(ObjectUtils.isQuoted(evaluateCommand)) {
-			return(ObjectUtils.deQuote(evaluateCommand));
+		if(ObjectHelper.isQuoted(evaluateCommand)) {
+			return(ObjectHelper.deQuote(evaluateCommand));
 		}
 
-		return(ObjectUtils.evaluateObject(evaluateCommand, templarContext));
+		return(ObjectHelper.evaluateObject(evaluateCommand, templarContext));
 	}
 
 	

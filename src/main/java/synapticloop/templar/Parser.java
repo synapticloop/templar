@@ -32,10 +32,9 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.FileHelper;
+import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.token.Token;
-import synapticloop.templar.utils.FileUtils;
-import synapticloop.templar.utils.HashUtils;
-import synapticloop.templar.utils.ParserCache;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -68,7 +67,7 @@ public class Parser {
 	 */
 	public Parser(File file) throws ParseException {
 		if(null != file) {
-			if(FileUtils.canReadFile(file)) {
+			if(FileHelper.canReadFile(file)) {
 				this.templarFile = file;
 			} else {
 				throw new ParseException("File '" + file.getPath() + "' does not exist, can not be read, or is not a file.");
@@ -106,9 +105,9 @@ public class Parser {
 		}
 
 		String contents = stringBuilder.toString();
-		String md5Hash = HashUtils.md5Hash(contents);
-		if(null != md5Hash && ParserCache.getIsInCache(md5Hash)) {
-			this.tokens = ParserCache.getCached(md5Hash);
+		String md5Hash = ParserHelper.md5Hash(contents);
+		if(null != md5Hash && ParserHelper.getIsInCache(md5Hash)) {
+			this.tokens = ParserHelper.getCached(md5Hash);
 			return;
 		}
 

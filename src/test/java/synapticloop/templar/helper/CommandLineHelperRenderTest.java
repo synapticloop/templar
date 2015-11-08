@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 import static org.junit.Assert.*;
 
@@ -10,9 +10,12 @@ import org.junit.Test;
 import synapticloop.templar.Parser;
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.CommandLineHelper;
 import synapticloop.templar.token.command.CommandLineToken;
+import synapticloop.templar.utils.TemplarConfiguration;
+import synapticloop.templar.utils.TemplarContext;
 
-public class CommandLineUtilsRenderTest {
+public class CommandLineHelperRenderTest {
 
 	@Test
 	public void testNotSingleQuote() throws ParseException, RenderException, ParseException {
@@ -31,55 +34,55 @@ public class CommandLineUtilsRenderTest {
 
 	@Test(expected=ParseException.class)
 	public void testNotDoubleQuote() throws ParseException {
-		CommandLineUtils.parseCommandLine("!'hello'");
+		CommandLineHelper.parseCommandLine("!'hello'");
 	}
 
 	@Test(expected=ParseException.class)
 	public void testNotNot() throws ParseException {
-		CommandLineUtils.parseCommandLine("!!!!!");
+		CommandLineHelper.parseCommandLine("!!!!!");
 	}
 
 	@Test(expected=ParseException.class)
 	public void testNoEndingDoubleQuote() throws ParseException {
-		CommandLineUtils.parseCommandLine("\"\\\" something");
+		CommandLineHelper.parseCommandLine("\"\\\" something");
 	}
 
 	@Test(expected=ParseException.class)
 	public void testNoEndingSingleQuote() throws ParseException {
-		CommandLineUtils.parseCommandLine("'\" something else \"");
+		CommandLineHelper.parseCommandLine("'\" something else \"");
 	}
 
 	@Test
 	public void testSingleQuote() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("'something else'"));
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("'\"something else\"'"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("'something else'"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("'\"something else\"'"));
 	}
 
 	@Test
 	public void testDoubleQuote() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("\"something else\""));
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("\"\\\"something else\\\"\""));
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("\"\\\"something\\\" else\""));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("\"something else\""));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("\"\\\"something else\\\"\""));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("\"\\\"something\\\" else\""));
 	}
 
 	@Test
 	public void testFunction() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine(" fn:and[true, true]"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine(" fn:and[true, true]"));
 	}
 
 	@Test
 	public void testFunctionInFunction() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine(" fn:and[true, fn:and[true, true]]"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine(" fn:and[true, fn:and[true, true]]"));
 	}
 
 	@Test
 	public void testNotFunction() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("! fn:and[true, true]"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("! fn:and[true, true]"));
 	}
 
 	@Test
 	public void testFunctionInNotFunction() throws ParseException {
-		assertOnlyOneCommand(CommandLineUtils.parseCommandLine("fn:and[true, !fn:and[true, true]]"));
+		assertOnlyOneCommand(CommandLineHelper.parseCommandLine("fn:and[true, !fn:and[true, true]]"));
 	}
 
 	private void assertOnlyOneCommand(List<CommandLineToken> commandTokens) {

@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class FileUtilsTest {
+import synapticloop.templar.helper.FileHelper;
+
+public class FileHelperTest {
 	@Mock private File mockFile;
 
 	@Before
@@ -24,41 +26,41 @@ public class FileUtilsTest {
 		when(mockFile.canRead()).thenReturn(true);
 		when(mockFile.exists()).thenReturn(true);
 		when(mockFile.isFile()).thenReturn(true);
-		assertTrue(FileUtils.canReadFile(mockFile));
+		assertTrue(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(true);
 		when(mockFile.exists()).thenReturn(false);
 		when(mockFile.isFile()).thenReturn(true);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(true);
 		when(mockFile.exists()).thenReturn(true);
 		when(mockFile.isFile()).thenReturn(false);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(true);
 		when(mockFile.exists()).thenReturn(false);
 		when(mockFile.isFile()).thenReturn(false);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(false);
 		when(mockFile.exists()).thenReturn(true);
 		when(mockFile.isFile()).thenReturn(true);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(false);
 		when(mockFile.exists()).thenReturn(false);
 		when(mockFile.isFile()).thenReturn(true);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(false);
 		when(mockFile.exists()).thenReturn(true);
 		when(mockFile.isFile()).thenReturn(false);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 
 		when(mockFile.canRead()).thenReturn(false);
 		when(mockFile.exists()).thenReturn(false);
 		when(mockFile.isFile()).thenReturn(false);
-		assertFalse(FileUtils.canReadFile(mockFile));
+		assertFalse(FileHelper.canReadFile(mockFile));
 	}
 }

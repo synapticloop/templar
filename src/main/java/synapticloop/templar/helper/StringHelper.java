@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -17,8 +17,8 @@ package synapticloop.templar.utils;
  * under the Licence.
  */
 
-public class StringUtils {
-	private StringUtils() {}
+public class StringHelper {
+	private StringHelper() {}
 
 	public static String escapeHtml(String source) {
 		if(source==null) {

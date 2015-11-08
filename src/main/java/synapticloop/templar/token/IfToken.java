@@ -22,8 +22,8 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.CommandLineHelper;
 import synapticloop.templar.token.command.CommandLineToken;
-import synapticloop.templar.utils.CommandLineUtils;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -64,7 +64,7 @@ public class IfToken extends CommandToken {
 				// now we need to go through and tokenise the inner tokeniser...
 				this.commandLine = stringBuilder.toString().trim();
 				try {
-					this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
+					this.commandLineTokens = CommandLineHelper.parseCommandLine(commandLine);
 				} catch (ParseException pcex) {
 					throw new ParseException("Could not parse command line '" + commandLine + "', message was: " + pcex.getMessage(), pcex);
 				}

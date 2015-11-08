@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionFormatDate extends Function {
@@ -74,7 +74,7 @@ public class FunctionFormatDate extends Function {
 	}
 
 	private Date getDateFromObject(TemplarContext templarContext, Object argument) {
-		Object dateOrTimestamp = ObjectUtils.evaluateObjectToDefault(argument, templarContext);
+		Object dateOrTimestamp = ObjectHelper.evaluateObjectToDefault(argument, templarContext);
 		Date date = null;
 		if(dateOrTimestamp instanceof Date) {
 			date = (Date)dateOrTimestamp;
@@ -82,7 +82,7 @@ public class FunctionFormatDate extends Function {
 			date = new Date(((java.sql.Date)dateOrTimestamp).getTime());
 		} else if (dateOrTimestamp instanceof String) {
 			// try to coerce to Long
-			date = new Date(Long.decode((String)ObjectUtils.evaluateObjectToDefault(argument.toString().trim(), templarContext)));
+			date = new Date(Long.decode((String)ObjectHelper.evaluateObjectToDefault(argument.toString().trim(), templarContext)));
 		} else if (dateOrTimestamp instanceof Long) {
 			date = new Date((Long)dateOrTimestamp);
 		} else if (dateOrTimestamp instanceof Timestamp) {

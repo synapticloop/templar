@@ -1,4 +1,4 @@
-package synapticloop.templar.utils;
+package synapticloop.templar.helper;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -24,11 +24,12 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.utils.TemplarContext;
 
-public class ObjectUtils {
+public class ObjectHelper {
 	private static final String[] METHOD_PREFIXES = {"get", "is", "has", ""};
 
-	private ObjectUtils() {}
+	private ObjectHelper() {}
 
 
 	/**
@@ -235,7 +236,7 @@ public class ObjectUtils {
 					string = string.trim();
 				}
 				// at this point - evaluate the token
-				objectArgs[i] = ObjectUtils.evaluateObject(string, templarContext);
+				objectArgs[i] = ObjectHelper.evaluateObject(string, templarContext);
 			}
 
 			try {
@@ -244,7 +245,7 @@ public class ObjectUtils {
 				throw new RenderException("Command " + parseableCommandline + "' exception, " + fex.getMessage(), fex);
 			}
 		} else {
-			object = ObjectUtils.evaluateObject(parseableCommandline, templarContext);
+			object = ObjectHelper.evaluateObject(parseableCommandline, templarContext);
 		}
 
 		return(object);

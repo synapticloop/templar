@@ -23,9 +23,9 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.CommandLineHelper;
+import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.token.command.CommandLineToken;
-import synapticloop.templar.utils.CommandLineUtils;
-import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -66,7 +66,7 @@ public class SetToken extends CommandToken {
 		contextAs = commandSplit[1].trim();
 
 		try {
-			this.commandLineTokens = CommandLineUtils.parseCommandLine(setCommand);
+			this.commandLineTokens = CommandLineHelper.parseCommandLine(setCommand);
 		} catch (ParseException pex) {
 			throw new ParseException("Could not parse command line '" + setCommand + "', message was: " + pex.getMessage(), pex);
 		}

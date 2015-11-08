@@ -18,7 +18,7 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.ObjectUtils;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public abstract class FunctionNumericComparison extends Function {
@@ -34,14 +34,14 @@ public abstract class FunctionNumericComparison extends Function {
 		hasError = false;
 		if(verifyNonNullArgumentLength(args)) {
 			try {
-				Object arg1Object = ObjectUtils.evaluateObjectToDefault(args[0].toString().trim(), templarContext);
+				Object arg1Object = ObjectHelper.evaluateObjectToDefault(args[0].toString().trim(), templarContext);
 				if(arg1Object instanceof Number) {
 					arg1 = new Long(((Number)arg1Object).longValue());
 				} else {
 					arg1 = Long.decode((String)arg1Object);
 				}
 
-				Object arg2Object = ObjectUtils.evaluateObjectToDefault(args[1].toString().trim(), templarContext);
+				Object arg2Object = ObjectHelper.evaluateObjectToDefault(args[1].toString().trim(), templarContext);
 				if(arg2Object instanceof Number) {
 					arg2 = new Long(((Number)arg2Object).longValue());
 				} else {

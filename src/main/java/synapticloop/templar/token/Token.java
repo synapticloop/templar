@@ -25,7 +25,7 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
-import synapticloop.templar.utils.StringUtils;
+import synapticloop.templar.helper.StringHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -107,6 +107,6 @@ public abstract class Token extends BasePositionToken {
 	}
 
 	public String toHtmlString() {
-		return(StringUtils.escapeHtml(value));
+		return(StringHelper.escapeHtml(value));
 	}
 }

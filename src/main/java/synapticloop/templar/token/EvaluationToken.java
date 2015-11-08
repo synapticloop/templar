@@ -22,9 +22,9 @@ import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
 import synapticloop.templar.exception.RenderException;
+import synapticloop.templar.helper.CommandLineHelper;
+import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.token.command.CommandLineToken;
-import synapticloop.templar.utils.CommandLineUtils;
-import synapticloop.templar.utils.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -53,7 +53,7 @@ public class EvaluationToken extends CommandToken {
 			throw new ParseException("Could not find end token '}' for evaluation.", this);
 		}
 		this.commandLine = stringBuilder.toString();
-		this.commandLineTokens = CommandLineUtils.parseCommandLine(commandLine);
+		this.commandLineTokens = CommandLineHelper.parseCommandLine(commandLine);
 	}
 
 
