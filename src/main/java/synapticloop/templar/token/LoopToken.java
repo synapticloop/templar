@@ -85,9 +85,18 @@ public class LoopToken extends CommandToken {
 			int offset = 0;
 
 			for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
-				Object object2 = iterator.next();
-				templarContext.add(contextAs, object2);
-				templarContext.add(contextAs + "Status", new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
+				Object nextObject = iterator.next();
+				templarContext.add(contextAs, nextObject);
+				LoopStatusBean loopStatusBean = (LoopStatusBean) templarContext.get(contextAs + "Status");
+				if(null != loopStatusBean) {
+					loopStatusBean.setFirst(first);
+					loopStatusBean.setLast(!iterator.hasNext());
+					loopStatusBean.setIndex(offset + 1);
+					loopStatusBean.setOffset(offset);
+				} else {
+					templarContext.add(contextAs + "Status", new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
+				}
+
 				for (Token token : this.childTokens) {
 					stringBuilder.append(token.render(templarContext));
 				}

@@ -23,6 +23,15 @@ public class LoopStatusBean {
 	private int index;
 	private int offset;
 
+	/**
+	 * Constructor for the loop status bean, which holds all of the information
+	 * about the status of the loop as it is iterated.
+	 * 
+	 * @param first whether this is the first iteration
+	 * @param last whether this is the last iteration
+	 * @param index what the index is
+	 * @param offset what the offset is
+	 */
 	public LoopStatusBean(boolean first, boolean last, int index, int offset) {
 		this.first = first;
 		this.last = last;
@@ -30,21 +39,14 @@ public class LoopStatusBean {
 		this.offset = offset;
 	}
 
-	public boolean getFirst() {
-		return(first);
-	}
-
-	public boolean getLast() {
-		return(last);
-	}
-
-	public int getIndex() {
-		return(index);
-	}
-
-	public int getOffset() {
-		return(offset);
-	}
+	public boolean getFirst() { return(first); }
+	public void setFirst(boolean first) { this.first = first; }
+	public boolean getLast() { return(last); }
+	public void setLast(boolean last) { this.last = last; }
+	public int getIndex() { return(index); }
+	public void setIndex(int index) { this.index = index; }
+	public int getOffset() { return(offset); }
+	public void setOffset(int offset) { this.offset = offset; }
 
 	@Override
 	public String toString() {
