@@ -133,7 +133,7 @@ public class TemplarContext {
 	 * Create a new Templar context from an existing one.  The existing context
 	 * will be cloned and unchanged.
 	 * 
-	 * @param existingContext
+	 * @param existingContext the existing context to clone
 	 */
 	@SuppressWarnings("unchecked")
 	public TemplarContext(TemplarContext existingContext) {

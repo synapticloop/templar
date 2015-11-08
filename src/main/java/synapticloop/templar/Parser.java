@@ -80,9 +80,11 @@ public class Parser {
 	}
 
 	/**
+	 * Parse the templar file from the passed in input stream 
 	 * 
-	 * @param inputStream
-	 * @throws ParseException
+	 * @param inputStream The input stream to parse
+	 * 
+	 * @throws ParseException if there was an error parsing the input stream 
 	 */
 	public Parser(InputStream inputStream) throws ParseException {
 		if(null == inputStream) {

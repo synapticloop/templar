@@ -38,10 +38,11 @@ public class IfToken extends CommandToken {
 	/**
 	 * The if token is a conditional token with a command line
 	 * 
-	 * @param value
-	 * @param stringTokenizer
-	 * @param tokeniser
-	 * @throws ParseException
+	 * @param value the value to evaluate
+	 * @param stringTokenizer the String tokenizer
+	 * @param tokeniser the tokeniser
+	 * 
+	 * @throws ParseException if there was an error parsing
 	 */
 	public IfToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);

@@ -36,8 +36,10 @@ public class EvaluationToken extends CommandToken {
 	 * Build an evaluation token which should be in the form of {to.be.evaluated}
 	 *
 	 * @param value the token value
-	 * @param stringTokenizer
-	 * @param tokeniser 
+	 * @param stringTokenizer the string tokenizer to read from 
+	 * @param tokeniser the templar tokenizer
+	 * 
+	 * @throws ParseException if there was an error parsing the context
 	 */
 	public EvaluationToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
