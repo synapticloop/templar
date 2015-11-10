@@ -25,13 +25,11 @@ import java.util.Set;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.function.Function;
-import synapticloop.templar.function.FunctionEqual;
 import synapticloop.templar.function.FunctionFormatDate;
 import synapticloop.templar.function.FunctionInstanceOf;
 import synapticloop.templar.function.FunctionIsNotNull;
 import synapticloop.templar.function.FunctionIsNull;
 import synapticloop.templar.function.FunctionLength;
-import synapticloop.templar.function.FunctionNotEqual;
 import synapticloop.templar.function.bool.FunctionAnd;
 import synapticloop.templar.function.bool.FunctionFalse;
 import synapticloop.templar.function.bool.FunctionOr;
@@ -40,6 +38,8 @@ import synapticloop.templar.function.comparison.FunctionGreaterThan;
 import synapticloop.templar.function.comparison.FunctionGreaterThanEqual;
 import synapticloop.templar.function.comparison.FunctionLessThan;
 import synapticloop.templar.function.comparison.FunctionLessThanEqual;
+import synapticloop.templar.function.equality.FunctionEqual;
+import synapticloop.templar.function.equality.FunctionNotEqual;
 import synapticloop.templar.function.math.FunctionAdd;
 import synapticloop.templar.function.math.FunctionDivide;
 import synapticloop.templar.function.math.FunctionEven;
@@ -121,8 +121,7 @@ public class TemplarContext {
 		functionAliasMap.put("eq", "=");
 
 		functionAliasMap.put("not=", "<>");
-		functionAliasMap.put("!=", "<>");
-		functionAliasMap.put("!eq", "<>");
+		functionAliasMap.put("ne", "<>");
 		functionAliasMap.put("notEqual", "<>");
 
 		functionAliasMap.put("gt", ">");

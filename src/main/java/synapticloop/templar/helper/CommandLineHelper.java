@@ -29,9 +29,31 @@ import synapticloop.templar.token.command.CommandLineToken;
 import synapticloop.templar.token.command.CommandNotToken;
 import synapticloop.templar.token.command.CommandSingleQuoteToken;
 
+/**
+ * The command line helper parses a command line into the tokens that it 
+ * requires, including:
+ * 
+ * <ul>
+ *   <li>Not (!) tokens</li>
+ *   <li>Function (fn:) tokens</li>
+ *   <li>Evaluation tokens</li>
+ * </ul>
+ * 
+ * @author synapticloop
+ *
+ */
 public class CommandLineHelper {
 	private CommandLineHelper() {}
 
+	/**
+	 * Parse the command line and return the list of tokens
+	 * 
+	 * @param commandLine the command line to parse
+	 * 
+	 * @return the list of parsed tokens
+	 * 
+	 * @throws ParseException if there was an error parsing the command line
+	 */
 	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseException {
 		List<CommandLineToken> commandTokens= new ArrayList<CommandLineToken>();
 		StringTokenizer stringTokenizer = new StringTokenizer(commandLine, "!:\"'[]", true);

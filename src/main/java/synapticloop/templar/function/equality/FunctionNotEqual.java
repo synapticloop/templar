@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.equality;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -21,7 +21,7 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionNotEqual extends Function {
+public class FunctionNotEqual extends BaseFunctionEquality {
 	public FunctionNotEqual() {
 		super(2);
 	}
@@ -30,6 +30,7 @@ public class FunctionNotEqual extends Function {
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		Object argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
 		Object argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext);
+
 		if(null == argZero) {
 			if(null == argOne) {
 				return(false);
@@ -40,9 +41,8 @@ public class FunctionNotEqual extends Function {
 			if(null == argOne) {
 				return(true);
 			} else {
-				return(!argOne.equals(argZero));
+				return(!coercion(argZero, argOne));
 			}
 		}
 	}
-
 }

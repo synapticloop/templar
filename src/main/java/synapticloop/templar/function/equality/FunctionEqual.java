@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.equality;
 
 /*
  * Copyright (c) 2012-2015 synapticloop.
@@ -21,7 +21,7 @@ import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionEqual extends Function {
+public class FunctionEqual extends BaseFunctionEquality {
 	public FunctionEqual() {
 		super(2);
 	}
@@ -44,40 +44,5 @@ public class FunctionEqual extends Function {
 				return coercion(argZero, argOne);
 			}
 		}
-	}
-
-	private Object coercion(Object argZero, Object argOne) {
-		// at this point - we need to be able to determine which type the first 
-		// object is, and whether we need to be able to do integers as well 
-		if(argZero instanceof Integer) {
-			// try to coerce the second arg to an integer
-			try {
-				return (((Integer)argZero).intValue() == new Integer(argOne.toString()).intValue());
-			} catch(NumberFormatException nfex) {
-				return(false);
-			}
-		} else if(argZero instanceof Float) {
-			// try to coerce the second arg to an float
-			try {
-				return (((Float)argZero).floatValue() == new Float(argOne.toString()).floatValue());
-			} catch(NumberFormatException nfex) {
-				return(false);
-			}
-		} else if(argZero instanceof Double) {
-			// try to coerce the second arg to an double
-			try {
-				return (((Double)argZero).doubleValue() == new Double(argOne.toString()).doubleValue());
-			} catch(NumberFormatException nfex) {
-				return(false);
-			}
-		} else if(argZero instanceof Boolean) {
-			// try to coerce the second arg to an double
-			try {
-				return (((Boolean)argZero).booleanValue() == new Boolean(argOne.toString()).booleanValue());
-			} catch(NumberFormatException nfex) {
-				return(false);
-			}
-		}
-		return(argOne.equals(argZero));
 	}
 }
