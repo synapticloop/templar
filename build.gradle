@@ -47,13 +47,13 @@ tasks.withType(Javadoc) {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from 'build/docs/javadoc'
+	classifier = 'javadoc'
+	from 'build/docs/javadoc'
 }
 
 task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
-    classifier = 'sources'
+	from sourceSets.main.allSource
+	classifier = 'sources'
 }
 
 test.finalizedBy(project.tasks.cobertura)
@@ -83,7 +83,7 @@ bintray {
 	user = System.getenv('BINTRAY_USER')
 	key = System.getenv('BINTRAY_PASSWORD')
 
-	publications = [ 'Synapticloop' ] //When uploading Maven-based publication files
+	publications = [ 'Synapticloop' ]
 
 	publish = true
 
@@ -92,4 +92,5 @@ bintray {
 		name = "templar"
 	}
 }
+
 task(dist).dependsOn( [ 'test', 'cobertura'] )
