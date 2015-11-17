@@ -29,13 +29,32 @@ import synapticloop.templar.bean.length.FieldSize;
 import synapticloop.templar.bean.length.MethodGetLength;
 import synapticloop.templar.bean.length.MethodGetSize;
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionLengthTest {
 	private FunctionLength functionLength;
 
+	public class TestBean {
+		public TestBean() { }
+
+		public String getDescription() { return("this is a description"); }
+	}
+
 	@Before
 	public void setup() {
 		functionLength = new FunctionLength();
+	}
+	
+	@Test
+	public void testStringLength() throws FunctionException {
+		TemplarContext templarContext = new TemplarContext();
+		templarContext.add("testBean", new TestBean());
+		
+		// the following evaluate to the same length, one is a method call, the others are strings
+		assertEquals(21, functionLength.evaluate("", new Object[] {"testBean.description" }, templarContext));
+		assertEquals(21, functionLength.evaluate("", new Object[] {"this is a description" }, templarContext));
+		assertEquals(21, functionLength.evaluate("", new Object[] {"\"this is a description\"" }, templarContext));
+		assertEquals(21, functionLength.evaluate("", new Object[] {"'this is a description'" }, templarContext));
 	}
 
 	@Test(expected = FunctionException.class)

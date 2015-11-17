@@ -27,13 +27,32 @@ import org.junit.Test;
 
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.function.equality.FunctionEqual;
+import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionEqualTest {
 	private FunctionEqual functionEqual;
+	private FunctionLength functionLength;
+
+	public class TestBean {
+		public TestBean() { }
+
+		public String getDescription() { return("description"); }
+	}
 
 	@Before
 	public void setup() {
 		functionEqual = new FunctionEqual();
+		functionLength = new FunctionLength();
+	}
+
+	@Test
+	public void testStringLengthFromContext() throws FunctionException {
+		TemplarContext templarContext = new TemplarContext();
+		templarContext.add("hello", "hello");
+		templarContext.add("testBean", new TestBean());
+		
+		Object length = functionLength.evaluate("length", new Object[] {"testBean.description"}, templarContext);
+		assertTrue((Boolean)functionEqual.evaluate("=", new Object[] { length, "\"11\"" }, templarContext));
 	}
 
 	@Test

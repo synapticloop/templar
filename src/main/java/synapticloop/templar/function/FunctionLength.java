@@ -23,6 +23,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionLength extends Function {
@@ -36,14 +37,24 @@ public class FunctionLength extends Function {
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		Object object = args[0];
-		// so what do we have here...
-		if (object instanceof Collection) {
-			return(((Collection)object).size());
-		} else if (object instanceof Object[]) {
-			return(((Object[])object).length);
+		Object argZero = null;
+		if(args[0] instanceof String) {
+			// this is either a lookup - or a simple string...
+			argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
 		} else {
-			return findAndInvokeAccessors(object);
+			// leave the object alone
+			argZero = args[0];
+		}
+
+		// so what do we have here...
+		if (argZero instanceof String) {
+			return(((String)argZero).length());
+		} else if (argZero instanceof Collection) {
+			return(((Collection)argZero).size());
+		} else if (argZero instanceof Object[]) {
+			return(((Object[])argZero).length);
+		} else {
+			return findAndInvokeAccessors(argZero);
 		}
 	}
 
