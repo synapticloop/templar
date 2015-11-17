@@ -46,6 +46,11 @@ public class FunctionLength extends Function {
 			argZero = args[0];
 		}
 
+		if(null == argZero) {
+			// is this the true length of null??
+			return(0);
+		}
+
 		// so what do we have here...
 		if (argZero instanceof String) {
 			return(((String)argZero).length());

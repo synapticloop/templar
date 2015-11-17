@@ -9,7 +9,7 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = 'v1.1.1'
+version = 'v1.1.2'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
