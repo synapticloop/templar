@@ -55,8 +55,10 @@ public class CommandEvaluationToken extends CommandLineToken {
 			return(ObjectHelper.deQuote(evaluateCommand));
 		}
 
-		return(ObjectHelper.evaluateObject(evaluateCommand, templarContext));
+		try {
+			return(ObjectHelper.evaluateObject(evaluateCommand, templarContext));
+		} catch(RenderException ex) {
+			throw new RenderException("Could not render line: " + evaluateCommand, ex);
+		}
 	}
-
-	
 }
