@@ -54,7 +54,7 @@ public class ImportToken extends Token {
 				stringBuilder.append(nextToken);
 			}
 			// if we are here - we could not find the end '}' for the import
-			throw new ParseException("Could not find end token marker '}' for the import.", this);
+			throw new ParseException("Could not find end token marker '}' for the import token.", this);
 		} else {
 			throw new ParseException("Could not find end token marker '}' for the import token.", this);
 		}
