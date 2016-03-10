@@ -34,6 +34,8 @@ $(document).ready(function() {
 		plain = plain.replace(/{/g, "{{");
 		plain = plain.replace(/\n/g, "{\\n}\n");
 		plain = plain.replace(/\t/g, "{\\t}");
+		plain = plain.replace(/</g, "&lt;");
+		plain = plain.replace(/>/g, "&gt;");
 		$("#templaroutput").empty();
 		$("#templaroutput").append(plain);
 		return(false);
