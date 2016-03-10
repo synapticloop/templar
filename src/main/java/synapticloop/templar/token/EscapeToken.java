@@ -20,6 +20,7 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 public class EscapeToken extends Token {
@@ -31,20 +32,26 @@ public class EscapeToken extends Token {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		if(stringTokenizer.hasMoreTokens()) {
+		while(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
 			if("}".equals(nextToken)) {
-				value = stringBuilder.toString();
+				this.value = stringBuilder.toString();
+				return;
 			} else {
 				stringBuilder.append(nextToken);
 			}
-		} else {
-			throw new ParseException("Could not find end token marker '}' for the escape token, and we are out of tokens", this);
-		}
+		} 
+
+		throw new ParseException("Could not find end token marker '}' for the escape token, and we are out of tokens", this);
+	}
+
+	@Override
+	public String render(TemplarContext templarContext) {
+		return(this.value);
 	}
 
 	@Override
 	public String toString() {
-		return(super.toString("ESCAPE", value));
+		return(super.toString("ESCAPE", this.value));
 	}
 }
