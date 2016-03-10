@@ -1,0 +1,29 @@
+{
+	"context": {
+		"pluginId": "synapticloop.documentr"
+	},
+	"templates": [
+		{ "type":"inbuilt", "value":"badge-travis-ci" },
+		{ "type":"inbuilt", "value":"badge-bintray" },
+		{ "type":"inbuilt", "value":"badge-shield-io-github-release" },
+
+		{ "type":"inbuilt", "value":"jvm-compatability" },
+		{ "type":"inbuilt", "value":"project-name" },
+		{ "type":"inbuilt", "value":"project-description" },
+
+		{ "type":"template", "value":"src/docs/usage.md.templar" },
+
+		{ "type":"inbuilt", "value":"gradle-build" },
+
+		{ "type":"inbuilt", "value":"logging-slf4j" },
+
+		{ "type":"inbuilt", "value":"publishing-github" },
+		{ "type":"inbuilt", "value":"publishing-bintray" },
+
+		{ "type":"inbuilt", "value":"dependencies" },
+
+		{ "type":"inbuilt", "value":"license-mit" },
+
+		{ "type":"inbuilt", "value":"attribution" }
+	]
+}
