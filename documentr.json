@@ -11,7 +11,7 @@
 		{ "type":"inbuilt", "value":"project-name" },
 		{ "type":"inbuilt", "value":"project-description" },
 
-		{ "type":"template", "value":"src/docs/usage.md.templar" },
+		{ "type":"file", "value":"src/docs/usage.md" },
 
 		{ "type":"inbuilt", "value":"gradle-build" },
 

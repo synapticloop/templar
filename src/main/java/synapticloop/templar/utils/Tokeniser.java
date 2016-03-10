@@ -31,6 +31,7 @@ import synapticloop.templar.token.DumpFunctionsToken;
 import synapticloop.templar.token.ElseToken;
 import synapticloop.templar.token.EndIfToken;
 import synapticloop.templar.token.EndLoopToken;
+import synapticloop.templar.token.EscapeToken;
 import synapticloop.templar.token.EvaluationToken;
 import synapticloop.templar.token.IfToken;
 import synapticloop.templar.token.ImportToken;
@@ -65,6 +66,7 @@ public class Tokeniser implements Serializable {
 	private static final int ENDLOOP = 13;
 	private static final int IMPORT = 14;
 	private static final int PRE = 15;
+	private static final int ESCAPED_BACKSLASH = 16;
 
 	private static final Map<String, Integer> TOKEN_MAP = new HashMap<String, Integer>();
 	static {
@@ -74,6 +76,7 @@ public class Tokeniser implements Serializable {
 		TOKEN_MAP.put("\\n", ESCAPED_N);
 		TOKEN_MAP.put("tab", TAB);
 		TOKEN_MAP.put("\\t", ESCAPED_T);
+		TOKEN_MAP.put("\\", ESCAPED_BACKSLASH);
 		TOKEN_MAP.put("set", SET);
 		TOKEN_MAP.put("if", IF);
 		TOKEN_MAP.put("loop", LOOP);
@@ -124,6 +127,9 @@ public class Tokeniser implements Serializable {
 						case TAB:
 						case ESCAPED_T:
 							tokens.add(new TabToken(token, stringTokenizer, this));
+							break;
+						case ESCAPED_BACKSLASH:
+							tokens.add(new EscapeToken(token, stringTokenizer, this));
 							break;
 						case SET:
 							tokens.add(new SetToken(token, stringTokenizer, this));
