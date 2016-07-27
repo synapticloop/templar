@@ -9,6 +9,7 @@ plugins {
 	id 'synapticloop.documentr' version '1.2.3'
 	id "synapticloop.projectFilestatistics" version "1.0.1"
 	id 'com.github.johnrengelman.shadow' version '1.2.3'
+	id 'synapticloop.copyrightr' version '1.0.1'
 }
 
 
@@ -58,6 +59,10 @@ configurations.all {
 	}
 }
 
+copyrightr {
+	dryRun = false
+}
+
 github {
 	owner = group
 	repo = archivesBaseName
@@ -75,7 +80,7 @@ def javaApiUrl = 'http://docs.oracle.com/javase/1.6.0/docs/api/'
 def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
 
 tasks.withType(Javadoc) {
-    options.links(javaApiUrl, groovyApiUrl)
+	options.links(javaApiUrl, groovyApiUrl)
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -111,7 +116,7 @@ publishing {
 }
 
 bintray {
-	user = System.getenv('BINTRAY_USER')
+	user = System.getenv('BINTRAY_USER')	
 	key = System.getenv('BINTRAY_PASSWORD')
 
 	publications = [ 'Synapticloop' ]
