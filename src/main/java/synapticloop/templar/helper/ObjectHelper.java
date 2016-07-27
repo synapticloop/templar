@@ -99,7 +99,7 @@ public class ObjectHelper {
 					default:
 						// at this point, the method that we have found has more than 1 parameter - we
 						// don't support this as the do notation doesn't handle it
-						throw new RenderException("Cannot invoke method with more than 1 parameter, tryied to invoke method: '" + invokeMethod.toGenericString() + ".");
+						throw new RenderException("Cannot invoke method with more than 1 parameter, tried to invoke method: '" + invokeMethod.toGenericString() + ".");
 					}
 				} else {
 					foundMethod = false;
