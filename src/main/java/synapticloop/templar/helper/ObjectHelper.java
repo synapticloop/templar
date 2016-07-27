@@ -22,9 +22,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.json.JSONObject;
-import org.json.JSONString;
-
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
@@ -297,15 +294,26 @@ public class ObjectHelper {
 			}
 		}
 
-		// now we are going to do some JSONObject parsing
-		if(object instanceof JSONObject) {
-			// this 
-		} else if(object instanceof JSONString) {
-		} else if(object instanceof JSONString) {
-			
+		try {
+			// it could be that we are looking up a direct call on the object
+
+			returnMethod = object.getClass().getMethod("get", String.class);
+			return(returnMethod);
+		} catch (NoSuchMethodException nsmex) {
+			throw new RenderException("Could not find 'get' method on object instance", nsmex);
+		} catch (SecurityException sex) {
+			throw new RenderException("Could not find 'get' method on object instance", sex);
 		}
-		
-		return(returnMethod);
+
+//		// now we are going to do some JSONObject parsing
+//		if(object instanceof JSONObject) {
+//			// this 
+//		} else if(object instanceof JSONString) {
+//		} else if(object instanceof JSONString) {
+//			
+//		}
+//		
+//		return(returnMethod);
 	}
 
 	private static Method getMethod(Object object, String methodReference) throws RenderException {

@@ -1,0 +1,11 @@
+{jsonObject.nested.one.two}{\n}
+{jsonObject.property}{\n}
+{if jsonObject.booleanTrue}correct{else}error{endif}{\n}
+{if jsonObject.booleanFalse}error{else}correct{endif}{\n}
+{if fn:=[jsonObject.oneHundred, '100']}correct{else}error{endif}{\n}
+{loop jsonObject.array as element}
+{element}{\n}
+{endloop}
+{loop jsonObject.objectArray as elementObject}
+{elementObject.name}{\n}
+{endloop}

@@ -49,6 +49,7 @@ import synapticloop.templar.function.math.FunctionOdd;
 import synapticloop.templar.function.math.FunctionPower;
 import synapticloop.templar.function.math.FunctionSubtract;
 import synapticloop.templar.function.string.FunctionIndexOf;
+import synapticloop.templar.function.string.FunctionToJson;
 
 public class TemplarContext {
 	private Map<String, Object> context = new HashMap<String, Object>();
@@ -102,6 +103,7 @@ public class TemplarContext {
 
 		// string
 		functionMap.put("indexOf", new FunctionIndexOf()); // get the index of strings
+		functionMap.put("toJson", new FunctionToJson()); // convert a string into a JSON object
 		// NIY
 //		functionMap.put("substring", new FunctionSubString()); // get the substring
 }
