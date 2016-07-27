@@ -38,6 +38,17 @@ public abstract class CommandToken extends Token {
 	@Override
 	public abstract String render(TemplarContext templarContext) throws RenderException;
 
+	/**
+	 * Return whether this token conforms to be a correct token that has an 'as'
+	 * in it
+	 *   e.g.: 
+	 *     {loop something as somethingElse}, or 
+	 *     {set something as somethingElse}
+	 * 
+	 * @param commandLine The command line to parse
+	 * 
+	 * @return whether this is a correct 'as' conforming token
+	 */
 	public boolean isCorrectAsStatement(String commandLine) {
 		if(null == commandLine || EMPTY_STRING.equals(commandLine.trim())) {
 			return(false);

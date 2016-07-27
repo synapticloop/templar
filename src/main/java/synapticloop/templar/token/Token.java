@@ -45,10 +45,30 @@ public abstract class Token extends BasePositionToken {
 		// classes
 	}
 
+	/**
+	 * Render this token.  By default this just returns the value of the token, 
+	 * and must be over-ridden in sub classes to output the correct information.
+	 * 
+	 * @param templarContext The templar context to use when rendering the token.
+	 * 
+	 * @return the rendered string
+	 * 
+	 * @throws RenderException if there was an error rendering the context
+	 */
 	public String render(TemplarContext templarContext) throws RenderException {
 		return(value);
 	}
 
+	/**
+	 * Render this token to an output stream.  By default this just returns the 
+	 * value of the token, and must be over-ridden in sub classes to output the 
+	 * correct information.
+	 * 
+	 * @param templarContext The templar context to use when rendering the output
+	 * @param outputStream The output stream to write the content to
+	 * 
+	 * @throws RenderException If there was an error rendering the content
+	 */
 	public void renderToStream(TemplarContext templarContext, OutputStream outputStream) throws RenderException {
 		try {
 			outputStream.write(render(templarContext).getBytes());
@@ -57,10 +77,20 @@ public abstract class Token extends BasePositionToken {
 		}
 	}
 
+	/**
+	 * Get a list of all of the child tokens for this token
+	 * 
+	 * @return A list of all of the child tokens
+	 */
 	public List<Token> getChildren() {
 		return(childTokens);
 	}
 
+	/**
+	 * Add a child token to this token
+	 * 
+	 * @param token The token to add as a child
+	 */
 	public void addChildToken(Token token) {
 		this.childTokens.add(token);
 	}

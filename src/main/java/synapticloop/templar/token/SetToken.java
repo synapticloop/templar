@@ -60,7 +60,7 @@ public class SetToken extends CommandToken {
 
 		// now make sure commandLine is correct
 		if(!isCorrectAsStatement(commandLine)) {
-			throw new ParseException(" Incorrect statement for '" + commandLine + "', could not find ' as ' token.  Format is {set something as somethingElse}.", this);
+			throw new ParseException("Incorrect statement for '" + commandLine + "', could not find ' as ' token.  Format is {set something as somethingElse}.", this);
 		}
 
 		contextAs = commandSplit[1].trim();

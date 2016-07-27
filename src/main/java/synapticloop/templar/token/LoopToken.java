@@ -65,6 +65,12 @@ public class LoopToken extends CommandToken {
 			}
 		}
 		this.commandLine = stringBuilder.toString().trim();
+
+		// now make sure commandLine is correct
+		if(!isCorrectAsStatement(commandLine)) {
+			throw new ParseException("Incorrect statement for '" + commandLine + "', could not find ' as ' token.  Format is {loop something as somethingElse}.", this);
+		}
+
 	}
 
 	@Override
