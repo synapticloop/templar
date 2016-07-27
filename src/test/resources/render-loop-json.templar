@@ -1,0 +1,4 @@
+[item] [offset] [index] [first] [last]{\n}
+{loop jsonArray as jsonItem}
+{jsonItem}  {jsonItemStatus.offset}        {jsonItemStatus.index}       {jsonItemStatus.first} {jsonItemStatus.last}{\n}
+{endloop}

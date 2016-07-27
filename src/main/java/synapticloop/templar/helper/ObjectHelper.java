@@ -22,6 +22,9 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.json.JSONObject;
+import org.json.JSONString;
+
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.utils.TemplarContext;
@@ -77,8 +80,7 @@ public class ObjectHelper {
 				// at this point - we may want to lookup the context for a variable, which 
 				// will be prefixed by a '$' character
 				if(nextToken.startsWith("$")) {
-					// look this up in the context - which should be a string??
-					// TODO - check the above
+					// look this up in the context - which should be a string
 					Object contextLookupObject = templarContext.get(nextToken.substring(1));
 					if(null != contextLookupObject) {
 						nextToken = contextLookupObject.toString();
@@ -294,6 +296,15 @@ public class ObjectHelper {
 				return(returnMethod);
 			}
 		}
+
+		// now we are going to do some JSONObject parsing
+		if(object instanceof JSONObject) {
+			// this 
+		} else if(object instanceof JSONString) {
+		} else if(object instanceof JSONString) {
+			
+		}
+		
 		return(returnMethod);
 	}
 

@@ -16,12 +16,12 @@ package synapticloop.templar.render;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
-
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Vector;
 
+import org.json.JSONArray;
 import org.junit.Test;
 
 import synapticloop.templar.Parser;
@@ -32,6 +32,28 @@ import synapticloop.templar.utils.TemplarContext;
 
 public class LoopRenderTest {
 
+	@Test
+	public void testJSONArrayLoop() throws ParseException, RenderException {
+		File file = new File("src/test/resources/render-loop-json.templar");
+		Parser parser = new Parser(file);
+
+		TemplarConfiguration templarConfiguration = new TemplarConfiguration();
+		templarConfiguration.setExplicitNewLines(true);
+		templarConfiguration.setExplicitTabs(true);
+		TemplarContext templarContext = new TemplarContext(templarConfiguration);
+
+		JSONArray jsonArray = new JSONArray();
+		jsonArray.put("  one");
+		jsonArray.put("  two");
+		jsonArray.put("three");
+		templarContext.add("jsonArray", jsonArray);
+		String render = parser.render(templarContext);
+		assertEquals("[item] [offset] [index] [first] [last]\n" + 
+				"  one  0        1       true false\n" + 
+				"  two  1        2       false false\n" + 
+				"three  2        3       false true\n", 
+				render);
+	}
 	@Test
 	public void testLoopStatusBean() throws ParseException, RenderException {
 		File file = new File("src/test/resources/render-loop-test.templar");

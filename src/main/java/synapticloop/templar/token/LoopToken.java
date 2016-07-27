@@ -31,6 +31,8 @@ import synapticloop.templar.utils.Tokeniser;
 public class LoopToken extends CommandToken {
 	private static final long serialVersionUID = 1045794103104169533L;
 
+	private static final String STATUS = "Status";
+
 	public LoopToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
 		StringBuilder stringBuilder = new StringBuilder();
@@ -87,14 +89,14 @@ public class LoopToken extends CommandToken {
 			for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
 				Object nextObject = iterator.next();
 				templarContext.add(contextAs, nextObject);
-				LoopStatusBean loopStatusBean = (LoopStatusBean) templarContext.get(contextAs + "Status");
+				LoopStatusBean loopStatusBean = (LoopStatusBean) templarContext.get(contextAs + STATUS);
 				if(null != loopStatusBean) {
 					loopStatusBean.setFirst(first);
 					loopStatusBean.setLast(!iterator.hasNext());
 					loopStatusBean.setIndex(offset + 1);
 					loopStatusBean.setOffset(offset);
 				} else {
-					templarContext.add(contextAs + "Status", new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
+					templarContext.add(contextAs + STATUS, new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
 				}
 
 				for (Token token : this.childTokens) {
@@ -109,17 +111,30 @@ public class LoopToken extends CommandToken {
 			int offset = 0;
 
 			for (int i = 0; i < objectArray.length; i++) {
-				Object object3 = objectArray[i];
-				templarContext.add(contextAs, object3);
-				templarContext.add(contextAs + "Status", new LoopStatusBean(first, (i+1 == objectArray.length), offset + 1, offset));
+				Object nextObject = objectArray[i];
+				templarContext.add(contextAs, nextObject);
+				templarContext.add(contextAs + STATUS, new LoopStatusBean(first, (i+1 == objectArray.length), offset + 1, offset));
 				for (Token token : this.childTokens) {
 					stringBuilder.append(token.render(templarContext));
 				}
 				first = false;
 				offset++;
-				
 			}
-			
+		} else if (object instanceof Iterable<?>) {
+			Iterable<?> iterable = (Iterable<?>)object;
+			boolean first = true;
+			int offset = 0;
+
+			for(Iterator iterator = iterable.iterator(); iterator.hasNext();) {
+				Object nextObject = iterator.next();
+				templarContext.add(contextAs, nextObject);
+				templarContext.add(contextAs + STATUS, new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
+				for (Token token : this.childTokens) {
+					stringBuilder.append(token.render(templarContext));
+				}
+				first = false;
+				offset++;
+			}
 		} else {
 			throw new RenderException("Don't know how to iterate over an object of type '" + object.getClass().getCanonicalName() + "'.\n" + this.toString());
 		}

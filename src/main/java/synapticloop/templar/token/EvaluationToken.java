@@ -33,7 +33,8 @@ public class EvaluationToken extends CommandToken {
 	private List<CommandLineToken> commandLineTokens;
 
 	/**
-	 * Build an evaluation token which should be in the form of {to.be.evaluated}
+	 * Build an evaluation token which should be in the form of full stop
+	 * separated actions: e.g.: {to.be.evaluated}
 	 *
 	 * @param value the token value
 	 * @param stringTokenizer the string tokenizer to read from 
