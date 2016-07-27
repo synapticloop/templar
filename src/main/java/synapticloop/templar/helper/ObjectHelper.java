@@ -250,7 +250,8 @@ public class ObjectHelper {
 
 	/**
 	 * Go through the METHOD_PREFIXES array and find the method that is called
-	 * METHOD_PREFIXES[i] + reference
+	 * METHOD_PREFIXES[i] + reference, if this is a Map, then we will look up
+	 * with a key.  The final lookup is a simple '.get(reference)' call
 	 *
 	 * @param object the object to look up the methods on
 	 * @param reference the reference
@@ -304,16 +305,6 @@ public class ObjectHelper {
 		} catch (SecurityException sex) {
 			throw new RenderException("Could not find 'get' method on object instance", sex);
 		}
-
-//		// now we are going to do some JSONObject parsing
-//		if(object instanceof JSONObject) {
-//			// this 
-//		} else if(object instanceof JSONString) {
-//		} else if(object instanceof JSONString) {
-//			
-//		}
-//		
-//		return(returnMethod);
 	}
 
 	private static Method getMethod(Object object, String methodReference) throws RenderException {
