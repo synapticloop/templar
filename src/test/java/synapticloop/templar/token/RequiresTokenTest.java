@@ -45,7 +45,4 @@ public class RequiresTokenTest {
 	public void testNullContext() throws ParseException {
 		new RequiresToken("", new StringTokenizer("}"), new Tokeniser());
 	}
-
-
-
 }
