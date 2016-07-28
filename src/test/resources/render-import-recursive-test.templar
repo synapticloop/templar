@@ -1,0 +1,3 @@
+start import{\n}
+{import src/test/resources/import/recursive.templar}
+end import{\n}

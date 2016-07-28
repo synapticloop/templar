@@ -24,19 +24,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.exception.RenderException;
 import synapticloop.templar.helper.FileHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
 
+/**
+ * The import token imports another file and parses its tokens and appends it
+ * to the current token list.
+ */
 public class ImportToken extends Token {
 	private static final long serialVersionUID = 9019815748103868539L;
 
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
+
+	private static final Map<String, List<Token>> IMPORT_CACHE = new HashMap<String, List<Token>>();
+
 	String importLocation = null;
 
 	public ImportToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
@@ -49,15 +59,21 @@ public class ImportToken extends Token {
 
 				if("}".equals(nextToken)) {
 					importLocation = stringBuilder.toString().trim();
+					// now we need to get all of the sub tokens...
+					if(!IMPORT_CACHE.containsKey(importLocation)) {
+						IMPORT_CACHE.put(importLocation, null);
+						// now we need to actually parse the tokens
+						this.childTokens = getTokens();
+						IMPORT_CACHE.put(importLocation, childTokens);
+					}
 					return;
 				}
 				stringBuilder.append(nextToken);
 			}
-			// if we are here - we could not find the end '}' for the import
-			throw new ParseException("Could not find end token marker '}' for the import token.", this);
-		} else {
-			throw new ParseException("Could not find end token marker '}' for the import token.", this);
 		}
+
+		// if we are here - we could not find the end '}' for the import
+		throw new ParseException("Could not find end token marker '}' for the import token.", this);
 	}
 
 	public List<Token> getTokens() throws ParseException {
@@ -135,6 +151,7 @@ public class ImportToken extends Token {
 		List<Token> tokens = new ArrayList<Token>();
 		StringTokenizer stringTokenizer = new StringTokenizer(stringBuilder.toString(), " \n\t{}", true);
 		try {
+			// At this point we will be running into recursive problems...
 			tokens.addAll(tokeniser.tokenise(stringTokenizer));
 		} catch (ParseException pex) {
 			throw new ParseException("Could not parse the imported file '" + importLocation + "', message was '" + pex.getMessage() + "'.");
@@ -150,8 +167,14 @@ public class ImportToken extends Token {
 	}
 
 	@Override
-	public String render(TemplarContext templarContext) {
-		return("");
+	public String render(TemplarContext templarContext) throws RenderException {
+		List<Token> tokenList = IMPORT_CACHE.get(importLocation);
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Token token : tokenList) {
+			String render = token.render(templarContext);
+			stringBuilder.append(render);
+		}
+		return(stringBuilder.toString());
 	}
 
 	@Override

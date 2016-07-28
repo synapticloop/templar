@@ -109,7 +109,6 @@ public class Tokeniser implements Serializable {
 					token = stringTokenizer.nextToken();
 					if(!TOKEN_MAP.containsKey(token)) {
 						tokens.add(new EvaluationToken(token, stringTokenizer, this));
-						
 					} else {
 						// good to go
 						switch (TOKEN_MAP.get(token)) {
@@ -172,7 +171,7 @@ public class Tokeniser implements Serializable {
 
 							ImportToken importToken = new ImportToken(token, stringTokenizer, this);
 							tokens.add(importToken);
-							tokens.addAll(importToken.getTokens());
+//							tokens.addAll(importToken.getTokens());
 							break;
 						case PRE:
 							PreToken preToken = new PreToken(token, stringTokenizer, this);
