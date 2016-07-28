@@ -17,7 +17,16 @@ public class ParserHelper {
 
 	private ParserHelper() {}
 
-	public static boolean didFindEndToken(StringTokenizer stringTokenizer, StringBuilder stringBuilder) {
+	/**
+	 * Consume the string tokenizer, adding tokens until the end token is found.
+	 * If the end token is found, return true, otherwise return false
+	 * 
+	 * @param stringTokenizer the string tokenizer to use
+	 * @param stringBuilder the String builder to append tokens to
+	 * 
+	 * @return whether the end token was found
+	 */
+	public static boolean consumeToEndToken(StringTokenizer stringTokenizer, StringBuilder stringBuilder) {
 		while(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();
 			if("}".equals(nextToken)) {
@@ -29,6 +38,15 @@ public class ParserHelper {
 		return false;
 	}
 
+	/**
+	 * Parse the string tokenizer to the end token
+	 * 
+	 * @param basePositionToken The base position token for outputting if in error
+	 * @param stringTokenizer The string tokenizer
+	 * @param tokenName the name of the token for output debugging
+	 * 
+	 * @throws ParseException If there was an error parsing the token
+	 */
 	public static void parseToEndToken(BasePositionToken basePositionToken, StringTokenizer stringTokenizer, String tokenName) throws ParseException {
 		if(stringTokenizer.hasMoreTokens()) {
 			String nextToken = stringTokenizer.nextToken();

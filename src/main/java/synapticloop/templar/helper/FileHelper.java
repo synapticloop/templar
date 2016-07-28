@@ -19,9 +19,23 @@ package synapticloop.templar.helper;
 
 import java.io.File;
 
+/**
+ * The file helper is a simple utility class for file information
+ * 
+ * @author synapticloop
+ *
+ */
 public class FileHelper {
 	private FileHelper() {}
 
+	/**
+	 * Return whether a file can be read - which ensures that the file exists, is
+	 * readable and is actually a file
+	 * 
+	 * @param file the file to check
+	 * 
+	 * @return whether the file exists, is readable and is a file
+	 */
 	public static boolean canReadFile(File file) {
 		return(file.exists() && file.canRead() && file.isFile());
 	}

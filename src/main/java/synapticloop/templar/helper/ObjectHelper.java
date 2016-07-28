@@ -174,6 +174,16 @@ public class ObjectHelper {
 		}
 	}
 
+	/**
+	 * Evaluate an object against the templar context to a boolean value.  If 
+	 * the object is quoted either with double quotes (") or single quotes (') 
+	 * then it will be passed back and interpreted
+	 * 
+	 * @param object the object to evaluate
+	 * @param templarContext the templar context for lookups
+	 * 
+	 * @return the evaluated object
+	 */
 	public static Boolean evaluateObjectToDefaultBoolean(Object object, TemplarContext templarContext) {
 		Object evaluateObjectToDefault = null;
 		boolean inverse = false;
@@ -199,6 +209,16 @@ public class ObjectHelper {
 		return(null);
 	}
 
+	/**
+	 * Parse and execute the command line utilising the templar context for lookups
+	 * 
+	 * @param templarContext the templar context to use as a lookup
+	 * @param commandLine the command line to evaluate
+	 * 
+	 * @return the evaluated command line
+	 * 
+	 * @throws RenderException if there was an error rendering the command line 
+	 */
 	public static Object parseAndExecuteCommandLine(TemplarContext templarContext, String commandLine) throws RenderException {
 
 		String parseableCommandline = commandLine;

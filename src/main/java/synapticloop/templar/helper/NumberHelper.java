@@ -64,6 +64,13 @@ public class NumberHelper {
 	}
 
 
+	/**
+	 * Simple conversion of a number to english based arguments
+	 * 
+	 * @param number the number to convert
+	 * 
+	 * @return the english based number
+	 */
 	public static String convert(long number) {
 		// 0 to 999 999 999 999
 		if (number == 0) { 

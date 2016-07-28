@@ -20,6 +20,7 @@ package synapticloop.templar.token;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
+import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
@@ -28,14 +29,7 @@ public class NewLineToken extends Token {
 
 	public NewLineToken(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		super(value, stringTokenizer, tokeniser);
-		if(stringTokenizer.hasMoreTokens()) {
-			String nextToken = stringTokenizer.nextToken();
-			if(!"}".equals(nextToken)) {
-				throw new ParseException("Could not find end token marker '}' for the newline token, next token was '" + nextToken + "'.", this);
-			}
-		} else {
-			throw new ParseException("Could not find end token marker '}' for the newline token, and we are out of tokens", this);
-		}
+		ParserHelper.parseToEndToken(this, stringTokenizer, "newline");
 	}
 
 	@Override
