@@ -9,6 +9,7 @@ import synapticloop.templar.helper.ParserHelper;
 import synapticloop.templar.utils.TemplarContext;
 import synapticloop.templar.utils.Tokeniser;
 
+
 public class RequiresToken extends CommandToken {
 	private static final long serialVersionUID = -5395690577077526893L;
 
@@ -25,6 +26,10 @@ public class RequiresToken extends CommandToken {
 		}
 
 		this.commandLine = stringBuilder.toString().trim();
+		
+		if(commandLine.length() == 0) {
+			throw new ParseException("Cannot have a requires token without a variable to require");
+		}
 	}
 
 	@Override
@@ -32,17 +37,15 @@ public class RequiresToken extends CommandToken {
 		if(null == templarContext) {
 			templarContext = new TemplarContext();
 		}
-		
-		if(null == ObjectHelper.evaluateObjectToDefault(commandLine, templarContext)) {
-			throw new RenderException(String.format("Could not find '%s' in context", commandLine));
-		}
+
+		ObjectHelper.evaluateObject(commandLine, templarContext);
 
 		return("");
 	}
 
 	@Override
 	public String toString() {
-		return(super.toString("REQUIRES"));
+		return(super.toString("REQUIRES", commandLine));
 	}
 
 }
