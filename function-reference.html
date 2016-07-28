@@ -1,38 +1,30 @@
-<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><title>templar by synapticloop</title><link rel="stylesheet" href="stylesheets/styles.css"><link rel="stylesheet" href="stylesheets/pygment_trac.css"><link rel="stylesheet" href="stylesheets/prettify.css" type="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script src="javascripts/prettify.js" type="text/javascript" ></script></head><body><div class="wrapper"><header><h1>templar</h1><p>An ultra light-weight templating engine (~90kb at the time of writing)</p><hr /><h2>Navigation</h2><p>&raquo; <a href="index.html">Home</a><br />&raquo; <a href="quick-start.html">Quick Start</a><br />&mdash;&raquo; <a href="syntax-reference.html">Syntax Reference</a><br />&mdash;&raquo; <a href="function-reference.html">Function Reference</a><br /></p><hr /><p class="view"><a href="https://github.com/synapticloop/templar">View the Project on GitHub <br /><small>synapticloop/templar</small></a></p><p class="view"><a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub <br /><small>synapticloop/templar/releases</small></a></p><ul><li><a href="https://github.com/synapticloop/templar/zipball/master">Download <strong>ZIP File</strong></a></li><li><a href="https://github.com/synapticloop/templar/tarball/master">Download <strong>TAR Ball</strong></a></li><li><a href="https://github.com/synapticloop/templar">View On <strong>GitHub</strong></a></li></ul><p>This project is maintained by <a href="https://github.com/synapticloop">synapticloop</a> and these pages were generated with <a href="https://github.com/synapticloop/templar-gen/">synapticloop templar-gen</a></p></header><section><h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>function reference.</h3><p>Functions are helpers that can be placed in:</p><ul><li>evaluations</li><li>set commands</li><li>loop commands</li><li>if commands</li></ul><p>And can be arbitrarily nested</p><p>The list of available commands are as follows - which can be output by <code>{dumpfunctions}</code></p><pre><code>FunctionLessThanEqual #numArgs: 2
-FunctionNotEqual #numArgs: 2
-FunctionLessThan #numArgs: 2
-FunctionAnd #numArgs: 2
-FunctionGreaterThanEqual #numArgs: 2
-FunctionLessThanEqual #numArgs: 2
-FunctionPower #numArgs: 2
-FunctionOr #numArgs: 2
-FunctionIsNotNull #numArgs: 1
-FunctionFormatDate #numArgs: 0
-FunctionModulus #numArgs: 2
-FunctionAnd #numArgs: 2
-FunctionLength #numArgs: 1
-FunctionFalse #numArgs: 1
-FunctionNotEqual #numArgs: 2
-FunctionMultiply #numArgs: 2
-FunctionAdd #numArgs: 2
-FunctionIsNotNull #numArgs: 1
-FunctionGreaterThan #numArgs: 2
-FunctionSubtract #numArgs: 2
-FunctionOdd #numArgs: 1
-FunctionDivide #numArgs: 2
-FunctionEqual #numArgs: 2
-FunctionIsNull #numArgs: 1
-FunctionSize #numArgs: 1
-FunctionEven #numArgs: 1
-FunctionTrue #numArgs: 1
-FunctionNotEqual #numArgs: 2
-FunctionNotEqual #numArgs: 2
-FunctionLessThan #numArgs: 2
-FunctionOr #numArgs: 2
-FunctionEqual #numArgs: 2
-FunctionIsNotNull #numArgs: 1
-FunctionGreaterThan #numArgs: 2
-FunctionGreaterThanEqual #numArgs: 2
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><title>templar by synapticloop</title><link rel="stylesheet" href="stylesheets/styles.css"><link rel="stylesheet" href="stylesheets/pygment_trac.css"><link rel="stylesheet" href="stylesheets/prettify.css" type="text/css" /><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--><script src="javascripts/prettify.js" type="text/javascript" ></script></head><body><div class="wrapper"><header><h1>templar</h1><p>An ultra light-weight templating engine (~90kb at the time of writing)</p><hr /><h2>Navigation</h2><p>&raquo; <a href="index.html">Home</a><br />&raquo; <a href="quick-start.html">Quick Start</a><br />&mdash;&raquo; <a href="syntax-reference.html">Syntax Reference</a><br />&mdash;&raquo; <a href="function-reference.html">Function Reference</a><br /></p><hr /><p class="view"><a href="https://github.com/synapticloop/templar">View the Project on GitHub <br /><small>synapticloop/templar</small></a></p><p class="view"><a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub <br /><small>synapticloop/templar/releases</small></a></p><ul><li><a href="https://github.com/synapticloop/templar/zipball/master">Download <strong>ZIP File</strong></a></li><li><a href="https://github.com/synapticloop/templar/tarball/master">Download <strong>TAR Ball</strong></a></li><li><a href="https://github.com/synapticloop/templar">View On <strong>GitHub</strong></a></li></ul><p>This project is maintained by <a href="https://github.com/synapticloop">synapticloop</a> and these pages were generated with <a href="https://github.com/synapticloop/templar-gen/">synapticloop templar-gen</a></p></header><section><h3><a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>function reference.</h3><p>Functions are helpers that can be placed in:</p><ul><li>evaluations</li><li>set commands</li><li>loop commands</li><li>if commands</li></ul><p>And can be arbitrarily nested</p><p>The list of available commands are as follows - which can be output by <code>{dumpfunctions}</code></p><pre><code>FunctionLessThanEqual fn:<=[ <#numArgs: 2> ] aliased as (lte)
+FunctionNotEqual fn:<>[ <#numArgs: 2> ] aliased as (notEqual, ne, not=)
+FunctionInstanceOf fn:instanceOf[ <#numArgs: 2> ]
+FunctionAnd fn:and[ <#numArgs: 2> ]
+FunctionIndexOf fn:indexOf[ <#numArgs: 2> ]
+FunctionPower fn:^[ <#numArgs: 2> ]
+FunctionOr fn:or[ <#numArgs: 2> ]
+FunctionIsNotNull fn:notNull[ <#numArgs: 1> ] aliased as (isNotNull, !null, isnotnull, notnull, !Null)
+FunctionFormatDate fn:fmtDate[ <#numArgs: 1 or 2> ]
+FunctionModulus fn:%[ <#numArgs: 2> ]
+FunctionAnd fn:&[ <#numArgs: 2> ]
+FunctionLength fn:length[ <#numArgs: 1> ]
+FunctionFalse fn:false[ <#numArgs: 1> ]
+FunctionMultiply fn:*[ <#numArgs: 2> ]
+FunctionAdd fn:+[ <#numArgs: 2> ]
+FunctionSubtract fn:-[ <#numArgs: 2> ]
+FunctionOdd fn:odd[ <#numArgs: 1> ]
+FunctionDivide fn:/[ <#numArgs: 2> ]
+FunctionToJson fn:toJson[ <#numArgs: 1> ]
+FunctionIsNull fn:null[ <#numArgs: 1> ] aliased as (isnull, isNull)
+FunctionEven fn:even[ <#numArgs: 1> ]
+FunctionTrue fn:true[ <#numArgs: 1> ]
+FunctionLessThan fn:<[ <#numArgs: 2> ] aliased as (lt)
+FunctionOr fn:|[ <#numArgs: 2> ]
+FunctionEqual fn:=[ <#numArgs: 2> ] aliased as (eq, equal)
+FunctionGreaterThan fn:>[ <#numArgs: 2> ] aliased as (gt)
+FunctionGreaterThanEqual fn:>=[ <#numArgs: 2> ] aliased as (gt=)
 </code></pre><p><strong>Creating your own function</strong></p><p>The functions should be fairly explanatory from the above list.  However you may wish to add your own function, the example shown here is taken from <a href="https://github.com/synapticloop/h2zero/">h2zero</a> <a href="https://github.com/synapticloop/h2zero/blob/master/src/main/java/synapticloop/h2zero/templar/function/FunctionRequiresImport.java">FunctionRequiresImport.java</a>.(with a lot more comments than are in the source)</p><pre class="prettyprint lang-java"><code>package synapticloop.h2zero.templar.function;
 
 import synapticloop.h2zero.model.BaseSchemaObject;
