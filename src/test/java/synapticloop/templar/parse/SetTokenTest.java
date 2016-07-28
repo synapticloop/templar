@@ -12,6 +12,7 @@ public class SetTokenTest {
 	@Test
 	public void testCommandLineParsing() throws ParseException {
 		Parser parser = new Parser("{set fn:length[1] as length}");
+		System.out.println(parser);
 		assertEquals("<SET@1:2 (fn:length[1] as length) />", parser.toString());
 	}
 }

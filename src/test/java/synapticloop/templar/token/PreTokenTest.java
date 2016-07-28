@@ -17,27 +17,27 @@ public class PreTokenTest {
 	@Test
 	public void testCorrectToken() throws ParseException {
 		Parser parser = new Parser("{pre all sorts of stuff here pre}");
-		assertEquals("<PRE@1:2 (all sorts of stuff here)/>", parser.toString());
+		assertEquals("<PRE@1:2 (all sorts of stuff here) />", parser.toString());
 	}
 
 	@Test
 	public void testLotsOfPreToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre pre pre pre something, something, pre pre}");
-		assertEquals("<PRE@1:2 (pre pre pre something, something, pre)/>", parser.toString());
+		assertEquals("<PRE@1:2 (pre pre pre something, something, pre) />", parser.toString());
 		assertEquals("pre pre pre something, something, pre", parser.render());
 	}
 
 	@Test
 	public void testJavascriptToken() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre some_javascript_function() {} pre}");
-		assertEquals("<PRE@1:2 (some_javascript_function() {})/>", parser.toString());
+		assertEquals("<PRE@1:2 (some_javascript_function() {}) />", parser.toString());
 		assertEquals("some_javascript_function() {}", parser.render());
 	}
 
 	@Test
 	public void testNewLinesStarter() throws ParseException, RenderException {
 		Parser parser = new Parser("{pre\nwe want to ignore start and end new lines\npre}");
-		assertEquals("<PRE@1:2 (we want to ignore start and end new lines)/>", parser.toString());
+		assertEquals("<PRE@1:2 (we want to ignore start and end new lines) />", parser.toString());
 		assertEquals("we want to ignore start and end new lines", parser.render());
 	}
 
@@ -51,7 +51,7 @@ public class PreTokenTest {
 				"	pre\n" + 
 				"	something, something\n" + 
 				"	pre\n" + 
-				"noindent)/>", parser.toString());
+				"noindent) />", parser.toString());
 		assertEquals("\nnoindent\n" + 
 				"	pre\n" + 
 				"	pre\n" + 

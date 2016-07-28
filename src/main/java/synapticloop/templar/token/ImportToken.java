@@ -198,7 +198,7 @@ public class ImportToken extends Token {
 		stringBuilder.append(")");
 
 		if(inPrintCache) {
-			stringBuilder.append("/");
+			stringBuilder.append(" /");
 		}
 		stringBuilder.append(">");
 

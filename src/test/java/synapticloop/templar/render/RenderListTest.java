@@ -36,12 +36,12 @@ public class RenderListTest {
 				"<NEWLINE@3:2 />" + 
 				"\n" + 
 				"<LOOP@4:2 (bean.arrayList as value)>\n" + 
-				"	<EVAL@5:3 (value)/><NEWLINE@5:4 />" + 
+				"	<EVAL@5:3 (value) /><NEWLINE@5:4 />" + 
 				"\n" + 
 				"</LOOP@6:2>\n" + 
 				"\n" + 
 				"<LOOP@8:2 (bean.childBeans as childBean)>\n" + 
-				"	<EVAL@9:3 (childBean.name)/><NEWLINE@9:4 />" + 
+				"	<EVAL@9:3 (childBean.name) /><NEWLINE@9:4 />" + 
 				"\n" + 
 				"</LOOP@10:2>\n");
 

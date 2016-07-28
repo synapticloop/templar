@@ -21,10 +21,10 @@ public class EvaluationTest {
 	public void testRender() throws ParseException {
 		File file = new File("src/test/resources/evaluation-test.templar");
 		parser = new Parser(file);
-		assertEquals("<EVAL@1:2 (this.should.all)/>\n" +
+		assertEquals("<EVAL@1:2 (this.should.all) />\n" +
 				"\n" +
 				"be\n" +
-				"eval<EVAL@4:6 (uation)/> tokens\n",
+				"eval<EVAL@4:6 (uation) /> tokens\n",
 				parser.toString());
 	}
 }

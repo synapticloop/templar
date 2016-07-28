@@ -45,7 +45,7 @@ public class EscapeTokenTest {
 	public void testEscape() throws ParseException, RenderException {
 		Parser parser = new Parser("{\\  }");
 		System.out.println(parser.toString());
-		assertEquals("<ESCAPE@1:2 (  )/>", parser.toString());
+		assertEquals("<ESCAPE@1:2 (  ) />", parser.toString());
 		assertEquals("  ", parser.render());
 	}
 }

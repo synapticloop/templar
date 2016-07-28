@@ -49,7 +49,7 @@ public class SetToken extends CommandToken {
 			throw new ParseException("Could not find end token '}' for set command.", this);
 		}
 
-		this.commandLine = stringBuilder.toString();
+		this.commandLine = stringBuilder.toString().trim();
 		String[] commandSplit = commandLine.split(" as ");
 
 		if(commandSplit.length != 2) {
@@ -85,17 +85,7 @@ public class SetToken extends CommandToken {
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<SET@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		if(null != commandLine) {
-			stringBuilder.append(commandLine.trim());
-		}
-		stringBuilder.append(") />");
-		return (stringBuilder.toString());
+		return(toString("SET", commandLine));
 	}
 
 }

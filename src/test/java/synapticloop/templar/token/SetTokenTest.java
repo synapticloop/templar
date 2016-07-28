@@ -89,7 +89,7 @@ public class SetTokenTest {
 	@Test
 	public void testSetStringInContext() throws ParseException, RenderException {
 		parser = new Parser("{set \"something\" as something}{something}");
-		assertEquals("<SET@1:2 (\"something\" as something) /><EVAL@1:3 (something)/>", parser.toString());
+		assertEquals("<SET@1:2 (\"something\" as something) /><EVAL@1:3 (something) />", parser.toString());
 		// we need to render this in order to set it into the context
 		String render = parser.render();
 		assertEquals("something", render);

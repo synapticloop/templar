@@ -32,6 +32,9 @@ import synapticloop.templar.utils.Tokeniser;
 public abstract class Token extends BasePositionToken {
 	private static final long serialVersionUID = -7987699180706299996L;
 
+	private static final String FORMAT_SHORT = "<%s@%d:%d%s>";
+	private static final String FORMAT_COMMAND_LINE = "<%s@%d:%d (%s) />";
+
 	protected String value = "";
 	protected List<Token> childTokens = new ArrayList<Token>();
 
@@ -104,24 +107,21 @@ public abstract class Token extends BasePositionToken {
 		return(value);
 	}
 
+	/**
+	 * Format the token output including a command line
+	 * 
+	 * @param name the name of the token
+	 * @param commandLine the command line to output
+	 * 
+	 * @return The formatted string
+	 */
 	public String toString(String name, String commandLine) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<");
-		stringBuilder.append(name);
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		stringBuilder.append(" (");
-		stringBuilder.append(commandLine);
-		stringBuilder.append(")/>");
-		return (stringBuilder.toString());
-		
+		return(String.format(FORMAT_COMMAND_LINE, name, lineNumber, characterNumber, commandLine));
 	}
 
 	public String toString(String name) {
 		String ending = name.startsWith("/")? "" : " /";
-		return(String.format("<%s@%d:%d%s>", name, lineNumber, characterNumber, ending));
+		return(String.format(FORMAT_SHORT, name, lineNumber, characterNumber, ending));
 	}
 
 	public String toHtmlString() {
