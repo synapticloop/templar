@@ -20,6 +20,13 @@ package synapticloop.templar.helper;
 public class StringHelper {
 	private StringHelper() {}
 
+	/**
+	 * Escape a string to HTML
+	 * 
+	 * @param source the source to be escaped
+	 * 
+	 * @return the HTML escaped string
+	 */
 	public static String escapeHtml(String source) {
 		if(source==null) {
 			return ""; 

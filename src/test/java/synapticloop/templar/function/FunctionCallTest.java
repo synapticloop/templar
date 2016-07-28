@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.function.util.FunctionCall;
 
 public class FunctionCallTest {
 	private FunctionCall functionCall;

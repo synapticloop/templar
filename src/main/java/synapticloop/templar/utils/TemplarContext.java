@@ -26,7 +26,6 @@ import java.util.Set;
 import synapticloop.templar.exception.FunctionException;
 import synapticloop.templar.function.Function;
 import synapticloop.templar.function.FunctionFormatDate;
-import synapticloop.templar.function.FunctionInstanceOf;
 import synapticloop.templar.function.FunctionIsNotNull;
 import synapticloop.templar.function.FunctionIsNull;
 import synapticloop.templar.function.FunctionLength;
@@ -50,6 +49,7 @@ import synapticloop.templar.function.math.FunctionPower;
 import synapticloop.templar.function.math.FunctionSubtract;
 import synapticloop.templar.function.string.FunctionIndexOf;
 import synapticloop.templar.function.string.FunctionToJson;
+import synapticloop.templar.function.util.FunctionInstanceOf;
 
 public class TemplarContext {
 	private Map<String, Object> context = new HashMap<String, Object>();

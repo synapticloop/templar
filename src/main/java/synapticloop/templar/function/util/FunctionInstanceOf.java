@@ -1,4 +1,4 @@
-package synapticloop.templar.function;
+package synapticloop.templar.function.util;
 
 /*
  * Copyright (c) 2012-2016 synapticloop.
@@ -18,26 +18,20 @@ package synapticloop.templar.function;
  */
 
 import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.function.Function;
+import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
-public class FunctionCall extends Function {
-
-	public FunctionCall() {
-		super(1);
+public class FunctionInstanceOf extends Function {
+	public FunctionInstanceOf() {
+		super(2);
 	}
 
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
-		String objectMethodCall = (String)args[0];
+		Object argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext);
+		String argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext).toString();
 
-		if(null == objectMethodCall) {
-			throw new FunctionException("Cannot function call with 'null' argument.");
-		}
-		// go through and see if we can find the function to call
-		String[] split = objectMethodCall.split(".");
-		if(split.length < 2) {
-			throw new FunctionException("Cannot make function call on'" + objectMethodCall + "'");
-		}
-		return(null);
+		return(argZero.getClass().getCanonicalName().endsWith(argOne));
 	}
 }

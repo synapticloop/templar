@@ -59,19 +59,41 @@ public class ParserHelper {
 	}
 
 
+	/**
+	 * Determine whether the list of tokens is in the cache
+	 * 
+	 * @param md5Hash the md5Hash of the token
+	 * 
+	 * @return whether the list of tokens is in the cache
+	 */
 	public static boolean getIsInCache(String md5Hash) {
 		return(cachedTokens.containsKey(md5Hash));
 	}
 
+	/**
+	 * Get the cached list of tokens for a specified hash
+	 * 
+	 * @param md5Hash the hash to look up
+	 * 
+	 * @return the list of toke
+	 */
 	public static List<Token> getCached(String md5Hash) {
 		return(cachedTokens.get(md5Hash));
 	}
 
-	public static String md5Hash(String message) throws ParseException {
+	/**
+	 * Get the md5Hash for the passed in contents
+	 * 
+	 * @param contents the contents to hash
+	 * @return the md5 hash
+	 * 
+	 * @throws ParseException if there was an error creating the md5hash
+	 */
+	public static String md5Hash(String contents) throws ParseException {
 		String digest = null; 
 		try { 
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5"); 
-			byte[] hash = messageDigest.digest(message.getBytes("UTF-8")); 
+			byte[] hash = messageDigest.digest(contents.getBytes("UTF-8")); 
 			//converting byte array to Hexadecimal String 
 			StringBuilder stringBuilder = new StringBuilder(2*hash.length); 
 			for(byte b : hash){ 
