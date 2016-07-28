@@ -120,20 +120,8 @@ public abstract class Token extends BasePositionToken {
 	}
 
 	public String toString(String name) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<");
-		stringBuilder.append(name);
-		stringBuilder.append("@");
-		stringBuilder.append(lineNumber);
-		stringBuilder.append(":");
-		stringBuilder.append(characterNumber);
-		if(name.startsWith("/")) {
-			stringBuilder.append(">");
-		} else {
-			stringBuilder.append(" />");
-		}
-
-		return(stringBuilder.toString());
+		String ending = name.startsWith("/")? "" : " /";
+		return(String.format("<%s@%d:%d%s>", name, lineNumber, characterNumber, ending));
 	}
 
 	public String toHtmlString() {
