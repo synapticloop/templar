@@ -2,7 +2,7 @@
 {if fn:=[something, "else"]}
 correct{\n}
 {else}
-setting something as else{\n}
+setting "else" to variable named something{\n}
 {set "else" as something}
 {import src/test/resources/import/recursive.templar}
 {endif}

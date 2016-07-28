@@ -25,8 +25,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -46,6 +48,7 @@ public class ImportToken extends Token {
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
 
 	private static final Map<String, List<Token>> IMPORT_CACHE = new HashMap<String, List<Token>>();
+	private static final Set<String> PRINT_CACHE = new HashSet<String>();
 
 	String importLocation = null;
 
@@ -63,7 +66,7 @@ public class ImportToken extends Token {
 					if(!IMPORT_CACHE.containsKey(importLocation)) {
 						IMPORT_CACHE.put(importLocation, null);
 						// now we need to actually parse the tokens
-						this.childTokens = getTokens();
+						this.childTokens = getChildTokens();
 						IMPORT_CACHE.put(importLocation, childTokens);
 					}
 					return;
@@ -76,7 +79,7 @@ public class ImportToken extends Token {
 		throw new ParseException("Could not find end token marker '}' for the import token.", this);
 	}
 
-	public List<Token> getTokens() throws ParseException {
+	private List<Token> getChildTokens() throws ParseException {
 
 		// now we need to get the current contents
 		// This is going to screw with the TokeniserInfo class - save the values
@@ -185,10 +188,29 @@ public class ImportToken extends Token {
 		stringBuilder.append(lineNumber);
 		stringBuilder.append(":");
 		stringBuilder.append(characterNumber);
+		boolean inPrintCache = PRINT_CACHE.contains(importLocation);
+		if(inPrintCache) {
+			stringBuilder.append(" *CACHED*");
+		}
 		stringBuilder.append(" (");
 		stringBuilder.append(importLocation);
-		stringBuilder.append(")>");
 
+		stringBuilder.append(")");
+
+		if(inPrintCache) {
+			stringBuilder.append("/");
+		}
+		stringBuilder.append(">");
+
+		if(PRINT_CACHE.isEmpty() || !inPrintCache) {
+			// all is good - this is the first print
+			PRINT_CACHE.add(importLocation);
+			for (Token childToken : childTokens) {
+				stringBuilder.append(childToken.toString());
+			}
+		}
+
+		PRINT_CACHE.clear();
 		return(stringBuilder.toString());
 	}
 }

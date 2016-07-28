@@ -20,12 +20,23 @@ public class RenderImportTest {
 		TemplarContext templarContext = new TemplarContext();
 
 		templarContext.add("something", "something");
+		assertEquals("start import<NEWLINE@1:14 />\n" + 
+				"<IMPORT@2:2 (src/test/resources/import/recursive.templar)><EVAL@1:2 (something)/><NEWLINE@1:3 />\n" + 
+				"<IF@2:2 (fn:=[something, \"else\"])>\n" + 
+				"correct<NEWLINE@3:9 />\n" + 
+				"<ELSE@4:2 />\n" + 
+				"setting \"else\" to variable named something<NEWLINE@5:44 />\n" + 
+				"<SET@6:2 (\"else\" as something) />\n" + 
+				"<IMPORT@7:2 *CACHED* (src/test/resources/import/recursive.templar)/>\n" + 
+				"</IF@8:2>\n" + 
+				"</IMPORT@2:2>\n" + 
+				"end import<NEWLINE@3:12 />\n", parser.toString());
 
 		String render = parser.render(templarContext);
-		System.out.println(render);
+
 		assertEquals("start import\n" + 
 				"something\n" + 
-				"setting something as else\n" + 
+				"setting \"else\" to variable named something\n" + 
 				"else\n" + 
 				"correct\n" + 
 				"end import\n",
