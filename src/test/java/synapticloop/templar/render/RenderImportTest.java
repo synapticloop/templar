@@ -20,7 +20,6 @@ public class RenderImportTest {
 		TemplarContext templarContext = new TemplarContext();
 
 		templarContext.add("something", "something");
-		System.out.println(parser.toString());
 
 		String render = parser.render(templarContext);
 		System.out.println(render);
