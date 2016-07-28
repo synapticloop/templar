@@ -23,7 +23,13 @@ public class RenderImportTest {
 
 		String render = parser.render(templarContext);
 		System.out.println(render);
-		assertTrue(true);
+		assertEquals("start import\n" + 
+				"something\n" + 
+				"setting something as else\n" + 
+				"else\n" + 
+				"correct\n" + 
+				"end import\n",
+				render);
 	}
 
 }
