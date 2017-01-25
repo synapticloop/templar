@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="h2zero-sample" default="gen">
+<project name="templar-ghpages" default="gen">
 	<target name="gen" description="templar-gen the pages">
 		<java jar="templar-gen.jar" fork="true" failonerror="true" maxmemory="128m">
 			<arg value="src" />
 			<arg value="." />
 		</java>
 	</target>
+
+	<target name="dist" depends="gen" description="build the pages" />
 </project>

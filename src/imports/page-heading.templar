@@ -1,4 +1,0 @@
-<h3>
-	<a id="templar-page" class="anchor" href="#templar-page" aria-hidden="true">
-	</a>Documentation for the "<code>{if !fn:null[name]}{name}{endif}</code>" JSON key.
-</h3>
