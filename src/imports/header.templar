@@ -4,3 +4,8 @@
 		{import ../synapticloop.github.io/src/includes/all-projects.html}
 	</nav>
 </div>
+
+<section id="banner">
+	<h2>Welcome to templar</h2>
+	<p>an easy to use, ultra light-weight, templating engine</p>
+</section>
