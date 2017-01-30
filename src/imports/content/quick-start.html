@@ -1,25 +1,25 @@
 <h3>quick start.</h3>
 
-			<p>
-				Getting started with templar:
-			</p>
+<p>
+	Getting started with templar:
+</p>
 
-			<p>
-				<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.
-			</p>
+<p>
+	<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.
+</p>
 
-			<p>This example was taken from <a href="http://synapticloop.github.io/sab-spot-comment/">sab-spot-comment</a>:</p>
+<p>This example was taken from <a href="http://synapticloop.github.io/sab-spot-comment/">sab-spot-comment</a>:</p>
 
-			<p>In a very small nutshell</p>
+<p>In a very small nutshell</p>
 
-			<ol>
-				<li>Create a new templarContext</li>
-				<li>Add stuff to it</li>
-				<li>Create a parser (and pass in the templar file)</li>
-				<li>render the content</li>
-			</ol>
+<ol>
+	<li>Create a new templarContext</li>
+	<li>Add stuff to it</li>
+	<li>Create a parser (and pass in the templar file)</li>
+	<li>render the content</li>
+</ol>
 
-			<pre class="prettyprint lang-java"><code>
+<pre class="prettyprint lang-java"><code>
 {pre
 TemplarContext templarContext = new TemplarContext();
 
@@ -40,33 +40,33 @@ try {
     return(HttpUtils.internalServerErrorResponse());
 }
 pre}
-			</code></pre>
+</code></pre>
 
-			<p><strong>1. Creating the TemplarContext</strong></p>
+<p><strong>1. Creating the TemplarContext</strong></p>
 
 <pre class="prettyprint lang-java"><code>
 TemplarContext templarContext = new TemplarContext();
 </code></pre>
 
-			<p>
-				This creates a default context, with a default configuration, meaning
-			</p>
-			
-			<ul>
-				<li>You must <em>explicitly</em> put in new lines</li>
-				<li>You must <em>explicitly</em> put in tab characters</li>
-				<li>Whitespace is ignored</li>
-			</ul>
+<p>
+	This creates a default context, with a default configuration, meaning
+</p>
 
-			<p>
-				These are the defaults and the output can be seen by viewing source of these pages - which should be mostly
-				on one line (more about the <code>{{pre ... pre}</code> syntax later).
-			</p>
-			
-			<p>
-				If you wish to over-ride this default behaviour, you will need to instantiate a <code>TemplarContext</code> with
-				a passed in <code>TemplarConfiguration</code>. e.g.:
-			</p>
+<ul>
+	<li>You must <em>explicitly</em> put in new lines</li>
+	<li>You must <em>explicitly</em> put in tab characters</li>
+	<li>Whitespace is ignored</li>
+</ul>
+
+<p>
+	These are the defaults and the output can be seen by viewing source of these pages - which should be mostly
+	on one line (more about the <code>{{pre ... pre}</code> syntax later).
+</p>
+
+<p>
+	If you wish to over-ride this default behaviour, you will need to instantiate a <code>TemplarContext</code> with
+	a passed in <code>TemplarConfiguration</code>. e.g.:
+</p>
 
 <pre class="prettyprint lang-java"><code>{pre
 TemplarConfiguration templarConfiguration = new TemplarConfiguration();
@@ -75,15 +75,16 @@ templarConfiguration.setExplicitTabs(false);
 templarConfiguration.setIgnoreWhitespace(false);
 pre}</code></pre>
 
-			<p>or</p>
+<p>or</p>
+
 <pre class="prettyprint lang-java"><code>{pre
 TemplarConfiguration templarConfiguration = new TemplarConfiguration(false, false, false);
 pre}
 </code></pre>
 
-			<p>
-				And then:
-			</p>
+<p>
+	And then:
+</p>
 
 <pre><code>
 {pre
@@ -91,18 +92,18 @@ TemplarContext templarContext = new TemplarContext(templarConfiguration);
 pre}
 </code></pre>
 
-		<p><strong>2. Adding objects to the templarContext</strong></p>
-		
-		<p>Very simply</p>
-		
+<p><strong>2. Adding objects to the templarContext</strong></p>
+
+<p>Very simply</p>
+
 <pre class="prettyprint lang-java"><code>{pre
 templarContext.add(key, value)
 pre}
 </code></pre>
 
-		<p><strong>3. Creating a parser object</strong></p>
+<p><strong>3. Creating a parser object</strong></p>
 
-		<p>Very simply</p>
+<p>Very simply</p>
 
 <pre class="prettyprint lang-java"><code>{pre
 try {
@@ -114,9 +115,9 @@ try {
 pre}
 </code></pre>
 
-		<p><strong>4. Rendering a parser object</strong></p>
+<p><strong>4. Rendering a parser object</strong></p>
 
-		<p>Very simply</p>
+<p>Very simply</p>
 
 <pre class="prettyprint lang-java"><code>{pre
 try {

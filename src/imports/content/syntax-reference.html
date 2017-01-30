@@ -1,90 +1,90 @@
 <h3>syntax reference.</h3>
 
-			<p>
-				In general all syntax starts with a <code>{{</code> character and ends with the next available <code>}</code> 
-				character.  This will either be an evaluation or a command, if it is not a command, templar will attempt to 
-				evaluate the expression.
-			</p>
+<p>
+	In general all syntax starts with a <code>{{</code> character and ends with the next available <code>}</code> 
+	character.  This will either be an evaluation or a command, if it is not a command, templar will attempt to 
+	evaluate the expression.
+</p>
 
-			<p>Command Quick links</p>
+<p>Command Quick links</p>
 
-			<ul>
-				<li><a href="#command-comments"><code>{{-- ...</code></a></li>
-				<li><a href="#command-if"><code>{{if ...</code></a></li>
-				<li><a href="#command-set"><code>{{set ...</code></a></li>
-				<li><a href="#command-loop"><code>{{loop ...</code></a></li>
-				<li><a href="#command-import"><code>{{import ...</code></a></li>
-				<li><a href="#command-pre"><code>{{pre ...</code></a></li>
-				<li><a href="#command-tab"><code>{{tab}</code> or <code>{{\t}</code></a></li>
-				<li><a href="#command-newline"><code>{{nl}</code> or <code>{{\n}</code></a></li>
-				<li><a href="#command-dumpcontext"><code>{{dumpcontext}</code></a></li>
-				<li><a href="#command-dumpfunctions"><code>{{dumpfunctions}</code></a></li>
-				<li><a href="#command-requires"><code>{{requires}</code></a></li>
-			</ul>
+<ul>
+	<li><a href="#command-comments"><code>{{-- ...</code></a></li>
+	<li><a href="#command-if"><code>{{if ...</code></a></li>
+	<li><a href="#command-set"><code>{{set ...</code></a></li>
+	<li><a href="#command-loop"><code>{{loop ...</code></a></li>
+	<li><a href="#command-import"><code>{{import ...</code></a></li>
+	<li><a href="#command-pre"><code>{{pre ...</code></a></li>
+	<li><a href="#command-tab"><code>{{tab}</code> or <code>{{\t}</code></a></li>
+	<li><a href="#command-newline"><code>{{nl}</code> or <code>{{\n}</code></a></li>
+	<li><a href="#command-dumpcontext"><code>{{dumpcontext}</code></a></li>
+	<li><a href="#command-dumpfunctions"><code>{{dumpfunctions}</code></a></li>
+	<li><a href="#command-requires"><code>{{requires}</code></a></li>
+</ul>
 
-			<h3>EVALUATIONS</h3>
+<h3>EVALUATIONS</h3>
 
-			<pre><code>{pre {&lt;evaluate&gt;.&lt;method&gt;.&lt;anotherMethod&gt;} pre}</code></pre>
+<pre><code>{pre {&lt;evaluate&gt;.&lt;method&gt;.&lt;anotherMethod&gt;} pre}</code></pre>
 
-			<p>
-				Evaluations are the simplest of the templar syntax, it will do the following: 
-			</p>
-			
-			<ol>
-				<li>Lookup the <code>&lt;evaluate&gt;</code> in the <code>templarContext</code></li>
-				<li>Call the <code>&lt;method&gt;</code> method on the <code>&lt;evaluate&gt;</code> object</li>
-				<li>Call the <code>&lt;anotherMethod&gt;</code> method on the object returned from the <code>&lt;evaluate&gt;.&lt;method&gt;</code> call</li>
-				<li>Render the above output</li>
-			</ol>
+<p>
+	Evaluations are the simplest of the templar syntax, it will do the following: 
+</p>
 
-			<p>
-				You may also evaluate functions (see the <a href="function-reference.html">function reference</a> for a list of functions available):
-			</p>
+<ol>
+	<li>Lookup the <code>&lt;evaluate&gt;</code> in the <code>templarContext</code></li>
+	<li>Call the <code>&lt;method&gt;</code> method on the <code>&lt;evaluate&gt;</code> object</li>
+	<li>Call the <code>&lt;anotherMethod&gt;</code> method on the object returned from the <code>&lt;evaluate&gt;.&lt;method&gt;</code> call</li>
+	<li>Render the above output</li>
+</ol>
 
-			<pre><code>{pre {fn:size[&lt;array&gt;]} pre}</code></pre>
+<p>
+	You may also evaluate functions (see the <a href="function-reference.html">function reference</a> for a list of functions available):
+</p>
 
-			<ol>
-				<li>Lookup the <code>&lt;array&gt;</code> in the <code>templarContext</code></li>
-				<li>Render the size or length of the object</li>
-			</ol>
+<pre><code>{pre {fn:size[&lt;array&gt;]} pre}</code></pre>
 
-			<p>
-				You may also evaluate objects where the actual name of the object is not known until runtime (i.e. render time).  
-				In a rather contrived example, let's say that you wanted to loop through all of the objects in a session and 
-				print out the key:value pairs.  In this case we use the dollar (<code>$</code>) notation:
-			</p>
+<ol>
+	<li>Lookup the <code>&lt;array&gt;</code> in the <code>templarContext</code></li>
+	<li>Render the size or length of the object</li>
+</ol>
 
-			<pre><code>{pre
+<p>
+	You may also evaluate objects where the actual name of the object is not known until runtime (i.e. render time).  
+	In a rather contrived example, let's say that you wanted to loop through all of the objects in a session and 
+	print out the key:value pairs.  In this case we use the dollar (<code>$</code>) notation:
+</p>
+
+<pre><code>{pre
 {loop session.sessionObjects.keySet as key}
 	{\t}KEY: {key}, VALUE: {session.sessionObjects.$key}{\n}
 {endloop}
 pre}</code></pre>
 
-			<p>
-				In effect this looks for a <code>$key</code> object in the templarContext with the name of <code>key</code> which 
-				is then called on the previous object.
-			</p>
+<p>
+	In effect this looks for a <code>$key</code> object in the templarContext with the name of <code>key</code> which 
+	is then called on the previous object.
+</p>
 
-			<h3>COMMANDS</h3>
+<h3>COMMANDS</h3>
 
-			{import src/imports/commands/comment.templar}
+{import src/imports/commands/comment.templar}
 
-			{import src/imports/commands/if.templar}
+{import src/imports/commands/if.templar}
 
-			{import src/imports/commands/set.templar}
+{import src/imports/commands/set.templar}
 
-			{import src/imports/commands/loop.templar}
+{import src/imports/commands/loop.templar}
 
-			{import src/imports/commands/import.templar}
+{import src/imports/commands/import.templar}
 
-			{import src/imports/commands/pre.templar}
+{import src/imports/commands/pre.templar}
 
-			{import src/imports/commands/tab.templar}
+{import src/imports/commands/tab.templar}
 
-			{import src/imports/commands/newline.templar}
+{import src/imports/commands/newline.templar}
 
-			{import src/imports/commands/dumpcontext.templar}
+{import src/imports/commands/dumpcontext.templar}
 
-			{import src/imports/commands/dumpfunctions.templar}
+{import src/imports/commands/dumpfunctions.templar}
 
-			{import src/imports/commands/requires.templar}
+{import src/imports/commands/requires.templar}
