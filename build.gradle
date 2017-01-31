@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+
+	id 'synapticloop.templar-gen' version '1.2.4'
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	jcenter()
+}
+
+group = 'synapticloop'
+archivesBaseName = 'templar-gen'
+description = """generate output with the Templar templating engine"""
+version = '1.2.3'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+templarGen {
+	out = '.'
+	inDir = 'src'
+}
