@@ -67,7 +67,6 @@ public class StaticToken extends Token {
 	}
 
 	private void readContents() throws ParseException {
-		StringBuilder stringBuilder = new StringBuilder();
 
 		boolean foundFilePath = true;
 		boolean foundClassPath = true;
@@ -81,7 +80,7 @@ public class StaticToken extends Token {
 				bufferedReader = new BufferedReader(new FileReader(templarFile));
 				String line = null;
 				while((line = bufferedReader.readLine()) != null) {
-					stringBuilder.append(line + "\n");
+					staticContents.append(line + "\n");
 				}
 			} catch(IOException jiioex) {
 				throw new ParseException("IO Exception reading file '" + templarFile.getPath() + "'", jiioex);
@@ -108,7 +107,7 @@ public class StaticToken extends Token {
 					String line = null;
 					try {
 						while((line = bufferedReader.readLine()) != null) {
-							stringBuilder.append(line + "\n");
+							staticContents.append(line + "\n");
 						}
 					} catch(IOException jiioex) {
 						foundClassPath = false;

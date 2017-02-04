@@ -90,6 +90,7 @@ public class Tokeniser implements Serializable {
 		TOKEN_MAP.put("endif", ENDIF);
 		TOKEN_MAP.put("endloop", ENDLOOP);
 		TOKEN_MAP.put("import", IMPORT);
+		TOKEN_MAP.put("static", STATIC);
 		TOKEN_MAP.put("pre", PRE);
 		TOKEN_MAP.put("requires", REQUIRES);
 	}
