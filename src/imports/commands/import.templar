@@ -1,7 +1,8 @@
 <h4><code class="large">{{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4>
 
 <p>
-	Import a file into the current file, the file to import can also be from the classpath (if you are deploying this as 
+	Import a file into the current file and parse the file for any templar declarations.
+	The file to import can also be from the classpath (if you are deploying this as 
 	a complete jar - <code>{{import classpath:/some/classpath/file/here.templar}</code>
 </p>
 

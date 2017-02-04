@@ -1,0 +1,15 @@
+<h4><code class="large">{{static ...}</code> - import a file into the current one <a name="command-static">&nbsp;</a></h4>
+
+<p>
+	Import a file into the current file and <strong>DO NOT</strong> parse the file 
+	for any templar declarations. The file to import can also be from the classpath 
+	(if you are deploying this as a complete jar - 
+	<code>{{import classpath:/some/classpath/file/here.templar}</code>
+</p>
+
+<pre><code>{pre {import src/imports/commands/static.templar}
+pre}</code></pre>
+
+<p>
+	This file was imported from syntax-reference.html with the above line
+</p>
