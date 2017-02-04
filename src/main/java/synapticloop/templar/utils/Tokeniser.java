@@ -40,6 +40,7 @@ import synapticloop.templar.token.NewLineToken;
 import synapticloop.templar.token.PreToken;
 import synapticloop.templar.token.RequiresToken;
 import synapticloop.templar.token.SetToken;
+import synapticloop.templar.token.StaticToken;
 import synapticloop.templar.token.TabToken;
 import synapticloop.templar.token.TextToken;
 import synapticloop.templar.token.Token;
@@ -66,9 +67,10 @@ public class Tokeniser implements Serializable {
 	private static final int ENDIF = 12;
 	private static final int ENDLOOP = 13;
 	private static final int IMPORT = 14;
-	private static final int PRE = 15;
-	private static final int ESCAPED_BACKSLASH = 16;
-	private static final int REQUIRES = 17;
+	private static final int STATIC = 15;
+	private static final int PRE = 16;
+	private static final int ESCAPED_BACKSLASH = 17;
+	private static final int REQUIRES = 18;
 
 	private static final Map<String, Integer> TOKEN_MAP = new HashMap<String, Integer>();
 	static {
@@ -160,6 +162,9 @@ public class Tokeniser implements Serializable {
 						case ENDLOOP:
 							tokens.add(new EndLoopToken("", stringTokenizer, this));
 							return(tokens);
+						case STATIC:
+							tokens.add(new StaticToken("", stringTokenizer, this));
+							break;
 						case IMPORT:
 							// this is a little bit special in that we want to include all of 
 							// the generated tokens, rather than just the single token and leave
