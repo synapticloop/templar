@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/synapticloop/templar.svg?branch=master)](https://travis-ci.org/synapticloop/templar) [![Download](https://api.bintray.com/packages/synapticloop/maven/templar/images/download.svg)](https://bintray.com/synapticloop/maven/templar/_latestVersion) [![GitHub Release](https://img.shields.io/github/release/synapticloop/templar.svg)](https://github.com/synapticloop/templar/releases) 
+<a name="documentr_top"></a>[![Build Status](https://travis-ci.org/synapticloop/templar.svg?branch=master)](https://travis-ci.org/synapticloop/templar) [![Download](https://api.bintray.com/packages/synapticloop/maven/templar/images/download.svg)](https://bintray.com/synapticloop/maven/templar/_latestVersion) [![GitHub Release](https://img.shields.io/github/release/synapticloop/templar.svg)](https://github.com/synapticloop/templar/releases) 
 
 > **This project requires JVM version of at least 1.7**
 
@@ -30,11 +30,11 @@ been [open-sourced](https://github.com/synapticloop/h2zero)
 ## What's with the whitespace (tabs and newlines)?
 
 Sometimes it matters, sometimes it doesn't - so by default we don't output tabs 
-and newlines unless explicitly asked to (i.e. ```{\n}``` or ```{\t}```)
+and newlines unless explicitly asked to (i.e. ```{\\n}``` or ```{\\t}```)
 
 All whitespace is stripped from the beginning (yet **NOT** the end) of a line 
 should you wish to have whitespace at the start of the line, you will need to 
-use either the pre (`{pre   `) syntax or the escape (`{\   `) syntax.
+use either the pre (`{pre   `) syntax or the escape (`{\\   `) syntax.
 
 You may change this behaviour by creating a `TemplarConfiguration` object and 
 setting it in the templar context object.
@@ -142,7 +142,7 @@ A sample `log4j2.xml` is below:
 
 # Artefact Publishing - Github
 
-This project publishes artefacts to [GitHib](https://github.com/)
+This project publishes artefacts to [GitHub](https://github.com/)
 
 > Note that the latest version can be found [https://github.com/synapticloop/templar/releases](https://github.com/synapticloop/templar/releases)
 
@@ -216,9 +216,9 @@ repositories {
 
 ```
 dependencies {
-	runtime(group: 'synapticloop', name: 'templar', version: '1.2.1', ext: 'jar')
+	runtime(group: 'synapticloop', name: 'templar', version: '1.4.0', ext: 'jar')
 
-	compile(group: 'synapticloop', name: 'templar', version: '1.2.1', ext: 'jar')
+	compile(group: 'synapticloop', name: 'templar', version: '1.4.0', ext: 'jar')
 }
 ```
 
@@ -226,9 +226,9 @@ or, more simply for versions of gradle greater than 2.1
 
 ```
 dependencies {
-	runtime 'synapticloop:templar:1.2.1'
+	runtime 'synapticloop:templar:1.4.0'
 
-	compile 'synapticloop:templar:1.2.1'
+	compile 'synapticloop:templar:1.4.0'
 }
 ```
 
@@ -238,7 +238,7 @@ dependencies {
 <dependency>
 	<groupId>synapticloop</groupId>
 	<artifactId>templar</artifactId>
-	<version>1.2.1</version>
+	<version>1.4.0</version>
 	<type>jar</type>
 </dependency>
 ```
@@ -252,29 +252,29 @@ You will also need to download the following dependencies:
 
 ### cobertura dependencies
 
-  - net.sourceforge.cobertura:cobertura:2.0.3: (It may be available on one of: [bintray](https://bintray.com/net.sourceforge.cobertura/maven/cobertura/2.0.3/view#files/net.sourceforge.cobertura/cobertura/2.0.3) [mvn central](http://search.maven.org/#artifactdetails|net.sourceforge.cobertura|cobertura|2.0.3|jar)
+  - `net.sourceforge.cobertura:cobertura:2.0.3`: (It may be available on one of: [bintray](https://bintray.com/net.sourceforge.cobertura/maven/cobertura/2.0.3/view#files/net.sourceforge.cobertura/cobertura/2.0.3) [mvn central](http://search.maven.org/#artifactdetails|net.sourceforge.cobertura|cobertura|2.0.3|jar))
 
 
 ### compile dependencies
 
-  - org.json:json:20160212: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar)
+  - `org.json:json:20160212`: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar))
 
 
 ### runtime dependencies
 
-  - org.json:json:20160212: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar)
+  - `org.json:json:20160212`: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar))
 
 
 ### testCompile dependencies
 
-  - junit:junit:4.11: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar)
-  - org.mockito:mockito-all:1.10.19: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar)
+  - `junit:junit:4.11`: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar))
+  - `org.mockito:mockito-all:1.10.19`: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar))
 
 
 ### testRuntime dependencies
 
-  - junit:junit:4.11: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar)
-  - org.mockito:mockito-all:1.10.19: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar)
+  - `junit:junit:4.11`: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar))
+  - `org.mockito:mockito-all:1.10.19`: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar))
 
 **NOTE:** You may need to download any dependencies of the above dependencies in turn (i.e. the transitive dependencies)
 
@@ -283,7 +283,7 @@ You will also need to download the following dependencies:
 ```
 The MIT License (MIT)
 
-Copyright (c) 2016 synapticloop
+Copyright (c) 2017 synapticloop
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
