@@ -1,5 +1,5 @@
 plugins {
-	id 'synapticloop.templar-gen' version '1.4.0'
+	id 'synapticloop.templar-gen' version '1.4.1'
 }
 
 templarGen {
