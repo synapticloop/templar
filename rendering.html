@@ -33,11 +33,11 @@
 	do 
 	that?
 &lt;/p&gt;</code></pre><p>Will display correctly</p><p>When you really wanted it not to do that?</p><p><strong>Ensure</strong> that you have a whitespace character '<code> </code>' at the end of each line, to ensure that the spacing is correct. (templar does <em>NOT</em> strip away the end of line whitespace - only the whitespace at the<em>start</em> of the line).</p><h5>4. Non-existent items in the context...</h5><p>If an item that you are trying to look-up does not exist, the for example: <code>{hello}</code>, you will see the following stacktrace:</p><pre><code>[ FATAL ]: Could not parse file 'src/rendering.html'. Exception[ synapticloop.templar.exception.RenderException ] message was: Could not render line: hello
-synapticloop.templar.exception.RenderException: Could not render line: hello</code></pre><p>If you are expecting it, you will need to add this to the context, if it is variable as to whether this may exist in the context, you may wrap it in a <code>fn:notNull</code> function:</p><pre><code>	{if fn:notNull[hello]}
-		'hello' is in the context
-	{else}
-		'hello' is <strong>NOT</strong> in the context
-	{endif} </code></pre><p>Which will render, as expected:</p>'hello' is <strong>NOT</strong> in the context </section></div></div></div></section><div id="footer">
+synapticloop.templar.exception.RenderException: Could not render line: hello</code></pre><p>If you are expecting it, you will need to add this to the context, if it is variable as to whether this may exist in the context, you may wrap it in a <code>fn:notNull</code> function:</p><pre><code>{if fn:notNull[hello]}
+	'hello' is in the context
+{else}
+	'hello' is <strong>NOT</strong> in the context
+{endif}</code></pre><p>Which will render, as expected:</p>'hello' is <strong>NOT</strong> in the context </section></div></div></div></section><div id="footer">
 	<div class="container">
 		<div class="row 200% uniform">
 		</div>
