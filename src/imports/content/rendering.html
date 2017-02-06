@@ -1,0 +1,162 @@
+<h3>Rendering</h3>
+
+<p>
+	Post parsing of the templar files, the next step is rendering of the output.
+</p>
+
+<pre>
+<code>
+{pre
+try {
+    String render = parser.render(templarContext);
+    // do something with the rendered content...
+    System.out.println(render);
+} catch (RenderException rex) {
+    rex.printStackTrace();
+}
+pre}
+</code>
+</pre>
+
+<h4>Some notes on rendering</h4>
+
+<h5>1. Rendering the contents of a file...</h5>
+
+<p>
+	You may render the contents of a file in one of two ways:
+</p>
+
+<ol>
+	<li><code>{{import path/to/file}</code> which will import <strong>and</strong>  parse the file for templar declarations</li>
+	<li><code>{{static path/to/file}</code> which will output the file as is</li>
+</ol>
+
+<h5>2. Ignoring templar directives...</h5>
+
+<p>
+	Need to output content as is (with new-lines/tabs and all sorts of characters including templar declarations)?
+</p>
+
+<p>
+	Use the <code>{{pre ... pre}</code> templar declarations - in this you may put 
+	any characters (including the <code>{{</code> and <code>}</code> character)
+</p>
+
+<h5>3. Whitespace and sentences over multiple lines...</h5>
+
+<p>
+	This paragraph:
+</p>
+
+<pre>
+<code>
+{pre
+&lt;p&gt;
+	sometimes
+	have
+	a
+	sentence
+	which
+	is
+	all
+	strung
+	together
+&lt;/p&gt;
+pre}
+</code>
+</pre>
+
+<p>Will turn into:</p>
+
+<p>
+	sometimes
+	have
+	a
+	sentence
+	which
+	is
+	all
+	strung
+	together
+</p>
+
+<p>
+	Whilst the following paragraph:
+</p>
+
+<pre>
+<code>
+{pre
+&lt;p&gt;
+	When 
+	you 
+	really 
+	wanted 
+	it 
+	not 
+	to 
+	do 
+	that?
+&lt;/p&gt;
+pre}
+</code>
+</pre>
+
+<p>Will display correctly</p>
+
+<p>
+	When 
+	you 
+	really 
+	wanted 
+	it 
+	not 
+	to 
+	do 
+	that?
+</p>
+
+<p>
+	<strong>Ensure</strong> that you have a whitespace character '<code> </code>' at 
+	the end of each line, to ensure that the spacing is correct. (templar does 
+	<em>NOT</em> strip away the end of line whitespace - only the whitespace at the
+	<em>start</em> of the line).
+</p>
+
+<h5>4. Non-existent items in the context...</h5>
+
+<p>
+	If an item that you are trying to look-up does not exist, the for example: 
+	<code>{{hello}</code>, you will see the following stacktrace:
+</p>
+
+<pre><code>
+{pre
+[ FATAL ]: Could not parse file 'src/rendering.html'. Exception[ synapticloop.templar.exception.RenderException ] message was: Could not render line: hello
+synapticloop.templar.exception.RenderException: Could not render line: hello
+pre}
+</code></pre>
+
+<p>
+	If you are expecting it, you will need to add this to the context, if it is 
+	variable as to whether this may exist in the context, you may wrap it in a 
+	<code>fn:notNull</code> function:
+</p>
+
+<pre><code>
+{pre
+{if fn:notNull[hello]}
+	'hello' is in the context
+{else}
+	'hello' is <strong>NOT</strong> in the context
+{endif}
+pre}
+</code></pre>
+
+<p>Which will render, as expected:</p>
+
+{if fn:notNull[hello]}
+	'hello' is in the context
+{else}
+	'hello' is <strong>NOT</strong> in the context
+{endif} 

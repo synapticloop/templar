@@ -5,10 +5,9 @@
 </p>
 
 <p>
-	<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.
+	<a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> 
+	and get started. (Make sure that you grab the <strong><code>-all</code></strong> classifier)
 </p>
-
-<p>This example was taken from <a href="http://synapticloop.github.io/sab-spot-comment/">sab-spot-comment</a>:</p>
 
 <p>In a very small nutshell</p>
 
@@ -18,6 +17,9 @@
 	<li>Create a parser (and pass in the templar file)</li>
 	<li>Render the content</li>
 </ol>
+
+<p>This example was taken from <a href="http://synapticloop.github.io/sab-spot-comment/">sab-spot-comment</a>:</p>
+
 
 <pre class="prettyprint lang-java"><code>
 {pre
@@ -100,6 +102,10 @@ pre}
 templarContext.add(key, value)
 pre}
 </code></pre>
+
+<p>
+	The templar context is simply a key:value hash map.
+</p>
 
 <p><strong>3. Creating a parser object</strong></p>
 

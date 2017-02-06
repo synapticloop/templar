@@ -5,14 +5,14 @@
 </p>
 
 <ul>
-	<li>evaluations</li>
-	<li>set commands</li>
-	<li>loop commands</li>
-	<li>if commands</li>
+	<li><code>evaluation</code>s</li>
+	<li><code>set</code> commands</li>
+	<li><code>loop</code> commands</li>
+	<li><code>if</code> commands</li>
 </ul>
 
 <p>
-	And can be arbitrarily nested
+	And each of the functions can be arbitrarily nested
 </p>
 
 <p>
@@ -24,8 +24,9 @@
 <p><strong>Creating your own function</strong></p>
 
 <p>
-	The functions should be fairly explanatory from the above list.  However you may wish to add your own function, 
-	the example shown here is taken from <a href="https://github.com/synapticloop/h2zero/">h2zero</a> <a href="https://github.com/synapticloop/h2zero/blob/master/src/main/java/synapticloop/h2zero/templar/function/FunctionRequiresImport.java">FunctionRequiresImport.java</a>.
+	The functions should be fairly explanatory from the above list.  However you 
+	may wish to add your own function, the example shown here is taken from 
+	<a href="https://github.com/synapticloop/h2zero/">h2zero</a> <a href="https://github.com/synapticloop/h2zero/blob/master/src/main/java/synapticloop/h2zero/templar/function/FunctionRequiresImport.java">FunctionRequiresImport.java</a>.
 	(with a lot more comments than are in the source)
 </p>
 
@@ -94,3 +95,8 @@ if(!templarContext.hasFunction("requiresImport")) {
 	templarContext.addFunction("requiresImport", new FunctionRequiresImport());
 }
 pre}</code></pre>
+
+<p>
+	Note that this will throw a <code>FunctionExeption</code> if the function name 
+	already exists.
+</p>

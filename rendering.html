@@ -6,7 +6,38 @@
 		<a href="https://github.com/synapticloop/templar-gen/">synapticloop templar-gen</a>
 	</p>
 </section>
-</section></div><div class="8u$ 12u$(medium) important(medium)"><section id="content"><p><strong>Key Concepts</strong></p><p>For those that are looking to dive straight into the code, there are only two simple key concepts that need to be understood, namely:</p><dl><dt><strong>the parsing</strong></dt><dd>The templar files (by convention having a '<code>.templar</code>' extension) are first parsed and tokenised.</dd><dt><strong>the rendering</strong></dt><dd>Once parsing has successfully completed, the parsed files are then rendered.</dd></dl><h3>Background</h3><p>Templar was designed with the following goals:</p><ul><li>light-weight - only one dependency (and this is to allow JSON values for the context - and this is built in!)</li><li>whitespace is important - we (sometimes) care about newlines, spaces and tabs</li><li>easy to use</li><li>just powerful enough</li></ul><p>When <a href="https://github.com/synapticloop/h2zero">h2zero</a> was in it's infancy, we needed a templating engine that would satisfy all of the above criteria - especially the whitespace - which we see as on of the most important ones (<em>no one likes generated code that is ugly</em>).  So we search around and evaluated the following:</p><ul><li>Velocity</li><li>FreeMarker</li><li>StringTemplate</li><li>JSPs !!!</li></ul><p>All required huge libraries, lots of dependencies until we found the (now very much defunct) JavaTemplar engine from <a href="https://code.google.com/p/javatemplar/">https://code.google.com/p/javatemplar/</a> (last updated July 2011). (although we do like their icon!).</p><p>Whilst this didn't quite have enough functionality to do what we required, it inspired us to build our own, which has now grown into a feature-rich templating engine.</p><p>In fact this site was generated with <a href="https://github.com/synapticloop/templar-gen/">synapticloop templar-gen</a> which utilises the library.</p><p>See the <a href="quick-start.html">Quick Start</a> to get up and running in no time at all, then check out the<a href="syntax-reference.html">Syntax Reference</a> and <a href="function-reference.html">Function Reference</a> for help.</p><h3>Download</h3><p><a href="https://github.com/synapticloop/templar/releases">Download a release from GitHub</a> and get started.</p></section></div></div></div></section><div id="footer">
+</section></div><div class="8u$ 12u$(medium) important(medium)"><section id="content"><h3>Rendering</h3><p>Post parsing of the templar files, the next step is rendering of the output.</p><pre><code>try {
+    String render = parser.render(templarContext);
+    // do something with the rendered content...
+    System.out.println(render);
+} catch (RenderException rex) {
+    rex.printStackTrace();
+}</code></pre><h4>Some notes on rendering</h4><h5>1. Rendering the contents of a file...</h5><p>You may render the contents of a file in one of two ways:</p><ol><li><code>{import path/to/file}</code> which will import <strong>and</strong>  parse the file for templar declarations</li><li><code>{static path/to/file}</code> which will output the file as is</li></ol><h5>2. Ignoring templar directives...</h5><p>Need to output content as is (with new-lines/tabs and all sorts of characters including templar declarations)?</p><p>Use the <code>{pre ... pre}</code> templar declarations - in this you may put any characters (including the <code>{</code> and <code>}</code> character)</p><h5>3. Whitespace and sentences over multiple lines...</h5><p>This paragraph:</p><pre><code>&lt;p&gt;
+	sometimes
+	have
+	a
+	sentence
+	which
+	is
+	all
+	strung
+	together
+&lt;/p&gt;</code></pre><p>Will turn into:</p><p>sometimeshaveasentencewhichisallstrungtogether</p><p>Whilst the following paragraph:</p><pre><code>&lt;p&gt;
+	When 
+	you 
+	really 
+	wanted 
+	it 
+	not 
+	to 
+	do 
+	that?
+&lt;/p&gt;</code></pre><p>Will display correctly</p><p>When you really wanted it not to do that?</p><p><strong>Ensure</strong> that you have a whitespace character '<code> </code>' at the end of each line, to ensure that the spacing is correct. (templar does <em>NOT</em> strip away the end of line whitespace - only the whitespace at the<em>start</em> of the line).</p><h5>4. Non-existent items in the context...</h5><p>If an item that you are trying to look-up does not exist, the for example: <code>{hello}</code>, you will see the following stacktrace:</p><pre><code>[ FATAL ]: Could not parse file 'src/rendering.html'. Exception[ synapticloop.templar.exception.RenderException ] message was: Could not render line: hello
+synapticloop.templar.exception.RenderException: Could not render line: hello</code></pre><p>If you are expecting it, you will need to add this to the context, if it is variable as to whether this may exist in the context, you may wrap it in a <code>fn:notNull</code> function:</p><pre><code>	{if fn:notNull[hello]}
+		'hello' is in the context
+	{else}
+		'hello' is <strong>NOT</strong> in the context
+	{endif} </code></pre><p>Which will render, as expected:</p>'hello' is <strong>NOT</strong> in the context </section></div></div></div></section><div id="footer">
 	<div class="container">
 		<div class="row 200% uniform">
 		</div>

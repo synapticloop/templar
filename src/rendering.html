@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+{import ../synapticloop.github.io/src/import/head.templar}
+<body>
+
+{import ../synapticloop.github.io/src/import/header.templar}
+
+<section id="main">
+	<div class="container">
+
+		<div class="row 200%">
+			<div class="4u 12u$(medium)">
+				{import ../synapticloop.github.io/src/import/sidebar.templar}
+			</div>
+
+			<div class="8u$ 12u$(medium) important(medium)">
+
+				<section id="content">
+					{import src/imports/content/rendering.html}
+				</section>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+{static ../synapticloop.github.io/src/includes/footer.html}
+
+{static ../synapticloop.github.io/src/includes/scripts.html}
+
+</body>
+</html>

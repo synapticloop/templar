@@ -1,6 +1,7 @@
-		<ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a href="quick-start.html">Quick Start</a></li>
-			<li><a href="syntax-reference.html">Syntax Reference</a></li>
-			<li><a href="function-reference.html">Function Reference</a></li>
-		</ul>
+<ul>
+	<li><a href="index.html">Home</a></li>
+	<li><a href="quick-start.html">Quick Start</a></li>
+	<li><a href="rendering.html">Rendering</a></li>
+	<li><a href="syntax-reference.html">Syntax Reference</a></li>
+	<li><a href="function-reference.html">Function Reference</a></li>
+</ul>
