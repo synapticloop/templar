@@ -131,7 +131,7 @@ public class TemplarContext {
 		functionAliasMap.put("lt", "<");
 		functionAliasMap.put("lte", "<=");
 
-		functionAliasMap.put("length", "size");
+		functionAliasMap.put("size", "length");
 
 	}
 
@@ -277,7 +277,7 @@ public class TemplarContext {
 	 * @return the return of the invoked function
 	 * 
 	 * @throws FunctionException if there was a problem invoking the function, or
-	 *   no function was registsred with that name
+	 *   no function was registered with that name
 	 */
 	public Object invokeFunction(String name, Object[] args, TemplarContext templarContext) throws FunctionException {
 		if(null == args) {
@@ -301,6 +301,14 @@ public class TemplarContext {
 		}
 	}
 
+	/**
+	 * Return the base function, which will also look up the aliase map for any 
+	 * function that has more that one way of being referenced.
+	 * 
+	 * @param name The name of the function to look up
+	 * 
+	 * @return The name of the function that was looked up
+	 */
 	public static String getBaseFunction(String name) {
 		if(functionAliasMap.containsKey(name)) {
 			return(functionAliasMap.get(name));

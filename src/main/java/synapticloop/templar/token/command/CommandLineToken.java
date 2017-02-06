@@ -51,6 +51,15 @@ public abstract class CommandLineToken {
 
 	public CommandLineToken(StringTokenizer stringTokenizer) throws ParseException {}
 
+	/**
+	 * Evaluate the token 
+	 * 
+	 * @param templarContext The templar context for any lookups that are required
+	 * 
+	 * @return The evaluated object
+	 * 
+	 * @throws RenderException If there was an error evaluating the command line
+	 */
 	public abstract Object evaluate(TemplarContext templarContext) throws RenderException;
 
 	@Override
