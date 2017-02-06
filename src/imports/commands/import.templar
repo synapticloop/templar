@@ -1,4 +1,4 @@
-<h4><code class="large">{{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4>
+<h4><code>{{import ...}</code> - import a file into the current one <a name="command-import">&nbsp;</a></h4>
 
 <p>
 	Import a file into the current file and parse the file for any templar declarations.
@@ -10,5 +10,6 @@
 pre}</code></pre>
 
 <p>
-	This file was imported from syntax-reference.html with the above line
+	This file was imported from <code>syntax-reference.html</code> with the above 
+	templar declaration.
 </p>

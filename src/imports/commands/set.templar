@@ -1,4 +1,4 @@
-<h4><code class="large">{{set ...}</code> - set a variable into the context <a name="command-set">&nbsp;</a></h4>
+<h4><code>{{set ...}</code> - set a variable into the context <a name="command-set">&nbsp;</a></h4>
 
 <p>
 	The format of this command is as follows: <code>{{set __something__ as __somethingElse__}</code>, where <code>__something__</code>

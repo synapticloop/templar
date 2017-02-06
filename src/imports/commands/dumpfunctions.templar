@@ -1,7 +1,7 @@
-			<h4><code class="large">{{dumpfunctions}</code> - dumping the functions <a name="command-dumpfunctions">&nbsp;</a></h4>
+<h4><code>{{dumpfunctions}</code> - dumping the functions <a name="command-dumpfunctions">&nbsp;</a></h4>
 
-			<p>
-				This is useful for debugging as this will render all of the registered functions and it will look like this:
-			</p>
+<p>
+	This is useful for debugging as this will render all of the registered functions and it will look like this:
+</p>
 
 <pre><code>{dumpfunctions}</code></pre>

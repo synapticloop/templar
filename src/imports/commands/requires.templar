@@ -1,4 +1,4 @@
-<h4><code class="large">{{requires}</code> - require a variable to be available in the context<a name="command-requires">&nbsp;</a></h4>
+<h4><code>{{requires}</code> - require a variable to be available in the context<a name="command-requires">&nbsp;</a></h4>
 
 <p>
 	This ensures that a variable is available in the context.  If the variable is not 

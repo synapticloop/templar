@@ -1,4 +1,4 @@
-<h4><code class="large">{{static ...}</code> - import a file into the current one <a name="command-static">&nbsp;</a></h4>
+<h4><code>{{static ...}</code> - import a file into the current one <a name="command-static">&nbsp;</a></h4>
 
 <p>
 	Import a file into the current file and <strong>DO NOT</strong> parse the file 

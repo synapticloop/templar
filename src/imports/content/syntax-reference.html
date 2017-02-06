@@ -1,12 +1,13 @@
 <h3>syntax reference.</h3>
 
 <p>
-	In general all syntax starts with a <code>{{</code> character and ends with the next available <code>}</code> 
-	character.  This will either be an evaluation or a command, if it is not a command, templar will attempt to 
+	In general all syntax starts with a <code>{{</code> character and ends with the next 
+	available <code>}</code> character.  This will either be an <strong>evaluation</strong> 
+	or a <strong>command</strong>, if it is not a command, templar will attempt to 
 	evaluate the expression.
 </p>
 
-<p>Command Quick links</p>
+<h4>Command Quick links</h4>
 
 <ul>
 	<li><a href="#command-comments"><code>{{-- ...</code></a></li>
@@ -25,6 +26,8 @@
 
 <h3>EVALUATIONS</h3>
 
+<h4>Method evaluations</h4>
+
 <pre><code>{pre {&lt;evaluate&gt;.&lt;method&gt;.&lt;anotherMethod&gt;} pre}</code></pre>
 
 <p>
@@ -37,6 +40,27 @@
 	<li>Call the <code>&lt;anotherMethod&gt;</code> method on the object returned from the <code>&lt;evaluate&gt;.&lt;method&gt;</code> call</li>
 	<li>Render the above output</li>
 </ol>
+
+<p>
+	Note that for each of the methods that is trying to be evaluated, the following 
+	prefixes will be looked up: <code>get</code>, <code>is</code>, <code>has</code> 
+	and finally just the method.
+</p>
+
+<p>
+	For example, if the method to be evaluated is <code>{{person.name}</code>, the 
+	<code>person</code> object will be looked up in the context, retrieved (if it 
+	exists), and then the following method lookups will be attempted (in order):
+</p>
+
+<ol>
+	<li><code>getName</code>,</li>
+	<li><code>isName</code>,</li>
+	<li><code>hasName</code>, and finally</li>
+	<li><code>name</code></li>
+</ol>
+
+<h4>Function evaluations</h4>
 
 <p>
 	You may also evaluate functions (see the <a href="function-reference.html">function reference</a> for a list of functions available):

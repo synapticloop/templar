@@ -1,35 +1,35 @@
-			<h4><code class="large">{{if ...</code> - condition <a name="command-if">&nbsp;</a></h4>
+<h4><code>{{if ...</code> - condition <a name="command-if">&nbsp;</a></h4>
 
-			<pre><code>{pre {if &lt;something&gt;}
+<pre><code>{pre {if &lt;something&gt;}
 	&lt;something&gt; is true and this will be output
 {else}
 	&lt;something&gt; is false and this will be output
 {endif}
 pre}</code></pre>
 
-			<p>
-				<code>&lt;something&gt;</code> can either be a function, or an evaluation, e.g:
-			</p>
+<p>
+	<code>&lt;something&gt;</code> can either be a function, or an evaluation, e.g:
+</p>
 
-			<pre><code>{pre {if fn:true[object.method]}
+<pre><code>{pre {if fn:true[object.method]}
 	fn:true[object.method] is true and this will be output
 {else}
 	fn:true[object.method] is false and this will be output
 {endif}
 pre}</code></pre>
 
-			<pre><code>{pre {if some.object.methodThatReturnsABoolean}
+<pre><code>{pre {if some.object.methodThatReturnsABoolean}
 	some.object.methodThatReturnsABoolean is true and this will be output
 {else}
 	some.object.methodThatReturnsABoolean is false and this will be output
 {endif}
 pre}</code></pre>
 
-			<p>
-				You may of course chain functions, so long as the result is coercible to a Boolean
-			</p>
+<p>
+	You may of course chain functions, so long as the result is coercible to a Boolean
+</p>
 
-			<pre><code>{pre {if fn:equals[fn:size[array], 10]}
+<pre><code>{pre {if fn:equals[fn:size[array], 10]}
 	this will be output if the size of the array is exactly 10
 {else}
 	this will be output if the size of the array is not exactly 10

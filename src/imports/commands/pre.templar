@@ -1,4 +1,4 @@
-<h4><code class="large">{{pre ...</code> - pre formatted text <a name="command-pre">&nbsp;</a></h4>
+<h4><code>{{pre ...</code> - pre formatted text <a name="command-pre">&nbsp;</a></h4>
 
 <p>
 	As the name would suggest pre-formatted text - this is the only command that does not end with a <code>}</code>
