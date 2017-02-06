@@ -27,8 +27,8 @@ pre}
 </p>
 
 <ol>
-	<li><code>{{import path/to/file}</code> which will import <strong>and</strong>  parse the file for templar declarations</li>
-	<li><code>{{static path/to/file}</code> which will output the file as is</li>
+	<li><code>{{import path/to/file.extension}</code> which will import <strong>and</strong>  parse the file for templar declarations</li>
+	<li><code>{{static path/to/file.extension}</code> which will output the file as is</li>
 </ol>
 
 <h5>2. Ignoring templar directives...</h5>
@@ -40,6 +40,15 @@ pre}
 <p>
 	Use the <code>{{pre ... pre}</code> templar declarations - in this you may put 
 	any characters (including the <code>{{</code> and <code>}</code> character)
+</p>
+
+<p>
+	{pre
+		Inside a <code>pre</code> declaration, you may write whatever you want, 
+		including declarations <code>{hello}</code>, functions 
+		<code>{fn:notNull[hello]}</code> or anything else, this will be ignored by 
+		the templar parser
+	pre}
 </p>
 
 <h5>3. Whitespace and sentences over multiple lines...</h5>
@@ -119,7 +128,7 @@ pre}
 <p>
 	<strong>Ensure</strong> that you have a whitespace character '<code> </code>' at 
 	the end of each line, to ensure that the spacing is correct. (templar does 
-	<em>NOT</em> strip away the end of line whitespace - only the whitespace at the
+	<em>NOT</em> strip away the end of line whitespace - only the whitespace at the 
 	<em>start</em> of the line).
 </p>
 
