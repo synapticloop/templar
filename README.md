@@ -216,9 +216,9 @@ repositories {
 
 ```
 dependencies {
-	runtime(group: 'synapticloop', name: 'templar', version: '1.4.2', ext: 'jar')
+	runtime(group: 'synapticloop', name: 'templar', version: '1.4.3', ext: 'jar')
 
-	compile(group: 'synapticloop', name: 'templar', version: '1.4.2', ext: 'jar')
+	compile(group: 'synapticloop', name: 'templar', version: '1.4.3', ext: 'jar')
 }
 ```
 
@@ -226,9 +226,9 @@ or, more simply for versions of gradle greater than 2.1
 
 ```
 dependencies {
-	runtime 'synapticloop:templar:1.4.2'
+	runtime 'synapticloop:templar:1.4.3'
 
-	compile 'synapticloop:templar:1.4.2'
+	compile 'synapticloop:templar:1.4.3'
 }
 ```
 
@@ -238,7 +238,7 @@ dependencies {
 <dependency>
 	<groupId>synapticloop</groupId>
 	<artifactId>templar</artifactId>
-	<version>1.4.2</version>
+	<version>1.4.3</version>
 	<type>jar</type>
 </dependency>
 ```

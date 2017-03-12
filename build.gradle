@@ -20,10 +20,12 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = '1.4.2'
+version = '1.4.4'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+// tasks.withType(Javadoc).all { enabled = false }
 
 cobertura {
 	coverageFormats = [ 'html', 'xml']

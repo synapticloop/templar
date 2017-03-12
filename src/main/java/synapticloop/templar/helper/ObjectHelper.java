@@ -87,7 +87,7 @@ public class ObjectHelper {
 				Method invokeMethod = findMethod(object, nextToken);
 				if(null != invokeMethod) {
 					foundMethod = true;
-					int parameterCount = invokeMethod.getParameterCount();
+					int parameterCount = invokeMethod.getParameterTypes().length;
 					switch (parameterCount) {
 					case 0:
 						object = invokeObjectMethod(object, invokeMethod);
@@ -282,6 +282,14 @@ public class ObjectHelper {
 	private static Method findMethod(Object object, String reference) throws RenderException {
 		Method returnMethod = null;
 		if(object instanceof Map<?, ?>) {
+			if(((Map<?,?>)object).containsKey(reference)) {
+				try {
+					return(object.getClass().getMethod("get", Object.class));
+				} catch (NoSuchMethodException nsmex) {
+				} catch (SecurityException sex) {
+				}
+			}
+
 			try {
 				returnMethod = object.getClass().getMethod(reference);
 				if(null != returnMethod) {
@@ -292,6 +300,7 @@ public class ObjectHelper {
 			} catch (SecurityException sex) {
 				// fall through
 			}
+
 
 			try {
 				// it could be that we are looking up a direct call on the object
@@ -339,7 +348,7 @@ public class ObjectHelper {
 		} catch (NullPointerException npex) {
 			throw new RenderException("Got Null Pointer for method '" + methodReference + "' on object '" + object + "'.", npex);
 		}
-			
+
 
 		return(null);
 	}

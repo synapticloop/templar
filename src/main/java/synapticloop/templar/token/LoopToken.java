@@ -19,6 +19,7 @@ package synapticloop.templar.token;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import synapticloop.templar.exception.ParseException;
@@ -120,6 +121,21 @@ public class LoopToken extends CommandToken {
 				Object nextObject = objectArray[i];
 				templarContext.add(contextAs, nextObject);
 				templarContext.add(contextAs + STATUS, new LoopStatusBean(first, (i+1 == objectArray.length), offset + 1, offset));
+				for (Token token : this.childTokens) {
+					stringBuilder.append(token.render(templarContext));
+				}
+				first = false;
+				offset++;
+			}
+		} else if(object instanceof Map<?, ?>) {
+			Map<?, ?> map = (Map<?, ?>)object;
+			Iterator<?> iterator = map.keySet().iterator();
+			boolean first = true;
+			int offset = 0;
+			while (iterator.hasNext()) {
+				Object nextObject = (Object) iterator.next();
+				templarContext.add(contextAs, nextObject);
+				templarContext.add(contextAs + STATUS, new LoopStatusBean(first, !iterator.hasNext(), offset + 1, offset));
 				for (Token token : this.childTokens) {
 					stringBuilder.append(token.render(templarContext));
 				}
