@@ -1,0 +1,25 @@
+<h4><code>{{statichtml ...}</code> - import a file into the current one and escape HTML characters<a name="command-statichtml">&nbsp;</a></h4>
+
+<p>
+	Import a file into the current file and <strong>DO NOT</strong> parse the file 
+	for any templar declarations. The file to import can also be from the classpath 
+	(if you are deploying this as a complete jar - 
+	<code>{{statichtml classpath:/some/classpath/file/here.templar}</code>
+</p>
+
+<p>
+	Escape any characters for HTML, i.e.:
+</p>
+
+<ul>
+	<li><code>&amp;</code> is escaped to <code>&amp;amp;</code></li>
+	<li><code>&lt;</code> is escaped to <code>&amp;lt;</code></li>
+	<li><code>&gt;</code> is escaped to <code>&amp;gt;</code></li>
+</ul>
+
+<pre><code>{pre {import src/imports/commands/static.templar}
+pre}</code></pre>
+
+<p>
+	This file was imported from syntax-reference.html with the above line
+</p>

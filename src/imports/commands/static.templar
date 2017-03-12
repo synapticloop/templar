@@ -4,7 +4,7 @@
 	Import a file into the current file and <strong>DO NOT</strong> parse the file 
 	for any templar declarations. The file to import can also be from the classpath 
 	(if you are deploying this as a complete jar - 
-	<code>{{import classpath:/some/classpath/file/here.templar}</code>
+	<code>{{static classpath:/some/classpath/file/here.templar}</code>
 </p>
 
 <pre><code>{pre {import src/imports/commands/static.templar}
