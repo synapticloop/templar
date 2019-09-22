@@ -3,13 +3,14 @@ plugins {
 	id 'eclipse'
 	id 'maven'
 	id 'maven-publish'
-	id 'net.saliman.cobertura' version '2.2.6'
+
+	id "com.github.ben-manes.versions" version "0.25.0"
 
 	id 'co.riiid.gradle' version '0.3.1'
-	id 'com.jfrog.bintray' version '1.4'
 
-	id 'synapticloop.documentr' version '2.8.2'
-	id 'synapticloop.copyrightr' version '1.1.2'
+	id 'synapticloop.documentr' version '3.0.0'
+	id 'synapticloop.copyrightr' version '1.3.1'
+	id "org.datlowe.maven-publish-auth" version "2.0.2"
 
 	id "synapticloop.projectFilestatistics" version "1.0.1"
 
@@ -20,16 +21,13 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = '1.4.4'
+version = '1.4.5'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 // tasks.withType(Javadoc).all { enabled = false }
 
-cobertura {
-	coverageFormats = [ 'html', 'xml']
-}
 
 test {
 	include '**/*Test.class' 
@@ -41,12 +39,14 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 	jcenter()
+
+	maven{
+		url "https://maven.pkg.github.com/synapticloop"
+	}
 }
 
 dependencies {
-	runtime 'org.json:json:20160212'
-
-	compile 'org.json:json:20160212'
+	implementation 'org.json:json:20190722'
 
 	testRuntime 'junit:junit:4.11'
 	testRuntime 'org.mockito:mockito-all:1.10.19'
@@ -85,13 +85,6 @@ github {
 	]
 }
 
-def javaApiUrl = 'http://docs.oracle.com/javase/1.6.0/docs/api/'
-def groovyApiUrl = 'http://groovy.codehaus.org/gapi/'
-
-tasks.withType(Javadoc) {
-	options.links(javaApiUrl, groovyApiUrl)
-}
-
 task javadocJar(type: Jar, dependsOn: javadoc) {
 	classifier = 'javadoc'
 	from 'build/docs/javadoc'
@@ -104,7 +97,7 @@ task sourcesJar(type: Jar) {
 
 publishing {
 	publications {
-		Synapticloop(MavenPublication) {
+		synapticloop(MavenPublication) {
 			from components.java
 			artifact sourcesJar
 			artifact javadocJar
@@ -122,22 +115,19 @@ publishing {
 			}
 		}
 	}
-}
 
-bintray {
-	user = System.getenv('BINTRAY_USER')	
-	key = System.getenv('BINTRAY_PASSWORD')
+	repositories {
+		maven {
+			url "https://maven.pkg.github.com/synapticloop/templar"
 
-	publications = [ 'Synapticloop' ]
-
-	publish = true
-
-	pkg {
-		repo = 'maven'
-		name = archivesBaseName
+			credentials {
+				username = System.getenv('GITHUB_PUBLISH_USER')
+				password = System.getenv('GITHUB_PUBLISH_TOKEN')
+			}
+		}
 	}
-
 }
+
 build.finalizedBy(project.tasks.shadowJar)
 
 task(dist).dependsOn( [ 'test', 'cobertura'] )
