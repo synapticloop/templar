@@ -10,7 +10,6 @@ plugins {
 
 	id 'synapticloop.documentr' version '3.0.0'
 	id 'synapticloop.copyrightr' version '1.3.1'
-	id "org.datlowe.maven-publish-auth" version "2.0.2"
 
 	id "synapticloop.projectFilestatistics" version "1.1.0"
 
@@ -21,7 +20,7 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = '1.4.5'
+version = '1.4.5.6'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -40,8 +39,8 @@ repositories {
 	mavenCentral()
 	jcenter()
 
-	maven{
-		url "https://maven.pkg.github.com/synapticloop"
+	maven {
+		url "https://maven.pkg.github.com/"
 	}
 }
 
@@ -104,15 +103,6 @@ publishing {
 
 			groupId group
 			artifactId archivesBaseName
-
-			pom.withXml {
-				configurations.compile.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
-					asNode().dependencies[0].dependency.find {
-						it.artifactId[0].text() == dep.moduleName &&
-								it.groupId[0].text() == dep.moduleGroup
-					}.scope[0].value = 'compile'
-				}
-			}
 		}
 	}
 

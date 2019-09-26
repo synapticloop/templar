@@ -1,7 +1,7 @@
 package synapticloop.templar.function.comparison;
 
 /*
- * Copyright (c) 2012-2017 synapticloop.
+ * Copyright (c) 2012-2019 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -37,14 +37,14 @@ public abstract class FunctionNumericComparison extends Function {
 			try {
 				Object arg1Object = ObjectHelper.evaluateObjectToDefault(args[0].toString().trim(), templarContext);
 				if(arg1Object instanceof Number) {
-					arg1 = new Long(((Number)arg1Object).longValue());
+					arg1 = Long.valueOf(((Number)arg1Object).longValue());
 				} else {
 					arg1 = Long.decode((String)arg1Object);
 				}
 
 				Object arg2Object = ObjectHelper.evaluateObjectToDefault(args[1].toString().trim(), templarContext);
 				if(arg2Object instanceof Number) {
-					arg2 = new Long(((Number)arg2Object).longValue());
+					arg2 = Long.valueOf(((Number)arg2Object).longValue());
 				} else {
 					arg2 = Long.decode((String)arg2Object);
 				}

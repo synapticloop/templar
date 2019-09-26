@@ -156,25 +156,25 @@ public class FunctionEqualTest {
 
 	@Test
 	public void testIntegerEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Integer(1), "1" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Integer.valueOf(1), "1" }, null)));
 	}
 
 	@Test
 	public void testDoubleEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Double(1.89), "1.89" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Double.valueOf(1.89), "1.89" }, null)));
 	}
 
 	@Test
 	public void testFloatEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Float(1.89), "1.89" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Float.valueOf(1.89f), "1.89" }, null)));
 	}
 
 	@Test
 	public void testBooleanEquals() throws FunctionException {
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(true), "true" }, null)));
-		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "true" }, null)));
-		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(true), "something-non-coercible" }, null)));
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "something-non-coercible" }, null)));
-		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { new Boolean(false), "false" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Boolean.TRUE, "true" }, null)));
+		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { Boolean.FALSE, "true" }, null)));
+		assertFalse(((Boolean)functionEqual.evaluate("=", new Object[] { Boolean.TRUE, "something-non-coercible" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Boolean.FALSE, "something-non-coercible" }, null)));
+		assertTrue(((Boolean)functionEqual.evaluate("=", new Object[] { Boolean.FALSE, "false" }, null)));
 	}
 }

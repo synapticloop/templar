@@ -1,10 +1,7 @@
 package synapticloop.templar.function.bool;
 
-import synapticloop.templar.exception.FunctionException;
-import synapticloop.templar.utils.TemplarContext;
-
 /*
- * Copyright (c) 2012-2017 synapticloop.
+ * Copyright (c) 2012-2019 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -19,6 +16,9 @@ import synapticloop.templar.utils.TemplarContext;
  * Licence for the specific language governing permissions and limitations
  * under the Licence.
  */
+
+import synapticloop.templar.exception.FunctionException;
+import synapticloop.templar.utils.TemplarContext;
 
 public class FunctionTrue extends FunctionBoolean {
 	public FunctionTrue() {
