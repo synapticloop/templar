@@ -12,7 +12,7 @@ plugins {
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = '1.5.4'
+version = '1.5.5'
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -46,6 +46,19 @@ configurations.all {
 		force 'xerces:xmlParserAPIs:2.6.2',
 					'xerces:xercesImpl:2.6.2',
 					'xml-apis:xml-apis:2.0.2'
+	}
+}
+
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId 'synapticloop'
+			artifactId 'h2zero'
+			version version
+
+			from components.java
+		}
 	}
 }
 
