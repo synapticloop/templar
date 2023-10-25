@@ -1,7 +1,7 @@
 package synapticloop.templar.function;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -109,7 +109,6 @@ public class FunctionLength extends Function {
 	 * @param object the object to reflect upon
 	 * @return the length, or -1 if not found.
 	 */
-
 	private static int getLength(Object object) {
 		int length = findMethod(object);
 		if(length != -1) {
@@ -128,15 +127,8 @@ public class FunctionLength extends Function {
 				if(invoke instanceof Integer) {
 					return((Integer)invoke);
 				}
-			} catch (SecurityException jlsex) {
-				// do nothing - will go through the loop or fall out
-			} catch (NoSuchMethodException jlnsmex) {
-				// do nothing - will go through the loop or fall out
-			} catch (IllegalArgumentException jliaex) {
-				// do nothing - will go through the loop or fall out
-			} catch (IllegalAccessException jliacex) {
-				// do nothing - will go through the loop or fall out
-			} catch (InvocationTargetException jlitex) {
+			} catch (SecurityException | NoSuchMethodException | IllegalArgumentException | IllegalAccessException |
+			         InvocationTargetException jlsex) {
 				// do nothing - will go through the loop or fall out
 			}
 		}
@@ -149,13 +141,7 @@ public class FunctionLength extends Function {
 			try {
 				Field field = object.getClass().getField(fieldString);
 				return(field.getInt(object));
-			} catch (SecurityException e) {
-				// do nothing - will go through the loop or fall out
-			} catch (NoSuchFieldException e) {
-				// do nothing - will go through the loop or fall out
-			} catch (IllegalArgumentException e) {
-				// do nothing - will go through the loop or fall out
-			} catch (IllegalAccessException e) {
+			} catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
 				// do nothing - will go through the loop or fall out
 			}
 		}

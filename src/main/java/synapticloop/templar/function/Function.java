@@ -1,7 +1,7 @@
 package synapticloop.templar.function;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -28,7 +28,8 @@ public abstract class Function {
 	protected Function() {}
 
 	/**
-	 * Instantiate the function
+	 * Instantiate the function setting the number of arguments which is used
+	 * for parsing a templar file
 	 * 
 	 * @param numArgs the number of requested arguments that this function takes
 	 */

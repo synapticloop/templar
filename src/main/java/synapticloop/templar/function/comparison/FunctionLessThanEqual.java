@@ -1,7 +1,7 @@
 package synapticloop.templar.function.comparison;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -25,7 +25,7 @@ public class FunctionLessThanEqual extends FunctionNumericComparison {
 	@Override
 	protected Object evaluateFunction(Object[] args, TemplarContext templarContext) throws FunctionException {
 		super.evaluateNumeric(args, templarContext);
-		return(arg1.longValue() <= arg2.longValue());
+		return(arg1.doubleValue() <= arg2.doubleValue());
 	}
 
 }

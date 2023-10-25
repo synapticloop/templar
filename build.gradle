@@ -10,12 +10,14 @@ plugins {
 
 
 group = 'synapticloop'
-archivesBaseName = 'templar'
 description = """Templar templating engine"""
 version = '1.5.6'
 
-sourceCompatibility = 17
-targetCompatibility = 17
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 
 
 test {
@@ -54,7 +56,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			groupId 'synapticloop'
-			artifactId 'templar'
+			artifactId "templar"
 			version version
 
 			from components.java

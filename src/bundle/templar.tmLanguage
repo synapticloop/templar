@@ -1,0 +1,12 @@
+{
+	scopeName = 'synapticloop.templar';
+	fileTypes = ( *.templar );
+	patterns = (
+		{
+			name = 'comment.multiline';
+			match = '\b(if|while|for|return)\b';
+			begin = "{--"
+			end = "--}
+		 },
+ );
+}

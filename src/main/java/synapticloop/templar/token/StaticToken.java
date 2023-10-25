@@ -1,7 +1,7 @@
 package synapticloop.templar.token;
 
 /*
- * Copyright (c) 2017-2019 synapticloop.
+ * Copyright (c) 2017-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and

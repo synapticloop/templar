@@ -1,7 +1,7 @@
 package synapticloop.templar.exception;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -17,12 +17,14 @@ package synapticloop.templar.exception;
  * under the Licence.
  */
 
+import java.io.Serial;
+
 /**
  * Thrown when there was a problem rendering the parsed templar template.
  */
 
 public class RenderException extends Exception {
-	private static final long serialVersionUID = -5781431903609494963L;
+	@Serial private static final long serialVersionUID = -5781431903609494963L;
 
 	/**
 	 * Create a rendering exception

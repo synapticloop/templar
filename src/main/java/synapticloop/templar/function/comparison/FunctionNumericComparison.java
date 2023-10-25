@@ -1,7 +1,7 @@
 package synapticloop.templar.function.comparison;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -22,35 +22,45 @@ import synapticloop.templar.function.Function;
 import synapticloop.templar.helper.ObjectHelper;
 import synapticloop.templar.utils.TemplarContext;
 
+/**
+ * This is the abstract base for all number comparisons
+ *
+ * @author synapticloop
+ */
 public abstract class FunctionNumericComparison extends Function {
 	protected boolean hasError = false;
-	protected Long arg1 = null;
-	protected Long arg2 = null;
+	protected Number arg1 = null;
+	protected Number arg2 = null;
 
 	public FunctionNumericComparison() {
 		super(2);
 	}
 
+	/**
+	 * Evaluate whether the objects are numeric or not
+	 *
+	 * @param args The arguments to evaluate
+	 * @param templarContext The templar context to look up the values (if required)
+	 * @throws FunctionException If the arguments are not coercible to a number
+	 */
 	public void evaluateNumeric(Object[] args, TemplarContext templarContext) throws FunctionException {
 		hasError = false;
 		if(verifyNonNullArgumentLength(args)) {
 			try {
 				Object arg1Object = ObjectHelper.evaluateObjectToDefault(args[0].toString().trim(), templarContext);
 				if(arg1Object instanceof Number) {
-					arg1 = Long.valueOf(((Number)arg1Object).longValue());
+					arg1 = ((Number) arg1Object).longValue();
 				} else {
 					arg1 = Long.decode((String)arg1Object);
 				}
 
 				Object arg2Object = ObjectHelper.evaluateObjectToDefault(args[1].toString().trim(), templarContext);
 				if(arg2Object instanceof Number) {
-					arg2 = Long.valueOf(((Number)arg2Object).longValue());
+					arg2 = ((Number) arg2Object).longValue();
 				} else {
 					arg2 = Long.decode((String)arg2Object);
 				}
-			} catch(NumberFormatException nfex) {
-				hasError = true;
-			} catch(ClassCastException ccex) {
+			} catch(NumberFormatException | ClassCastException ex) {
 				hasError = true;
 			}
 		} else {
@@ -61,5 +71,4 @@ public abstract class FunctionNumericComparison extends Function {
 			throw new FunctionException("The function '>=, >, <, <=' takes exactly two arguments, both of which must be coercible to a number.");
 		}
 	}
-
 }

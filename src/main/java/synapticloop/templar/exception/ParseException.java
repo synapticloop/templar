@@ -1,7 +1,7 @@
 package synapticloop.templar.exception;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -21,6 +21,8 @@ import synapticloop.templar.token.BasePositionToken;
 import synapticloop.templar.token.ParseExceptionToken;
 import synapticloop.templar.utils.Tokeniser;
 
+import java.io.Serial;
+
 /**
  * When there is a problem parsing the templar template.  This can also contain
  * the token that caused the exception.  If the constructor is used without an
@@ -29,7 +31,7 @@ import synapticloop.templar.utils.Tokeniser;
  * example, when a templar file was passed in but it does not exist.
  */
 public class ParseException extends Exception {
-	private static final long serialVersionUID = 2330577994861842050L;
+	@Serial private static final long serialVersionUID = 2330577994861842050L;
 	private BasePositionToken exceptionToken = null;
 
 	/**

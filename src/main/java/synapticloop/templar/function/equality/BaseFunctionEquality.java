@@ -1,7 +1,7 @@
 package synapticloop.templar.function.equality;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -26,7 +26,11 @@ public abstract class BaseFunctionEquality extends Function {
 
 	protected boolean coercion(Object argZero, Object argOne) {
 		// at this point - we need to be able to determine which type the first 
-		// object is, and whether we need to be able to do integers as well 
+		// object is, and whether we need to be able to do integers as well
+//		if(argZero instanceof Number) {
+//			return(argZero.equals(argOne));
+//		}
+
 		if(argZero instanceof Integer) {
 			// try to coerce the second arg to an integer
 			try {

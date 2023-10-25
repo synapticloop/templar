@@ -1,7 +1,7 @@
 package synapticloop.templar.helper;
 
 /*
- * Copyright (c) 2012-2019 synapticloop.
+ * Copyright (c) 2012-2023 synapticloop.
  * All rights reserved.
  *
  * This source code and any derived binaries are covered by the terms and
@@ -82,7 +82,8 @@ public class NumberHelper {
 
 
 	/**
-	 * Simple conversion of a number to english based arguments
+	 * Simple conversion of a number to english based arguments only covers
+	 * cases up to 100 billion - or 999,999,999,999
 	 * 
 	 * @param number the number to convert
 	 * 
@@ -116,9 +117,6 @@ public class NumberHelper {
 			tradBillions = "";
 			break;
 		case 1 :
-			tradBillions = convertLessThanOneThousand(billions)
-			+ " billion ";
-			break;
 		default :
 			tradBillions = convertLessThanOneThousand(billions)
 			+ " billion ";
@@ -131,9 +129,6 @@ public class NumberHelper {
 			tradMillions = "";
 			break;
 		case 1 :
-			tradMillions = convertLessThanOneThousand(millions)
-			+ " million ";
-			break;
 		default :
 			tradMillions = convertLessThanOneThousand(millions)
 			+ " million ";
