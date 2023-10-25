@@ -1,31 +1,20 @@
 plugins {
 	id 'java'
 	id 'eclipse'
-	id 'maven'
-	id 'maven-publish'
 
-	id "com.github.ben-manes.versions" version "0.25.0"
+	id "com.github.ben-manes.versions" version "0.49.0"
 
-	id 'co.riiid.gradle' version '0.3.1'
-
-	id 'synapticloop.documentr' version '3.0.0'
 	id 'synapticloop.copyrightr' version '1.3.1'
-
-	id "synapticloop.projectFilestatistics" version "1.1.0"
-
-	id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 
 group = 'synapticloop'
 archivesBaseName = 'templar'
 description = """Templar templating engine"""
-version = '1.5.0'
+version = '1.5.2'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-// tasks.withType(Javadoc).all { enabled = false }
+sourceCompatibility = 17
+targetCompatibility = 17
 
 
 test {
@@ -37,21 +26,16 @@ test {
 repositories {
 	mavenLocal()
 	mavenCentral()
-	jcenter()
-
 	maven {
-		url "https://maven.pkg.github.com/"
+		url 'https://jitpack.io'
 	}
 }
 
 dependencies {
-	implementation 'org.json:json:20190722'
+	implementation 'org.json:json:20231013'
 
-	testRuntime 'junit:junit:4.11'
-	testRuntime 'org.mockito:mockito-all:1.10.19'
-
-	testCompile 'junit:junit:4.11'
-	testCompile 'org.mockito:mockito-all:1.10.19'
+	testImplementation 'junit:junit:4.13.2'
+	testImplementation 'org.mockito:mockito-core:5.6.0'
 }
 
 // we always want to fail on version conflict
@@ -70,54 +54,3 @@ copyrightr {
 		"src/test/java/**/*.java"
 	]
 }
-
-github {
-	owner = group
-	repo = archivesBaseName
-	if(System.getenv('GITHUB_TOKEN')) {
-		token = System.getenv('GITHUB_TOKEN')
-	}
-	tagName = version
-	name = version
-	assets = [
-		'build/libs/' + archivesBaseName + '-' + version + '-all.jar'
-	]
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier = 'javadoc'
-	from 'build/docs/javadoc'
-}
-
-task sourcesJar(type: Jar) {
-	from sourceSets.main.allSource
-	classifier = 'sources'
-}
-
-publishing {
-	publications {
-		synapticloop(MavenPublication) {
-			from components.java
-			artifact sourcesJar
-			artifact javadocJar
-
-			groupId group
-			artifactId archivesBaseName
-		}
-	}
-
-	repositories {
-		maven {
-			url "https://maven.pkg.github.com/synapticloop/templar"
-
-			credentials {
-				username = System.getenv('GITHUB_PUBLISH_USER')
-				password = System.getenv('GITHUB_PUBLISH_TOKEN')
-			}
-		}
-	}
-}
-
-build.finalizedBy(project.tasks.shadowJar)
-
-task(dist).dependsOn( [ 'test', 'cobertura'] )
