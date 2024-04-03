@@ -3,15 +3,15 @@ plugins {
 	id 'eclipse'
 	id 'maven-publish'
 
-	id "com.github.ben-manes.versions" version "0.49.0"
+	id "com.github.ben-manes.versions" version "0.51.0"
 
 	id 'synapticloop.copyrightr' version '1.3.1'
 }
 
 
-group = 'synapticloop'
 description = """Templar templating engine"""
-version = '1.5.6'
+version = findProperty("h2zero.version")
+group = 'com.synapticloop'
 
 java {
 	toolchain {
@@ -35,10 +35,10 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.json:json:20231013'
+	implementation 'org.json:json:20240303'
 
 	testImplementation 'junit:junit:4.13.2'
-	testImplementation 'org.mockito:mockito-core:5.6.0'
+	testImplementation 'org.mockito:mockito-core:5.11.0'
 }
 
 // we always want to fail on version conflict
@@ -55,7 +55,7 @@ configurations.all {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId 'synapticloop'
+			groupId 'com.synapticloop'
 			artifactId "templar"
 			version version
 

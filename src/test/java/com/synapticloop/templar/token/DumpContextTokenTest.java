@@ -1,0 +1,62 @@
+package com.synapticloop.templar.token;
+
+import static org.junit.Assert.*;
+
+import java.util.StringTokenizer;
+
+import com.synapticloop.templar.token.DumpContextToken;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.MockitoAnnotations;
+
+import com.synapticloop.templar.exception.ParseException;
+import com.synapticloop.templar.exception.RenderException;
+import com.synapticloop.templar.utils.TemplarContext;
+import com.synapticloop.templar.utils.Tokeniser;
+
+
+public class DumpContextTokenTest {
+	DumpContextToken dumpContextToken;
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
+
+	@Test
+	public void testNullContext() {
+		try {
+			dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
+			assertEquals("<DUMPCONTEXT@1:1 />", dumpContextToken.toString());
+		} catch (ParseException e) {
+			assertFalse(true);
+		}
+	}
+
+	@Test
+	public void testRender() throws ParseException, RenderException {
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
+		TemplarContext templarContext = new TemplarContext();
+		templarContext.add("key", "value");
+		assertEquals("TemplarContext[{key:value}]", dumpContextToken.render(templarContext));
+	}
+
+	@Test
+	public void testRenderObjects() throws ParseException, RenderException {
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
+		TemplarContext templarContext = new TemplarContext();
+		templarContext.add("key", "value");
+		templarContext.add("stringArray", new String[8]);
+		String render = dumpContextToken.render(templarContext);
+		assertTrue(render.contains("TemplarContext["));
+		assertTrue(render.contains("{stringArray:[Ljava.lang.String;"));
+		assertTrue(render.contains("{key:value}"));
+	}
+
+	@Test
+	public void testRenderNullContext() throws ParseException, RenderException {
+		dumpContextToken = new DumpContextToken("", new StringTokenizer("}"), new Tokeniser());
+		assertEquals("TemplarContext[]", dumpContextToken.render(null));
+	}
+
+}
