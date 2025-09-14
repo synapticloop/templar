@@ -27,9 +27,6 @@ public abstract class BaseFunctionEquality extends Function {
 	protected boolean coercion(Object argZero, Object argOne) {
 		// at this point - we need to be able to determine which type the first 
 		// object is, and whether we need to be able to do integers as well
-//		if(argZero instanceof Number) {
-//			return(argZero.equals(argOne));
-//		}
 
 		if(argZero instanceof Integer) {
 			// try to coerce the second arg to an integer

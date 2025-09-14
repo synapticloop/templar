@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'eclipse'
 	id 'maven-publish'
+	id 'distribution'
 
 	id "com.github.ben-manes.versions" version "0.51.0"
 
@@ -10,13 +11,15 @@ plugins {
 
 
 description = """Templar templating engine"""
-version = findProperty("h2zero.version")
+version = findProperty("version")
 group = 'com.synapticloop'
 
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
+	withSourcesJar()
+	withJavadocJar()
 }
 
 
@@ -29,9 +32,8 @@ test {
 repositories {
 	mavenLocal()
 	mavenCentral()
-	maven {
-		url 'https://jitpack.io'
-	}
+	maven { url 'https://jitpack.io' }
+	maven { url "https://reposilite.synapticloop.com/releases" }
 }
 
 dependencies {
@@ -51,16 +53,22 @@ configurations.all {
 	}
 }
 
-
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId 'com.synapticloop'
-			artifactId "templar"
-			version version
-
 			from components.java
 		}
+	}
+	repositories {
+		maven {
+			name 'synapticloop'
+			url "https://reposilite.synapticloop.com/releases"
+			credentials {
+				username REPOSILITE_USER
+				password REPOSILITE_TOKEN
+			}
+		}
+		mavenLocal()
 	}
 }
 
