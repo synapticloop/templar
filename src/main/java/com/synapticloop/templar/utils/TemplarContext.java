@@ -47,10 +47,7 @@ import com.synapticloop.templar.function.math.FunctionMultiply;
 import com.synapticloop.templar.function.math.FunctionOdd;
 import com.synapticloop.templar.function.math.FunctionPower;
 import com.synapticloop.templar.function.math.FunctionSubtract;
-import com.synapticloop.templar.function.string.FunctionIndexOf;
-import com.synapticloop.templar.function.string.FunctionStartsWith;
-import com.synapticloop.templar.function.string.FunctionSubString;
-import com.synapticloop.templar.function.string.FunctionToJson;
+import com.synapticloop.templar.function.string.*;
 import com.synapticloop.templar.function.util.FunctionInstanceOf;
 
 public class TemplarContext {
@@ -108,6 +105,9 @@ public class TemplarContext {
 		functionMap.put("toJson", new FunctionToJson()); // convert a string into a JSON object
 		functionMap.put("startsWith", new FunctionStartsWith()); // determine whether a string starts with another string
 		functionMap.put("substring", new FunctionSubString()); // return a substring of a string
+		functionMap.put("uppercase", new FunctionUppercase()); // return the uppercase of the string
+		functionMap.put("lowercase", new FunctionLowercase()); // return the lowercase of the string
+		functionMap.put("pluralise", new FunctionPluralise()); // return the lowercase of the string
 
 	}
 
@@ -135,6 +135,11 @@ public class TemplarContext {
 		functionAliasMap.put("lte", "<=");
 
 		functionAliasMap.put("size", "length");
+
+		functionAliasMap.put("lowerCase", "lowercase");
+		functionAliasMap.put("upperCase", "uppercase");
+		functionAliasMap.put("pluralize", "pluralise");
+
 
 	}
 
