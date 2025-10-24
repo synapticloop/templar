@@ -17,13 +17,14 @@ package com.synapticloop.templar.token;
  * under the Licence.
  */
 
+import java.io.Serial;
 import java.util.StringTokenizer;
 
 import com.synapticloop.templar.exception.ParseException;
 import com.synapticloop.templar.utils.Tokeniser;
 
 public class ParseExceptionToken extends Token {
-	private static final long serialVersionUID = -4061717941516767128L;
+	@Serial private static final long serialVersionUID = -4061717941516767128L;
 
 	public ParseExceptionToken() throws ParseException {
 		super("", null, new Tokeniser());

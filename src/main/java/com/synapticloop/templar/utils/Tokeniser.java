@@ -17,6 +17,7 @@ package com.synapticloop.templar.utils;
  * under the Licence.
  */
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,11 +47,11 @@ import com.synapticloop.templar.token.TextToken;
 import com.synapticloop.templar.token.Token;
 
 public class Tokeniser implements Serializable {
-	private static final long serialVersionUID = 4768014602151991781L;
+	@Serial private static final long serialVersionUID = 4768014602151991781L;
 
-	private static Map<String, List<Token>> importCache = new HashMap<String, List<Token>>();
+	private static final Map<String, List<Token>> importCache = new HashMap<>();
 
-	private TokeniserInfo tokeniserInfo = new TokeniserInfo();
+	private final TokeniserInfo tokeniserInfo = new TokeniserInfo();
 
 	private static final int BEGIN_PARENTHESES = 0;
 	private static final int DOUBLE_DASH = 1;

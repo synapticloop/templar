@@ -119,13 +119,12 @@ public class FunctionLength extends Function {
 	}
 
 	private static int findMethod(Object object) {
-		for (int i = 0; i < METHODS.length; i++) {
-			String methodString = METHODS[i];
+		for (String methodString : METHODS) {
 			try {
 				Method method = object.getClass().getMethod(methodString);
-				Object invoke = method.invoke(object, (Object[])null);
-				if(invoke instanceof Integer) {
-					return((Integer)invoke);
+				Object invoke = method.invoke(object, (Object[]) null);
+				if (invoke instanceof Integer) {
+					return ((Integer) invoke);
 				}
 			} catch (SecurityException | NoSuchMethodException | IllegalArgumentException | IllegalAccessException |
 			         InvocationTargetException jlsex) {
@@ -136,11 +135,10 @@ public class FunctionLength extends Function {
 	}
 
 	private static int findField(Object object) {
-		for (int i = 0; i < FIELDS.length; i++) {
-			String fieldString = FIELDS[i];
+		for (String fieldString : FIELDS) {
 			try {
 				Field field = object.getClass().getField(fieldString);
-				return(field.getInt(object));
+				return (field.getInt(object));
 			} catch (SecurityException | NoSuchFieldException | IllegalArgumentException | IllegalAccessException e) {
 				// do nothing - will go through the loop or fall out
 			}

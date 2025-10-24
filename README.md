@@ -1,13 +1,6 @@
-<a name="documentr_top"></a>[![Build Status](https://travis-ci.org/synapticloop/templar.svg?branch=master)](https://travis-ci.org/synapticloop/templar) [![Download](https://api.bintray.com/packages/synapticloop/maven/templar/images/download.svg)](https://bintray.com/synapticloop/maven/templar/_latestVersion) [![GitHub Release](https://img.shields.io/github/release/synapticloop/templar.svg)](https://github.com/synapticloop/templar/releases) 
-
-> **This project requires JVM version of at least 1.7**
-
-
-
+<img src="project-logo.png" alt="Description" width="300" style="display:block; margin:auto;">
 
 # templar
-
-
 
 > Templar templating engine
 
@@ -24,7 +17,14 @@ No idea! - I guess the answer is 'fast-enough' depending on what you want to do
 with it.
 
 We use it as the basis of our code generation tool ```h2zero``` which has now 
-been [open-sourced](https://github.com/synapticloop/h2zero)
+been [open-sourced](https://github.com/synapticloop/h2zero).  
+
+Code generation is done on an ad-hoc basis, so the speed is not sufficiently 
+important.  If you are looking to generate millions of requests per second, 
+this is probably not for you.
+
+No parsing/rendering speed testing or comparisons have been done, and will 
+not be done.
 
 
 ## What's with the whitespace (tabs and newlines)?
@@ -53,261 +53,92 @@ file which will allow you to convert your existing text into templar formatted
 text.
 
 
-# Building the Package
+# In-Build functions
 
-## *NIX/Mac OS X
-
-From the root of the project, simply run
-
-`./gradlew build`
-
-
-## Windows
-
-`./gradlew.bat build`
-
-
-This will compile and assemble the artefacts into the `build/libs/` directory.
-
-Note that this may also run tests (if applicable see the Testing notes)
-
-# Logging - slf4j
-
-slf4j is the logging framework used for this project.  In order to set up a logging framework with this project, sample configurations are below:
-
-## Log4j
-
-
-You will need to include dependencies for this - note that the versions may need to be updated.
-
-### Maven
+Templar consists of a lot of in-built functions which will always exist in 
+the `TemplarContext`:
 
 ```
-<dependency>
-	<groupId>org.apache.logging.log4j</groupId>
-	<artifactId>log4j-slf4j-impl</artifactId>
-	<version>2.5</version>
-	<scope>runtime</scope>
-</dependency>
+// null operators
+functionMap.put("null", new FunctionIsNull()); // test whether the passed in parameter is null
+functionMap.put("notNull", new FunctionIsNotNull()); // test whether the passed in parameter is not null
 
-<dependency>
-	<groupId>org.apache.logging.log4j</groupId>
-	<artifactId>log4j-core</artifactId>
-	<version>2.5</version>
-	<scope>runtime</scope>
-</dependency>
+// boolean function operators
+functionMap.put("=", new FunctionEqual()); // test whether the passed in parameters are equal
+functionMap.put("<>", new FunctionNotEqual()); // test whether the passed in parameters are not equal
+functionMap.put(">", new FunctionGreaterThan()); // test whether the the first parameter is greater than the second
+functionMap.put(">=", new FunctionGreaterThanEqual()); // test whether the the first parameter is greater than or equal to the second
+functionMap.put("<", new FunctionLessThan());  // test whether the the first parameter is less than the second
+functionMap.put("<=", new FunctionLessThanEqual());  // test whether the the first parameter is less than or equal to the second
 
+// size operators
+functionMap.put("length", new FunctionLength()); // return the length/size of the passed in parameter
+
+// date operators
+functionMap.put("fmtDate", new FunctionFormatDate()); // format the date with the two parameters date, and format as a string
+
+// boolean test operators
+functionMap.put("false", new FunctionFalse()); // test whether the parameter is false
+functionMap.put("true", new FunctionTrue()); // test whether the parameter is true
+
+// logical operators
+functionMap.put("and", new FunctionAnd()); // logical AND function for the two parameters
+functionMap.put("&", new FunctionAnd()); // logical AND function for the two parameters
+functionMap.put("or", new FunctionOr()); // logical OR function for the two parameters
+functionMap.put("|", new FunctionOr()); // logical OR function for the two parameters
+
+// mathematical operators
+functionMap.put("+", new FunctionAdd()); // Mathematical ADDITION of two numbers
+functionMap.put("-", new FunctionSubtract()); // Mathematical SUBTRACTION of two numbers
+functionMap.put("*", new FunctionMultiply()); // Mathematical MULTIPLICATION of two numbers
+functionMap.put("/", new FunctionDivide()); // Mathematical DIVISION of two numbers
+functionMap.put("^", new FunctionPower()); // Mathematical EXPONENT of two numbers
+functionMap.put("%", new FunctionModulus()); // Mathematical MODULUS of two numbers
+
+// even and odd
+functionMap.put("even", new FunctionEven()); // Test whether the passed in number is even
+functionMap.put("odd", new FunctionOdd()); // Test whether the passed in number is odd
+
+// utilties
+functionMap.put("instanceOf", new FunctionInstanceOf()); // Test whether it is an instance of
+
+// string
+functionMap.put("indexOf", new FunctionIndexOf()); // get the index of strings
+functionMap.put("toJson", new FunctionToJson()); // convert a string into a JSON object
+functionMap.put("startsWith", new FunctionStartsWith()); // determine whether a string starts with another string
+functionMap.put("substring", new FunctionSubString()); // return a substring of a string
+functionMap.put("uppercase", new FunctionUppercase()); // return the uppercase of the string
+functionMap.put("lowercase", new FunctionLowercase()); // return the lowercase of the string
+functionMap.put("pluralise", new FunctionPluralise()); // return the lowercase of the string
 ```
 
-### Gradle &lt; 2.1
+And some aliases for the above
 
 ```
-dependencies {
-	...
-	runtime(group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.5', ext: 'jar')
-	runtime(group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5', ext: 'jar')
-	...
-}
+functionAliasMap.put("isnull", "null");
+functionAliasMap.put("isNull", "null");
+
+functionAliasMap.put("!Null", "notNull");
+functionAliasMap.put("!null", "notNull");
+functionAliasMap.put("isnotnull", "notNull");
+functionAliasMap.put("isNotNull", "notNull");
+functionAliasMap.put("notnull", "notNull");
+
+functionAliasMap.put("equal", "=");
+functionAliasMap.put("eq", "=");
+
+functionAliasMap.put("not=", "<>");
+functionAliasMap.put("ne", "<>");
+functionAliasMap.put("notEqual", "<>");
+
+functionAliasMap.put("gt", ">");
+functionAliasMap.put("gt=", ">=");
+functionAliasMap.put("lt", "<");
+functionAliasMap.put("lte", "<=");
+
+functionAliasMap.put("size", "length");
+
+functionAliasMap.put("lowerCase", "lowercase");
+functionAliasMap.put("upperCase", "uppercase");
+functionAliasMap.put("pluralize", "pluralise");
 ```
-### Gradle &gt;= 2.1
-
-```
-dependencies {
-	...
-	runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.5'
-	runtime 'org.apache.logging.log4j:log4j-core:2.5'
-	...
-}
-```
-
-
-### Setting up the logging:
-
-A sample `log4j2.xml` is below:
-
-```
-<Configuration status="WARN">
-	<Appenders>
-		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-		</Console>
-	</Appenders>
-	<Loggers>
-		<Root level="trace">
-			<AppenderRef ref="Console"/>
-		</Root>
-	</Loggers>
-</Configuration>
-```
-
-# Artefact Publishing - Github
-
-This project publishes artefacts to [GitHub](https://github.com/)
-
-> Note that the latest version can be found [https://github.com/synapticloop/templar/releases](https://github.com/synapticloop/templar/releases)
-
-As such, this is not a repository, but a location to download files from.
-
-# Artefact Publishing - Bintray
-
-This project publishes artefacts to [bintray](https://bintray.com/)
-
-> Note that the latest version can be found [https://bintray.com/synapticloop/maven/templar/view](https://bintray.com/synapticloop/maven/templar/view)
-
-## maven setup
-
-this comes from the jcenter bintray, to set up your repository:
-
-```
-<?xml version="1.0" encoding="UTF-8" ?>
-<settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd' xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
-  <profiles>
-    <profile>
-      <repositories>
-        <repository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>bintray</name>
-          <url>http://jcenter.bintray.com</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>bintray-plugins</name>
-          <url>http://jcenter.bintray.com</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <id>bintray</id>
-    </profile>
-  </profiles>
-  <activeProfiles>
-    <activeProfile>bintray</activeProfile>
-  </activeProfiles>
-</settings>
-```
-
-## gradle setup
-
-Repository
-
-```
-repositories {
-	maven {
-		url  "http://jcenter.bintray.com" 
-	}
-}
-```
-
-or just
-
-```
-repositories {
-	jcenter()
-}
-```
-
-## Dependencies - Gradle
-
-```
-dependencies {
-	runtime(group: 'synapticloop', name: 'templar', version: '1.4.3', ext: 'jar')
-
-	compile(group: 'synapticloop', name: 'templar', version: '1.4.3', ext: 'jar')
-}
-```
-
-or, more simply for versions of gradle greater than 2.1
-
-```
-dependencies {
-	runtime 'synapticloop:templar:1.4.3'
-
-	compile 'synapticloop:templar:1.4.3'
-}
-```
-
-## Dependencies - Maven
-
-```
-<dependency>
-	<groupId>synapticloop</groupId>
-	<artifactId>templar</artifactId>
-	<version>1.4.3</version>
-	<type>jar</type>
-</dependency>
-```
-
-## Dependencies - Downloads
-
-
-You will also need to download the following dependencies:
-
-
-
-### cobertura dependencies
-
-  - `net.sourceforge.cobertura:cobertura:2.0.3`: (It may be available on one of: [bintray](https://bintray.com/net.sourceforge.cobertura/maven/cobertura/2.0.3/view#files/net.sourceforge.cobertura/cobertura/2.0.3) [mvn central](http://search.maven.org/#artifactdetails|net.sourceforge.cobertura|cobertura|2.0.3|jar))
-
-
-### compile dependencies
-
-  - `org.json:json:20160212`: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar))
-
-
-### runtime dependencies
-
-  - `org.json:json:20160212`: (It may be available on one of: [bintray](https://bintray.com/org.json/maven/json/20160212/view#files/org.json/json/20160212) [mvn central](http://search.maven.org/#artifactdetails|org.json|json|20160212|jar))
-
-
-### testCompile dependencies
-
-  - `junit:junit:4.11`: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar))
-  - `org.mockito:mockito-all:1.10.19`: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar))
-
-
-### testRuntime dependencies
-
-  - `junit:junit:4.11`: (It may be available on one of: [bintray](https://bintray.com/junit/maven/junit/4.11/view#files/junit/junit/4.11) [mvn central](http://search.maven.org/#artifactdetails|junit|junit|4.11|jar))
-  - `org.mockito:mockito-all:1.10.19`: (It may be available on one of: [bintray](https://bintray.com/org.mockito/maven/mockito-all/1.10.19/view#files/org.mockito/mockito-all/1.10.19) [mvn central](http://search.maven.org/#artifactdetails|org.mockito|mockito-all|1.10.19|jar))
-
-**NOTE:** You may need to download any dependencies of the above dependencies in turn (i.e. the transitive dependencies)
-
-# License
-
-```
-The MIT License (MIT)
-
-Copyright (c) 2017 synapticloop
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-
---
-
-> `This README.md file was hand-crafted with care utilising synapticloop`[`templar`](https://github.com/synapticloop/templar/)`->`[`documentr`](https://github.com/synapticloop/documentr/)
-
---
-

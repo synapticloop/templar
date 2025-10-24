@@ -36,7 +36,7 @@ public class FunctionSplit extends Function {
 		String argZero = ObjectHelper.evaluateObjectToDefault(args[0], templarContext).toString();
 		String argOne = ObjectHelper.evaluateObjectToDefault(args[1], templarContext).toString();
 
-		return(new ArrayList<String>(Arrays.asList(argZero.split(argOne))));
+		return(new ArrayList<>(Arrays.asList(argZero.split(argOne))));
 	}
 
 }

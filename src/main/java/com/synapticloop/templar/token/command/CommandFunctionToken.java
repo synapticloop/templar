@@ -48,7 +48,7 @@ public class CommandFunctionToken extends CommandLineToken {
 				nextToken = nextToken.substring(1).trim();
 			}
 			// we may have a dangling ',' which was just removed between two quoted values, which are actually tokens
-			if(nextToken.length() == 0) {
+			if(nextToken.isEmpty()) {
 				nextToken = stringTokenizer.nextToken().trim();
 			}
 
@@ -112,10 +112,10 @@ public class CommandFunctionToken extends CommandLineToken {
 
 			if(i == 0) {
 				if(args[0] instanceof Boolean) {
-					if("or".equals(baseFunction) &&  ((Boolean)args[i]).booleanValue()) {
+					if("or".equals(baseFunction) && (Boolean) args[i]) {
 						// if we have an or function, if the first is true, ignore the rest...
 						return(true);
-					} else if("and".equals(baseFunction) &&  !((Boolean)args[i]).booleanValue()) {
+					} else if("and".equals(baseFunction) &&  !(Boolean) args[i]) {
 						// if we have an and function, if the first is false, ignore the rest...
 						return(false);
 					}

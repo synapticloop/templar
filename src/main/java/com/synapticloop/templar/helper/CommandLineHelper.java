@@ -55,7 +55,7 @@ public class CommandLineHelper {
 	 * @throws ParseException if there was an error parsing the command line
 	 */
 	public static List<CommandLineToken> parseCommandLine(String commandLine) throws ParseException {
-		List<CommandLineToken> commandTokens= new ArrayList<CommandLineToken>();
+		List<CommandLineToken> commandTokens= new ArrayList<>();
 		StringTokenizer stringTokenizer = new StringTokenizer(commandLine, "!:\"'[]", true);
 
 		while(stringTokenizer.hasMoreElements()) {

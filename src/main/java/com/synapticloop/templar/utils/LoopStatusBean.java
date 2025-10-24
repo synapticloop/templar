@@ -50,11 +50,17 @@ public class LoopStatusBean {
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("first: " + first + "\n");
-		stringBuilder.append("last: " + last + "\n");
-		stringBuilder.append("index: " + index + "\n");
-		stringBuilder.append("offset: " + offset + "\n");
-		return(stringBuilder.toString());
+		return("first: " +
+				first +
+				"\n" +
+				"last: " +
+				last +
+				"\n" +
+				"index: " +
+				index +
+				"\n" +
+				"offset: " +
+				offset +
+				"\n");
 	}
 }

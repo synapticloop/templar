@@ -17,12 +17,7 @@ package com.synapticloop.templar.token;
  * under the Licence.
  */
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,7 +38,7 @@ import com.synapticloop.templar.utils.Tokeniser;
  * to the current token list.
  */
 public class ImportToken extends Token {
-	private static final long serialVersionUID = 9019815748103868539L;
+	@Serial private static final long serialVersionUID = 9019815748103868539L;
 
 	private static final String CLASSPATH_DESIGNATOR = "classpath:";
 

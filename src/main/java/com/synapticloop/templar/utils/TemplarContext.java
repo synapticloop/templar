@@ -51,10 +51,10 @@ import com.synapticloop.templar.function.string.*;
 import com.synapticloop.templar.function.util.FunctionInstanceOf;
 
 public class TemplarContext {
-	private Map<String, Object> context = new HashMap<String, Object>();
+	private Map<String, Object> context = new HashMap<>();
 	private TemplarConfiguration templarConfiguration = new TemplarConfiguration();
 
-	private static Map<String, Function> functionMap = new HashMap<String, Function>();
+	private static final Map<String, Function> functionMap = new HashMap<>();
 	static {
 
 		// null operators
@@ -111,7 +111,7 @@ public class TemplarContext {
 
 	}
 
-	private static Map<String, String> functionAliasMap = new HashMap<String, String>();
+	private static final Map<String, String> functionAliasMap = new HashMap<>();
 	static {
 		functionAliasMap.put("isnull", "null");
 		functionAliasMap.put("isNull", "null");

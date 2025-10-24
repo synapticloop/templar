@@ -17,14 +17,14 @@ package com.synapticloop.templar.helper;
  * under the Licence.
  */
 
+import com.synapticloop.templar.exception.FunctionException;
+import com.synapticloop.templar.exception.RenderException;
+import com.synapticloop.templar.utils.TemplarContext;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.StringTokenizer;
-
-import com.synapticloop.templar.exception.FunctionException;
-import com.synapticloop.templar.exception.RenderException;
-import com.synapticloop.templar.utils.TemplarContext;
 
 public class ObjectHelper {
 	private static final String[] METHOD_PREFIXES = {"get", "is", "has", ""};
@@ -36,12 +36,12 @@ public class ObjectHelper {
 	 * Evaluate an object against the templar context.  This does not allow for 
 	 * quoted variable, and everything is attempted to be looked up through the 
 	 * templar context inline.
-	 * 
+	 *
 	 * @param commandLine the command line to evaluate
 	 * @param templarContext the templar context for lookups
-	 * 
+	 *
 	 * @return the evaluated object
-	 * 
+	 *
 	 * @throws RenderException if there was an error rendering 
 	 */
 	public static Object evaluateObject(String commandLine, TemplarContext templarContext) throws RenderException {
@@ -89,16 +89,16 @@ public class ObjectHelper {
 					foundMethod = true;
 					int parameterCount = invokeMethod.getParameterTypes().length;
 					switch (parameterCount) {
-					case 0:
-						object = invokeObjectMethod(object, invokeMethod);
-						break;
-					case 1:
-						object = invokeObjectMethod(object, invokeMethod, new Object[] { nextToken });
-						break;
-					default:
-						// at this point, the method that we have found has more than 1 parameter - we
-						// don't support this as the do notation doesn't handle it
-						throw new RenderException("Cannot invoke method with more than 1 parameter, tried to invoke method: '" + invokeMethod.toGenericString() + ".");
+						case 0:
+							object = invokeObjectMethod(object, invokeMethod);
+							break;
+						case 1:
+							object = invokeObjectMethod(object, invokeMethod, new Object[] { nextToken });
+							break;
+						default:
+							// at this point, the method that we have found has more than 1 parameter - we
+							// don't support this as the do notation doesn't handle it
+							throw new RenderException("Cannot invoke method with more than 1 parameter, tried to invoke method: '" + invokeMethod.toGenericString() + ".");
 					}
 				} else {
 					foundMethod = false;
@@ -117,24 +117,16 @@ public class ObjectHelper {
 	private static Object invokeObjectMethod(Object object, Method invokeMethod) throws RenderException {
 		try {
 			return(invokeMethod.invoke(object, new Object[] {}));
-		} catch (IllegalArgumentException iaex) {
-			throw new RenderException(iaex.getMessage(), iaex);
-		} catch (IllegalAccessException iaex) {
-			throw new RenderException(iaex.getMessage(), iaex);
-		} catch (InvocationTargetException itex) {
-			throw new RenderException(itex.getMessage(), itex);
+		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
+			throw new RenderException(ex.getMessage(), ex);
 		}
 	}
 
 	private static Object invokeObjectMethod(Object object, Method invokeMethod, Object[] parameters) throws RenderException {
 		try {
 			return(invokeMethod.invoke(object, parameters));
-		} catch (IllegalArgumentException iaex) {
-			throw new RenderException(iaex.getMessage(), iaex);
-		} catch (IllegalAccessException iaex) {
-			throw new RenderException(iaex.getMessage(), iaex);
-		} catch (InvocationTargetException itex) {
-			throw new RenderException(itex.getMessage(), itex);
+		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
+			throw new RenderException(ex.getMessage(), ex);
 		}
 	}
 
@@ -142,10 +134,10 @@ public class ObjectHelper {
 	 * Evaluate an object against the templar context.  If the object is quoted
 	 * either with double quotes (") or single quotes (') then it will be 
 	 * passed back as a string and not looked up in the context
-	 * 
+	 *
 	 * @param object the object to evaluate
 	 * @param templarContext the templar context for lookups
-	 * 
+	 *
 	 * @return the evaluated object
 	 */
 
@@ -162,13 +154,11 @@ public class ObjectHelper {
 			Object evaluatedObject = null;
 			try {
 				evaluatedObject = evaluateObject(object.toString(), templarContext);
-			} catch (RenderException sterex) {
+			} catch (RenderException rex) {
 				// WARNING - THIS IS GOING TO BE REMOVED AT SOME POINT IN TIME!
 				// at this point all actual literal values should have been quoted...
 				// maybe we will leave this in
-				if(null == evaluatedObject && null != object) {
-					return(object);
-				}
+				return (object);
 			}
 			return(evaluatedObject);
 		}
@@ -178,18 +168,17 @@ public class ObjectHelper {
 	 * Evaluate an object against the templar context to a boolean value.  If 
 	 * the object is quoted either with double quotes (") or single quotes (') 
 	 * then it will be passed back and interpreted
-	 * 
+	 *
 	 * @param object the object to evaluate
 	 * @param templarContext the templar context for lookups
-	 * 
+	 *
 	 * @return the evaluated object
 	 */
 	public static Boolean evaluateObjectToDefaultBoolean(Object object, TemplarContext templarContext) {
 		Object evaluateObjectToDefault = null;
 		boolean inverse = false;
-		if(object instanceof String) {
-			String temp = (String)object;
-			if(null != temp && temp.startsWith("!")) {
+		if(object instanceof String temp) {
+			if(temp.startsWith("!")) {
 				inverse = true;
 				temp = temp.substring(1);
 			}
@@ -200,9 +189,9 @@ public class ObjectHelper {
 
 		if(evaluateObjectToDefault instanceof Boolean) {
 			if(inverse) {
-				return(!((Boolean) evaluateObjectToDefault).booleanValue());
+				return(!(Boolean) evaluateObjectToDefault);
 			} else {
-				return(((Boolean) evaluateObjectToDefault).booleanValue());
+				return((Boolean) evaluateObjectToDefault);
 			}
 		}
 
@@ -211,12 +200,12 @@ public class ObjectHelper {
 
 	/**
 	 * Parse and execute the command line utilising the templar context for lookups
-	 * 
+	 *
 	 * @param templarContext the templar context to use as a lookup
 	 * @param commandLine the command line to evaluate
-	 * 
+	 *
 	 * @return the evaluated command line
-	 * 
+	 *
 	 * @throws RenderException if there was an error rendering the command line 
 	 */
 	public static Object parseAndExecuteCommandLine(TemplarContext templarContext, String commandLine) throws RenderException {
@@ -277,7 +266,8 @@ public class ObjectHelper {
 	 * @param reference the reference
 	 *
 	 * @return the method, or null if not found
-	 * @throws RenderException 
+	 *
+	 * @throws RenderException if there was an error finding/invoking the method
 	 */
 	private static Method findMethod(Object object, String reference) throws RenderException {
 		Method returnMethod = null;
@@ -285,8 +275,8 @@ public class ObjectHelper {
 			if(((Map<?,?>)object).containsKey(reference)) {
 				try {
 					return(object.getClass().getMethod("get", Object.class));
-				} catch (NoSuchMethodException nsmex) {
-				} catch (SecurityException sex) {
+				} catch (NoSuchMethodException  | SecurityException ignored) {
+					// fall through
 				}
 			}
 
@@ -295,9 +285,7 @@ public class ObjectHelper {
 				if(null != returnMethod) {
 					return(returnMethod);
 				}
-			} catch (NoSuchMethodException nsmex) {
-				// fall through
-			} catch (SecurityException sex) {
+			} catch (NoSuchMethodException | SecurityException ignored) {
 				// fall through
 			}
 
@@ -307,20 +295,16 @@ public class ObjectHelper {
 
 				returnMethod = object.getClass().getMethod("get", Object.class);
 				return(returnMethod);
-			} catch (NoSuchMethodException nsmex) {
-				throw new RenderException("Could not find 'get' method on Map object instance", nsmex);
-			} catch (SecurityException sex) {
-				throw new RenderException("Could not find 'get' method on Map object instance", sex);
+			} catch (NoSuchMethodException | SecurityException ex) {
+				throw new RenderException("Could not find 'get' method on Map object instance", ex);
 			}
 		}
 
-		for (int i = 0; i < METHOD_PREFIXES.length; i++) {
-			String methodPrefix = METHOD_PREFIXES[i];
-
+		for (String methodPrefix : METHOD_PREFIXES) {
 			returnMethod = getMethod(object, methodPrefix + reference);
 
-			if(null != returnMethod) {
-				return(returnMethod);
+			if (null != returnMethod) {
+				return (returnMethod);
 			}
 		}
 
@@ -329,10 +313,8 @@ public class ObjectHelper {
 
 			returnMethod = object.getClass().getMethod("get", String.class);
 			return(returnMethod);
-		} catch (NoSuchMethodException nsmex) {
-			throw new RenderException("Could not find 'get' method on object instance", nsmex);
-		} catch (SecurityException sex) {
-			throw new RenderException("Could not find 'get' method on object instance", sex);
+		} catch (NoSuchMethodException | SecurityException ex) {
+			throw new RenderException("Could not find 'get' method on object instance", ex);
 		}
 	}
 
@@ -356,14 +338,13 @@ public class ObjectHelper {
 	/**
 	 * Return whether the object is quoted, i.e. the passed in object is a String 
 	 * and both starts and ends with a single quote (') or a double quote (")
-	 * 
+	 *
 	 * @param object the object to test
-	 * 
+	 *
 	 * @return whether the object is a string and is quoted
 	 */
 	public static boolean isQuoted(Object object) {
-		if(object instanceof String) {
-			String string = (String)object;
+		if(object instanceof String string) {
 			return(string.length() >= 2 && ((string.startsWith("'") && string.endsWith("'")) || (string.startsWith("\"") && string.endsWith("\""))));
 		}
 		return(false);
@@ -372,9 +353,9 @@ public class ObjectHelper {
 	/**
 	 * De-quote a string by removing both the first and last quote character (either 
 	 * single or double quotation marks) 
-	 * 
+	 *
 	 * @param quotedString the quoted string
-	 * 
+	 *
 	 * @return the de-quoted string 
 	 */
 	public static String deQuote(String quotedString) {

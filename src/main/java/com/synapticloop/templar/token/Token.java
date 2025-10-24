@@ -19,6 +19,7 @@ package com.synapticloop.templar.token;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -30,13 +31,13 @@ import com.synapticloop.templar.utils.TemplarContext;
 import com.synapticloop.templar.utils.Tokeniser;
 
 public abstract class Token extends BasePositionToken {
-	private static final long serialVersionUID = -7987699180706299996L;
+	@Serial private static final long serialVersionUID = -7987699180706299996L;
 
 	private static final String FORMAT_SHORT = "<%s@%d:%d%s>";
 	private static final String FORMAT_COMMAND_LINE = "<%s@%d:%d (%s) />";
 
 	protected String value = "";
-	protected List<Token> childTokens = new ArrayList<Token>();
+	protected List<Token> childTokens = new ArrayList<>();
 
 	public Token(String value, StringTokenizer stringTokenizer, Tokeniser tokeniser) throws ParseException {
 		this.tokeniser = tokeniser;
