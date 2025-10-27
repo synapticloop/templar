@@ -29,10 +29,7 @@ import com.synapticloop.templar.function.FunctionFormatDate;
 import com.synapticloop.templar.function.FunctionIsNotNull;
 import com.synapticloop.templar.function.FunctionIsNull;
 import com.synapticloop.templar.function.FunctionLength;
-import com.synapticloop.templar.function.bool.FunctionAnd;
-import com.synapticloop.templar.function.bool.FunctionFalse;
-import com.synapticloop.templar.function.bool.FunctionOr;
-import com.synapticloop.templar.function.bool.FunctionTrue;
+import com.synapticloop.templar.function.bool.*;
 import com.synapticloop.templar.function.comparison.FunctionGreaterThan;
 import com.synapticloop.templar.function.comparison.FunctionGreaterThanEqual;
 import com.synapticloop.templar.function.comparison.FunctionLessThan;
@@ -78,6 +75,8 @@ public class TemplarContext {
 		// boolean test operators
 		functionMap.put("false", new FunctionFalse()); // test whether the parameter is false
 		functionMap.put("true", new FunctionTrue()); // test whether the parameter is true
+		functionMap.put("if", new FunctionIf()); // if true return the second parameter
+		functionMap.put("ifElse", new FunctionIfElse()); // if true return the second parameter, else the third
 
 		// logical operators
 		functionMap.put("and", new FunctionAnd()); // logical AND function for the two parameters

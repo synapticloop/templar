@@ -1,33 +1,17 @@
 package com.synapticloop.templar.function.string;
 
 import com.synapticloop.templar.Parser;
-import com.synapticloop.templar.exception.FunctionException;
 import com.synapticloop.templar.exception.ParseException;
 import com.synapticloop.templar.exception.RenderException;
-import com.synapticloop.templar.function.Function;
-import com.synapticloop.templar.function.FunctionLength;
-import com.synapticloop.templar.helper.CommandLineHelper;
-import com.synapticloop.templar.helper.CommandLineHelperRenderTest;
-import com.synapticloop.templar.helper.ObjectHelper;
-import com.synapticloop.templar.token.command.CommandLineToken;
 import com.synapticloop.templar.utils.TemplarContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.junit.Assert.assertEquals;
 
 public class FunctionPluraliseTest {
-	private FunctionPluralise functionPluralise;
-
-	@Before
-	public void setup() {
-		functionPluralise = new FunctionPluralise();
-	}
-
 	@Test
-	public void testPluralise() throws FunctionException, RenderException, ParseException {
+	public void testPluralise() throws RenderException, ParseException {
 		TemplarContext templarContext = new TemplarContext();
 		templarContext.add("one", new Object[] { "one" });
 		templarContext.add("two", new Object[] { "one", "two" });
