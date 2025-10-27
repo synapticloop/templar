@@ -4,14 +4,12 @@
 
 > Templar templating engine
 
+A lightweight java templating engine - and by lightweight we mean a small number
+of lines of code... (that weights in around 100k jar size):
 
+(Documentation may live here: [https://synapticloop.github.io/templar/](http://synapticloop.github.io/templar/))
 
-(Documentation now lives here: [https://synapticloop.github.io/templar/](http://synapticloop.github.io/templar/))
-
-A lightweight java templating engine - and by lightweight we mean a small number 
-of lines of code... (that weights in around 90k):
-
-## how fast is it??
+## How Fast Is It??
 
 No idea! - I guess the answer is 'fast-enough' depending on what you want to do 
 with it.
@@ -21,13 +19,14 @@ been [open-sourced](https://github.com/synapticloop/h2zero).
 
 Code generation is done on an ad-hoc basis, so the speed is not sufficiently 
 important.  If you are looking to generate millions of requests per second, 
-this is probably not for you.
+this is probably not for you. _(Chances are you want to use a mustache related 
+templating engine)_
 
-No parsing/rendering speed testing or comparisons have been done, and will 
-not be done.
+**NOTE:** No parsing/rendering speed testing or comparisons have been done, and 
+will ever be done.
 
 
-## What's with the whitespace (tabs and newlines)?
+## What's With The Whitespace (Tabs and Newlines)?
 
 Sometimes it matters, sometimes it doesn't - so by default we don't output tabs 
 and newlines unless explicitly asked to (i.e. ```{\\n}``` or ```{\\t}```)
@@ -46,14 +45,14 @@ setting it in the templar context object.
   TemplarContext templarContext = new TemplarContext(templarConfiguration);
 ```
 
-## Conversion of existing text
+## Conversion of Existing Text
 
 The file `quick-convert.html` at the root of the project is an all-in-one html 
 file which will allow you to convert your existing text into templar formatted 
 text.
 
 
-# In-Build functions
+# In-Built Functions
 
 Templar consists of a lot of in-built functions which will always exist in 
 the `TemplarContext`:
